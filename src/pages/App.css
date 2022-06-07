@@ -29,6 +29,10 @@
 
 .draw{
     position: absolute;
-    width: 1024px;
-    height: 720px;
+    width: 100vw;
+    /* height: calc(100vw / 1.333333333); */
+}
+
+video{
+    display: none;
 }

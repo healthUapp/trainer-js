@@ -43,17 +43,17 @@ export default function Trainer() {
         canvasCtx,
         Object.values(POSE_LANDMARKS_LEFT)
             .map(index => results.poseLandmarks[index]),
-        {color: '#DFF', fillColor: '#FF0000'});
+        {color: 'blue', lineWidth: 1});
       drawLandmarks(
           canvasCtx,
           Object.values(POSE_LANDMARKS_RIGHT)
               .map(index => results.poseLandmarks[index]),
-          {color: '#DFF', fillColor: '#00FF00'});
+          {color: 'yellow', lineWidth: 1});
       drawLandmarks(
           canvasCtx,
           Object.values(POSE_LANDMARKS_NEUTRAL)
               .map(index => results.poseLandmarks[index]),
-          {color: '#DFF', fillColor: '#AAAAAA'});
+          {color: '#DFF', lineWidth: 1});
     }
     canvasCtx.restore();
   }
@@ -91,6 +91,8 @@ export default function Trainer() {
     <center>
       <div className="drawBox">
         <Webcam
+          width={"1024"}
+          height={"768"}
           ref={webcamRef}
         />
         <canvas
