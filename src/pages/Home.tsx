@@ -1,4 +1,4 @@
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import './App.css';
 import {NavLink, useHistory} from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -7,13 +7,12 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const Home: React.FC = () => {
-
     return (
-        <IonPage>
-            <IonContent className="startPage" fullscreen>
-                <h1>1</h1>
-            </IonContent>
-        </IonPage>
+        <IonContent className="startPage" fullscreen>
+            <NavLink to="trainer">
+                <IonButton className='button'>START</IonButton>
+            </NavLink>
+        </IonContent>
     );
 };
 
