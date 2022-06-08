@@ -10,7 +10,6 @@ import {drawLandmarks, drawConnectors} from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
 
 
-
 export default function Trainer() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -54,6 +53,7 @@ export default function Trainer() {
           Object.values(POSE_LANDMARKS_NEUTRAL)
               .map(index => results.poseLandmarks[index]),
           {color: '#DFF', lineWidth: 1});
+
     }
     canvasCtx.restore();
   }
@@ -70,6 +70,7 @@ export default function Trainer() {
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5
     });
+    
     pose.onResults(onResults);
 
     if (
