@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 const Home: React.FC = () => {
     return (
         <IonContent className="startPage" fullscreen>
-            <NavLink to="trainer">
-                <IonButton className='button'>START</IonButton>
+            <NavLink to="exercise">
+                <IonButton className='menuButton'>START</IonButton>
             </NavLink>
         </IonContent>
     );

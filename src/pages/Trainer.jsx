@@ -8,9 +8,9 @@ import * as cam from "@mediapipe/camera_utils";
 import "@mediapipe/control_utils";
 import {drawLandmarks, drawConnectors} from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
+import CheckExercise from "../components/CheckExercise";
 
-
-export default function Trainer() {
+export default function Trainer({exerciseName: Number}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   var camera = null;
@@ -19,8 +19,7 @@ export default function Trainer() {
     console.log(results)
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
-    const videoHeight = webcamRef.current.video.videoHeight;
-
+    const videoHeight = webcamRef.current.video.videoHeight;    
     // Set canvas width
     canvasRef.current.width = videoWidth;
     canvasRef.current.height = videoHeight;
@@ -37,6 +36,9 @@ export default function Trainer() {
       canvasElement.height
     );
 
+    const colorsForLines = CheckExercise(results.poseLandmarks, exerciseName)
+    
+    //Цвет точек и линий
     if (results.poseLandmarks) {
       drawLandmarks(
         canvasCtx,
@@ -46,7 +48,7 @@ export default function Trainer() {
               return(results.poseLandmarks[index])}
             }),
         {color: 'blue', lineWidth: 1});
-        drawConnectors(
+      drawConnectors(
           canvasCtx,
           Object.values(POSE_LANDMARKS)
           .map(index => {
@@ -98,10 +100,7 @@ export default function Trainer() {
           height={"720"}
           ref={webcamRef}
         />
-       # <canvas
-          ref={canvasRef}
-          className="draw"
-        />
+        <canvas ref={canvasRef} className="draw"/>
       </div>
     </center>
   );

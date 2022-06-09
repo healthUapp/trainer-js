@@ -7,7 +7,7 @@
     --background: rgb(187, 187, 187);
 }
 
-.button {
+.menuButton {
     --background:rgb(255, 196, 0);
     width: 500px;
     height: 200px;
@@ -36,4 +36,22 @@
 
 video{
     display: none;
+}
+
+.buttonBox{
+    width: 100vw;
+    height: 100vh;
+    display: flex-box;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.exercise-1,.exercise-2,.exercise-3,.exercise-4{
+    --background:rgb(255, 196, 0);
+    height: 200px;
+    font-size: 100px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
 }
