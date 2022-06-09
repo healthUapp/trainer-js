@@ -30,6 +30,7 @@
 .draw{
     position: absolute;
     width: 100vw;
+    transform:  scaleX(-1);
     /* height: calc(100vw / 1.333333333); */
 }
 
