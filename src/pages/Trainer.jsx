@@ -2,7 +2,7 @@ import { FaceMesh } from "@mediapipe/face_mesh";
 import React, { useRef, useEffect } from "react";
 import { Pose } from "@mediapipe/pose";
 import { Hands } from "@mediapipe/hands";
-import { POSE_LANDMARKS_LEFT, POSE_LANDMARKS_RIGHT, POSE_LANDMARKS_NEUTRAL} from "@mediapipe/pose";
+import { POSE_LANDMARKS ,POSE_CONNECTIONS} from "@mediapipe/pose";
 import { HAND_CONNECTIONS } from "@mediapipe/hands";
 import * as cam from "@mediapipe/camera_utils";
 import "@mediapipe/control_utils";
@@ -40,21 +40,23 @@ export default function Trainer() {
     if (results.poseLandmarks) {
       drawLandmarks(
         canvasCtx,
-        Object.values(POSE_LANDMARKS_LEFT)
-            .map(index => results.poseLandmarks[index]),
+        Object.values(POSE_LANDMARKS)
+            .map(index => {
+              if (index >10 && index <17 || index >22 && index<29) { 
+              return(results.poseLandmarks[index])}
+            }),
         {color: 'blue', lineWidth: 1});
-      drawLandmarks(
+        drawConnectors(
           canvasCtx,
-          Object.values(POSE_LANDMARKS_RIGHT)
-              .map(index => results.poseLandmarks[index]),
-          {color: 'yellow', lineWidth: 1});
-      drawLandmarks(
-          canvasCtx,
-          Object.values(POSE_LANDMARKS_NEUTRAL)
-              .map(index => results.poseLandmarks[index]),
-          {color: '#DFF', lineWidth: 1});
-
+          Object.values(POSE_LANDMARKS)
+          .map(index => {
+            if (index >10 && index <17 || index >22 && index<29) { 
+            return(results.poseLandmarks[index])}
+          }), 
+          POSE_CONNECTIONS,
+          {color: 'white', lineWidth: 4});
     }
+    
     canvasCtx.restore();
   }
 
@@ -66,7 +68,7 @@ export default function Trainer() {
       modelComplexity: 0.5,
       smoothLandmarks: true,
       enableSegmentation: true,
-      smoothSegmentation: true,
+      smoothSegmentation: false,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5
     });
@@ -92,11 +94,11 @@ export default function Trainer() {
     <center>
       <div className="drawBox">
         <Webcam
-          width={"1024"}
-          height={"768"}
+          width={"1280"}
+          height={"720"}
           ref={webcamRef}
         />
-        <canvas
+       # <canvas
           ref={canvasRef}
           className="draw"
         />
