@@ -2,7 +2,7 @@ import React from 'react'
 
 function CheckExercise(poseLandmarks: any, exerciseName: Number) {
 
-    
+    console.log(poseLandmarks, exerciseName)
 
     return {
         arm:{

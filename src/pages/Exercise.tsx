@@ -1,8 +1,8 @@
 import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import {NavLink, useHistory} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import './App.css';
-import Trainer from './Trainer';
+import '../App.css';
+import Trainer from '../components/Trainer';
 
 export default function Exercise() {
 

@@ -3,7 +3,7 @@ import {IonApp, IonRouterOutlet, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
 import Home from './pages/Home';
 import Exercise from './pages/Exercise'
-import Trainer from "./pages/Trainer"
+import Trainer from "./components/Trainer"
 
 setupIonicReact();
 
