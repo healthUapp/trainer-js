@@ -1,10 +1,6 @@
-import React from 'react'
+function CheckExercise(poseLandmarks: [Number, Number], exerciseName: Number) {
 
-function CheckExercise(poseLandmarks: any, exerciseName: Number) {
-
-    console.log(poseLandmarks, exerciseName)
-
-    return {
+    let colors = {
         arm:{
             left: {
                 up: '',
@@ -32,6 +28,23 @@ function CheckExercise(poseLandmarks: any, exerciseName: Number) {
             }
         }
     }
+
+    switch (exerciseName) {
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            
+            break;
+    }
+
+    return colors
 }
 
 export default CheckExercise

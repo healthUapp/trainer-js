@@ -39,22 +39,35 @@ export default function Trainer(exerciseName) {
     const colorLine = CheckExercise(results.poseLandmarks, exerciseName)
     
     console.log(colorLine)
+
     //Цвет точек и линий
+    
     if (results.poseLandmarks) {
       drawLandmarks(
         canvasCtx,
-        Object.values(POSE_LANDMARKS)
-            .map(index => {
-              if (index >10 && index <17 || index >22 && index<29) { 
-              return(results.poseLandmarks[index])}
-            }),
+        // results.poseLandmarks,  //- если нужны все точки
+        results.poseLandmarks.map((value, index) => {            
+            if (index === 11 || index === 12 ||
+              index === 13 || index === 14 ||
+              index === 15 || index === 16 ||
+              index === 23 || index === 24 ||
+              index === 25 || index === 26 ||
+              index === 27 || index === 28) { 
+              return(results.poseLandmarks[index])
+            }
+        }),
         {color: 'blue', lineWidth: 1});
       drawConnectors(
           canvasCtx,
-          Object.values(POSE_LANDMARKS)
-          .map(index => {
-            if (index >10 && index <17 || index >22 && index<29) { 
-            return(results.poseLandmarks[index])}
+          results.poseLandmarks.map((value, index) => {            
+            if (index === 11 || index === 12 ||
+              index === 13 || index === 14 ||
+              index === 15 || index === 16 ||
+              index === 23 || index === 24 ||
+              index === 25 || index === 26 ||
+              index === 27 || index === 28) { 
+              return(results.poseLandmarks[index])
+            }
           }), 
           POSE_CONNECTIONS,
           {color: 'white', lineWidth: 4});
