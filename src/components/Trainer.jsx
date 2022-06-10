@@ -10,7 +10,7 @@ import {drawLandmarks, drawConnectors} from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
 import CheckExercise from "./CheckExercise";
 
-export default function Trainer(exerciseName) {
+export default function Trainer({exerciseName}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   var camera = null;
@@ -36,7 +36,8 @@ export default function Trainer(exerciseName) {
     );
     
     const colors = CheckExercise(results.poseLandmarks, exerciseName)
-      
+
+    // console.log(colors)
 
     //Цвет точек и линий
     

@@ -34,7 +34,7 @@ function CheckExercise(poseLandmarks, exerciseName) {
         return radians_to_degrees(Math.acos(angle));
     }  
 
-    let colors = {
+    const colors = {
         arm:{
             left: {
                 up: 'white',
@@ -63,39 +63,28 @@ function CheckExercise(poseLandmarks, exerciseName) {
         }
     }
 
+    if(exerciseName === 1) goodMorning();
+
     function goodMorning() {
         const angle = find_angle(right_shoulder, right_elbow, right_wrist)
 
         if(angle > 100) {
-            colors.arm.right.up = 'red',
+            colors.arm.right.up = 'red'
             colors.arm.right.down = 'red'
+            console.log(colors.arm.right)
         }else{
-            if(angle > 50){
-                colors.arm.right.up = 'green',
+            if(angle < 150){
+                colors.arm.right.up = 'green'
                 colors.arm.right.down = 'green'
+                console.log(colors.arm.right)
             }else {
-                colors.arm.right.up = 'yellow',
+                colors.arm.right.up = 'yellow'
                 colors.arm.right.down = 'yellow'
             }
         }
         
     }
 
-
-    switch (exerciseName) {
-        case 1:
-            goodMorning()
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
-            break;
-    }
 
     return colors
 }
