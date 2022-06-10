@@ -57,16 +57,16 @@ export default function Trainer({exerciseName}) {
         POSE_CONNECTIONS,
         {color: 'white', lineWidth: 5});
 
-      if (colors.arm.right.down !== 'white'){
+      if (colors.arm.right !== 'white'){
         drawConnectors(
           canvasCtx,
           results.poseLandmarks.map((value, index) => {            
-            if (index === 16 || index === 14) { 
+            if (index === 16 || index === 14 || index ===12) { 
               return(results.poseLandmarks[index])
             }
           }), 
           POSE_CONNECTIONS,
-          {color: colors.arm.right.down, lineWidth: 5});
+          {color: colors.arm.right, lineWidth: 5});
       }  
       
     }
