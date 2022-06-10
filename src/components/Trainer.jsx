@@ -35,8 +35,8 @@ export default function Trainer(exerciseName) {
       canvasElement.height
     );
     
-    const colorLine = CheckExercise(results.poseLandmarks, exerciseName)
-  
+    const colors = CheckExercise(results.poseLandmarks, exerciseName)
+      
 
     //Цвет точек и линий
     

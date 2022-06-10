@@ -1,6 +1,4 @@
 function CheckExercise(poseLandmarks, exerciseName) {
-
-    //arms
     const left_shoulder = [poseLandmarks[11].x,poseLandmarks[11].y,poseLandmarks[11].z]
     const right_shoulder= [poseLandmarks[12].x,poseLandmarks[12].y,poseLandmarks[12].z]
     const left_elbow= [poseLandmarks[13].x,poseLandmarks[13].y,poseLandmarks[13].z]
@@ -15,35 +13,6 @@ function CheckExercise(poseLandmarks, exerciseName) {
     const right_ankle=[poseLandmarks[28].x,poseLandmarks[28].y,poseLandmarks[28].z]
     const left_foot=[poseLandmarks[31].x,poseLandmarks[31].y,poseLandmarks[31].z]
     const right_foot=[poseLandmarks[32].x,poseLandmarks[32].y,poseLandmarks[32].z]
-
-    let colors = {
-        arm:{
-            left: {
-                up: '',
-                down: ''
-            },
-            right: {
-                up: '',
-                down: ''
-            }
-        },
-        body:{
-            up: '',
-            down: '',
-            left: '',
-            right: ''
-        },
-        leg:{
-            left: {
-                up: '',
-                down: ''
-            },
-            right: {
-                up: '',
-                down: ''
-            }
-        }
-    }
 
     // Function to find the angle in 3D space
     function find_angle(p1, p2, p3) {
@@ -65,12 +34,57 @@ function CheckExercise(poseLandmarks, exerciseName) {
         return radians_to_degrees(Math.acos(angle));
     }  
 
-    console.log(find_angle(left_shoulder,left_elbow,left_wrist))
-    
-    
+    let colors = {
+        arm:{
+            left: {
+                up: 'white',
+                down: 'white'
+            },
+            right: {
+                up: 'white',
+                down: 'white'
+            }
+        },
+        body:{
+            up: 'white',
+            down: 'white',
+            left: 'white',
+            right: 'white'
+        },
+        leg:{
+            left: {
+                up: 'white',
+                down: 'white'
+            },
+            right: {
+                up: 'white',
+                down: 'white'
+            }
+        }
+    }
+
+    function goodMorning() {
+        const angle = find_angle(right_shoulder, right_elbow, right_wrist)
+
+        if(angle > 100) {
+            colors.arm.right.up = 'red',
+            colors.arm.right.down = 'red'
+        }else{
+            if(angle > 50){
+                colors.arm.right.up = 'green',
+                colors.arm.right.down = 'green'
+            }else {
+                colors.arm.right.up = 'yellow',
+                colors.arm.right.down = 'yellow'
+            }
+        }
+        
+    }
+
+
     switch (exerciseName) {
         case 1:
-            
+            goodMorning()
             break;
         case 2:
             
@@ -88,3 +102,5 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
 
 export default CheckExercise
+
+
