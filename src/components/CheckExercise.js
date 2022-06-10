@@ -1,22 +1,21 @@
 function CheckExercise(poseLandmarks, exerciseName) {
 
     //arms
-    const left_shoulder=poseLandmarks[11]
-    const right_shoulder=poseLandmarks[12]
-    const left_elbow=poseLandmarks[13]
-    const right_elbow=poseLandmarks[14]
-    const left_wrist=poseLandmarks[15]
-    const right_wrist=poseLandmarks[16]
-    //legs
-    const left_hip=poseLandmarks[23]
-    const right_hip=poseLandmarks[24]
-    const left_knee=poseLandmarks[25]
-    const right_knee=poseLandmarks[26]
-    const left_ankle=poseLandmarks[27]
-    const right_ankle=poseLandmarks[28]
-    const left_foot=poseLandmarks[31]
-    const right_foot=poseLandmarks[32]
-   
+    const left_shoulder = [poseLandmarks[11].x,poseLandmarks[11].y,poseLandmarks[11].z]
+    const right_shoulder= [poseLandmarks[12].x,poseLandmarks[12].y,poseLandmarks[12].z]
+    const left_elbow= [poseLandmarks[13].x,poseLandmarks[13].y,poseLandmarks[13].z]
+    const right_elbow= [poseLandmarks[14].x,poseLandmarks[14].y,poseLandmarks[14].z]
+    const left_wrist=[poseLandmarks[15].x,poseLandmarks[15].y,poseLandmarks[15].z]
+    const right_wrist=[poseLandmarks[16].x,poseLandmarks[16].y,poseLandmarks[16].z]
+    const left_hip=[poseLandmarks[23].x,poseLandmarks[23].y,poseLandmarks[23].z]
+    const right_hip=[poseLandmarks[24].x,poseLandmarks[24].y,poseLandmarks[24].z]
+    const left_knee=[poseLandmarks[25].x,poseLandmarks[25].y,poseLandmarks[25].z]
+    const right_knee=[poseLandmarks[26].x,poseLandmarks[26].y,poseLandmarks[26].z]
+    const left_ankle=[poseLandmarks[27].x,poseLandmarks[27].y,poseLandmarks[27].z]
+    const right_ankle=[poseLandmarks[28].x,poseLandmarks[28].y,poseLandmarks[28].z]
+    const left_foot=[poseLandmarks[31].x,poseLandmarks[31].y,poseLandmarks[31].z]
+    const right_foot=[poseLandmarks[32].x,poseLandmarks[32].y,poseLandmarks[32].z]
+
     let colors = {
         arm:{
             left: {
@@ -46,30 +45,27 @@ function CheckExercise(poseLandmarks, exerciseName) {
         }
     }
 
-    // function radians_to_degrees(radians) {
-    //     return radians * (180 / Math.PI);
-    // }
-    
-    // // Function to find the distance between 2 points in a 3D plane
-    // function dist(p1, p2) {
-    //     return Math.sqrt(
-    //         Math.pow(p1[0] - p2[0], 2) +
-    //         Math.pow(p1[1] - p2[1], 2) +
-    //         Math.pow(p1[2] - p2[2], 2)
-    //     ); 
-    // }
-    
-    // // Function to find the angle in 3D space
-    // function find_angle(p1, p2, p3) {
-    //     const ab = dist(a, b);
-    //     const bc = dist(b, c);
-    //     const ac = dist(a, c);
-    
-    //     const angle = (Math.pow(ab, 2) + Math.pow(bc, 2) - Math.pow(ac, 2)) / 
-    // (2 * ab * bc);
-    //     return radians_to_degrees(Math.acos(angle));
-    // }  
+    // Function to find the angle in 3D space
+    function find_angle(p1, p2, p3) {
+        function radians_to_degrees(radians) {
+            return radians * (180 / Math.PI);
+        }
+        function dist(p1, p2) {
+            let one = Math.pow(p1[0] - p2[0], 2)
+            let two = Math.pow(p1[1] - p2[1], 2)
+            return Math.sqrt(one + two) 
+        }
 
+        const ab = dist(p1, p2);
+        const bc = dist(p2, p3);
+        const ac = dist(p1, p3);
+    
+        const angle = (Math.pow(ab, 2) + Math.pow(bc, 2) - Math.pow(ac, 2)) / (2 * ab * bc);
+
+        return radians_to_degrees(Math.acos(angle));
+    }  
+
+    console.log(find_angle(left_shoulder,left_elbow,left_wrist))
     
     
     switch (exerciseName) {

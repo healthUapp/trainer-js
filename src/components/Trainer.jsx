@@ -16,7 +16,6 @@ export default function Trainer(exerciseName) {
   var camera = null;
 
   function onResults(results) {
-    console.log(results)
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;    
@@ -37,8 +36,7 @@ export default function Trainer(exerciseName) {
     );
     
     const colorLine = CheckExercise(results.poseLandmarks, exerciseName)
-    
-    console.log(colorLine)
+  
 
     //Цвет точек и линий
     
