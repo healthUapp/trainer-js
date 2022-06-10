@@ -43,6 +43,21 @@ export default function Trainer(exerciseName) {
     //Цвет точек и линий
     
     if (results.poseLandmarks) {
+      drawConnectors(
+        canvasCtx,
+        results.poseLandmarks.map((value, index) => {            
+          if (index === 11 || index === 12 ||
+            index === 13 || index === 14 ||
+            index === 15 || index === 16 ||
+            index === 23 || index === 24 ||
+            index === 25 || index === 26 ||
+            index === 27 || index === 28) { 
+            return(results.poseLandmarks[index])
+          }
+        }), 
+        POSE_CONNECTIONS,
+        {color: 'white', lineWidth: 5});
+    }
       drawLandmarks(
         canvasCtx,
         // results.poseLandmarks,  //- если нужны все точки
@@ -57,24 +72,10 @@ export default function Trainer(exerciseName) {
             }
         }),
         {color: 'blue', lineWidth: 1});
-      drawConnectors(
-          canvasCtx,
-          results.poseLandmarks.map((value, index) => {            
-            if (index === 11 || index === 12 ||
-              index === 13 || index === 14 ||
-              index === 15 || index === 16 ||
-              index === 23 || index === 24 ||
-              index === 25 || index === 26 ||
-              index === 27 || index === 28) { 
-              return(results.poseLandmarks[index])
-            }
-          }), 
-          POSE_CONNECTIONS,
-          {color: 'white', lineWidth: 4});
-    }
+      
     
-    canvasCtx.restore();
-  }
+      canvasCtx.restore();
+    }
 
   useEffect(() => {
     const pose = new Pose({locateFile: (file) => {
