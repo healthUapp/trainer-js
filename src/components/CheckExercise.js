@@ -68,19 +68,23 @@ function CheckExercise(poseLandmarks, exerciseName) {
     function goodMorning() {
         const angle = find_angle(right_shoulder, right_elbow, right_wrist)
 
-        if(angle > 100) {
-            colors.arm.right.up = 'red'
-            colors.arm.right.down = 'red'
-        }else{
-            if(angle < 150){
-                colors.arm.right.up = 'green'
-                colors.arm.right.down = 'green'
-            }else {
-                colors.arm.right.up = 'yellow'
-                colors.arm.right.down = 'yellow'
-            }
+
+        if(angle > 30 && angle <90) {
+            colors.arm.right.up = 'yellow'
+            colors.arm.right.down = 'yellow'
         }
         
+        if(angle >=90 && angle <100){
+            colors.arm.right.up = 'green'
+            colors.arm.right.down = 'green'
+            
+        }
+
+        if(angle <= 30 || angle >= 100){
+            colors.arm.right.up = 'red'
+            colors.arm.right.down = 'red'
+        }
+    
     }
 
 

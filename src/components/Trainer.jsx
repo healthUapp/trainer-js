@@ -37,7 +37,7 @@ export default function Trainer({exerciseName}) {
     
     const colors = CheckExercise(results.poseLandmarks, exerciseName)
 
-    console.log(colors)
+    // console.log(colors)
 
     //Цвет точек и линий
     
@@ -56,6 +56,19 @@ export default function Trainer({exerciseName}) {
         }), 
         POSE_CONNECTIONS,
         {color: 'white', lineWidth: 5});
+
+      if (colors.arm.right.down !== 'white'){
+        drawConnectors(
+          canvasCtx,
+          results.poseLandmarks.map((value, index) => {            
+            if (index === 16 || index === 14) { 
+              return(results.poseLandmarks[index])
+            }
+          }), 
+          POSE_CONNECTIONS,
+          {color: colors.arm.right.down, lineWidth: 5});
+      }  
+      
     }
       drawLandmarks(
         canvasCtx,
