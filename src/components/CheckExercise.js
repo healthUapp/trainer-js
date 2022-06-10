@@ -1,8 +1,22 @@
 function CheckExercise(poseLandmarks, exerciseName) {
 
+    //arms
     const left_shoulder=poseLandmarks[11]
     const right_shoulder=poseLandmarks[12]
-    console.log(left_shoulder)
+    const left_elbow=poseLandmarks[13]
+    const right_elbow=poseLandmarks[14]
+    const left_wrist=poseLandmarks[15]
+    const right_wrist=poseLandmarks[16]
+    //legs
+    const left_hip=poseLandmarks[23]
+    const right_hip=poseLandmarks[24]
+    const left_knee=poseLandmarks[25]
+    const right_knee=poseLandmarks[26]
+    const left_ankle=poseLandmarks[27]
+    const right_ankle=poseLandmarks[28]
+    const left_foot=poseLandmarks[31]
+    const right_foot=poseLandmarks[32]
+   
     let colors = {
         arm:{
             left: {
