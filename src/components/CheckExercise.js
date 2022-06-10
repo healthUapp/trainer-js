@@ -71,12 +71,10 @@ function CheckExercise(poseLandmarks, exerciseName) {
         if(angle > 100) {
             colors.arm.right.up = 'red'
             colors.arm.right.down = 'red'
-            console.log(colors.arm.right)
         }else{
             if(angle < 150){
                 colors.arm.right.up = 'green'
                 colors.arm.right.down = 'green'
-                console.log(colors.arm.right)
             }else {
                 colors.arm.right.up = 'yellow'
                 colors.arm.right.down = 'yellow'

@@ -37,7 +37,7 @@ export default function Trainer({exerciseName}) {
     
     const colors = CheckExercise(results.poseLandmarks, exerciseName)
 
-    // console.log(colors)
+    console.log(colors)
 
     //Цвет точек и линий
     
