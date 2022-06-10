@@ -61,11 +61,16 @@ export default function Trainer({exerciseName}) {
         drawConnectors(
           canvasCtx,
           results.poseLandmarks.map((value, index) => {            
+<<<<<<< HEAD
             if (index === 16 || index === 14 || index === 12 ) { 
+=======
+            if (index === 16 || index === 14 || index ===12) { 
+>>>>>>> 8f6e72e1e1525b64126f9648f09bdc4ef2b2f185
               return(results.poseLandmarks[index])
             }
           }), 
           POSE_CONNECTIONS,
+<<<<<<< HEAD
           {color: colors.arm.right.down, lineWidth: 5});
       }
       if (colors.arm.right !== 'white'){
@@ -91,6 +96,10 @@ export default function Trainer({exerciseName}) {
           {color: colors.arm.left, lineWidth: 5});
       }
 
+=======
+          {color: colors.arm.right, lineWidth: 5});
+      }  
+>>>>>>> 8f6e72e1e1525b64126f9648f09bdc4ef2b2f185
       
     }
       drawLandmarks(
