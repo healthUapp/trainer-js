@@ -1,28 +1,28 @@
-const colors = {
-    arm: {
-        left: 'white',
-        right: 'white'
-    },
-    body: {
-        up: 'white',
-        down: 'white',
-        left: 'white',
-        right: 'white'
-    },
-    leg: {
-        left: {
-            up: 'white',
-            down: 'white'
-        },
-        right: {
-            up: 'white',
-            down: 'white'
-        }
-    }
-}
-
 function CheckExercise(poseLandmarks, exerciseName) {
     console.log(poseLandmarks)
+
+    const colors = {
+        arm: {
+            left: 'white',
+            right: 'white'
+        },
+        body: {
+            up: 'white',
+            down: 'white',
+            left: 'white',
+            right: 'white'
+        },
+        leg: {
+            left: {
+                up: 'white',
+                down: 'white'
+            },
+            right: {
+                up: 'white',
+                down: 'white'
+            }
+        }
+    }
 
     if(!poseLandmarks) return colors;
 
@@ -81,7 +81,6 @@ function CheckExercise(poseLandmarks, exerciseName) {
         }
 
     }
-
 
     return colors
 }
