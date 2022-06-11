@@ -53,7 +53,6 @@ export default function Trainer({exerciseName}) {
         }), 
         POSE_CONNECTIONS,
         {color: 'white', lineWidth: 5});
-
       if (colors.arm.right !== 'white'){
         drawConnectors(
           canvasCtx,
@@ -68,30 +67,6 @@ export default function Trainer({exerciseName}) {
 
           {color: colors.arm.right.down, lineWidth: 5});
       }
-      if (colors.arm.right !== 'white'){
-        drawConnectors(
-          canvasCtx,
-          results.poseLandmarks.map((value, index) => {            
-            if (index === 16 || index === 14 || index === 12 ) { 
-              return(results.poseLandmarks[index])
-            }
-          }), 
-          POSE_CONNECTIONS,
-          {color: colors.arm.right, lineWidth: 5});
-      }
-      if (colors.arm.left !== 'white'){
-        drawConnectors(
-          canvasCtx,
-          results.poseLandmarks.map((value, index) => {            
-            if (index === 16 || index === 14 || index === 12 ) { 
-              return(results.poseLandmarks[index])
-            }
-          }), 
-          POSE_CONNECTIONS,
-          {color: colors.arm.left, lineWidth: 5});
-      }
-      
-    }
       drawLandmarks(
         canvasCtx,
         // results.poseLandmarks,  //- если нужны все точки
@@ -106,6 +81,8 @@ export default function Trainer({exerciseName}) {
             }
         }),
         {color: 'blue', lineWidth: 1});
+    }
+      
       
     
       canvasCtx.restore();

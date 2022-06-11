@@ -1,5 +1,32 @@
+const colors = {
+    arm: {
+        left: 'white',
+        right: 'white'
+    },
+    body: {
+        up: 'white',
+        down: 'white',
+        left: 'white',
+        right: 'white'
+    },
+    leg: {
+        left: {
+            up: 'white',
+            down: 'white'
+        },
+        right: {
+            up: 'white',
+            down: 'white'
+        }
+    }
+}
+
 function CheckExercise(poseLandmarks, exerciseName) {
-    const left_shoulder = [poseLandmarks[11].x, poseLandmarks[11].y, poseLandmarks[11].z]
+    console.log(poseLandmarks)
+
+    if(!poseLandmarks) return colors;
+
+    const left_shoulder = [poseLandmarks[11]?.x, poseLandmarks[11]?.y, poseLandmarks[11]?.z]
     const right_shoulder = [poseLandmarks[12].x, poseLandmarks[12].y, poseLandmarks[12].z]
     const left_elbow = [poseLandmarks[13].x, poseLandmarks[13].y, poseLandmarks[13].z]
     const right_elbow = [poseLandmarks[14].x, poseLandmarks[14].y, poseLandmarks[14].z]
@@ -34,29 +61,6 @@ function CheckExercise(poseLandmarks, exerciseName) {
         return radians_to_degrees(Math.acos(angle));
     }
 
-    const colors = {
-        arm: {
-            left: 'white',
-            right: 'white'
-        },
-        body: {
-            up: 'white',
-            down: 'white',
-            left: 'white',
-            right: 'white'
-        },
-        leg: {
-            left: {
-                up: 'white',
-                down: 'white'
-            },
-            right: {
-                up: 'white',
-                down: 'white'
-            }
-        }
-    }
-
     if (exerciseName === 1) goodMorning();
 
     function goodMorning() {
@@ -74,7 +78,7 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
         if (angle <= 30 || angle >= 100) {
             colors.arm.right = 'red'
-        }ß
+        }
 
     }
 
