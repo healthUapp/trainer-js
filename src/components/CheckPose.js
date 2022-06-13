@@ -43,10 +43,11 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
 
     function goodMorning() {
         const angle = findAngle(12, 14, 16, poseLandmarks)
-        if ((angle > 70 && angle < 90) || angle >= 100 && angle < 120) {
+
+        if ((angle > 70 && angle < 85) || angle >= 100 && angle < 120) {
             colors.arm.right = 'yellow'
         }
-        if (angle >= 90 && angle < 100) {
+        if (angle >= 85 && angle < 100) {
             colors.arm.right = 'green'
         }
         if (angle <= 70 || angle >= 120) {
