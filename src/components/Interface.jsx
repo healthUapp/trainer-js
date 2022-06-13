@@ -1,4 +1,5 @@
 import React, {useState,useEffect, useRef} from "react"
+import findAngle from "./findAngle";
 import * as d3 from "d3";
 
 export default function Interface({dots, colors}) {
@@ -29,7 +30,7 @@ export default function Interface({dots, colors}) {
     {coord: [24,26], color: colors.leg.right},
     {coord: [26,28], color: colors.leg.right},
     {coord: [23,25], color: colors.leg.left},
-    {coord: [25,27], color: colors.leg.lef}
+    {coord: [25,27], color: colors.leg.left}
   ].forEach((line) => {
 
     let a = line.coord[0];
@@ -37,7 +38,7 @@ export default function Interface({dots, colors}) {
     
     svg.append('line')
         .style("stroke", line.color)
-        .style("stroke-width", 15)
+        .style("stroke-width", 20)
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -55,9 +56,28 @@ export default function Interface({dots, colors}) {
         .style("stroke", "white")
         .style("stroke-width", 10)
         .style("fill", "red")
-        .attr("r", 15)
+        .attr("r", 25 + dot.z / 5)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
         .attr("cy", (dot.y) * upperSize.height);
+
+        if(index === 14){
+          svg.append('text')
+          .attr('x', upperSize.width - (dot.x) * upperSize.width + 50)
+          .attr('y', (dot.y) * upperSize.height)
+          .style('font-size', 100)
+          .attr('class', 'angle')
+          .style('fill','white')
+          .text(`${Math.round(findAngle(16,14,12, dots)*10)/10}°`)
+        }
+        if(index === 13){
+          svg.append('text')
+          .attr('x', upperSize.width - (dot.x) * upperSize.width - 300)
+          .attr('y', (dot.y) * upperSize.height)
+          .style('font-size', 100)
+          .attr('class', 'angle')
+          .style('fill','white')
+          .text(`${Math.round(findAngle(11,13,15, dots)*10)/10}°`)
+        }
     }
   });
 
