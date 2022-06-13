@@ -42,17 +42,37 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
     if (exerciseName === 1) goodMorning();
 
     function goodMorning() {
-        const angle = findAngle(12, 14, 16, poseLandmarks)
+        
+        const angle_elbow_left=findAngle(15, 13, 11, poseLandmarks) 
+        const angle_elbow_right=findAngle(16, 14, 12, poseLandmarks) 
+        
+        const angle_back_right=findAngle(12, 24, 26, poseLandmarks)
+        
+        //const angle_leg_left=findAngle(23, 25, 27, poseLandmarks)
+        const angle_leg_right=findAngle(24, 26, 28, poseLandmarks)
 
-        if ((angle > 70 && angle < 85) || angle >= 100 && angle < 120) {
-            colors.arm.right = 'yellow'
+        let stage = "START"
+
+        if (angle_elbow_left>=40 && angle_elbow_right>=40 && angle_elbow_left<=80 && angle_elbow_right<=80){
+            colors.arm.left = "green"
+            colors.arm.right="green"
+            stage ="KNEE"
         }
-        if (angle >= 85 && angle < 100) {
-            colors.arm.right = 'green'
-        }
-        if (angle <= 70 || angle >= 120) {
-            colors.arm.right = 'red'
-        }
+       
+
+    if (stage==="KNEE" && angle_leg_right>=120 && angle_leg_right<=160){
+        colors.leg.left="green"
+        colors.leg.right="green"
+        stage="DOWN"
+    }
+        
+
+    if (stage==="DOWN" && angle_back_right>=90 && angle_back_right<=130){
+        colors.body.up="green"
+        colors.body.down="green"
+        stage="UP"
+    }
+       
     }
     
     return {
