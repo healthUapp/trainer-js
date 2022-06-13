@@ -1,5 +1,5 @@
 import { FaceMesh } from "@mediapipe/face_mesh";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Pose } from "@mediapipe/pose";
 import { Hands } from "@mediapipe/hands";
 import { POSE_LANDMARKS ,POSE_CONNECTIONS} from "@mediapipe/pose";
@@ -8,11 +8,16 @@ import * as cam from "@mediapipe/camera_utils";
 import "@mediapipe/control_utils";
 import {drawLandmarks, drawConnectors} from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
-import CheckExercise from "./CheckExercise";
+import CheckPose from "./CheckPose";
+import findAngle from "./findAngle";
+import Interface from "./Interface";
 
 export default function Trainer({exerciseName}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [leftHandAngle, setLeftHandAngle] = useState(0)
+  const [leftHandColor,setLeftHandColor] = useState('#fff')
+  const [dots,setDots] = useState(undefined)
   var camera = null;
 
   function onResults(results) {
@@ -22,7 +27,6 @@ export default function Trainer({exerciseName}) {
     // Set canvas width
     canvasRef.current.width = videoWidth;
     canvasRef.current.height = videoHeight;
-
     const canvasElement = canvasRef.current;
     const canvasCtx = canvasElement.getContext("2d");
     canvasCtx.save();
@@ -35,10 +39,17 @@ export default function Trainer({exerciseName}) {
       canvasElement.height
     );
     
-    const colors = CheckExercise(results.poseLandmarks, exerciseName)
-    //Цвет точек и линий
-    
+    const poseInfo = CheckPose(results.poseLandmarks, exerciseName)
+    const colors = poseInfo.colors
+
+    if(results.poseLandmarks) {
+      setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
+      setLeftHandColor(`${colors.arm.right}`)
+      setDots(results.poseLandmarks)
+    }
+        
     if (results.poseLandmarks) {
+      //Рисование точек и линий
       drawConnectors(
         canvasCtx,
         results.poseLandmarks.map((value, index) => {            
@@ -58,7 +69,8 @@ export default function Trainer({exerciseName}) {
         drawConnectors(
           canvasCtx,
           results.poseLandmarks.map((value, index) => {            
-            if (index === 16 || index === 14 || index ===12) {
+            if (index === 16 || index === 14 ||
+                index ===12 || index ===11) {
               return(results.poseLandmarks[index])
             }}), 
           POSE_CONNECTIONS,
@@ -87,13 +99,14 @@ export default function Trainer({exerciseName}) {
     const pose = new Pose({locateFile: (file) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
     }});
+
     pose.setOptions({
       modelComplexity: 0.5,
       smoothLandmarks: true,
       enableSegmentation: true,
       smoothSegmentation: false,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5
+      minDetectionConfidence: 0.6,
+      minTrackingConfidence: 0.6
     });
     
     pose.onResults(onResults);
@@ -122,6 +135,16 @@ export default function Trainer({exerciseName}) {
           ref={webcamRef}
         />
         <canvas ref={canvasRef} className="draw"/>
+      </div>
+      <div className="settings">
+        <div className="angles">
+          <p>Left hand angle: 
+            <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
+          </p>
+        </div>
+      </div>
+      <div className="svgBox">
+        <Interface dots = {dots}/>
       </div>
     </center>
   );
