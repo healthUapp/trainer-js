@@ -18,6 +18,22 @@ export default function Trainer({exerciseName}) {
   const [leftHandAngle, setLeftHandAngle] = useState(0)
   const [leftHandColor,setLeftHandColor] = useState('#fff')
   const [dots,setDots] = useState(undefined)
+  const [colors,setColors] = useState({
+    arm: {
+        left: 'white',
+        right: 'white'
+    },
+    body: {
+        up: 'white',
+        down: 'white',
+        left: 'white',
+        right: 'white'
+    },
+    leg: {
+        left: 'white',
+        right: 'white'
+    }
+  })
   var camera = null;
 
   function onResults(results) {
@@ -40,56 +56,12 @@ export default function Trainer({exerciseName}) {
     );
     
     const poseInfo = CheckPose(results.poseLandmarks, exerciseName)
-    const colors = poseInfo.colors
 
     if(results.poseLandmarks) {
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
-      setLeftHandColor(`${colors.arm.right}`)
+      setLeftHandColor(`${poseInfo.colors.arm.right}`)
       setDots(results.poseLandmarks)
-    }
-        
-    if (results.poseLandmarks) {
-      //Рисование точек и линий
-      drawConnectors(
-        canvasCtx,
-        results.poseLandmarks.map((value, index) => {            
-          if (index === 11 || index === 12 ||
-            index === 13 || index === 14 ||
-            index === 15 || index === 16 ||
-            index === 23 || index === 24 ||
-            index === 25 || index === 26 ||
-            index === 27 || index === 28) { 
-            return(results.poseLandmarks[index])
-          }
-        }), 
-        POSE_CONNECTIONS,
-        {color: 'white', lineWidth: 5});
-        
-      if (colors.arm.right !== 'white'){
-        drawConnectors(
-          canvasCtx,
-          results.poseLandmarks.map((value, index) => {            
-            if (index === 16 || index === 14 ||
-                index ===12 || index ===11) {
-              return(results.poseLandmarks[index])
-            }}), 
-          POSE_CONNECTIONS,
-          {color: colors.arm.right, lineWidth: 5});
-      }   
-
-      drawLandmarks(
-        canvasCtx,
-        results.poseLandmarks.map((value, index) => {            
-            if (index === 11 || index === 12 ||
-              index === 13 || index === 14 ||
-              index === 15 || index === 16 ||
-              index === 23 || index === 24 ||
-              index === 25 || index === 26 ||
-              index === 27 || index === 28) { 
-              return(results.poseLandmarks[index])
-            }
-        }),
-        {color: 'black', lineWidth: 3});
+      setColors(poseInfo.colors)
     }
 
       canvasCtx.restore();
@@ -138,13 +110,13 @@ export default function Trainer({exerciseName}) {
       </div>
       <div className="settings">
         <div className="angles">
-          <p>Left hand angle: 
+          <p>Right hand angle: 
             <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
           </p>
         </div>
       </div>
       <div className="svgBox">
-        <Interface dots = {dots}/>
+        <Interface dots = {dots} colors = {colors}/>
       </div>
     </center>
   );

@@ -1,7 +1,6 @@
 import findAngle from "./findAngle";
 
 function CheckExercise(poseLandmarks, exerciseName, find_angle) {
-    console.log(poseLandmarks)
 
     const colors = {
         arm: {
@@ -15,14 +14,8 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
             right: 'white'
         },
         leg: {
-            left: {
-                up: 'white',
-                down: 'white'
-            },
-            right: {
-                up: 'white',
-                down: 'white'
-            }
+            left: 'white',
+            right: 'white'
         }
     }
 
