@@ -19,7 +19,7 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
         }
     }
 
-    if(!poseLandmarks) return colors;
+    if (!poseLandmarks) return colors;
 
     // const left_shoulder = [poseLandmarks[11]?.x, poseLandmarks[11]?.y, poseLandmarks[11]?.z]
     // const right_shoulder = [poseLandmarks[12].x, poseLandmarks[12].y, poseLandmarks[12].z]
@@ -37,109 +37,150 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
     // const right_foot = [poseLandmarks[32].x, poseLandmarks[32].y, poseLandmarks[32].z]
 
     // Function to find the angle in 3D space
-    
+
 
     if (exerciseName === 1) goodMorning();
     if (exerciseName === 2) cabaret();
+    if (exerciseName === 3) march_in_place();
 
     function goodMorning() {
-        
-        const angle_elbow_left=findAngle(15, 13, 11, poseLandmarks) 
-        const angle_elbow_right=findAngle(16, 14, 12, poseLandmarks) 
-        
-        const angle_back_right=findAngle(12, 24, 26, poseLandmarks)
-        
+
+        const angle_elbow_left = findAngle(15, 13, 11, poseLandmarks)
+        const angle_elbow_right = findAngle(16, 14, 12, poseLandmarks)
+
+        const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
+
         //const angle_leg_left=findAngle(23, 25, 27, poseLandmarks)
-        const angle_leg_right=findAngle(24, 26, 28, poseLandmarks)
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
         let stage = "START"
 
-        if (angle_elbow_left>=40 && angle_elbow_right>=40 && angle_elbow_left<=80 && angle_elbow_right<=80){
+        if (angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80) {
             colors.arm.left = "green"
-            colors.arm.right="green"
-            stage ="KNEE"
+            colors.arm.right = "green"
+            stage = "KNEE"
         }
-       
 
-    if (stage==="KNEE" && angle_leg_right>=120 && angle_leg_right<=160){
-        colors.leg.left="green"
-        colors.leg.right="green"
-        stage="DOWN"
-    }
-        
 
-    if (stage==="DOWN" && angle_back_right>=90 && angle_back_right<=130){
-        colors.body.up="green"
-        colors.body.down="green"
-        stage="UP"
+        if (stage === "KNEE" && angle_leg_right >= 120 && angle_leg_right <= 160) {
+            colors.leg.left = "green"
+            colors.leg.right = "green"
+            stage = "DOWN"
+        }
+
+
+        if (stage === "DOWN" && angle_back_right >= 90 && angle_back_right <= 130) {
+            colors.body.up = "green"
+            colors.body.down = "green"
+            stage = "UP"
+        }
+
     }
-       
-    }
-    
-    function cabaret(){
+
+    function cabaret() {
 
         let stage = "START"
-        let side =""
+        let side = ""
         let counter = 0
 
-        const angle_shoulder_left=findAngle(13, 11, 23, poseLandmarks)
-        const angle_shoulder_right= findAngle(14, 12, 24, poseLandmarks)
-        
-        const angle_knee_right=findAngle(24, 26, 28, poseLandmarks)
-        const angle_knee_left=findAngle(23, 25, 27, poseLandmarks)
-    
-        const angle_leg_right=findAngle(12, 24, 28, poseLandmarks)
-        const angle_leg_left=findAngle(11, 23, 27, poseLandmarks)
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+
+        const angle_knee_right = findAngle(24, 26, 28, poseLandmarks)
+        const angle_knee_left = findAngle(23, 25, 27, poseLandmarks)
+
+        const angle_leg_right = findAngle(12, 24, 28, poseLandmarks)
+        const angle_leg_left = findAngle(11, 23, 27, poseLandmarks)
 
         if (counter % 2 == 0) {
-            side="LEFT"
-                            colors.arm.left="yellow"
-                            colors.leg.right="yellow"
+            side = "LEFT"
+            colors.arm.left = "yellow"
+            colors.leg.right = "yellow"
         }
-        else  { 
-                            side="RIGHT"
-                            colors.arm.right="yellow"
-                            colors.leg.left="yellow"
-                        }
+        else {
+            side = "RIGHT"
+            colors.arm.right = "yellow"
+            colors.leg.left = "yellow"
+        }
 
-        if (angle_shoulder_left>=80  && angle_shoulder_right>=80)
-                        {
-                            colors.arm.left="green"
-                            colors.arm.right="green"
-                            stage="KNEE"
-                        }      
-         else {
-                colors.arm.left="red"
-                colors.arm.right="red"
-                }
-                            
+        if (angle_shoulder_left >= 80 && angle_shoulder_right >= 80) {
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+            stage = "KNEE"
+        }
+        else {
+            colors.arm.left = "red"
+            colors.arm.right = "red"
+        }
+
         if (side === "LEFT") {
             if (stage === "KNEE" && angle_knee_right >= 80 && angle_knee_right <= 100) {
-            stage = "LEG"
-            colors.leg.right="green"
-                    }
-            if (stage === "LEG" && angle_leg_right >= 90 && angle_leg_right <= 110) {
-                      stage = "STAND"
-                      counter += 1
-                      colors.leg.right="green"
-                    }
+                stage = "LEG"
+                colors.leg.right = "green"
             }
-        
+            if (stage === "LEG" && angle_leg_right >= 90 && angle_leg_right <= 110) {
+                stage = "STAND"
+                counter += 1
+                colors.leg.right = "green"
+            }
+        }
+
         if (side === "RIGHT") {
             if (stage === "KNEE" && angle_knee_left >= 80 && angle_knee_left <= 100) {
-                  stage = "LEG";
-                  colors.leg.left="green"
+                stage = "LEG";
+                colors.leg.left = "green"
             }
-              
-                if (stage === "LEG" && angle_leg_left >= 90 && angle_leg_left <= 110) {
-                  stage = "STAND";
-                  counter += 1;
-                  colors.leg.left="green"
-                }
-              }
+
+            if (stage === "LEG" && angle_leg_left >= 90 && angle_leg_left <= 110) {
+                stage = "STAND";
+                counter += 1;
+                colors.leg.left = "green"
+            }
+        }
 
     }
 
+    function march_in_place() {
+
+        let stage = "START"
+        let side = ""
+        let counter = 0
+
+        const angle_arm_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_arm_right = findAngle(12, 14, 16, poseLandmarks)
+
+        const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+
+        if (counter % 2 == 0) {
+            side = "LEFT"
+            stage == "UP"
+            colors.arm.left = "yellow"
+            colors.leg.right = "yellow"
+        }
+        else {
+            side = "RIGHT"
+            stage == "UP"
+            colors.arm.right = "yellow"
+            colors.leg.left = "yellow"
+        }
+
+        if (side === "LEFT" && angle_arm_left >= 20 && angle_arm_left <= 80 && angle_leg_right >= 70 && angle_leg_right <= 100) {
+            colors.arm.left = "green"
+            colors.leg.right = "green"
+            stage = "DOWN";
+            counter += 1;
+        }
+
+        if (side === "RIGHT" && angle_arm_right >= 20 && angle_arm_right <= 80 && angle_leg_left >= 70 && angle_leg_left <= 100) {
+            colors.arm.right = "green"
+            colors.leg.left = "green"
+            stage = "DOWN";
+            counter += 1;
+        }
+
+
+    }
     return {
         colors: colors,
     }
