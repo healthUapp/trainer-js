@@ -42,7 +42,12 @@ export default function Trainer({exerciseName}) {
   var camera = null;
 
   function onResults(results) {
-   
+    //Видимость полной позы человека
+
+    if(results.poseLandmarks){
+      
+    }
+    
   
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
@@ -66,7 +71,7 @@ export default function Trainer({exerciseName}) {
 
     if(results.poseLandmarks) {
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
-      setVisibleBody(checkBody(results.poseLandmarks)) //Видимость полной позы человека
+      
       setLeftHandColor(`${poseInfo.colors.arm.right}`)
       setDots(results.poseLandmarks)
       setColors(poseInfo.colors)
@@ -107,28 +112,29 @@ export default function Trainer({exerciseName}) {
   }, []);
 
   return (
-    <center>
-      <div className="drawBox">
-        <Webcam
-          width={"1280"}
-          height={"720"}
-          ref={webcamRef}
-        />
-        <canvas ref={canvasRef} className="draw"/>
-      </div>
-      <div className="settings">
-        <div className="angles">
-          <p>Right hand angle: 
-            <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
-          </p>
+    <div className="exerciseView">
+      <div className="poseView">
+        <div className="drawBox">
+          <Webcam
+            width={"1280"}
+            height={"720"}
+            ref={webcamRef}
+          />
+          <canvas ref={canvasRef} className="draw"/>
+          {/* {visibleBody && */}
+            <Interface dots={dots} colors={colors}/>
+          {/* } */}
+        </div>
+        <div className="settings">
+          <div className="angles">
+            <p>Right hand angle: 
+              <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
+            </p>
+          </div>
         </div>
       </div>
-      <div className="svgBox">
-        {visibleBody &&
-          <Interface dots={dots} colors={colors}/>
-        }
-      </div>
-    </center>
+      <div className="exerciseStateView"></div>
+    </div>
   );
 }
 

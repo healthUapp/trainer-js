@@ -18,21 +18,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-.drawBox{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(112, 112, 112);
-}
-
-.draw{
-    position: absolute;
-    width: 100vw;
-    transform:  scaleX(-1);
-    /* height: calc(100vw / 1.333333333); */
-}
 
 video{
     display: none;
@@ -46,6 +31,46 @@ video{
     justify-content: center;
     align-items: center;
     
+}
+
+.exerciseView{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.poseView{
+    height: 100%;
+    width: 50%;
+    background-color: rgb(112, 112, 112);
+    display: flex;
+    align-items: center;
+}
+
+.exerciseStateView{
+    height: 100%;
+    width: 50%;
+}
+
+.drawBox{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.draw{
+    width: 100%;
+    transform:  scaleX(-1);
+    /* height: calc(100vw / 1.333333333); */
+}
+
+.svg{
+    position: absolute;
+    z-index: 10;
+    width: 50vw;
+    height: calc(50vw / 1.333333333);
 }
 
 .exercise-1,.exercise-2,.exercise-3,.exercise-4{
@@ -71,20 +96,6 @@ video{
 
 .angles{
     font-size: 20px;
-}
-
-.svgBox{
-    position: absolute;
-    top: calc(50% - 50vw / 1.333333333);
-    left: 0;
-    width: 100vw;
-    height: calc(100vw / 1.333333333);
-    /* background-color: rgba(100,100,0,0.2); */
-}
-
-.svg{
-    width: 100%;
-    height: 100%;
 }
 
 .angle{

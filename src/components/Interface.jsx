@@ -10,6 +10,9 @@ export default function Interface({dots, colors}) {
     height: svgRef.current?.parentNode.clientHeight,
   }
 
+
+  console.log(upperSize)
+
   if(!dots){return <svg />}
 
   svg.style('background', 'rgba(100,100,0,0.2)').html(null)
@@ -34,7 +37,8 @@ export default function Interface({dots, colors}) {
     
     svg.append('line')
         .style("stroke", line.color)
-        .style("stroke-width", 15)
+        .style('filter',"opacity(0.5)")
+        .style("stroke-width", 10)
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -50,9 +54,9 @@ export default function Interface({dots, colors}) {
       index === 27 || index === 28) { 
         svg.append('circle')
         .style("stroke", "white")
-        .style("stroke-width", 10)
-        .style("fill", "red")
-        .attr("r", 20 + dot.z / 5)
+        .style("stroke-width", 2)
+        .style("fill", 'rgba(0,0,0,0.5)')
+        .attr("r", 8)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
         .attr("cy", (dot.y) * upperSize.height);
 

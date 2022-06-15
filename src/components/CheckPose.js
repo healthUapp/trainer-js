@@ -56,23 +56,13 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
 
     function goodMorning() {
-
-        const angle_elbow_left = findAngle(15, 13, 11, poseLandmarks)
-        const angle_elbow_right = findAngle(16, 14, 12, poseLandmarks)
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
 
-        let stage = "START"
+        let stage = "UP"
 
-        if (angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80) {
-            colors.arm.left = "green"
-            colors.arm.right = "green"
-            stage = "KNEE"
-        }
-
-
-        if (stage === "KNEE" && angle_leg_right >= 120 && angle_leg_right <= 160) {
+        if (stage === "UP" && angle_leg_right >= 120 && angle_leg_right <= 160) {
             colors.leg.left = "green"
             colors.leg.right = "green"
             stage = "DOWN"

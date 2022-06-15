@@ -18,10 +18,7 @@ export default function Exercise() {
                     <IonButton className='exercise-4' expand="full" onClick={()=>setExerciseName(4)}>START-4</IonButton>
                 </div>
             }
-            {(exerciseName === 1) && <Trainer exerciseName = {exerciseName}/>}
-            {(exerciseName === 2) && <Trainer exerciseName = {exerciseName}/>}
-            {(exerciseName === 3) && <Trainer exerciseName = {exerciseName}/>}
-            {(exerciseName === 4) && <Trainer exerciseName = {exerciseName}/>}
+            {(exerciseName !== null) && <Trainer exerciseName = {exerciseName}/>}
         </IonContent>
     )
 }
