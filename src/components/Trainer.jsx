@@ -71,7 +71,7 @@ export default function Trainer({exerciseName}) {
 
     if(results.poseLandmarks) {
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
-      
+      setVisibleBody(checkBody(results.poseLandmarks))
       setLeftHandColor(`${poseInfo.colors.arm.right}`)
       setDots(results.poseLandmarks)
       setColors(poseInfo.colors)
@@ -121,17 +121,17 @@ export default function Trainer({exerciseName}) {
             ref={webcamRef}
           />
           <canvas ref={canvasRef} className="draw"/>
-          {/* {visibleBody && */}
+          {visibleBody &&
             <Interface dots={dots} colors={colors}/>
-          {/* } */}
+          }
         </div>
-        <div className="settings">
+        {/* <div className="settings">
           <div className="angles">
             <p>Right hand angle: 
               <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="exerciseStateView"></div>
     </div>

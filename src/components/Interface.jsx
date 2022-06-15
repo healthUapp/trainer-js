@@ -38,7 +38,7 @@ export default function Interface({dots, colors}) {
     svg.append('line')
         .style("stroke", line.color)
         .style('filter',"opacity(0.5)")
-        .style("stroke-width", 10)
+        .style("stroke-width", 5)
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -56,28 +56,9 @@ export default function Interface({dots, colors}) {
         .style("stroke", "white")
         .style("stroke-width", 2)
         .style("fill", 'rgba(0,0,0,0.5)')
-        .attr("r", 8)
+        .attr("r", 5)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
         .attr("cy", (dot.y) * upperSize.height);
-
-        if(index === 14){
-          svg.append('text')
-          .attr('x', upperSize.width - (dot.x) * upperSize.width + 50)
-          .attr('y', (dot.y) * upperSize.height)
-          .style('font-size', 50)
-          .attr('class', 'angle')
-          .style('fill','white')
-          .text(`${Math.round(findAngle(16,14,12, dots)*10)/10}°`)
-        }
-        if(index === 13){
-          svg.append('text')
-          .attr('x', upperSize.width - (dot.x) * upperSize.width - 150)
-          .attr('y', (dot.y) * upperSize.height)
-          .style('font-size', 50)
-          .attr('class', 'angle')
-          .style('fill','white')
-          .text(`${Math.round(findAngle(11,13,15, dots)*10)/10}°`)
-        }
     }
   });
 
