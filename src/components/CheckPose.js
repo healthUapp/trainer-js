@@ -1,5 +1,6 @@
 import { color } from "d3";
 import findAngle from "./findAngle";
+import checkBody from "./checkBody";
 
 function CheckExercise(poseLandmarks, exerciseName) {
 
@@ -43,15 +44,8 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
 
     if (exerciseName === 1) {
-        function allDots(){
-            let state = false 
-            if (poseLandmarks[11].visibility>0.8 && poseLandmarks[12].visibility>0.8 && poseLandmarks[28].visibility>0.8 && poseLandmarks[27].visibility>0.8 ){
-                state=true
-            }
-            return state
-        }
         
-        if(allDots()){
+        if(checkBody(poseLandmarks)){
             goodMorning()
         }
     };
