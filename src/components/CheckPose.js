@@ -1,7 +1,10 @@
 import { color } from "d3";
 import findAngle from "./findAngle";
 
-function CheckExercise(poseLandmarks, exerciseName, find_angle) {
+function CheckExercise(poseLandmarks, exerciseName) {
+
+
+    console.log(poseLandmarks)
 
     const colors = {
         arm: {
@@ -40,19 +43,24 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
     // Function to find the angle in 3D space
 
 
-    if (exerciseName === 1) goodMorning();
+    if (exerciseName === 1) {
+        
+
+        if(allDots){
+            goodMorning()
+        }
+    };
     if (exerciseName === 2) cabaret();
     if (exerciseName === 3) march_in_place();
     if (exerciseName === 4) leg_push();
+
+
 
     function goodMorning() {
 
         const angle_elbow_left = findAngle(15, 13, 11, poseLandmarks)
         const angle_elbow_right = findAngle(16, 14, 12, poseLandmarks)
-
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
-
-        //const angle_leg_left=findAngle(23, 25, 27, poseLandmarks)
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
         let stage = "START"
@@ -159,13 +167,13 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
 
         if (counter % 2 == 0) {
             side = "LEFT"
-            stage == "UP"
+            stage = "UP"
             colors.arm.left = "yellow"
             colors.leg.right = "yellow"
         }
         else {
             side = "RIGHT"
-            stage == "UP"
+            stage = "UP"
             colors.arm.right = "yellow"
             colors.leg.left = "yellow"
         }
@@ -234,6 +242,7 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
           }
 
     }
+
     return {
         colors: colors,
     }
