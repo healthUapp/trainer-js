@@ -60,7 +60,7 @@ function CheckExercise(poseLandmarks, exerciseName) {
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
 
-        let stage = "UP"
+        let stage = "DOWN"
 
         if (stage === "UP" && angle_leg_right >= 120 && angle_leg_right <= 160) {
             colors.leg.left = "green"
@@ -199,9 +199,9 @@ function CheckExercise(poseLandmarks, exerciseName) {
         const angle_leg_r = findAngle(12, 24, 28, poseLandmarks)
         const angle_leg_l = findAngle(11, 23, 27, poseLandmarks)
         
-        if (angle_body_right >= 160 && angle_body_right >= 160) {
-            colors.arm.left = "yellow"
-            colors.arm.right = "yellow"
+        if (angle_body_right >= 160 && angle_body_left >= 160) {
+            colors.arm.left = "green"
+            colors.arm.right = "green"
             stage = "DOWN";
           }
           
@@ -233,6 +233,26 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
     }
 
+    function squat(){
+        let counter = 0
+        let stage =null;
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+        const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
+
+        colors.leg.right="yellow"
+        colors.leg.left="yellow"
+        if (angle_leg_left > 150 && angle_leg_right > 150) {
+            stage = "DOWN";
+          }
+          
+          if (stage === "DOWN" && angle_leg_left <= 110 && angle_leg_left >= 90 && angle_leg_right <= 110 && angle_leg_right >= 90) {
+            stage = "UP";
+            colors.leg.right="green"
+            colors.leg.left="green"
+            counter += 1;
+          }
+
+    }
     return {
         colors: colors,
     }
