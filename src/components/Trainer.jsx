@@ -42,8 +42,7 @@ export default function Trainer({exerciseName}) {
   var camera = null;
 
   function onResults(results) {
-    //Видимость полной позы человека
-    setVisibleBody(checkBody(results.poseLandmarks))
+   
   
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
@@ -67,6 +66,7 @@ export default function Trainer({exerciseName}) {
 
     if(results.poseLandmarks) {
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
+      setVisibleBody(checkBody(results.poseLandmarks)) //Видимость полной позы человека
       setLeftHandColor(`${poseInfo.colors.arm.right}`)
       setDots(results.poseLandmarks)
       setColors(poseInfo.colors)
