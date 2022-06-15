@@ -94,7 +94,7 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
         const angle_leg_right = findAngle(12, 24, 28, poseLandmarks)
         const angle_leg_left = findAngle(11, 23, 27, poseLandmarks)
 
-        if (counter % 2 == 0) {
+        if (counter % 2 === 0) {
             side = "LEFT"
             colors.arm.left = "yellow"
             colors.leg.right = "yellow"
@@ -159,13 +159,13 @@ function CheckExercise(poseLandmarks, exerciseName, find_angle) {
 
         if (counter % 2 == 0) {
             side = "LEFT"
-            stage == "UP"
+            stage = "UP"
             colors.arm.left = "yellow"
             colors.leg.right = "yellow"
         }
         else {
             side = "RIGHT"
-            stage == "UP"
+            stage = "UP"
             colors.arm.right = "yellow"
             colors.leg.left = "yellow"
         }
