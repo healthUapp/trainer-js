@@ -4,7 +4,6 @@ import findAngle from "./findAngle";
 function CheckExercise(poseLandmarks, exerciseName) {
 
 
-    console.log(poseLandmarks)
 
     const colors = {
         arm: {
@@ -44,15 +43,15 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
 
     if (exerciseName === 1) {
-        function allDots(poseLandmarks){
-            let state = false
-            
-            
-
+        function allDots(){
+            let state = false 
+            if (poseLandmarks[11].visibility>0.8 && poseLandmarks[12].visibility>0.8 && poseLandmarks[28].visibility>0.8 && poseLandmarks[27].visibility>0.8 ){
+                state=true
+            }
             return state
         }
-
-        if(allDots){
+        
+        if(allDots()){
             goodMorning()
         }
     };
@@ -68,6 +67,7 @@ function CheckExercise(poseLandmarks, exerciseName) {
         const angle_elbow_right = findAngle(16, 14, 12, poseLandmarks)
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+
 
         let stage = "START"
 
