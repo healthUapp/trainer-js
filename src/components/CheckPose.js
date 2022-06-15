@@ -44,7 +44,13 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
 
     if (exerciseName === 1) {
-        
+        function allDots(poseLandmarks){
+            let state = false
+            
+            
+
+            return state
+        }
 
         if(allDots){
             goodMorning()
