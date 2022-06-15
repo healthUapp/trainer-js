@@ -12,6 +12,8 @@ import CheckPose from "./CheckPose";
 import findAngle from "./findAngle";
 import Interface from "./Interface";
 
+import checkBody from "./checkBody";
+
 export default function Trainer({exerciseName}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -34,9 +36,15 @@ export default function Trainer({exerciseName}) {
         right: 'white'
     }
   })
+
+  const [visibleBody, setVisibleBody] = useState(false)
+
   var camera = null;
 
   function onResults(results) {
+    //Видимость полной позы человека
+    setVisibleBody(checkBody(results.poseLandmarks))
+  
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;    
@@ -65,7 +73,7 @@ export default function Trainer({exerciseName}) {
     }
 
       canvasCtx.restore();
-    }
+  }
 
   useEffect(() => {
     const pose = new Pose({locateFile: (file) => {
@@ -116,7 +124,9 @@ export default function Trainer({exerciseName}) {
         </div>
       </div>
       <div className="svgBox">
-        <Interface dots = {dots} colors = {colors}/>
+        {visibleBody &&
+          <Interface dots={dots} colors={colors}/>
+        }
       </div>
     </center>
   );
