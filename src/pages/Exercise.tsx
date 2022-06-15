@@ -6,19 +6,20 @@ import Trainer from '../components/Trainer';
 
 export default function Exercise() {
 
-    const [exerciseName, setExerciseName] = useState<Number | null>(null)
-    
+    const [exerciseValue, setExerciseValue] = useState<number | null>(null)
+    const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH"]
     return (
         <IonContent className="startPage" fullscreen>
-            {(exerciseName === null) &&
+            {(exerciseValue === null) &&
                 <div className='buttonBox'>
-                    <IonButton className='exercise-1' expand="full" onClick={()=>setExerciseName(1)}>START-1</IonButton>
-                    <IonButton className='exercise-2' expand="full" onClick={()=>setExerciseName(2)}>START-2</IonButton>
-                    <IonButton className='exercise-3' expand="full" onClick={()=>setExerciseName(3)}>START-3</IonButton>
-                    <IonButton className='exercise-4' expand="full" onClick={()=>setExerciseName(4)}>START-4</IonButton>
+                    {
+                        exerciseNames.map((name, index)=>{
+                            return <IonButton className={`exercise-${(index)}`} expand="full" onClick={()=>setExerciseValue(index)}>{name}</IonButton>
+                        })
+                    }
                 </div>
             }
-            {(exerciseName !== null) && <Trainer exerciseName = {exerciseName}/>}
+            {(exerciseValue !== null) && <Trainer exerciseName={exerciseNames[exerciseValue]} exerciseValue={exerciseValue}/>}
         </IonContent>
     )
 }

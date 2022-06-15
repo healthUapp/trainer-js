@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+h1,h2,h3,h4,h5,h6,p{
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .startPage{
     --background: rgb(187, 187, 187);
 }
@@ -37,7 +41,37 @@ video{
     position: relative;
     width: 100vw;
     height: 100vh;
+    display: inline-flex;
 }
+.foregroundView{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,0.8);
+    z-index: 10;
+    
+}
+
+.foregroundTextBox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* vertical-align: middle; */
+}
+
+.foregroundText{
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8vw;
+    width: 50%;
+}
+
+
 
 .poseView{
     height: 100%;
@@ -50,6 +84,7 @@ video{
 .exerciseStateView{
     height: 100%;
     width: 50%;
+
 }
 
 .drawBox{
@@ -73,12 +108,28 @@ video{
     height: calc(50vw / 1.333333333);
 }
 
-.exercise-1,.exercise-2,.exercise-3,.exercise-4{
+.exercise-0,.exercise-1,.exercise-2,.exercise-3{
     --background:rgb(255, 196, 0);
-    height: 200px;
-    font-size: 100px;
+    height: calc(25vh - 20px);
+    font-size: 8vw;
     font-family: 'Courier New', Courier, monospace;
     padding: 10px;
+}
+
+.exercise-0{
+    --background:#EAA724;
+}
+
+.exercise-1{
+    --background:#5B1C02;
+}
+
+.exercise-2{
+    --background:#D25B01;
+}
+
+.exercise-3{
+    --background:#807622;
 }
 
 .settings{
@@ -100,4 +151,9 @@ video{
 
 .angle{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.textBox{
+    padding-left: 10px;
+    font-size: 1vw;
 }

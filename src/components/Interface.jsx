@@ -10,9 +10,6 @@ export default function Interface({dots, colors}) {
     height: svgRef.current?.parentNode.clientHeight,
   }
 
-
-  console.log(upperSize)
-
   if(!dots){return <svg />}
 
   svg.style('background', 'rgba(100,100,0,0.2)').html(null)

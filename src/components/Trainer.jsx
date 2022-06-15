@@ -14,7 +14,7 @@ import Interface from "./Interface";
 
 import checkBody from "./checkBody";
 
-export default function Trainer({exerciseName}) {
+export default function Trainer({exerciseValue, exerciseName}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [leftHandAngle, setLeftHandAngle] = useState(0)
@@ -67,7 +67,7 @@ export default function Trainer({exerciseName}) {
       canvasElement.height
     );
     
-    const poseInfo = CheckPose(results.poseLandmarks, exerciseName)
+    const poseInfo = CheckPose(results.poseLandmarks, exerciseValue)
 
     if(results.poseLandmarks) {
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
@@ -112,7 +112,7 @@ export default function Trainer({exerciseName}) {
   }, []);
 
   return (
-    <div className="exerciseView">
+    <div className="exerciseView">    
       <div className="poseView">
         <div className="drawBox">
           <Webcam
@@ -125,15 +125,24 @@ export default function Trainer({exerciseName}) {
             <Interface dots={dots} colors={colors}/>
           }
         </div>
-        {/* <div className="settings">
-          <div className="angles">
-            <p>Right hand angle: 
-              <span style={{color: leftHandColor}}>{Math.round(leftHandAngle*10)/10}°</span>
-            </p>
-          </div>
-        </div> */}
       </div>
-      <div className="exerciseStateView"></div>
+      <div className="exerciseStateView">
+          <div className="textBox">
+            <h1>Excersice name: {exerciseName}</h1>
+          </div>
+      </div>
+
+      {(!visibleBody || !dots) &&
+        <div className="foregroundView">
+          <div className="foregroundTextBox">
+            {!dots
+            ?<h1 className="foregroundText">Connecting to camera......</h1>
+            :<h1 className="foregroundText">Stand up to your full height</h1>
+            }
+          </div>
+        </div>
+      }
+      
     </div>
   );
 }
