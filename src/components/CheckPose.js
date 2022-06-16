@@ -216,7 +216,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function squat() {
-
+        
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
@@ -236,15 +236,17 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function lunges() {
-
+        
         stage = "START";
         let side = ""
         let status_left=""
         let status_right=""
-        const angle_left = findAngle(23, 25, 27)
-        const angle_right = findAngle(24, 26, 28)
-        const angle_l_sh = findAngle(11, 23, 25)
-        const angle_r_sh = findAngle(12, 24, 26)
+        const angle_left = findAngle(23, 25, 27, poseLandmarks)
+        const angle_right = findAngle(24, 26, 28, poseLandmarks)
+        const angle_l_sh = findAngle(11, 23, 25, poseLandmarks)
+        const angle_r_sh = findAngle(12, 24, 26, poseLandmarks)
+
+
         if (counter % 2 === 0) {
             side = "LEFT";
         } else {
@@ -279,6 +281,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         if (angle_left >= 80 && angle_left <= 110) {
             colors.leg.left = "green"
             status_left = "OK";
+            console.log('legleft')
         } else {
             status_left = "not ok";
         }

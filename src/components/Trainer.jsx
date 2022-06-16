@@ -30,7 +30,8 @@ export default function Trainer({exerciseValue, exerciseName}) {
   const [angle,setAngle] = useState(null)
   const [visibleBody, setVisibleBody] = useState(false)
   const [checking,setChecking]=useState(false)
-  const [delay,setDelay] = useState(0)
+  const [stage,setStage] = useState('')
+  const [counter,setCounter] = useState(0)
   const [colors,setColors] = useState({
     arm: {
         left: 'white',
@@ -80,13 +81,16 @@ export default function Trainer({exerciseValue, exerciseName}) {
     );
     
     const poseInfo = CheckPose(results.poseLandmarks, exerciseValue)
-
+    
     if(results.poseLandmarks) {
+      console.log(poseInfo.counter)
       setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
       setVisibleBody(checkBody(results.poseLandmarks))
       setLeftHandColor(`${poseInfo.colors.arm.right}`)
       setDots(results.poseLandmarks)
       setColors(poseInfo.colors)
+      setCounter(counter + poseInfo.counter)
+      setStage(poseInfo.stage)
     }
 
       canvasCtx.restore();
@@ -277,6 +281,11 @@ export default function Trainer({exerciseValue, exerciseName}) {
           {precent && <div className="precentBox">
             <h1 style={{color: `rgba(${200 - precent*2},${precent * 2},0,0.9)`}}>{precent}%</h1>
           </div>}
+          {(counter || stage) && 
+              <div className="precentBox">
+                {!!stage && <h1>{stage}</h1>}
+                {!!counter && <h1>{counter}</h1>}
+            </div>}
       </div>
       {(!visibleBody || !dots) &&
         <div className="foregroundView">

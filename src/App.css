@@ -46,8 +46,8 @@ video{
 .foregroundView{
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 50%;
     height: 100%;
     background-color: rgba(0, 0, 0,0.8);
     z-index: 10;
@@ -67,7 +67,7 @@ video{
     color: white;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 8vw;
+    font-size: 4vw;
     width: 50%;
 }
 
@@ -108,9 +108,9 @@ video{
     height: calc(50vw / 1.333333333);
 }
 
-.exercise-0,.exercise-1,.exercise-2,.exercise-3,.exercise-4{
+.exercise-0,.exercise-1,.exercise-2,.exercise-3,.exercise-4,.exercise-5,.exercise-6{
     --background:rgb(255, 196, 0);
-    height: calc(20vh - 20px);
+    height: calc(16vh - 20px);
     font-size: 8vw;
     font-family: 'Courier New', Courier, monospace;
     padding: 10px;
@@ -136,6 +136,9 @@ video{
 }
 .exercise-5{
     --background:#5b4602;
+}
+.exercise-6{
+    --background:#23025b;
 }
 
 .settings{

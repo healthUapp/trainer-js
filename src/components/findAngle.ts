@@ -1,5 +1,7 @@
 export default function findAngle(a:number, b:number, c:number, poseLandmarks: any) {
 
+    if(!poseLandmarks) {return null}
+
     const p1 = [poseLandmarks[a]?.x, poseLandmarks[a]?.y, poseLandmarks[a]?.z]
     const p2 = [poseLandmarks[b]?.x, poseLandmarks[b]?.y, poseLandmarks[b]?.z]
     const p3 = [poseLandmarks[c]?.x, poseLandmarks[c]?.y, poseLandmarks[c]?.z]
