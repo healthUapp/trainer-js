@@ -20,6 +20,9 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         }
     }
 
+    let stage="undefined"
+    let counter=0
+
     if (!poseLandmarks) return colors;
 
     if (exerciseValue === 0) {
@@ -42,7 +45,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
 
-        let stage = "DOWN"
+         stage = "DOWN"
 
         if (stage === "UP" && angle_leg_right >= 120 && angle_leg_right <= 160) {
             colors.leg.left = "green"
@@ -61,9 +64,8 @@ function CheckExercise(poseLandmarks, exerciseValue) {
 
     function cabaret() {
 
-        let stage = "START"
+        stage = "START"
         let side = ""
-        let counter = 0
 
         const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
         const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
@@ -127,9 +129,8 @@ function CheckExercise(poseLandmarks, exerciseValue) {
 
     function march_in_place() {
 
-        let stage = "START"
+        stage = "START"
         let side = ""
-        let counter = 0
 
         const angle_arm_left = findAngle(11, 13, 15, poseLandmarks)
         const angle_arm_right = findAngle(12, 14, 16, poseLandmarks)
@@ -169,9 +170,8 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function leg_push() {
-        let stage = "START"
+        stage = "START"
         let side = ""
-        let counter = 0
 
         const angle_body_left = findAngle(13, 11, 23, poseLandmarks)
         const angle_body_right = findAngle(14, 12, 24, poseLandmarks)
@@ -216,8 +216,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function squat() {
-        let counter = 0;
-        let stage = null;
+
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
@@ -237,8 +236,8 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function lunges() {
-        let counter = 0
-        let stage = "START";
+
+        stage = "START";
         let side = ""
         let status_left=""
         let status_right=""
@@ -306,6 +305,8 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
     return {
         colors: colors,
+        stage:stage,
+        counter:counter
     }
 }
 
