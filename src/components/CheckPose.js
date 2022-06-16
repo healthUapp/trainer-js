@@ -239,9 +239,13 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     function lunges() {
         let counter = 0
         let stage = "START";
-
-        angle_left = calculate_angle(23,25,27)
-        angle_right = calculate_angle(24,26,28)
+        let side = ""
+        let status_left=""
+        let status_right=""
+        const angle_left = findAngle(23, 25, 27)
+        const angle_right = findAngle(24, 26, 28)
+        const angle_l_sh = findAngle(11, 23, 25)
+        const angle_r_sh = findAngle(12, 24, 26)
         if (counter % 2 === 0) {
             side = "LEFT";
         } else {
@@ -249,63 +253,63 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         }
 
         if (side === "LEFT") {
-            angle_l_sh = calculate_angle(11, 23, 25);
-            colors.body.left="orange"
-            colors.leg.left="orange"
+            
+            colors.body.left = "orange"
+            colors.leg.left = "orange"
 
 
             if (angle_l_sh >= 150 && angle_l_sh <= 180) {
-                colors.body.left="green"
+                colors.body.left = "green"
             } else {
-                colors.body.left="red"
+                colors.body.left = "red"
             }
         }
 
         if (side === "RIGHT") {
-            angle_r_sh = calculate_angle(12, 24, 26);
-            colors.body.right="blue"
-            colors.leg.right="blue"
+            
+            colors.body.right = "blue"
+            colors.leg.right = "blue"
 
             if (angle_r_sh >= 150 && angle_r_sh <= 180) {
-                colors.body.right="green"
+                colors.body.right = "green"
             } else {
-                colors.body.right="red"
+                colors.body.right = "red"
             }
         }
 
         if (angle_left >= 80 && angle_left <= 110) {
-            colors.leg.left="green"
+            colors.leg.left = "green"
             status_left = "OK";
-          } else {
+        } else {
             status_left = "not ok";
-          }
-          
-          if (angle_right >= 80 && angle_right <= 110) {
-            colors.leg.right="green"
+        }
+
+        if (angle_right >= 80 && angle_right <= 110) {
+            colors.leg.right = "green"
             status_right = "OK";
-          } else {
+        } else {
             status_right = "not ok";
-          }
-          
-          if (status_right === "OK" && status_left === "OK") {
+        }
+
+        if (status_right === "OK" && status_left === "OK") {
             stage = "up";
-          }
-          
-          if (angle_left > 120 && angle_right > 120 && stage === "up") {
-            colors.leg.left="green"
-            colors.leg.right="green"
+        }
+
+        if (angle_left > 120 && angle_right > 120 && stage === "up") {
+            colors.leg.left = "green"
+            colors.leg.right = "green"
             stage = "down";
             counter += 1;
-          }
-          
-     
-    }
-        return {
-            colors: colors,
         }
+
+
+    }
+    return {
+        colors: colors,
+    }
 }
 
 
-    export default CheckExercise
+export default CheckExercise
 
 
