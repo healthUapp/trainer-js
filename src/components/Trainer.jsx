@@ -22,13 +22,14 @@ export default function Trainer({exerciseValue, exerciseName}) {
   const canvasRef = useRef(null);
   const [leftHandAngle, setLeftHandAngle] = useState(0)
   const [crazyRule,setCrazyRule] = useState([])
-  const [precent, setPrecent] = useState(0)
+  const [precent, setPrecent] = useState(null)
   const [rules,setRules] = useState([])
   const [leftHandColor,setLeftHandColor] = useState('#fff')
   const [dots,setDots] = useState(undefined)
   const [dotsForAngle,setDotsForAngle] = useState([])
   const [angle,setAngle] = useState(null)
   const [visibleBody, setVisibleBody] = useState(false)
+  const [checking,setChecking]=useState(false)
   const [colors,setColors] = useState({
     arm: {
         left: 'white',
@@ -210,6 +211,15 @@ export default function Trainer({exerciseValue, exerciseName}) {
     console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
   }
 
+  if(checking){
+    let timer = setTimeout(()=>{
+      checkRules()
+      return () =>{
+        clearTimeout(timer)
+      }
+    },50)
+  }
+
   return (
     <div className="exerciseView">    
       <div className="poseView">
@@ -254,14 +264,17 @@ export default function Trainer({exerciseValue, exerciseName}) {
               })
             }
           </div>
-          <div>
-            <p>{angle}</p>
-          </div>
-          <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton>
-          {crazyRule.length > 0 && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{checkRules()}}>CHECK RULES</IonButton>}
-          <h1>{precent}%</h1>
-      </div>
 
+          {angle && <div className="angleBox">
+                      <h1 >{Math.floor(angle*10)/10}°</h1>
+                    </div>
+          }
+          <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton>
+          {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>CHECK RULES</IonButton>}
+          {precent && <div className="precentBox">
+            <h1 >{precent}%</h1>
+          </div>}
+      </div>
       {(!visibleBody || !dots) &&
         <div className="foregroundView">
           <div className="foregroundTextBox">

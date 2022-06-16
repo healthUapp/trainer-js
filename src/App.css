@@ -195,9 +195,9 @@ video{
 } */
 
 .dotBox{
-    width: 90%;
+    flex-wrap: wrap;
     display: flex;
-    
+    margin: 0 auto;
 }
 
 .selectedDotsForAngle{
@@ -207,7 +207,7 @@ video{
 
 .dotNumber,.selectedDotNumber{
     height: 50px;
-    width: 50px;
+    width: calc(50% / 6);
     background: #025b54;
     text-align: center;
     align-items: center;
@@ -231,4 +231,14 @@ video{
 .checkRule{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #025b1e;
+}
+
+.precentBox,.angleBox{
+    width: 100%;
+    text-align: center;
+    font-size: 7vw;
+    margin: 20px 0;
+}
+.angleBox{
+    font-size: 4vw;
 }
