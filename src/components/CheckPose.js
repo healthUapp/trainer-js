@@ -2,10 +2,7 @@ import { color } from "d3";
 import findAngle from "./findAngle";
 import checkBody from "./checkBody";
 
-function CheckExercise(poseLandmarks, exerciseName) {
-
-
-
+function CheckExercise(poseLandmarks, exerciseValue) {
     const colors = {
         arm: {
             left: 'white',
@@ -25,33 +22,18 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
     if (!poseLandmarks) return colors;
 
-    // const left_shoulder = [poseLandmarks[11]?.x, poseLandmarks[11]?.y, poseLandmarks[11]?.z]
-    // const right_shoulder = [poseLandmarks[12].x, poseLandmarks[12].y, poseLandmarks[12].z]
-    // const left_elbow = [poseLandmarks[13].x, poseLandmarks[13].y, poseLandmarks[13].z]
-    // const right_elbow = [poseLandmarks[14].x, poseLandmarks[14].y, poseLandmarks[14].z]
-    // const left_wrist = [poseLandmarks[15].x, poseLandmarks[15].y, poseLandmarks[15].z]
-    // const right_wrist = [poseLandmarks[16].x, poseLandmarks[16].y, poseLandmarks[16].z]
-    // const left_hip = [poseLandmarks[23].x, poseLandmarks[23].y, poseLandmarks[23].z]
-    // const right_hip = [poseLandmarks[24].x, poseLandmarks[24].y, poseLandmarks[24].z]
-    // const left_knee = [poseLandmarks[25].x, poseLandmarks[25].y, poseLandmarks[25].z]
-    // const right_knee = [poseLandmarks[26].x, poseLandmarks[26].y, poseLandmarks[26].z]
-    // const left_ankle = [poseLandmarks[27].x, poseLandmarks[27].y, poseLandmarks[27].z]
-    // const right_ankle = [poseLandmarks[28].x, poseLandmarks[28].y, poseLandmarks[28].z]
-    // const left_foot = [poseLandmarks[31].x, poseLandmarks[31].y, poseLandmarks[31].z]
-    // const right_foot = [poseLandmarks[32].x, poseLandmarks[32].y, poseLandmarks[32].z]
-
-    // Function to find the angle in 3D space
-
-
-    if (exerciseName === 1) {
+    if (exerciseValue === 0) {
         
         if(checkBody(poseLandmarks)){
             goodMorning()
         }
     };
-    if (exerciseName === 2) cabaret();
-    if (exerciseName === 3) march_in_place();
-    if (exerciseName === 4) leg_push();
+
+    if (exerciseValue === 1) cabaret();
+    if (exerciseValue === 2) march_in_place();
+    if (exerciseValue === 3) leg_push();
+    if (exerciseValue === 4) high_knee_march();
+    if (exerciseValue === 5) squat();
 
 
 
@@ -233,6 +215,10 @@ function CheckExercise(poseLandmarks, exerciseName) {
 
     }
 
+    function high_knee_march(){
+        
+    }
+
     function squat(){
         let counter = 0
         let stage =null;
@@ -253,6 +239,8 @@ function CheckExercise(poseLandmarks, exerciseName) {
           }
 
     }
+
+    
     return {
         colors: colors,
     }

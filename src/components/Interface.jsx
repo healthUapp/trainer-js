@@ -2,7 +2,7 @@ import React, {useState,useEffect, useRef} from "react"
 import findAngle from "./findAngle";
 import * as d3 from "d3";
 
-export default function Interface({dots, colors}) {
+export default function Interface({dots, colors, selectDot}) {
   const svgRef = useRef(null)
   const svg = d3.select(svgRef.current)
   const upperSize = {
@@ -42,20 +42,27 @@ export default function Interface({dots, colors}) {
         .attr('y2',dots[b].y * upperSize.height)
   })
   
-  dots.forEach((dot,index) => {
+  dots.forEach((dot, index) => {
     if (index === 11 || index === 12 ||
       index === 13 || index === 14 ||
       index === 15 || index === 16 ||
       index === 23 || index === 24 ||
       index === 25 || index === 26 ||
       index === 27 || index === 28) { 
-        svg.append('circle')
+        let circle = svg.append('circle')
         .style("stroke", "white")
         .style("stroke-width", 2)
         .style("fill", 'rgba(0,0,0,0.5)')
         .attr("r", 5)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
-        .attr("cy", (dot.y) * upperSize.height);
+        .attr("cy", (dot.y) * upperSize.height)
+    
+
+        svg.append("text")
+          .attr("x", upperSize.width - (dot.x) * upperSize.width + (index % 2 === 0? 14 : -30))
+          .attr("y", (dot.y) * upperSize.height )
+          .text(index)
+          .attr('class', 'dotName') 
     }
   });
 

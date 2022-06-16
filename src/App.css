@@ -108,9 +108,9 @@ video{
     height: calc(50vw / 1.333333333);
 }
 
-.exercise-0,.exercise-1,.exercise-2,.exercise-3{
+.exercise-0,.exercise-1,.exercise-2,.exercise-3,.exercise-4{
     --background:rgb(255, 196, 0);
-    height: calc(25vh - 20px);
+    height: calc(20vh - 20px);
     font-size: 8vw;
     font-family: 'Courier New', Courier, monospace;
     padding: 10px;
@@ -132,7 +132,10 @@ video{
     --background:#807622;
 }
 .exercise-4{
-    --background:#807622;
+    --background:#025b54;
+}
+.exercise-5{
+    --background:#5b4602;
 }
 
 .settings{
@@ -159,4 +162,73 @@ video{
 .textBox{
     padding-left: 10px;
     font-size: 1vw;
+}
+
+.dotName{
+    font: small-caps bold 15px sans-serif;
+    fill:rgb(0, 0, 0);
+}
+
+.getAngleBox{
+    margin-bottom: 20px;
+}
+
+
+.dot1Text,.dot2Text,.dot3Text{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.dot1, .dot2, .dot3{
+    width: 80px;
+    height: 20px;
+    margin-right: 20px;
+}
+
+.ionItem{
+    width: 100px;
+}
+
+/* .circle :hover{
+    cursor: pointer;
+} */
+
+.dotBox{
+    width: 90%;
+    display: flex;
+    
+}
+
+.selectedDotsForAngle{
+    display: flex;
+    margin: 20px 0;
+}
+
+.dotNumber,.selectedDotNumber{
+    height: 50px;
+    width: 50px;
+    background: #025b54;
+    text-align: center;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.selectedDotNumber{
+    background: #027238;
+}
+
+.dotNumber :hover{
+    cursor: pointer;
+}
+
+.createRules{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #5a5b02;
+}
+.checkRule{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #025b1e;
 }

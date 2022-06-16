@@ -14,7 +14,7 @@ export default function Exercise() {
                 <div className='buttonBox'>
                     {
                         exerciseNames.map((name, index)=>{
-                            return <IonButton className={`exercise-${(index)}`} expand="full" onClick={()=>setExerciseValue(index)}>{name}</IonButton>
+                            return <IonButton className={`exercise-${(index)}`} key={index} expand="full" onClick={()=>setExerciseValue(index)}>{name}</IonButton>
                         })
                     }
                 </div>

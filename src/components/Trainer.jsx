@@ -1,4 +1,5 @@
 import { FaceMesh } from "@mediapipe/face_mesh";
+import { IonButton, IonCheckbox, IonItem, IonLabel, IonList } from "@ionic/react";
 import React, { useRef, useEffect, useState } from "react";
 import { Pose } from "@mediapipe/pose";
 import { Hands } from "@mediapipe/hands";
@@ -14,12 +15,20 @@ import Interface from "./Interface";
 
 import checkBody from "./checkBody";
 
+
 export default function Trainer({exerciseValue, exerciseName}) {
+  const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [leftHandAngle, setLeftHandAngle] = useState(0)
+  const [crazyRule,setCrazyRule] = useState([])
+  const [precent, setPrecent] = useState(0)
+  const [rules,setRules] = useState([])
   const [leftHandColor,setLeftHandColor] = useState('#fff')
   const [dots,setDots] = useState(undefined)
+  const [dotsForAngle,setDotsForAngle] = useState([])
+  const [angle,setAngle] = useState(null)
+  const [visibleBody, setVisibleBody] = useState(false)
   const [colors,setColors] = useState({
     arm: {
         left: 'white',
@@ -37,7 +46,6 @@ export default function Trainer({exerciseValue, exerciseName}) {
     }
   })
 
-  const [visibleBody, setVisibleBody] = useState(false)
 
   var camera = null;
 
@@ -50,9 +58,11 @@ export default function Trainer({exerciseValue, exerciseName}) {
     
   
     // const video = webcamRef.current.video;
+
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;    
     // Set canvas width
+
     canvasRef.current.width = videoWidth;
     canvasRef.current.height = videoHeight;
     const canvasElement = canvasRef.current;
@@ -85,8 +95,9 @@ export default function Trainer({exerciseValue, exerciseName}) {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
     }});
 
+    
     pose.setOptions({
-      modelComplexity: 0.5,
+      modelComplexity: 1,
       smoothLandmarks: true,
       enableSegmentation: true,
       smoothSegmentation: false,
@@ -111,6 +122,94 @@ export default function Trainer({exerciseValue, exerciseName}) {
     }
   }, []);
 
+  useEffect(()=>{
+    if(dotsForAngle.length === 3) {
+      setAngle(findAngle(dotsForAngle[0],dotsForAngle[1],dotsForAngle[2], dots))
+      let allRules = rules.slice()
+      allRules.push({dots:dotsForAngle, angle: findAngle(dotsForAngle[0],dotsForAngle[1],dotsForAngle[2], dots)})
+      setRules(allRules)
+      setDotsForAngle([])
+    }
+  },[dotsForAngle])
+
+  useEffect(()=>{
+    console.log(rules)
+  },[rules])
+
+  function selectDot(dotNumber){
+    
+    if(dotsForAngle.length < 3){
+        let a = dotsForAngle.slice()
+        a.push(dotNumber)
+        setDotsForAngle(a)
+    }
+  }
+
+  function createRules(){
+    var dotsSet = (function(arr, limit){
+      var results = [], result, mask, total = Math.pow(2, arr.length);
+      for(mask = 0; mask < total; mask++){
+          result = [];
+          let i = arr.length - 1; 
+          do{
+              if( (mask & (1 << i)) !== 0){
+                  result.push(arr[i]);
+              }
+          }while(i--);
+          if( result.length == limit){
+              results.push(result);
+          }
+      }
+      return results; 
+    })(rightDots, 3);
+
+    let angles = []
+    dotsSet.forEach(element => {
+      angles.push(findAngle(element[0],element[1],element[2],dots))
+    });
+
+    setCrazyRule(angles)
+    console.log(angles)
+  }
+
+  function checkRules(){
+    var dotsSet = (function(arr, limit){
+      var results = [], result, mask, total = Math.pow(2, arr.length);
+      for(mask = 0; mask < total; mask++){
+          result = [];
+          let i = arr.length - 1; 
+          do{
+              if( (mask & (1 << i)) !== 0){
+                  result.push(arr[i]);
+              }
+          }while(i--);
+          if( result.length == limit){
+              results.push(result);
+          }
+      }
+      return results; 
+    })(rightDots, 3);
+
+    let trueAngles = 0
+    let falseAngles = 0
+
+    let angles = []
+
+    dotsSet.forEach(element => {
+      angles.push(findAngle(element[0],element[1],element[2],dots))
+    });
+
+    angles.forEach((el,ind)=>{
+      if(((el < crazyRule[ind] + 5) && (el > crazyRule[ind] - 5))){
+        trueAngles = trueAngles + 1
+      }else {
+        falseAngles = falseAngles + 1
+      }
+    })
+    setPrecent(Math.floor((trueAngles/220)*1000)/10)
+    console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
+  }
+
   return (
     <div className="exerciseView">    
       <div className="poseView">
@@ -130,6 +229,37 @@ export default function Trainer({exerciseValue, exerciseName}) {
           <div className="textBox">
             <h1>Excersice name: {exerciseName}</h1>
           </div>
+          <div className="dotBox">
+            {
+              rightDots.map((value,index)=>{
+                return <IonButton className="dotNumber" key={index} expand="block" color="primary" onClick={()=>{
+                  if(dotsForAngle.length > 0){
+                    if(value !== dotsForAngle[0] &&
+                      value !== dotsForAngle[1] &&
+                      value !== dotsForAngle[2]){
+                        selectDot(value)
+                      }
+                  }else {
+                    selectDot(value)
+                  }
+                  
+                }}>{value}</IonButton>
+              })
+            }
+          </div>
+          <div className="selectedDotsForAngle">
+            {
+              dotsForAngle.map((item,index)=>{
+                return <IonButton className="selectedDotNumber" key={index} expand="block" color="success">{item}</IonButton>
+              })
+            }
+          </div>
+          <div>
+            <p>{angle}</p>
+          </div>
+          <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton>
+          {crazyRule.length > 0 && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{checkRules()}}>CHECK RULES</IonButton>}
+          <h1>{precent}%</h1>
       </div>
 
       {(!visibleBody || !dots) &&
