@@ -30,6 +30,7 @@ export default function Trainer({exerciseValue, exerciseName}) {
   const [angle,setAngle] = useState(null)
   const [visibleBody, setVisibleBody] = useState(false)
   const [checking,setChecking]=useState(false)
+  const [delay,setDelay] = useState(0)
   const [colors,setColors] = useState({
     arm: {
         left: 'white',
@@ -207,18 +208,20 @@ export default function Trainer({exerciseValue, exerciseName}) {
         falseAngles = falseAngles + 1
       }
     })
-    setPrecent(Math.floor((trueAngles/220)*1000)/10)
-    console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
+    setPrecent(Math.floor((trueAngles/220)*100))
+    // console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
   }
 
-  if(checking){
-    let timer = setTimeout(()=>{
-      checkRules()
-      return () =>{
-        clearTimeout(timer)
-      }
-    },50)
-  }
+  useEffect(()=>{
+    if(checking){
+      let timer = setTimeout(()=>{
+        checkRules()
+       return () =>{
+         clearTimeout(timer)
+       }
+     },10)
+   }
+  },[dots, checking])
 
   return (
     <div className="exerciseView">    
@@ -270,9 +273,9 @@ export default function Trainer({exerciseValue, exerciseName}) {
                     </div>
           }
           <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton>
-          {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>CHECK RULES</IonButton>}
+          {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>{checking? "UNCHECK" : "CHECK"} RULES</IonButton>}
           {precent && <div className="precentBox">
-            <h1 >{precent}%</h1>
+            <h1 style={{color: `rgba(${200 - precent*2},${precent * 2},0,0.9)`}}>{precent}%</h1>
           </div>}
       </div>
       {(!visibleBody || !dots) &&
