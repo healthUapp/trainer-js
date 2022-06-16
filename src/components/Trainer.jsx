@@ -30,7 +30,7 @@ export default function Trainer({exerciseValue, exerciseName}) {
   const [angle,setAngle] = useState(null)
   const [visibleBody, setVisibleBody] = useState(false)
   const [checking,setChecking]=useState(false)
-  const [stage,setStage] = useState('')
+  const [stage,setStage] = useState(null)
   const [counter,setCounter] = useState(0)
   const [colors,setColors] = useState({
     arm: {
@@ -53,48 +53,49 @@ export default function Trainer({exerciseValue, exerciseName}) {
   var camera = null;
 
   function onResults(results) {
-    //Видимость полной позы человека
-
-    if(results.poseLandmarks){
+          const videoWidth = webcamRef.current.video.videoWidth;
+          const videoHeight = webcamRef.current.video.videoHeight;    
+          // Set canvas width
       
-    }
-    
-  
-    // const video = webcamRef.current.video;
-
-    const videoWidth = webcamRef.current.video.videoWidth;
-    const videoHeight = webcamRef.current.video.videoHeight;    
-    // Set canvas width
-
-    canvasRef.current.width = videoWidth;
-    canvasRef.current.height = videoHeight;
-    const canvasElement = canvasRef.current;
-    const canvasCtx = canvasElement.getContext("2d");
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(
-      results.image,
-      0,
-      0,
-      canvasElement.width,
-      canvasElement.height
+          canvasRef.current.width = videoWidth;
+          canvasRef.current.height = videoHeight;
+          const canvasElement = canvasRef.current;
+          const canvasCtx = canvasElement.getContext("2d");
+          canvasCtx.save();
+          canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+          canvasCtx.drawImage(
+            results.image,
+            0,
+            0,
+            canvasElement.width,
+            canvasElement.height
+            
     );
-    
-    const poseInfo = CheckPose(results.poseLandmarks, exerciseValue)
-    
-    if(results.poseLandmarks) {
-      console.log(poseInfo.counter)
-      setLeftHandAngle(findAngle(16,14,11,results.poseLandmarks))
-      setVisibleBody(checkBody(results.poseLandmarks))
-      setLeftHandColor(`${poseInfo.colors.arm.right}`)
-      setDots(results.poseLandmarks)
-      setColors(poseInfo.colors)
-      setCounter(counter + poseInfo.counter)
-      setStage(poseInfo.stage)
-    }
 
-      canvasCtx.restore();
+    canvasCtx.restore();
+
+    if(results.poseLandmarks) {
+      setDots(results.poseLandmarks)
+    }
   }
+
+
+  useEffect(()=>{    
+        if(dots){
+          const poseInfo = CheckPose(dots, exerciseValue, stage)
+          
+          if(dots) {
+            console.log(poseInfo.counter)
+            setLeftHandAngle(findAngle(16,14,11, dots))
+            setVisibleBody(checkBody(dots))
+            setLeftHandColor(`${poseInfo.colors.arm.right}`)
+            setColors(poseInfo.colors)
+            setCounter(counter + poseInfo.counter)
+            setStage(poseInfo.stage)
+          }
+           
+        }
+  },[dots])
 
   useEffect(() => {
     const pose = new Pose({locateFile: (file) => {

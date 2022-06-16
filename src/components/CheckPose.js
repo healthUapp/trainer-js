@@ -2,7 +2,7 @@ import { color } from "d3";
 import findAngle from "./findAngle";
 import checkBody from "./checkBody";
 
-function CheckExercise(poseLandmarks, exerciseValue) {
+function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
         arm: {
             left: 'white',
@@ -20,7 +20,10 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         }
     }
 
-    let stage="undefined"
+    let stage;
+    console.log(peviousStage)
+    if(peviousStage){stage = peviousStage}
+
     let counter=0
 
     if (!poseLandmarks) return colors;
@@ -236,8 +239,6 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
 
     function lunges() {
-        
-        stage = "START";
         let side = ""
         let status_left=""
         let status_right=""
@@ -281,7 +282,6 @@ function CheckExercise(poseLandmarks, exerciseValue) {
         if (angle_left >= 80 && angle_left <= 110) {
             colors.leg.left = "green"
             status_left = "OK";
-            console.log('legleft')
         } else {
             status_left = "not ok";
         }
@@ -297,7 +297,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
             stage = "up";
         }
 
-        if (angle_left > 120 && angle_right > 120 && stage === "up") {
+        if (angle_left > 110 && angle_right > 110 && stage === "up") {
             colors.leg.left = "green"
             colors.leg.right = "green"
             stage = "down";
@@ -308,7 +308,7 @@ function CheckExercise(poseLandmarks, exerciseValue) {
     }
     return {
         colors: colors,
-        stage:stage,
+        stage: stage,
         counter:counter
     }
 }
