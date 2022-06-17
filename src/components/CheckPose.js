@@ -40,6 +40,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 3) leg_push();
     if (exerciseValue === 4) squat();
     if (exerciseValue === 5) lunges();
+    if (exerciseValue === 6) calf_rises();
 
 
 
@@ -303,6 +304,22 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "down";
             counter += 1;
         }
+
+    }
+    function calf_rises(){
+
+       const angle_ankle_right = findAngle(32, 28, 26, poseLandmarks)
+       const angle_ankle_left = findAngle(31, 27, 25, poseLandmarks)
+
+        if (stage === "UP" && angle_ankle_left >= 120) {
+            stage = "DOWN";
+        }
+
+        if (stage === "DOWN" && angle_ankle_left <= 115) {
+            stage = "UP";
+        counter += 1;
+}
+
 
 
     }
