@@ -334,6 +334,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const arm_right=findAngle(24, 12, 14,poseLandmarks)
         const center_angle=findAngle(26, center, 25,poseLandmarks)
 
+        let arm_status=""
 
         if (center_angle < 10) {
             stage = "SPREAD LEG AND ARMS";
