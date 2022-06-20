@@ -1,7 +1,7 @@
 import { color } from "d3";
 import findAngle from "./findAngle";
 import checkBody from "./checkBody";
-import midPoint from "./midPoint";
+import findAngleMidPoint from "./findAngleMidPoint";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
@@ -329,11 +329,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function junmping_jack(){
 
-        const center=midPoint(23,24,poseLandmarks)
         const arm_left=findAngle(23, 11, 13,poseLandmarks)
         const arm_right=findAngle(24, 12, 14,poseLandmarks)
-        const center_angle=findAngle(26, center, 25,poseLandmarks)
-
+        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)
+        
         let arm_status=""
 
         if (center_angle < 10) {
@@ -361,8 +360,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function half_jack(){
 
-        const center=midPoint(23,24,poseLandmarks)
-        const center_angle=findAngle(26, center, 25,poseLandmarks)
+        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)
 
         if (center_angle < 10) {
             stage = "SPREAD LEG";
