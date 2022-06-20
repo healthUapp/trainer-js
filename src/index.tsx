@@ -17,6 +17,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-
-serviceWorkerRegistration.unregister();
-reportWebVitals();

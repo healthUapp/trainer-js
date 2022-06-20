@@ -37,8 +37,5 @@ export default function findAngleMidPoint(a:number, b:number, c:number, d:number
     const ac = dist(p1, p3);
 
     const angle = (Math.pow(ab, 2) + Math.pow(bc, 2) - Math.pow(ac, 2)) / (2 * ab * bc);
-
-    console.log(radians_to_degrees(Math.acos(angle)))
-
     return radians_to_degrees(Math.acos(angle));
 }

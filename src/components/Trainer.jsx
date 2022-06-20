@@ -1,37 +1,30 @@
-import { FaceMesh } from "@mediapipe/face_mesh";
 import { IonButton, IonCheckbox, IonItem, IonLabel, IonList } from "@ionic/react";
 import React, { useRef, useEffect, useState } from "react";
-import { Pose } from "@mediapipe/pose";
-import { Hands } from "@mediapipe/hands";
-import { POSE_LANDMARKS ,POSE_CONNECTIONS} from "@mediapipe/pose";
-import { HAND_CONNECTIONS } from "@mediapipe/hands";
-import * as cam from "@mediapipe/camera_utils";
-import "@mediapipe/control_utils";
-import {drawLandmarks, drawConnectors} from "@mediapipe/drawing_utils";
-import Webcam from "react-webcam";
 import CheckPose from "./CheckPose";
 import findAngle from "./findAngle";
-import Interface from "./Interface";
-
-import checkBody from "./checkBody";
 
 
-export default function Trainer({exerciseValue, exerciseName}) {
+
+
+
+export default function Trainer({visibleBody, dots, cource, unselectCource}) {
+  const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK"]
   const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
   const [leftHandAngle, setLeftHandAngle] = useState(0)
   const [crazyRule,setCrazyRule] = useState([])
   const [precent, setPrecent] = useState(null)
   const [rules,setRules] = useState([])
   const [leftHandColor,setLeftHandColor] = useState('#fff')
-  const [dots,setDots] = useState(undefined)
   const [dotsForAngle,setDotsForAngle] = useState([])
   const [angle,setAngle] = useState(null)
-  const [visibleBody, setVisibleBody] = useState(false)
+
   const [checking,setChecking]=useState(false)
   const [stage,setStage] = useState(null)
   const [counter,setCounter] = useState(0)
+  const [exerciseNumber,setExerciseNumber] = useState(0)
+  const [time, setTime] = useState(5)
+  const [showResults, setShowResults] = useState(false)
+  const [results,setResults] = useState([])
   const [colors,setColors] = useState({
     arm: {
         left: 'white',
@@ -50,44 +43,34 @@ export default function Trainer({exerciseValue, exerciseName}) {
   })
 
 
-  var camera = null;
+  
 
-  function onResults(results) {
-          const videoWidth = webcamRef.current.video.videoWidth;
-          const videoHeight = webcamRef.current.video.videoHeight;    
-          // Set canvas width
-      
-          canvasRef.current.width = videoWidth;
-          canvasRef.current.height = videoHeight;
-          const canvasElement = canvasRef.current;
-          const canvasCtx = canvasElement.getContext("2d");
-          canvasCtx.save();
-          canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-          canvasCtx.drawImage(
-            results.image,
-            0,
-            0,
-            canvasElement.width,
-            canvasElement.height
-            
-    );
-
-    canvasCtx.restore();
-
-    if(results.poseLandmarks) {
-      setDots(results.poseLandmarks)
+  useEffect(()=>{
+    if(visibleBody && (time > 0)) {
+      setTimeout(()=>{
+        setTime(time - 1)
+      },1000)
     }
-  }
 
+    if(visibleBody && (time <= 0)){
+      setResults([{name: exerciseNames[cource[exerciseNumber]], value: counter},...results])
+      setCounter(0)
+      if(exerciseNumber + 1 >= cource.length){
+        console.log('cource is ended')
+        setShowResults(true)
+      }else {
+        setTime(5)
+        setExerciseNumber(exerciseNumber + 1)
+      }
+    }
+  },[visibleBody, time])
 
   useEffect(()=>{    
         if(dots){
-          const poseInfo = CheckPose(dots, exerciseValue, stage)
+          const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
           
           if(dots) {
-            console.log(poseInfo.counter)
             setLeftHandAngle(findAngle(16,14,11, dots))
-            setVisibleBody(checkBody(dots))
             setLeftHandColor(`${poseInfo.colors.arm.right}`)
             setColors(poseInfo.colors)
             setCounter(counter + poseInfo.counter)
@@ -97,38 +80,7 @@ export default function Trainer({exerciseValue, exerciseName}) {
         }
   },[dots])
 
-  useEffect(() => {
-    const pose = new Pose({locateFile: (file) => {
-      return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-    }});
-
-    
-    pose.setOptions({
-      modelComplexity: 1,
-      smoothLandmarks: true,
-      enableSegmentation: true,
-      smoothSegmentation: false,
-      minDetectionConfidence: 0.6,
-      minTrackingConfidence: 0.6
-    });
-    
-    pose.onResults(onResults);
-
-    if (
-      typeof webcamRef.current !== "undefined" &&
-      webcamRef.current !== null
-    ) {
-      camera = new cam.Camera(webcamRef.current.video, {
-        onFrame: async () => {
-          await pose.send({ image: webcamRef.current.video });
-        },
-        width: 640,
-        height: 480,
-      });
-      camera.start();
-    }
-  }, []);
-
+  
   useEffect(()=>{
     if(dotsForAngle.length === 3) {
       setAngle(findAngle(dotsForAngle[0],dotsForAngle[1],dotsForAngle[2], dots))
@@ -139,9 +91,6 @@ export default function Trainer({exerciseValue, exerciseName}) {
     }
   },[dotsForAngle])
 
-  useEffect(()=>{
-    console.log(rules)
-  },[rules])
 
   function selectDot(dotNumber){
     
@@ -217,6 +166,16 @@ export default function Trainer({exerciseValue, exerciseName}) {
     // console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
   }
 
+  function drawResults(){
+
+    return <div className="results">
+                <h1 className="resultHead">RESULTS: </h1>
+                {
+                  results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: {result.value}</p> )
+                }
+              </div>
+  }
+  
   useEffect(()=>{
     if(checking){
       let timer = setTimeout(()=>{
@@ -229,25 +188,29 @@ export default function Trainer({exerciseValue, exerciseName}) {
   },[dots, checking])
 
   return (
-    <div className="exerciseView">    
-      <div className="poseView">
-        <div className="drawBox">
-          <Webcam
-            width={"1280"}
-            height={"720"}
-            ref={webcamRef}
-          />
-          <canvas ref={canvasRef} className="draw"/>
-          {visibleBody &&
-            <Interface dots={dots} colors={colors}/>
-          }
-        </div>
-      </div>
+    <>    
+      
       <div className="exerciseStateView">
           <div className="textBox">
-            <h1>Excersice name: {exerciseName}</h1>
+            <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
+            <div className="hText">
+              <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
+              <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
+              <h1>Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
+              <h1>Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+            </div>
+            {showResults && drawResults()}
+            
+            {stage && 
+              <>
+             
+              <div className="infoBox">
+                <h1 className="infoStage"><span className="tm">TREINER MESSAGE:</span> <br/>{stage}</h1>
+              </div>
+              </>
+              }
           </div>
-          <div className="dotBox">
+          {/* <div className="dotBox">
             {
               rightDots.map((value,index)=>{
                 return <IonButton className="dotNumber" key={index} expand="block" color="primary" onClick={()=>{
@@ -264,42 +227,34 @@ export default function Trainer({exerciseValue, exerciseName}) {
                 }}>{value}</IonButton>
               })
             }
-          </div>
-          <div className="selectedDotsForAngle">
+          </div> */}
+          {/* <div className="selectedDotsForAngle">
             {
               dotsForAngle.map((item,index)=>{
                 return <IonButton className="selectedDotNumber" key={index} expand="block" color="success">{item}</IonButton>
               })
             }
-          </div>
+          </div> */}
 
-          {angle && <div className="angleBox">
+          {/* {angle && <div className="angleBox">
                       <h1 >{Math.floor(angle*10)/10}°</h1>
                     </div>
-          }
-          <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton>
-          {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>{checking? "UNCHECK" : "CHECK"} RULES</IonButton>}
-          {precent && <div className="precentBox">
+          } */}
+          {/* <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton> */}
+          {/* {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>{checking? "UNCHECK" : "CHECK"} RULES</IonButton>} */}
+          {/* {precent && <div className="precentBox">
             <h1 style={{color: `rgba(${200 - precent*2},${precent * 2},0,0.9)`}}>{precent}%</h1>
-          </div>}
-          {(counter || stage) && 
-              <div className="precentBox">
-                {!!stage && <h1>{stage}</h1>}
-                {!!counter && <h1>{counter}</h1>}
-            </div>}
+          </div>} */}
       </div>
       {(!visibleBody || !dots) &&
         <div className="foregroundView">
           <div className="foregroundTextBox">
-            {!dots
-            ?<h1 className="foregroundText">Connecting to camera......</h1>
-            :<h1 className="foregroundText">Stand up to your full height</h1>
-            }
+              <h1 className="foregroundText">Stand up to your full height</h1>
           </div>
         </div>
       }
       
-    </div>
+    </>
   );
 }
 

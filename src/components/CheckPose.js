@@ -22,20 +22,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     }
 
     let stage;
-    console.log(peviousStage)
     if(peviousStage){stage = peviousStage}
 
     let counter=0
 
     if (!poseLandmarks) return colors;
 
-    if (exerciseValue === 0) {
-
-        if (checkBody(poseLandmarks)) {
-            goodMorning()
-        }
-    };
-
+    if (exerciseValue === 0) goodMorning();
     if (exerciseValue === 1) cabaret();
     if (exerciseValue === 2) march_in_place();
     if (exerciseValue === 3) leg_push();
@@ -44,7 +37,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 6) calf_rises();
     if (exerciseValue === 7) junmping_jack();
     if (exerciseValue === 8) half_jack();
-
 
     function goodMorning() {
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
@@ -308,6 +300,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
 
     }
+
     function calf_rises(){
 
        const angle_ankle_right = findAngle(32, 28, 26, poseLandmarks)
@@ -323,7 +316,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 }
 
     }
-
 
     function junmping_jack(){
 
@@ -370,6 +362,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
           }          
 
     }
+
     return {
         colors: colors,
         stage: stage,
