@@ -43,7 +43,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 5) lunges();
     if (exerciseValue === 6) calf_rises();
     if (exerciseValue === 7) junmping_jack();
-
+    if (exerciseValue === 8) half_jack();
 
 
     function goodMorning() {
@@ -356,6 +356,24 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
           }
           
 
+
+    }
+
+    function half_jack(){
+
+        const center=midPoint(23,24,poseLandmarks)
+        const center_angle=findAngle(26, center, 25,poseLandmarks)
+
+        if (center_angle < 10) {
+            stage = "SPREAD LEG";
+          }
+           
+          if (stage === "SPREAD LEG" && center_angle >= 15) {
+            stage = "SHIFT";
+            colors.leg.left="green"
+            colors.leg.right="green"
+            counter += 1;
+          }          
 
     }
     return {
