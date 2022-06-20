@@ -322,8 +322,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         counter += 1;
 }
 
-
-
     }
 
 
@@ -331,7 +329,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         const arm_left=findAngle(23, 11, 13,poseLandmarks)
         const arm_right=findAngle(24, 12, 14,poseLandmarks)
-        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)
+        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
         
         let arm_status=""
 
@@ -353,14 +351,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right="green"
             counter += 1;
           }
-          
-
 
     }
 
     function half_jack(){
 
-        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)
+        const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
 
         if (center_angle < 10) {
             stage = "SPREAD LEG";

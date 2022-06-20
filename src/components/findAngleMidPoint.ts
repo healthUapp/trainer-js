@@ -1,5 +1,8 @@
 export default function findAngleMidPoint(a:number, b:number, c:number, d:number, poseLandmarks: any) {
 
+    //a,b - точки для которых нужно найти середину
+    //с,d - точки для подсчёта углов
+    //находим середину между точками,затем считаем угол между серединой и двумя другими точками
     if(!poseLandmarks) {return null}
 
     const dot1 = [poseLandmarks[a]?.x, poseLandmarks[a]?.y, poseLandmarks[a]?.z]
@@ -11,7 +14,7 @@ export default function findAngleMidPoint(a:number, b:number, c:number, d:number
         return [one,two]
     }
 
-    const mid_point = findMid(dot1,dot2)
+    const mid_point = findMid(dot1,dot2)//середина между точками a,b
 
     
 
