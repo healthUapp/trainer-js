@@ -7,7 +7,7 @@ import Trainer from '../components/Trainer';
 export default function Exercise() {
 
     const [exerciseValue, setExerciseValue] = useState<number | null>(null)
-    const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES"]
+    const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK"]
     return (
         <IonContent className="startPage" fullscreen>
             {(exerciseValue === null) &&

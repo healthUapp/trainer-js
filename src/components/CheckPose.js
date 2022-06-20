@@ -1,6 +1,7 @@
 import { color } from "d3";
 import findAngle from "./findAngle";
 import checkBody from "./checkBody";
+import midPoint from "./midPoint";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
@@ -41,6 +42,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 4) squat();
     if (exerciseValue === 5) lunges();
     if (exerciseValue === 6) calf_rises();
+    if (exerciseValue === 7) junmping_jack();
 
 
 
@@ -320,6 +322,38 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         counter += 1;
 }
 
+
+
+    }
+
+
+    function junmping_jack(){
+
+        const center=midPoint(23,24,poseLandmarks)
+        const arm_left=findAngle(23, 11, 13,poseLandmarks)
+        const arm_right=findAngle(24, 12, 14,poseLandmarks)
+        const center_angle=findAngle(26, center, 25,poseLandmarks)
+
+
+        if (center_angle < 10) {
+            stage = "SPREAD LEG AND ARMS";
+          }
+          
+          if (arm_left > 170 && arm_right > 170) {
+            arm_status = "ok";
+          } else {
+            arm_status = "not ok";
+          }
+          
+          if (stage === "SPREAD LEG AND ARMS" && center_angle >= 15 && arm_status === "ok") {
+            stage = "SHIFT";
+            colors.arm.left="green"
+            colors.arm.right="green"
+            colors.leg.left="green"
+            colors.leg.right="green"
+            counter += 1;
+          }
+          
 
 
     }
