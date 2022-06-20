@@ -1,9 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-}
-
-h1,h2,h3,h4,h5,h6,p{
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -20,7 +17,6 @@ h1,h2,h3,h4,h5,h6,p{
     left: calc(50% - 250px);
     top: calc(50% - 100px);
     font-size: 100px;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 
@@ -34,13 +30,21 @@ video{
     position: relative;
     background-color: rgb(229, 229, 229);
 }
-.buttons{
+.buttonsCr{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 30%;
 }
+.buttonsEx{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
 
 .exerciseView{
     position: relative;
@@ -71,7 +75,6 @@ video{
 .foregroundText{
     color: white;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 4vw;
     width: 50%;
 }
@@ -118,7 +121,6 @@ video{
     height: 5vh;
     width:50%;
     font-size: 2vw;
-    font-family: 'Courier New', Courier, monospace;
     padding: 10px;
     
 }
@@ -140,9 +142,6 @@ video{
     font-size: 20px;
 }
 
-.angle{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
 
 .textBox{
     font-size: 1vw;
@@ -162,7 +161,6 @@ video{
 
 
 .dot1Text,.dot2Text,.dot3Text{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 400;
     font-size: 20px;
 }
@@ -198,7 +196,6 @@ video{
     background: #025b54;
     text-align: center;
     align-items: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
     font-weight: 400;
 }
@@ -212,11 +209,9 @@ video{
 }
 
 .createRules{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #5a5b02;
 }
 .checkRule{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #025b1e;
 }
 
@@ -246,10 +241,11 @@ video{
 }
 
 .backBtn{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    --background: rgb(97, 97, 97);
+    --background: rgb(134, 50, 5);
     margin-bottom: 20px;
     width: 100%;
+    height: 60px;
+    font-size: 30px;
     z-index: 11;
 }
 
@@ -265,7 +261,6 @@ video{
     width: calc(100% - 20px);
     font-size: 50px;
     margin: 10px;
-
 }
 
 .canvasBox{

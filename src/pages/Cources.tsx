@@ -9,12 +9,14 @@ import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
-export default function Exercise() {
 
+export default function Exercise() {
+    const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    const allCources = [[5,8,4,8,1,0,6],[0,1,2],[3,4,5],[6,7,8]]
+    const allCources = [[0,1,2,3,4,5,6,7,8],[0,1,2],[3,4,5],[6,7,8]]
+    const allExercises = [0,1,2,3,4,5,6,7,8]
     const cameraRef:any = useRef(null)
     const canvasRef:any= useRef(null)
     const [dots,setDots] = useState(undefined)
@@ -120,14 +122,25 @@ export default function Exercise() {
             <div className="exerciseView">
                 {(chosenСourse === null) &&
                     <div className='buttonBox'>
-                        <div className="buttons">   
+                        <div className="buttonsCr">   
                             {
                                 allCources.map((cource, index)=>{
                                     return <IonButton className={`exercise bg${(index)}`} 
                                         key={index} expand="full"
                                         onClick={()=>{setChosenСourse(cource)}}
-                                        style={{"--background":`rgb(0,${200-((200/allCources.length) * index)},0)`}}
+                                        style={{"--background":`rgb(20,${170 - (150 * index /allExercises.length)},80)`}}
                                         >{cource.toString()}</IonButton>
+                                })
+                            }
+                        </div>
+                        <div className="buttonsEx">   
+                            {
+                                allExercises.map((cource, index)=>{
+                                    return <IonButton className={`exercise bg${(index)}`} 
+                                        key={index} expand="full"
+                                        onClick={()=>{setChosenСourse([cource])}}
+                                        style={{"--background":`rgb(120,${200 - (200/allExercises.length) * index},0)`}}
+                                        >{exerciseNames[cource]}</IonButton>
                                 })
                             }
                         </div>
@@ -150,6 +163,7 @@ export default function Exercise() {
                     </div>
                     {(chosenСourse !== null) && <>
                         <Trainer 
+                            setColors={setColors}
                             visibleBody={visibleBody}
                             dots = {dots}
                             cource={chosenСourse} 

@@ -1,82 +1,60 @@
 import { IonButton, IonCheckbox, IonItem, IonLabel, IonList } from "@ionic/react";
 import React, { useRef, useEffect, useState } from "react";
-import CheckPose from "./CheckPose";
+import CheckPose from "../components/CheckPose";
 import findAngle from "./findAngle";
 
 
 
 
 
-export default function Trainer({visibleBody, dots, cource, unselectCource}) {
+export default function Trainer({visibleBody, dots, cource, unselectCource, setColors}) {
   const exerciseNames = ["GOOD MORNING","CABARET","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK"]
   const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
-  const [leftHandAngle, setLeftHandAngle] = useState(0)
   const [crazyRule,setCrazyRule] = useState([])
   const [precent, setPrecent] = useState(null)
   const [rules,setRules] = useState([])
-  const [leftHandColor,setLeftHandColor] = useState('#fff')
   const [dotsForAngle,setDotsForAngle] = useState([])
   const [angle,setAngle] = useState(null)
-
   const [checking,setChecking]=useState(false)
   const [stage,setStage] = useState(null)
   const [counter,setCounter] = useState(0)
   const [exerciseNumber,setExerciseNumber] = useState(0)
-  const [time, setTime] = useState(5)
+  const [time, setTime] = useState(15)
   const [showResults, setShowResults] = useState(false)
   const [results,setResults] = useState([])
-  const [colors,setColors] = useState({
-    arm: {
-        left: 'white',
-        right: 'white'
-    },
-    body: {
-        up: 'white',
-        down: 'white',
-        left: 'white',
-        right: 'white'
-    },
-    leg: {
-        left: 'white',
-        right: 'white'
-    }
-  })
+
 
 
   
 
   useEffect(()=>{
-    if(visibleBody && (time > 0)) {
-      setTimeout(()=>{
-        setTime(time - 1)
-      },1000)
-    }
-
-    if(visibleBody && (time <= 0)){
-      setResults([{name: exerciseNames[cource[exerciseNumber]], value: counter},...results])
-      setCounter(0)
-      if(exerciseNumber + 1 >= cource.length){
-        console.log('cource is ended')
-        setShowResults(true)
-      }else {
-        setTime(5)
-        setExerciseNumber(exerciseNumber + 1)
+    if(!showResults){
+      if(visibleBody && (time > 0)) {
+        setTimeout(()=>{
+          setTime(time - 1)
+        },1000)
+      }
+  
+      if(visibleBody && (time <= 0)){
+        setResults([{name: exerciseNames[cource[exerciseNumber]], value: counter},...results])
+        setCounter(0)
+        if(exerciseNumber + 1 >= cource.length){
+          console.log('cource is ended')
+          setShowResults(true)
+        }else {
+          setTime(15)
+          setExerciseNumber(exerciseNumber + 1)
+        }
       }
     }
-  },[visibleBody, time])
+  },[visibleBody, time, showResults])
 
   useEffect(()=>{    
         if(dots){
           const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
-          
-          if(dots) {
-            setLeftHandAngle(findAngle(16,14,11, dots))
-            setLeftHandColor(`${poseInfo.colors.arm.right}`)
-            setColors(poseInfo.colors)
-            setCounter(counter + poseInfo.counter)
-            setStage(poseInfo.stage)
-          }
-           
+          setColors(poseInfo.colors)
+          setCounter(counter + poseInfo.counter)
+          setStage(poseInfo.stage)
         }
   },[dots])
 
@@ -91,15 +69,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource}) {
     }
   },[dotsForAngle])
 
-
-  function selectDot(dotNumber){
-    
-    if(dotsForAngle.length < 3){
-        let a = dotsForAngle.slice()
-        a.push(dotNumber)
-        setDotsForAngle(a)
-    }
-  }
 
   function createRules(){
     var dotsSet = (function(arr, limit){
@@ -171,7 +140,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource}) {
     return <div className="results">
                 <h1 className="resultHead">RESULTS: </h1>
                 {
-                  results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: {result.value}</p> )
+                  results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29);'}}>{result.value}</span></p> )
                 }
               </div>
   }
@@ -195,15 +164,16 @@ export default function Trainer({visibleBody, dots, cource, unselectCource}) {
             <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
             <div className="hText">
               <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
-              <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
-              <h1>Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
-              <h1>Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+              {!showResults && <>
+                <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
+                <h1>Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
+                <h1>Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+              </>}
             </div>
             {showResults && drawResults()}
             
-            {stage && 
+            {stage && !showResults && 
               <>
-             
               <div className="infoBox">
                 <h1 className="infoStage"><span className="tm">TREINER MESSAGE:</span> <br/>{stage}</h1>
               </div>
