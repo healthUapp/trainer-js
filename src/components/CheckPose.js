@@ -42,7 +42,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function goodMorning() {
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
-        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+        
 
         const angle_elbow_left=findAngle(15, 13, 11, poseLandmarks)
         const angle_elbow_right=findAngle(16, 14, 12, poseLandmarks)
@@ -54,17 +54,20 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down="yellow"
         colors.body.up="yellow"
 
-        if ( stage !== "DOWN" && stage === 'UP' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 &&  angle_back_right >= 90 && angle_back_right <= 110) {
+        if ( stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 &&  angle_back_right >= 90 && angle_back_right <= 110) {
             colors.arm.left = "green"
             colors.leg.right = "green"
-            stage = "DOWN";
+            colors.body.left="green"
+            colors.body.right="green"
+            colors.body.down="green"
+            colors.body.up="green"
+            stage = "UP";
             counter += 1;
-            console.log('left')
         }
 
         
-        if(angle_leg_right >= 160 && angle_leg_right <= 190  ){
-            stage = "UP";
+        if(angle_back_right>=130  ){
+            stage = "DOWN";
         }      
           
           
@@ -155,7 +158,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
-            console.log('left')
         }
 
         if ( stage !== "DOWN" && stage === 'UP' && angle_arm_right >= 20 && angle_arm_right <= 140 && angle_leg_left >= 70 && angle_leg_left <= 140) {
@@ -163,7 +165,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.left = "green"
             stage = "DOWN";
             counter += 1;
-            console.log('right')
         }
         
         if(angle_leg_right >= 160 && angle_leg_right <= 190 && angle_leg_left >= 160 && angle_leg_left <= 190 ){
