@@ -44,21 +44,30 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
+        angle_elbow_left=findAngle(15, 13, 11, poseLandmarks)
+        angle_elbow_right=findAngle(16, 14, 12, poseLandmarks)
 
-         stage = "DOWN"
-
-        if (stage === "UP" && angle_leg_right >= 120 && angle_leg_right <= 160) {
-            colors.leg.left = "green"
-            colors.leg.right = "green"
-            stage = "DOWN"
-        }
-
-
-        if (stage === "DOWN" && angle_back_right >= 90 && angle_back_right <= 130) {
-            colors.body.up = "green"
-            colors.body.down = "green"
+        if (angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80) {
+            colors.arm.left="green"
+            colors.arm.right="green"
+            stage = "KNEE";
+          }
+          
+          if (stage === "KNEE" && angle_leg_right >= 120 && angle_leg_right <= 160) {
+            colors.leg.left="green"
+            colors.leg.right="green"
+            stage = "DOWN";
+          }
+          
+          if (stage === "DOWN" && angle_back_right >= 90 && angle_back_right <= 130) {
+            colors.body.left="green"
+            colors.body.right="green"
+            colors.body.down="green"
+            colors.body.up="green"
             stage = "UP"
-        }
+            counter +=1
+          }
+          
 
     }
 
