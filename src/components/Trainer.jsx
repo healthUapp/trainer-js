@@ -158,11 +158,10 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
   },[dots, checking])
 
   return (
-    <>    
-      
+    <>
+        <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
       <div className="exerciseStateView">
           <div className="textBox">
-            <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
             <div className="hText">
               <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
               {!showResults && <>
