@@ -166,8 +166,8 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
               <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
               {!showResults && <>
                 <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
-                <h1>Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
-                <h1 className="time">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+                <h1 className="hight">Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
+                <h1 className="hight">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
               </>}
             </div>
             {showResults && drawResults()}

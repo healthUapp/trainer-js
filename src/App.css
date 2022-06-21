@@ -262,7 +262,7 @@ video{
 .infoStage{
     margin: 10px;
     width: calc(100% - 20px);
-    font-size: 50px;
+    font-size: 90px;
     margin: 10px;
 }
 
@@ -297,6 +297,6 @@ video{
     font-size: 25px;
 }
 
-.time{
+.hight{
     font-size: 50px;
 }
