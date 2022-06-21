@@ -54,27 +54,18 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down="yellow"
         colors.body.up="yellow"
 
-        stage = "STAND"
-          
-        if (angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80) {
-            colors.arm.left="green"
-            colors.arm.right="green"
-            stage="DOWN"
-          }
+        if ( stage !== "DOWN" && stage === 'UP' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 &&  angle_back_right >= 90 && angle_back_right <= 110) {
+            colors.arm.left = "green"
+            colors.leg.right = "green"
+            stage = "DOWN";
+            counter += 1;
+            console.log('left')
+        }
 
-          if (stage === "DOWN" && angle_back_right >= 90 && angle_back_right <= 110) {
-            colors.body.left="green"
-            colors.body.right="green"
-            colors.body.down="green"
-            colors.body.up="green"
-            stage = "UP"
-            counter+=1
-          }
-
-          else {
-            stage="STAND"
-          }
-
+        
+        if(angle_leg_right >= 160 && angle_leg_right <= 190  ){
+            stage = "UP";
+        }      
           
           
     }
