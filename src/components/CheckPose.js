@@ -38,7 +38,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 7) junmping_jack();
     if (exerciseValue === 8) half_jack();
     if (exerciseValue === 9) cabaret_right();
-    
+    if (exerciseValue === 10) side_leg_rises();
+
     function goodMorning() {
         const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
         const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
@@ -370,6 +371,47 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right="green"
             counter += 1;
           }          
+
+    }
+
+
+    function side_leg_rises(){
+
+    const center_angle=findAngleMidPoint(23,24,25,26,poseLandmarks)
+    
+    let side ="LEFT"
+
+    if (center_angle < 30) {
+    stage = "UP";
+        }
+
+    if (side === "LEFT") {
+   colors.leg.left="yellow"
+} 
+
+if (side === "RIGHT") {
+    colors.leg.right="yellow"
+ } 
+
+ if (side === "LEFT") {
+    if (center_angle > 100 && stage === "UP") {
+      stage = "SHIFT";
+      counter += 1;
+      side="LEFT"
+      colors.leg.right="green"
+    }
+  }
+  
+  if (side === "RIGHT") {
+    if (center_angle > 100 && stage === "UP") {
+      stage = "SHIFT";
+      counter += 1;
+      side="LEFT"
+      colors.leg.right="green"
+    }
+  }
+  
+
 
     }
 
