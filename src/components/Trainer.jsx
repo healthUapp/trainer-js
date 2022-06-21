@@ -19,10 +19,11 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
   const [stage,setStage] = useState(null)
   const [counter,setCounter] = useState(0)
   const [exerciseNumber,setExerciseNumber] = useState(0)
-  const [time, setTime] = useState(90)
+  const maxTime = 10
+  const [time, setTime] = useState(maxTime)
   const [showResults, setShowResults] = useState(false)
   const [results,setResults] = useState([])
-
+ 
 
 
   
@@ -42,7 +43,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
           console.log('cource is ended')
           setShowResults(true)
         }else {
-          setTime(90)
+          setTime(maxTime)
           setExerciseNumber(exerciseNumber + 1)
         }
       }
@@ -55,6 +56,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
           setColors(poseInfo.colors)
           setCounter(counter + poseInfo.counter)
           setStage(poseInfo.stage)
+
         }
   },[dots])
 
@@ -180,36 +182,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
               </>
               }
           </div>
-          {/* <div className="dotBox">
-            {
-              rightDots.map((value,index)=>{
-                return <IonButton className="dotNumber" key={index} expand="block" color="primary" onClick={()=>{
-                  if(dotsForAngle.length > 0){
-                    if(value !== dotsForAngle[0] &&
-                      value !== dotsForAngle[1] &&
-                      value !== dotsForAngle[2]){
-                        selectDot(value)
-                      }
-                  }else {
-                    selectDot(value)
-                  }
-                  
-                }}>{value}</IonButton>
-              })
-            }
-          </div> */}
-          {/* <div className="selectedDotsForAngle">
-            {
-              dotsForAngle.map((item,index)=>{
-                return <IonButton className="selectedDotNumber" key={index} expand="block" color="success">{item}</IonButton>
-              })
-            }
-          </div> */}
 
-          {/* {angle && <div className="angleBox">
-                      <h1 >{Math.floor(angle*10)/10}°</h1>
-                    </div>
-          } */}
           {/* <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton> */}
           {/* {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>{checking? "UNCHECK" : "CHECK"} RULES</IonButton>} */}
           {/* {precent && <div className="precentBox">

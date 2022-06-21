@@ -67,7 +67,7 @@ export default function Exercise() {
       canvasCtx.restore();
 
       setVisibleBody(checkBody(results.poseLandmarks))
-
+        
       if(results.poseLandmarks) {
         setDots(results.poseLandmarks)
       }

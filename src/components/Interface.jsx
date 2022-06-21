@@ -2,7 +2,7 @@ import React, {useState,useEffect, useRef} from "react"
 import findAngle from "./findAngle";
 import * as d3 from "d3";
 
-export default function Interface({dots, colors, selectDot}) {
+export default function Interface({dots, colors}) {
   const svgRef = useRef(null)
   const svg = d3.select(svgRef.current)
   const upperSize = {

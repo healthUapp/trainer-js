@@ -62,8 +62,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function cabaret() {
 
-        stage = "START"
-        let side = ""
+        //stage = "START"
 
         const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
         const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
@@ -74,55 +73,45 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle_leg_right = findAngle(12, 24, 28, poseLandmarks)
         const angle_leg_left = findAngle(11, 23, 27, poseLandmarks)
 
-        if (counter % 2 === 0) {
-            side = "LEFT"
+        if (counter % 2 == 0) {
             colors.arm.left = "yellow"
             colors.leg.right = "yellow"
+
+            if ( angle_knee_right >= 80 && angle_knee_right <= 100) {
+                stage = "LEG"
+                colors.leg.right = "green"
+            }
+            if (stage === "LEG" && angle_leg_right >= 60 && angle_leg_right <= 110) {
+                stage = "KNEE"
+                counter += 1
+                colors.leg.right = "green"
+            }
         }
         else {
-            side = "RIGHT"
             colors.arm.right = "yellow"
             colors.leg.left = "yellow"
+            if ( angle_knee_left >= 80 && angle_knee_left <= 100) {
+                stage = "LEG";
+                colors.leg.left = "green"
+            }
+            if (stage === "LEG" && angle_leg_left >= 90 && angle_leg_left <= 110) {
+                stage = "KNEE";
+                counter += 1;
+                colors.leg.left = "green"
+            }
         }
 
 
         if (angle_shoulder_left >= 80 && angle_shoulder_right >= 80) {
             colors.arm.left = "green"
             colors.arm.right = "green"
-            stage = "KNEE"
         }
         else {
             colors.arm.left = "red"
             colors.arm.right = "red"
         }
 
-
-        if (side === "LEFT") {
-            if (stage === "KNEE" && angle_knee_right >= 80 && angle_knee_right <= 100) {
-                stage = "LEG"
-                colors.leg.right = "green"
-            }
-            if (stage === "LEG" && angle_leg_right >= 90 && angle_leg_right <= 110) {
-                stage = "STAND"
-                counter += 1
-                colors.leg.right = "green"
-            }
-        }
-
-
-        if (side === "RIGHT") {
-            if (stage === "KNEE" && angle_knee_left >= 80 && angle_knee_left <= 100) {
-                stage = "LEG";
-                colors.leg.left = "green"
-            }
-
-            if (stage === "LEG" && angle_leg_left >= 90 && angle_leg_left <= 110) {
-                stage = "STAND";
-                counter += 1;
-                colors.leg.left = "green"
-            }
-        }
-
+        
     }
 
     function march_in_place() {
