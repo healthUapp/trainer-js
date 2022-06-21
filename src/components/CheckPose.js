@@ -428,7 +428,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
 
                     
-        if (stage=="SPREAD LEG AND ARMS" && center_angle>=25 && status_left=="ok" && arm_right>150 || stage=="SPREAD LEG AND ARMS" && center_angle>=25 && arm_left>150){
+        if (stage=="SPREAD LEG AND ARMS" && center_angle>=25 && arm_right>150 || stage=="SPREAD LEG AND ARMS" && center_angle>=25 && arm_left>150){
             stage="SHIFT"                    
             counter+=1
         }
