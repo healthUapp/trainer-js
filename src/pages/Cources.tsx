@@ -11,7 +11,7 @@ import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
 
 export default function Exercise() {
-    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT"]
+    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT","STEP SIDE JACK"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
@@ -27,7 +27,7 @@ export default function Exercise() {
         //     exercises: [[0,5],[1,5],[2,5],[3,5]]
         // }
     ]
-    const allExercises = [0,1,2,3,4,5,6,7,8,9]
+    const allExercises = [0,1,2,3,4,5,6,7,8,9,10]
     const cameraRef:any = useRef(null)
     const canvasRef:any= useRef(null)
     const [dots,setDots] = useState(undefined)
