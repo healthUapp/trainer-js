@@ -19,7 +19,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
   const [stage,setStage] = useState(null)
   const [counter,setCounter] = useState(0)
   const [exerciseNumber,setExerciseNumber] = useState(0)
-  const [time, setTime] = useState(15)
+  const [time, setTime] = useState(90)
   const [showResults, setShowResults] = useState(false)
   const [results,setResults] = useState([])
 
@@ -42,7 +42,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
           console.log('cource is ended')
           setShowResults(true)
         }else {
-          setTime(15)
+          setTime(90)
           setExerciseNumber(exerciseNumber + 1)
         }
       }
@@ -167,7 +167,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
               {!showResults && <>
                 <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
                 <h1>Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
-                <h1>Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+                <h1 className="time">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
               </>}
             </div>
             {showResults && drawResults()}

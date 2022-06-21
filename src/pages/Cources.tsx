@@ -155,11 +155,13 @@ export default function Exercise() {
                         ref={cameraRef}
                     />
                     <div className="canvasBox">
-                        {visibleBody &&
-                            // @ts-ignore
-                            <Interface dots={dots} colors={colors}/>
-                        }
-                        <canvas ref={canvasRef} className="draw"/>
+                        <div className="svgBox">
+                            {visibleBody &&
+                                // @ts-ignore
+                                <Interface dots={dots} colors={colors}/>
+                            }
+                            <canvas ref={canvasRef} className="draw"/>
+                        </div>
                     </div>
                     {(chosenСourse !== null) && <>
                         <Trainer 

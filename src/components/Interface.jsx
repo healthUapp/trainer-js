@@ -12,7 +12,7 @@ export default function Interface({dots, colors, selectDot}) {
 
   if(!dots){return <svg />}
 
-  svg.style('background', 'rgba(100,100,0,0.2)').html(null)
+  svg.html(null)
 
   const lines = [{coord: [16,14], color: colors.arm.right},
     {coord: [14,12], color: colors.arm.right},
@@ -34,8 +34,8 @@ export default function Interface({dots, colors, selectDot}) {
     
     svg.append('line')
         .style("stroke", line.color)
-        .style('filter',"opacity(0.5)")
-        .style("stroke-width", 5)
+        .style('filter',"opacity(1)")
+        .style("stroke-width", 10)
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -51,9 +51,9 @@ export default function Interface({dots, colors, selectDot}) {
       index === 27 || index === 28) { 
         let circle = svg.append('circle')
         .style("stroke", "white")
-        .style("stroke-width", 2)
-        .style("fill", 'rgba(0,0,0,0.5)')
-        .attr("r", 5)
+        .style("stroke-width", 3)
+        .style("fill", 'rgba(0,0,0,0.4)')
+        .attr("r", 8)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
         .attr("cy", (dot.y) * upperSize.height)
     
