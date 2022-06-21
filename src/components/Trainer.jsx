@@ -55,8 +55,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
           const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
           setColors(poseInfo.colors)
           setCounter(counter + poseInfo.counter)
-          setStage(poseInfo.stage)
-
+          if(poseInfo.stage) setStage(poseInfo.stage)
         }
   },[dots])
 
@@ -142,7 +141,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     return <div className="results">
                 <h1 className="resultHead">RESULTS: </h1>
                 {
-                  results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29);'}}>{result.value}</span></p> )
+                  results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29)'}}>{result.value}</span></p> )
                 }
               </div>
   }
