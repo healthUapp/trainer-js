@@ -15,7 +15,18 @@ export default function Exercise() {
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    const allCources = [[0,1,2,3,4,5,6,7,8],[0,1,2],[3,4,5],[6,7,8]]
+    const allCources = [[1,2,3] , [5,4,5,1]
+        // {
+        //     name: 'Power Trim',
+        //     time: 20,
+        //     exercises: [[5,5],[8,5],[4,5],[8,5]]
+        // },
+        // {
+        //     name: 'Something Else',
+        //     time: 20,
+        //     exercises: [[0,5],[1,5],[2,5],[3,5]]
+        // }
+    ]
     const allExercises = [0,1,2,3,4,5,6,7,8,9]
     const cameraRef:any = useRef(null)
     const canvasRef:any= useRef(null)
@@ -116,6 +127,13 @@ export default function Exercise() {
         }
     }, []);
     
+    // function drawCourcesButtons(){
+    //     for (const cource of allCources) {
+    //         () => {
+    //             return <div></div>
+    //         }
+    //     }
+    // }
 
     return (
         <IonContent className="startPage" fullscreen>
@@ -123,7 +141,9 @@ export default function Exercise() {
                 {(chosenСourse === null) &&
                     <div className='buttonBox'>
                         <div className="buttonsCr">   
-                            {
+                        
+                            {   
+                                // drawCourcesButtons()
                                 allCources.map((cource, index)=>{
                                     return <IonButton className={`exercise bg${(index)}`} 
                                         key={index} expand="full"
