@@ -1,6 +1,6 @@
-import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
-import {NavLink, useHistory} from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
 import Trainer from '../components/Trainer';
@@ -17,11 +17,11 @@ import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
 export default function Exercise() {
-    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT","STEP SIDE JACK"]
+    const exerciseNames = ["GOOD MORNING", "CABARET RIGHT", "MARCH IN PLACE", "LEG PUSH", "SQUAT", "REVERSE LUNGE", "CALF RISES", "JUMPING JACK", "HALF JACK", "CABARET LEFT", "SIDE LEG RISES", "STEP SIDE JACK"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    const allCources = [[2,0,5,1,9,3]
+    const allCources = [[2, 0, 5, 1, 9, 3]
         // {
         //     name: 'Power Trim',
         //     time: 20,
@@ -33,59 +33,63 @@ export default function Exercise() {
         //     exercises: [[0,5],[1,5],[2,5],[3,5]]
         // }
     ]
-    const allExercises = exerciseNames.map((name)=>{
+    const allExercises = exerciseNames.map((name) => {
         let time;
         let gif;
         switch (name) {
             case "GOOD MORNING":
-                time = 5
+                time = 30
                 gif = goodMorningGif
                 break;
-            
+
             case "CABARET LEFT":
-                time = 5
+                time = 30
                 gif = cabaretGif
                 break;
             case "MARCH IN PLACE":
-                time = 5
+                time = 30
                 gif = marchGif
                 break;
-            
+
             case "LEG PUSH":
-                time = 5
+                time = 30
                 gif = legPushGif
                 break;
             case "SQUAT":
-                time = 5
+                time = 30
                 gif = goodMorningGif
                 break;
-            
+
             case "REVERSE LUNGE":
-                time = 5
+                time = 30
                 gif = lungeGif
                 break;
             case "CALF RISES":
-                time = 5
+                time = 30
                 gif = goodMorningGif
                 break;
-            
+
             case "JUMPING JACK":
-                time = 5
+                time = 30
                 gif = goodMorningGif
                 break;
             case "HALF JACK":
-                time = 5
+                time = 30
                 gif = goodMorningGif
                 break;
             case "CABARET RIGHT":
-                time = 5
+                time = 30
                 gif = cabaretGif
                 break;
-            case "STEP SIDE JACK":
-                time = 5
+            case "SIDE LEG RISES":
+                time = 30
                 gif = goodMorningGif
                 break;
-        
+            case "STEP SIDE JACK":
+                time = 30
+                gif = goodMorningGif
+                break;
+
         }
 
         return {
@@ -94,11 +98,11 @@ export default function Exercise() {
             gif: gif
         }
     })
-    const cameraRef:any = useRef(null)
-    const canvasRef:any= useRef(null)
-    const [dots,setDots] = useState(undefined)
+    const cameraRef: any = useRef(null)
+    const canvasRef: any = useRef(null)
+    const [dots, setDots] = useState(undefined)
     const [visibleBody, setVisibleBody] = useState(false)
-    const [colors,setColors] = useState({
+    const [colors, setColors] = useState({
         arm: {
             left: 'white',
             right: 'white'
@@ -116,17 +120,17 @@ export default function Exercise() {
     })
 
     var camera = null;
-    
-    function unselectCource(){
+
+    function unselectCource() {
         setChosenСourse(null)
     }
 
-    function onResults(results:any) {
+    function onResults(results: any) {
 
         const videoWidth = cameraRef.current.video.videoWidth;
-        const videoHeight = cameraRef.current.video.videoHeight;    
+        const videoHeight = cameraRef.current.video.videoHeight;
         // Set canvas width
-    
+
         canvasRef.current.width = videoWidth;
         canvasRef.current.height = videoHeight;
         const canvasElement = canvasRef.current;
@@ -134,65 +138,67 @@ export default function Exercise() {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
         canvasCtx.drawImage(
-          results.image,
-          0,
-          0,
-          canvasElement.width,
-          canvasElement.height
+            results.image,
+            0,
+            0,
+            canvasElement.width,
+            canvasElement.height
         );
-  
-      canvasCtx.restore();
 
-      setVisibleBody(checkBody(results.poseLandmarks))
-        
-      if(results.poseLandmarks) {
-        setDots(results.poseLandmarks)
-      }
+        canvasCtx.restore();
+
+        setVisibleBody(checkBody(results.poseLandmarks))
+
+        if (results.poseLandmarks) {
+            setDots(results.poseLandmarks)
+        }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(cameraReadiness)
-    },[cameraReadiness])
+    }, [cameraReadiness])
 
     useEffect(() => {
-        const pose = new Pose({locateFile: (file) => {
-          return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-        }});
-    
-        
-        pose.setOptions({
-          modelComplexity: 1,
-          smoothLandmarks: true,
-          enableSegmentation: true,
-          smoothSegmentation: false,
-          minDetectionConfidence: 0.6,
-          minTrackingConfidence: 0.6
+        const pose = new Pose({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+            }
         });
-        
+
+
+        pose.setOptions({
+            modelComplexity: 1,
+            smoothLandmarks: true,
+            enableSegmentation: true,
+            smoothSegmentation: false,
+            minDetectionConfidence: 0.6,
+            minTrackingConfidence: 0.6
+        });
+
         //@ts-ignore
         pose.onResults(onResults);
-    
+
         if (
-          typeof cameraRef.current !== "undefined" &&
-          cameraRef.current !== null
+            typeof cameraRef.current !== "undefined" &&
+            cameraRef.current !== null
         ) {
             console.log('upTrue')
-          camera = new cam.Camera(cameraRef.current.video, {
-            onFrame: async () => {
-                await pose.send({ image: cameraRef.current.video });
-                if(!cameraReadiness){
-                    setCameraReadiness(true)
-                }
-            },
-            width: 640,
-            height: 480,
-          });
-          camera.start();
+            camera = new cam.Camera(cameraRef.current.video, {
+                onFrame: async () => {
+                    await pose.send({ image: cameraRef.current.video });
+                    if (!cameraReadiness) {
+                        setCameraReadiness(true)
+                    }
+                },
+                width: 640,
+                height: 480,
+            });
+            camera.start();
         } else {
             console.log('false')
         }
     }, []);
-    
+
     // function drawCourcesButtons(){
     //     for (const cource of allCources) {
     //         () => {
@@ -206,35 +212,35 @@ export default function Exercise() {
             <div className="exerciseView">
                 {(chosenСourse === null) &&
                     <div className='buttonBox'>
-                        <div className="buttonsCr">   
-                        
-                            {   
+                        <div className="buttonsCr">
+
+                            {
                                 // drawCourcesButtons()
-                                allCources.map((cource, index)=>{
-                                    return <IonButton className={`exercise bg${(index)}`} 
+                                allCources.map((cource, index) => {
+                                    return <IonButton className={`exercise bg${(index)}`}
                                         key={index} expand="full"
-                                        onClick={()=>{setChosenСourse(cource)}}
-                                        style={{"--background":`rgb(20,${170 - (150 * index /allExercises.length)},80)`}}
-                                        >{cource.toString()}</IonButton>
+                                        onClick={() => { setChosenСourse(cource) }}
+                                        style={{ "--background": `rgb(20,${170 - (150 * index / allExercises.length)},80)` }}
+                                    >{cource.toString()}</IonButton>
                                 })
                             }
                         </div>
-                        <div className="buttonsEx">   
+                        <div className="buttonsEx">
                             {
-                                allExercises.map((ex: any, index)=>{
-                                    return <IonButton className={`exercise bg${(index)}`} 
+                                allExercises.map((ex: any, index) => {
+                                    return <IonButton className={`exercise bg${(index)}`}
                                         key={index} expand="full"
-                                        onClick={()=>{setChosenСourse([index])}}
-                                        style={{"--background":`rgb(120,${200 - (200/allExercises.length) * index},0)`}}
-                                        >{ex.name}</IonButton>
+                                        onClick={() => { setChosenСourse([index]) }}
+                                        style={{ "--background": `rgb(120,${200 - (200 / allExercises.length) * index},0)` }}
+                                    >{ex.name}</IonButton>
                                 })
                             }
                         </div>
                     </div>
                 }
-                
-               
-                <div className='drawBox' style={chosenСourse ? {"display": "inline-flex"}:{"display": "none"}}>
+
+
+                <div className='drawBox' style={chosenСourse ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
                         width={"1280"}
                         height={"720"}
@@ -244,31 +250,31 @@ export default function Exercise() {
                         <div className="svgBox">
                             {visibleBody &&
                                 // @ts-ignore
-                                <Interface dots={dots} colors={colors}/>
+                                <Interface dots={dots} colors={colors} />
                             }
-                            <canvas ref={canvasRef} className="draw"/>
+                            <canvas ref={canvasRef} className="draw" />
                         </div>
                     </div>
                     {(chosenСourse !== null) && <>
-                        <Trainer 
+                        <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
-                            dots = {dots}
-                            cource={chosenСourse} 
-                            allExercises = {allExercises}
+                            dots={dots}
+                            cource={chosenСourse}
+                            allExercises={allExercises}
                             unselectCource={unselectCource}
                         />
                     </>}
-                
+
                 </div>
-                
+
             </div>
-            {!cameraReadiness && <div className="loadingView">   
+            {!cameraReadiness && <div className="loadingView">
                 <h1>LOADING...</h1>
             </div>}
             {/* @ts-ignore */}
-            
+
         </IonContent>
     )
-    
+
 }
