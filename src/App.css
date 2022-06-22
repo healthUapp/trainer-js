@@ -312,7 +312,7 @@ video{
     overflow: hidden;
     z-index: 0;
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
 .gif{

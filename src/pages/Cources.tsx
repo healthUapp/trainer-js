@@ -18,7 +18,7 @@ export default function Exercise() {
     const [exerciseTime, setExerciseTime] = useState(60)
     const [selectedGif,setSelectedGif] = useState(march)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    const allCources = [[1,2,3] , [5,4,5,1]
+    const allCources = [[2,0,5,1,9,3]
         // {
         //     name: 'Power Trim',
         //     time: 20,
@@ -156,7 +156,7 @@ export default function Exercise() {
                                 })
                             }
                         </div>
-                        <div className="buttonsEx">   
+                        {/* <div className="buttonsEx">   
                             {
                                 allExercises.map((cource, index)=>{
                                     return <IonButton className={`exercise bg${(index)}`} 
@@ -166,7 +166,7 @@ export default function Exercise() {
                                         >{exerciseNames[cource]}</IonButton>
                                 })
                             }
-                        </div>
+                        </div> */}
                     </div>
                 }
                 
