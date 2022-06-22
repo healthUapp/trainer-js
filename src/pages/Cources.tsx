@@ -10,10 +10,11 @@ import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
 
-import marchGif from '../assets/gif/1.gif'
-import goodMorningGif from '../assets/gif/2.gif'
-import cabaretGif from '../assets/gif/4.gif'
-import lungeGif from '../assets/gif/5.gif'
+import marchGif from '../assets/gif/March.gif'
+import goodMorningGif from '../assets/gif/GM.gif'
+import cabaretGif from '../assets/gif/Cabaret.gif'
+import lungeGif from '../assets/gif/BL.gif'
+import legPushGif from '../assets/gif/SLDL.gif'
 
 export default function Exercise() {
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT","STEP SIDE JACK"]
@@ -42,46 +43,46 @@ export default function Exercise() {
                 break;
             
             case "CABARET LEFT":
-                time = 30
+                time = 5
                 gif = cabaretGif
                 break;
             case "MARCH IN PLACE":
-                time = 60
+                time = 5
                 gif = marchGif
                 break;
             
             case "LEG PUSH":
-                time = 60
-                gif = goodMorningGif
+                time = 5
+                gif = legPushGif
                 break;
             case "SQUAT":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
             
             case "REVERSE LUNGE":
-                time = 60
+                time = 5
                 gif = lungeGif
                 break;
             case "CALF RISES":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
             
             case "JUMPING JACK":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
             case "HALF JACK":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
             case "CABARET RIGHT":
-                time = 30
+                time = 5
                 gif = cabaretGif
                 break;
             case "STEP SIDE JACK":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
         
