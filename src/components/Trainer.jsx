@@ -21,6 +21,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
     const [time, setTime] = useState(allExercises[cource[exerciseNumber]].time)
+    const [pause,setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[cource[exerciseNumber]].gif)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
@@ -30,7 +31,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
 
 
     useEffect(()=>{
-        if(!showResults){
+        if(!showResults && !pause){
             if(visibleBody && (time > 0)) {
                 setTimeout(()=>{
                     setTime(time - 1)
@@ -47,13 +48,18 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     setExerciseNumber(exerciseNumber + 1)
                     setSelectedGif(allExercises[cource[exerciseNumber + 1]].gif)
                     setTime(allExercises[cource[exerciseNumber + 1]].time)
+                    setPause(5)
                 }
             }
+        }else {
+          setTimeout(()=>{
+            setPause(pause - 1)
+          },1000)
         }
-    },[visibleBody, time, showResults])
+    },[visibleBody, time, showResults, pause])
     
     useEffect(()=>{
-        if(dots){
+        if(dots && !pause){
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
             setColors(poseInfo.colors)
             setCounter(counter + poseInfo.counter)
@@ -204,7 +210,13 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     </div>
                 </div>
             }
-
+            {pause &&
+                      <div className="pause">
+                          <div className="pauseTextBox">
+                              <h1 className="foregroundText">PAUSE {pause}s</h1>
+                          </div>
+                      </div>
+            }
         </>
     );
 }
