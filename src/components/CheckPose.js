@@ -241,36 +241,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle_r_sh = findAngle(12, 24, 26, poseLandmarks)
 
 
-        if (counter % 2 === 0) {
-            side = "LEFT";
-        } else {
-            side = "RIGHT";
-        }
-
-        if (side === "LEFT") {
-
             colors.body.left = "orange"
             colors.leg.left = "orange"
-
+            colors.body.right = "blue"
+            colors.leg.right = "blue"
 
             if (angle_l_sh >= 150 && angle_l_sh <= 180) {
                 colors.body.left = "green"
             } else {
                 colors.body.left = "red"
             }
-        }
-
-        if (side === "RIGHT") {
-
-            colors.body.right = "blue"
-            colors.leg.right = "blue"
 
             if (angle_r_sh >= 150 && angle_r_sh <= 180) {
                 colors.body.right = "green"
             } else {
                 colors.body.right = "red"
             }
-        }
+        
 
         if (angle_left >= 80 && angle_left <= 110) {
             colors.leg.left = "green"
@@ -279,6 +266,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             status_left = "not ok";
         }
 
+
         if (angle_right >= 80 && angle_right <= 110) {
             colors.leg.right = "green"
             status_right = "OK";
@@ -286,14 +274,16 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             status_right = "not ok";
         }
 
+
         if (status_right === "OK" && status_left === "OK") {
-            stage = "up";
+            stage = "UP";
         }
 
-        if (angle_left > 110 && angle_right > 110 && stage === "up") {
+
+        if (angle_left > 110 && angle_right > 110 && stage === "UP") {
             colors.leg.left = "green"
             colors.leg.right = "green"
-            stage = "down";
+            stage = "DOWN";
             counter += 1;
         }
 
