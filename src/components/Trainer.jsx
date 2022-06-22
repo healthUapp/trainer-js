@@ -52,9 +52,11 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                 }
             }
         }else {
+         if(!showResults){
           setTimeout(()=>{
             setPause(pause - 1)
           },1000)
+         }
         }
     },[visibleBody, time, showResults, pause])
     

@@ -37,7 +37,7 @@ export default function Exercise() {
         let gif;
         switch (name) {
             case "GOOD MORNING":
-                time = 60
+                time = 5
                 gif = goodMorningGif
                 break;
             
