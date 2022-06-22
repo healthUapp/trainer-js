@@ -37,21 +37,21 @@ export default function Exercise() {
         let gif;
         switch (name) {
             case "GOOD MORNING":
-                time = 5
+                time = 60
                 gif = goodMorningGif
                 break;
             
             case "CABARET LEFT":
-                time = 10
+                time = 30
                 gif = cabaretGif
                 break;
             case "MARCH IN PLACE":
-                time = 5
+                time = 60
                 gif = marchGif
                 break;
             
             case "LEG PUSH":
-                time = 5
+                time = 60
                 gif = goodMorningGif
                 break;
             case "SQUAT":
@@ -60,7 +60,7 @@ export default function Exercise() {
                 break;
             
             case "REVERSE LUNGE":
-                time = 5
+                time = 60
                 gif = lungeGif
                 break;
             case "CALF RISES":
@@ -77,7 +77,7 @@ export default function Exercise() {
                 gif = goodMorningGif
                 break;
             case "CABARET RIGHT":
-                time = 10
+                time = 30
                 gif = cabaretGif
                 break;
             case "STEP SIDE JACK":

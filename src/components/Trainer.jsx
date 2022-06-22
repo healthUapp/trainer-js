@@ -61,6 +61,9 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         }
     },[dots])
 
+    useEffect(()=>{
+      console.log(allExercises)
+    },[])
 
     useEffect(()=>{
         if(dotsForAngle.length === 3) {
