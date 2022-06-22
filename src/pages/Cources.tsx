@@ -10,10 +10,13 @@ import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
 
+import march from '../assets/gif/1.gif'
+
 export default function Exercise() {
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
+    const [selectedGif,setSelectedGif] = useState(march)
     const [cameraReadiness, setCameraReadiness] = useState(false)
     const allCources = [[1,2,3] , [5,4,5,1]
         // {
@@ -188,6 +191,7 @@ export default function Exercise() {
                             setColors={setColors}
                             visibleBody={visibleBody}
                             dots = {dots}
+                            gif = {selectedGif}
                             cource={chosenСourse} 
                             unselectCource={unselectCource}
                         />

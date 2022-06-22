@@ -7,7 +7,7 @@ import findAngle from "./findAngle";
 
 
 
-export default function Trainer({visibleBody, dots, cource, unselectCource, setColors}) {
+export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, gif}) {
   const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT"]
   const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
   const [crazyRule,setCrazyRule] = useState([])
@@ -159,8 +159,11 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
 
   return (
     <>    
-      
+ 
       <div className="exerciseStateView">
+          <div className="gifBox">
+            <img className="gif" src={gif} alt="loading..." />
+          </div>
           <div className="textBox">
             <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
             <div className="hText">

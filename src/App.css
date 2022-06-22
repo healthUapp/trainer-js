@@ -300,3 +300,20 @@ video{
 .hight{
     font-size: 50px;
 }
+
+.gifBox{
+    background-color: none;
+    position: absolute;
+    height: 100vh;
+    min-width: 50vw;
+    overflow: hidden;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.gif{
+    position: absolute;
+    bottom: 0;
+    height: 70vh;
+}
