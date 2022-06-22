@@ -19,7 +19,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [stage,setStage] = useState(null)
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
-    const maxTime = 10
+    const maxTime = 60
     const [time, setTime] = useState(maxTime)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
