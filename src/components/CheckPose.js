@@ -196,26 +196,16 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage === "DOWN" && angle_back >= 130 && angle_back <= 150) {
             stage = "PUSH"
         }
-
-        if (counter % 2 === 0) {
-            side = "LEFT"
-            colors.arm.right = "yellow"
-            colors.leg.left = "yellow"
-        }
-
-        else {
-            side = "RIGHT"
-            colors.arm.left = "yellow"
-            colors.leg.right = "yellow"
-        }
-
+       
         if (side === "LEFT" && stage === "PUSH" && angle_leg_l >= 110 && angle_leg_l <= 140) {
             stage = "UP";
+            side= "RIGHT";
             counter += 1;
         }
 
         if (side === "RIGHT" && stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
             stage = "UP";
+            side= "LEFT";
             counter += 1;
         }
 
