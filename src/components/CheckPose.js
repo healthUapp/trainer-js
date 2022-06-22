@@ -42,7 +42,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 11) step_side_jack();
 
     function goodMorning() {
-        const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
+        const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
 
 
         const angle_elbow_left = findAngle(15, 13, 11, poseLandmarks)
@@ -55,7 +55,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down = "yellow"
         colors.body.up = "yellow"
 
-        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_right >= 90 && angle_back_right <= 110) {
+        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 70 && angle_back_left <= 120) {
             colors.arm.left = "green"
             colors.leg.right = "green"
             colors.body.left = "green"
@@ -67,7 +67,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
 
 
-        if (angle_back_right >= 130) {
+        if (angle_back_left >= 140) {
             stage = "DOWN";
         }
 
