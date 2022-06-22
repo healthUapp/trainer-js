@@ -213,22 +213,22 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function squat() {
 
-        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+        
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
         colors.leg.right = "yellow"
         colors.leg.left = "yellow"
-        if (angle_leg_left > 150 && angle_leg_right > 150) {
+        if (angle_leg_left > 150) {
             stage = "DOWN";
         }
 
-        if (stage === "DOWN" && angle_leg_left <= 110 && angle_leg_left >= 90 && angle_leg_right <= 110 && angle_leg_right >= 90) {
+        if (stage === "DOWN" && angle_leg_left <= 130 && angle_leg_left >= 90) {
             stage = "UP";
             colors.leg.right = "green"
             colors.leg.left = "green"
             counter += 1;
         }
-
+       
     }
 
     function lunges() {
