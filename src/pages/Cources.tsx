@@ -17,7 +17,7 @@ import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
 export default function Exercise() {
-    const exerciseNames = ["GOOD MORNING", "CABARET RIGHT", "MARCH IN PLACE", "LEG PUSH", "SQUAT", "REVERSE LUNGE", "CALF RISES", "JUMPING JACK", "HALF JACK", "CABARET LEFT", "SIDE LEG RISES", "STEP SIDE JACK"]
+    const exerciseNames = ["GOOD MORNING", "CABARET LEFT", "MARCH IN PLACE", "LEG PUSH", "SQUAT", "REVERSE LUNGE", "CALF RISES", "JUMPING JACK", "HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
