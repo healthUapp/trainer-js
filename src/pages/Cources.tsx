@@ -10,13 +10,15 @@ import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
 
-import march from '../assets/gif/1.gif'
+import marchGif from '../assets/gif/1.gif'
+import goodMorningGif from '../assets/gif/2.gif'
+import cabaretGif from '../assets/gif/4.gif'
+import lungeGif from '../assets/gif/5.gif'
 
 export default function Exercise() {
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK","CABARET RIGHT","STEP SIDE JACK"]
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
-    const [selectedGif,setSelectedGif] = useState(march)
     const [cameraReadiness, setCameraReadiness] = useState(false)
     const allCources = [[2,0,5,1,9,3]
         // {
@@ -30,7 +32,67 @@ export default function Exercise() {
         //     exercises: [[0,5],[1,5],[2,5],[3,5]]
         // }
     ]
-    const allExercises = [0,1,2,3,4,5,6,7,8,9,10]
+    const allExercises = exerciseNames.map((name)=>{
+        let time;
+        let gif;
+        switch (name) {
+            case "GOOD MORNING":
+                time = 5
+                gif = goodMorningGif
+                break;
+            
+            case "CABARET LEFT":
+                time = 10
+                gif = cabaretGif
+                break;
+            case "MARCH IN PLACE":
+                time = 5
+                gif = marchGif
+                break;
+            
+            case "LEG PUSH":
+                time = 5
+                gif = goodMorningGif
+                break;
+            case "SQUAT":
+                time = 60
+                gif = goodMorningGif
+                break;
+            
+            case "REVERSE LUNGE":
+                time = 5
+                gif = lungeGif
+                break;
+            case "CALF RISES":
+                time = 60
+                gif = goodMorningGif
+                break;
+            
+            case "JUMPING JACK":
+                time = 60
+                gif = goodMorningGif
+                break;
+            case "HALF JACK":
+                time = 60
+                gif = goodMorningGif
+                break;
+            case "CABARET RIGHT":
+                time = 10
+                gif = cabaretGif
+                break;
+            case "STEP SIDE JACK":
+                time = 60
+                gif = goodMorningGif
+                break;
+        
+        }
+
+        return {
+            name: name,
+            time: time,
+            gif: gif
+        }
+    })
     const cameraRef:any = useRef(null)
     const canvasRef:any= useRef(null)
     const [dots,setDots] = useState(undefined)
@@ -156,17 +218,17 @@ export default function Exercise() {
                                 })
                             }
                         </div>
-                        {/* <div className="buttonsEx">   
+                        <div className="buttonsEx">   
                             {
-                                allExercises.map((cource, index)=>{
+                                allExercises.map((ex: any, index)=>{
                                     return <IonButton className={`exercise bg${(index)}`} 
                                         key={index} expand="full"
-                                        onClick={()=>{setChosenСourse([cource])}}
+                                        onClick={()=>{setChosenСourse([index])}}
                                         style={{"--background":`rgb(120,${200 - (200/allExercises.length) * index},0)`}}
-                                        >{exerciseNames[cource]}</IonButton>
+                                        >{ex.name}</IonButton>
                                 })
                             }
-                        </div> */}
+                        </div>
                     </div>
                 }
                 
@@ -191,8 +253,8 @@ export default function Exercise() {
                             setColors={setColors}
                             visibleBody={visibleBody}
                             dots = {dots}
-                            gif = {selectedGif}
                             cource={chosenСourse} 
+                            allExercises = {allExercises}
                             unselectCource={unselectCource}
                         />
                     </>}

@@ -7,9 +7,10 @@ import findAngle from "./findAngle";
 
 
 
-export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, gif}) {
+export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, allExercises}) {
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT"]
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
+
     const [crazyRule,setCrazyRule] = useState([])
     const [precent, setPrecent] = useState(null)
     const [rules,setRules] = useState([])
@@ -19,8 +20,8 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [stage,setStage] = useState(null)
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
-    const maxTime = 60
-    const [time, setTime] = useState(maxTime)
+    const [time, setTime] = useState(allExercises[cource[exerciseNumber]].time)
+    const [selectedGif,setSelectedGif] = useState(allExercises[cource[exerciseNumber]].gif)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
 
@@ -37,19 +38,20 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             }
 
             if(visibleBody && (time <= 0)){
-                setResults([{name: exerciseNames[cource[exerciseNumber]], value: counter},...results])
+                setResults([{name: allExercises[cource[exerciseNumber]].name, value: counter},...results])
                 setCounter(0)
                 if(exerciseNumber + 1 >= cource.length){
                     console.log('cource is ended')
                     setShowResults(true)
                 }else {
-                    setTime(maxTime)
                     setExerciseNumber(exerciseNumber + 1)
+                    setSelectedGif(allExercises[cource[exerciseNumber + 1]].gif)
+                    setTime(allExercises[cource[exerciseNumber + 1]].time)
                 }
             }
         }
     },[visibleBody, time, showResults])
-
+    
     useEffect(()=>{
         if(dots){
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
@@ -161,9 +163,11 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         <>
             <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
             <div className="exerciseStateView">
-                <div className="gifBox">
-                    <img className="gif" src={gif} alt="loading..." />
-                </div>
+                {!showResults &&
+                  <div className="gifBox">
+                    <img className="gif" src={selectedGif} />
+                  </div>
+                }
                 <div className="textBox">
                     <div className="hText">
                         <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
