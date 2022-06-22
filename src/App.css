@@ -70,6 +70,7 @@ video{
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 11;
     /* vertical-align: middle; */
 }
 
@@ -245,11 +246,13 @@ video{
 
 .backBtn{
     --background: rgb(134, 50, 5);
-    margin-bottom: 20px;
-    width: 100%;
-    height: 60px;
-    font-size: 30px;
-    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 40px;
+    font-size: 20px;
+    z-index: 999;
 }
 
 .infoBox{
