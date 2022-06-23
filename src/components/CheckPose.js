@@ -313,7 +313,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         let arm_status = ""
 
-        if (center_angle < 10) {
+        if (center_angle < 15) {
             stage = "SPREAD LEG AND ARMS";
         }
 
@@ -323,7 +323,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             arm_status = "not ok";
         }
 
-        if (stage === "SPREAD LEG AND ARMS" && center_angle >= 15 && arm_status === "ok") {
+        if (stage !=="SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok") {
             stage = "SHIFT";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -338,7 +338,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
 
-        if (center_angle < 20) {
+        if (center_angle < 15) {
             stage = "SPREAD LEG";
         }
 
