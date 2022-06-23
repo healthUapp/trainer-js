@@ -176,7 +176,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     }
 
     function leg_push() {
-        stage = "START"
         let side = ""
 
         const angle_body_left = findAngle(13, 11, 23, poseLandmarks)
@@ -197,13 +196,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "PUSH"
         }
        
-        if (side === "LEFT" && stage === "PUSH" && angle_leg_l >= 110 && angle_leg_l <= 140) {
+        if (stage === "PUSH" && angle_leg_l >= 110 && angle_leg_l <= 140) {
             stage = "UP";
             side= "RIGHT";
             counter += 1;
         }
 
-        if (side === "RIGHT" && stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
+        if ( stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
             stage = "UP";
             side= "LEFT";
             counter += 1;
