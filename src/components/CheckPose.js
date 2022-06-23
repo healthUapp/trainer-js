@@ -338,11 +338,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
 
-        if (center_angle < 10) {
+        if (center_angle < 20) {
             stage = "SPREAD LEG";
         }
 
-        if (stage === "SPREAD LEG" && center_angle >= 15) {
+        if (stage !=="SHIFT" && stage === "SPREAD LEG" && center_angle >= 25) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
