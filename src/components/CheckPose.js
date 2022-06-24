@@ -22,9 +22,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     }
 
     let stage;
+    let accuracy;
+    let counter = 0;
+
     if (peviousStage) { stage = peviousStage }
 
-    let counter = 0
+    
 
     if (!poseLandmarks) return colors;
 
@@ -55,7 +58,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down = "yellow"
         colors.body.up = "yellow"
 
-        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 70 && angle_back_left <= 120) {
+        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 80 && angle_back_left <= 100) {
             colors.arm.left = "green"
             colors.leg.right = "green"
             colors.body.left = "green"
@@ -64,6 +67,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.body.up = "green"
             stage = "UP";
             counter += 1;
+            if(angle_back_left > 90){
+                accuracy = Math.floor(((180 - angle_back_left) / 90 * 100) * 10) /10
+            } else {
+                accuracy =Math.floor((angle_back_left / 90 * 100) * 10) /10
+            }
         }
 
 
@@ -416,7 +424,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     return {
         colors: colors,
         stage: stage,
-        counter: counter
+        counter: counter,
+        accuracy: accuracy
     }
 }
 

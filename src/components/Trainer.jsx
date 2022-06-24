@@ -12,6 +12,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
 
     const [crazyRule,setCrazyRule] = useState([])
+    const [accuracy,setAccuracy] = useState([])
     const [precent, setPrecent] = useState(null)
     const [rules,setRules] = useState([])
     const [dotsForAngle,setDotsForAngle] = useState([])
@@ -39,7 +40,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             }
 
             if(visibleBody && (time <= 0)){
-                setResults([{name: allExercises[cource[exerciseNumber]].name, value: counter},...results])
+                setResults([{name: allExercises[cource[exerciseNumber]].name, value: counter, accuracy: accuracy},...results])
                 setCounter(0)
                 if(exerciseNumber + 1 >= cource.length){
                     console.log('cource is ended')
@@ -51,6 +52,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     setPause(5)
                 }
             }
+            
         }else {
          if(!showResults){
           setTimeout(()=>{
@@ -65,6 +67,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
             setColors(poseInfo.colors)
             setCounter(counter + poseInfo.counter)
+            if(poseInfo.accuracy) setAccuracy([...accuracy, poseInfo.accuracy])
             if(poseInfo.stage) setStage(poseInfo.stage)
         }
     },[dots])
@@ -154,7 +157,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         return <div className="results">
             <h1 className="resultHead">RESULTS: </h1>
             {
-                results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29)'}}>{result.value}</span></p> )
+                results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29)'}}>{result.value}({Math.floor(accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / accuracy.length)}%)</span></p> )
             }
         </div>
     }
@@ -179,6 +182,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     <img className="gif" src={selectedGif} />
                   </div>
                 }
+
                 <div className="textBox">
                     <div className="hText">
                         <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
@@ -186,6 +190,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                             <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
                             <h1 className="hight">Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
                             <h1 className="hight">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
+                            <h1 className="hight">Accuracy: <span style={{'color':"red"}}>{accuracy[counter === 0? 0 : counter -1]}</span>%</h1>
                         </>}
                     </div>
                     {showResults && drawResults()}
