@@ -37,9 +37,6 @@ export default function Exercise() {
         exercises: [[2, 0, 5, 1, 9, 3],
         [0, 2, 0, 1, 4, 3], [6,7,8,6]]
     }
-    const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
-    const [exerciseTime, setExerciseTime] = useState(60)
-    const [cameraReadiness, setCameraReadiness] = useState(false)
     const allExercises = exerciseNames.map((name) => {
         let time;
         let gif;
@@ -105,8 +102,13 @@ export default function Exercise() {
             gif: gif
         }
     })
+
+    const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
+    const [cameraReadiness, setCameraReadiness] = useState(false)
+    
     const cameraRef: any = useRef(null)
     const canvasRef: any = useRef(null)
+
     const [dots, setDots] = useState(undefined)
     const [visibleBody, setVisibleBody] = useState(false)
     const [colors, setColors] = useState({
@@ -126,7 +128,7 @@ export default function Exercise() {
         }
     })
 
-    var camera = null;
+    let camera = null;
 
     function unselectCource() {
         setChosenСourse(null)
@@ -159,6 +161,44 @@ export default function Exercise() {
         if (results.poseLandmarks) {
             setDots(results.poseLandmarks)
         }
+    }
+
+    function drawCards(){
+        return (
+            <div className="cardsBox">
+                        {    
+                            allSets.exercises.map((cource, index) => {
+                                return  (
+                                <div  
+                                    className={`card bg${(index)}`} 
+                                    key={index}
+                                    onClick={() => { setChosenСourse(cource) }}
+                                >
+                                       <div className='cardImgBox'>
+                                        <img className='cardImg' src={allSets.images[index]} />
+                                       </div>
+                                        
+                                        <div className="cardText">
+                                            <h5 className='cardHighText'>{allSets.names[index]}</h5>
+                                            <div className='cardLowerTextBox'>
+                                                <p className='cardLowerText'>5 min</p>
+                                                <p className='cardLowerText'>9 ex.</p>
+                                                <div className='cardLowerIconsBox'>
+                                                    <p className='cardLowerIconsText'>workouts</p>
+                                                    <div className='cardLowerIconsCheckedBox'>
+                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                        <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                )
+                            })
+                        }
+            </div>
+        )
     }
 
     useEffect(() => {
@@ -206,52 +246,6 @@ export default function Exercise() {
         }
     }, []);
 
-    // function drawCourcesButtons(){
-    //     for (const cource of allCources) {
-    //         () => {
-    //             return <div></div>
-    //         }
-    //     }
-    // }
-
-    function drawCards(){
-        return (
-            <div className="cardsBox">
-                        {    
-                            allSets.exercises.map((cource, index) => {
-                                return  (
-                                <div  
-                                    className={`card bg${(index)}`} 
-                                    key={index}
-                                    onClick={() => { setChosenСourse(cource) }}
-                                >
-                                       <div className='cardImgBox'>
-                                        <img className='cardImg' src={allSets.images[index]} />
-                                       </div>
-                                        
-                                        <div className="cardText">
-                                            <h5 className='cardHighText'>{allSets.names[index]}</h5>
-                                            <div className='cardLowerTextBox'>
-                                                <p className='cardLowerText'>5 min</p>
-                                                <p className='cardLowerText'>9 ex.</p>
-                                                <div className='cardLowerIconsBox'>
-                                                    <p className='cardLowerIconsText'>workouts</p>
-                                                    <div className='cardLowerIconsCheckedBox'>
-                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                        <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                                )
-                            })
-                        }
-            </div>
-        )
-    }
-
 
     return (
         <IonContent className="startPage" fullscreen>
@@ -292,7 +286,6 @@ export default function Exercise() {
             {!cameraReadiness && <div className="loadingView">
                 <h1>LOADING...</h1>
             </div>}
-            {/* @ts-ignore */}
 
         </IonContent>
     )
