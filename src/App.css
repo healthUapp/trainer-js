@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Mulish';
 }
 
 .startPage{
@@ -24,26 +26,6 @@ video{
     display: none;
 }
 
-.buttonBox{
-    width: 50vw;
-    height: 100vh;
-    position: relative;
-    background-color: rgb(229, 229, 229);
-}
-.buttonsCr{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30%;
-}
-.buttonsEx{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
-}
 
 
 .exerciseView{
@@ -118,15 +100,6 @@ video{
     z-index: -1;
     height: 100vh;
     width: calc(100vh * 1.333333);
-}
-
-.exercise{
-    --background:rgb(255, 196, 0);
-    height: 5vh;
-    width:50%;
-    font-size: 2vw;
-    padding: 10px;
-    
 }
 
 .settings{
@@ -347,3 +320,4 @@ video{
     justify-content: center;
     z-index: 11;
 }
+

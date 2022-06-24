@@ -204,11 +204,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     }
                 </div>
 
-                {/* <IonButton className="createRules" expand="block" color="success" onClick={()=>{createRules()}}>CREATE RULES</IonButton> */}
-                {/* {(crazyRule.length > 0) && <IonButton className="checkRule" expand="block" color="success" onClick={()=>{setChecking(!checking)}}>{checking? "UNCHECK" : "CHECK"} RULES</IonButton>} */}
-                {/* {precent && <div className="precentBox">
-            <h1 style={{color: `rgba(${200 - precent*2},${precent * 2},0,0.9)`}}>{precent}%</h1>
-          </div>} */}
             </div>
             {(!visibleBody || !dots) &&
                 <div className="foregroundView">

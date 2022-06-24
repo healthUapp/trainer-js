@@ -1,8 +1,9 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonImg, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 
 import { NavLink, useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
+import '../Cards.scss'
 import Trainer from '../components/Trainer';
 import Webcam from "react-webcam";
 import Interface from "../components/Interface";
@@ -10,29 +11,35 @@ import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/checkBody";
 
+
+//GIF
 import marchGif from '../assets/gif/March.gif'
 import goodMorningGif from '../assets/gif/GM.gif'
 import cabaretGif from '../assets/gif/Cabaret.gif'
 import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
+//JPG
+import set1 from '../assets/jpg/set1-min.jpg'
+import set2 from '../assets/jpg/set2-min.jpg'
+import set3 from '../assets/jpg/set3-min.jpg'
+
+//SVG
+import cheked from '../assets/svg/cheked.svg'
+import uncheked from '../assets/svg/uncheked.svg'
+
+
 export default function Exercise() {
     const exerciseNames = ["GOOD MORNING", "CABARET LEFT", "MARCH IN PLACE", "LEG PUSH", "SQUAT", "REVERSE LUNGE", "CALF RISES", "JUMPING JACK", "HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK"]
+    const allSets = {
+        names:  ["Monday", "Tuesday", "Wednesday"],
+        images: [set1, set2, set3],
+        exercises: [[2, 0, 5, 1, 9, 3],
+        [0, 2, 0, 1, 4, 3], [6,7,8,6]]
+    }
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [exerciseTime, setExerciseTime] = useState(60)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    const allCources = [[2, 0, 5, 1, 9, 3]
-        // {
-        //     name: 'Power Trim',
-        //     time: 20,
-        //     exercises: [[5,5],[8,5],[4,5],[8,5]]
-        // },
-        // {
-        //     name: 'Something Else',
-        //     time: 20,
-        //     exercises: [[0,5],[1,5],[2,5],[3,5]]
-        // }
-    ]
     const allExercises = exerciseNames.map((name) => {
         let time;
         let gif;
@@ -207,38 +214,51 @@ export default function Exercise() {
     //     }
     // }
 
+    function drawCards(){
+        return (
+            <div className="cardsBox">
+                        {    
+                            allSets.exercises.map((cource, index) => {
+                                return  (
+                                <div  
+                                    className={`card bg${(index)}`} 
+                                    key={index}
+                                    onClick={() => { setChosenСourse(cource) }}
+                                >
+                                       <div className='cardImgBox'>
+                                        <img className='cardImg' src={allSets.images[index]} />
+                                       </div>
+                                        
+                                        <div className="cardText">
+                                            <h5 className='cardHighText'>{allSets.names[index]}</h5>
+                                            <div className='cardLowerTextBox'>
+                                                <p className='cardLowerText'>5 min</p>
+                                                <p className='cardLowerText'>9 ex.</p>
+                                                <div className='cardLowerIconsBox'>
+                                                    <p className='cardLowerIconsText'>workouts</p>
+                                                    <div className='cardLowerIconsCheckedBox'>
+                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                        <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                )
+                            })
+                        }
+            </div>
+        )
+    }
+
+
     return (
         <IonContent className="startPage" fullscreen>
             <div className="exerciseView">
                 {(chosenСourse === null) &&
-                    <div className='buttonBox'>
-                        <div className="buttonsCr">
-
-                            {
-                                // drawCourcesButtons()
-                                allCources.map((cource, index) => {
-                                    return <IonButton className={`exercise bg${(index)}`}
-                                        key={index} expand="full"
-                                        onClick={() => { setChosenСourse(cource) }}
-                                        style={{ "--background": `rgb(20,${170 - (150 * index / allExercises.length)},80)` }}
-                                    >{cource.toString()}</IonButton>
-                                })
-                            }
-                        </div>
-                        <div className="buttonsEx">
-                            {
-                                allExercises.map((ex: any, index) => {
-                                    return <IonButton className={`exercise bg${(index)}`}
-                                        key={index} expand="full"
-                                        onClick={() => { setChosenСourse([index]) }}
-                                        style={{ "--background": `rgb(120,${200 - (200 / allExercises.length) * index},0)` }}
-                                    >{ex.name}</IonButton>
-                                })
-                            }
-                        </div>
-                    </div>
+                    drawCards()
                 }
-
 
                 <div className='drawBox' style={chosenСourse ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
@@ -262,13 +282,13 @@ export default function Exercise() {
                             dots={dots}
                             cource={chosenСourse}
                             allExercises={allExercises}
-                            unselectCource={unselectCource}
+                            unselectCource={unselectCource}   
                         />
                     </>}
 
                 </div>
-
             </div>
+
             {!cameraReadiness && <div className="loadingView">
                 <h1>LOADING...</h1>
             </div>}
