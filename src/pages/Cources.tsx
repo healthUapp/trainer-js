@@ -27,81 +27,77 @@ import set3 from '../assets/jpg/set3-min.jpg'
 //SVG
 import cheked from '../assets/svg/cheked.svg'
 import uncheked from '../assets/svg/uncheked.svg'
+import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 
 export default function Exercise() {
-    const exerciseNames = ["GOOD MORNING", "CABARET LEFT", "MARCH IN PLACE", "LEG PUSH", "SQUAT", "REVERSE LUNGE", "CALF RISES", "JUMPING JACK", "HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK"]
     const allSets = {
         names:  ["Monday", "Tuesday", "Wednesday"],
         images: [set1, set2, set3],
         exercises: [[2, 0, 5, 1, 9, 3],
         [0, 2, 0, 1, 4, 3], [6,7,8,6]]
     }
-    const allExercises = exerciseNames.map((name) => {
-        let time;
-        let gif;
-        switch (name) {
-            case "GOOD MORNING":
-                time = 30
-                gif = goodMorningGif
-                break;
+    const allExercises = [
+            {
+                name :"GOOD MORNING",
+                time : 30,
+                gif : goodMorningGif   
+            },
+            {
+                name:"CABARET LEFT",
+                time : 30,
+                gif : cabaretGif
+            },
+            {   
+                name:"MARCH IN PLACE",
+                time : 30,
+                gif : marchGif
+            },
+            {
+                name:"LEG PUSH",
+                time : 30,
+                gif : legPushGif
+            },
+            {
+                name:"SQUAT",
+                time :30,
+                gif :goodMorningGif,
+            },
+            {
+                name:"REVERSE LUNGE",
+                time : 30,
+                gif : lungeGif
+            },{
+                name:"CALF RISES",
+                time : 30,
+                gif : goodMorningGif
+            },{
+                name:"JUMPING JACK",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"HALF JACK",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"CABARET RIGHT",
+                time : 30,
+                gif : cabaretGif
+            },
+            {
+                name:"SIDE LEG RISES",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"STEP SIDE JACK",
+                time : 30,
+                gif : goodMorningGif
+            }
 
-            case "CABARET LEFT":
-                time = 30
-                gif = cabaretGif
-                break;
-            case "MARCH IN PLACE":
-                time = 30
-                gif = marchGif
-                break;
-
-            case "LEG PUSH":
-                time = 30
-                gif = legPushGif
-                break;
-            case "SQUAT":
-                time = 30
-                gif = goodMorningGif
-                break;
-
-            case "REVERSE LUNGE":
-                time = 30
-                gif = lungeGif
-                break;
-            case "CALF RISES":
-                time = 30
-                gif = goodMorningGif
-                break;
-
-            case "JUMPING JACK":
-                time = 30
-                gif = goodMorningGif
-                break;
-            case "HALF JACK":
-                time = 30
-                gif = goodMorningGif
-                break;
-            case "CABARET RIGHT":
-                time = 30
-                gif = cabaretGif
-                break;
-            case "SIDE LEG RISES":
-                time = 30
-                gif = goodMorningGif
-                break;
-            case "STEP SIDE JACK":
-                time = 30
-                gif = goodMorningGif
-                break;
-
-        }
-
-        return {
-            name: name,
-            time: time,
-            gif: gif
-        }
-    })
+    ]
 
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [cameraReadiness, setCameraReadiness] = useState(false)
@@ -283,8 +279,11 @@ export default function Exercise() {
                 </div>
             </div>
 
-            {!cameraReadiness && <div className="loadingView">
-                <h1>LOADING...</h1>
+            {!cameraReadiness && <div className='loadingViewBox'>
+                <div className="loadingView">
+                    <h1 className='loadingText'>LOADING...</h1>
+                    <img className='loadingHelpIcon' src={loadingHelp} alt="" />
+                </div>
             </div>}
 
         </IonContent>
