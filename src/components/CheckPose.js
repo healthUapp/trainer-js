@@ -27,7 +27,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     if (peviousStage) { stage = peviousStage }
 
-    
+
 
     if (!poseLandmarks) return colors;
 
@@ -43,6 +43,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 9) cabaret_right();
     if (exerciseValue === 10) side_leg_rises();
     if (exerciseValue === 11) step_side_jack();
+    if (exerciseValue === 12) chest_expansion();
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -67,10 +68,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.body.up = "green"
             stage = "UP";
             counter += 1;
-            if(angle_back_left > 90){
-                accuracy = Math.floor(((180 - angle_back_left) / 90 * 100) * 10) /10
+            if (angle_back_left > 90) {
+                accuracy = Math.floor(((180 - angle_back_left) / 90 * 100) * 10) / 10
             } else {
-                accuracy =Math.floor((angle_back_left / 90 * 100) * 10) /10
+                accuracy = Math.floor((angle_back_left / 90 * 100) * 10) / 10
             }
         }
 
@@ -203,16 +204,16 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage === "DOWN" && angle_back >= 130 && angle_back <= 150) {
             stage = "PUSH"
         }
-       
+
         if (stage === "PUSH" && angle_leg_l >= 110 && angle_leg_l <= 140) {
             stage = "UP";
-            side= "RIGHT";
+            side = "RIGHT";
             counter += 1;
         }
 
-        if ( stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
+        if (stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
             stage = "UP";
-            side= "LEFT";
+            side = "LEFT";
             counter += 1;
         }
 
@@ -220,7 +221,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function squat() {
 
-        
+
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
         colors.leg.right = "yellow"
@@ -235,7 +236,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.left = "green"
             counter += 1;
         }
-       
+
     }
 
     function lunges() {
@@ -248,23 +249,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle_r_sh = findAngle(12, 24, 26, poseLandmarks)
 
 
-            colors.body.left = "orange"
-            colors.leg.left = "orange"
-            colors.body.right = "blue"
-            colors.leg.right = "blue"
+        colors.body.left = "orange"
+        colors.leg.left = "orange"
+        colors.body.right = "blue"
+        colors.leg.right = "blue"
 
-            if (angle_l_sh >= 150 && angle_l_sh <= 180) {
-                colors.body.left = "green"
-            } else {
-                colors.body.left = "red"
-            }
+        if (angle_l_sh >= 150 && angle_l_sh <= 180) {
+            colors.body.left = "green"
+        } else {
+            colors.body.left = "red"
+        }
 
-            if (angle_r_sh >= 150 && angle_r_sh <= 180) {
-                colors.body.right = "green"
-            } else {
-                colors.body.right = "red"
-            }
-        
+        if (angle_r_sh >= 150 && angle_r_sh <= 180) {
+            colors.body.right = "green"
+        } else {
+            colors.body.right = "red"
+        }
+
 
         if (angle_left >= 80 && angle_left <= 110) {
             colors.leg.left = "green"
@@ -330,7 +331,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             arm_status = "not ok";
         }
 
-        if (stage !=="SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok") {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok") {
             stage = "SHIFT";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -349,7 +350,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SPREAD LEG";
         }
 
-        if (stage !=="SHIFT" && stage === "SPREAD LEG" && center_angle >= 25) {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
@@ -399,27 +400,50 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     }
 
-    function step_side_jack(){
+    function step_side_jack() {
 
         const arm_left = findAngle(23, 11, 13, poseLandmarks)
         const arm_right = findAngle(24, 12, 14, poseLandmarks)
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
 
-        colors.arm.left="yellow"
-        colors.arm.right="yellow"
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
         colors.leg.left = "yellow"
         colors.leg.right = "yellow"
 
-        if (center_angle < 15){
+        if (center_angle < 15) {
             stage = "SPREAD LEG AND ARMS"
         }
 
-                    
-        if (stage=="SPREAD LEG AND ARMS" && center_angle>=25 && arm_right>150 || stage=="SPREAD LEG AND ARMS" && center_angle>=25 && arm_left>150){
-            stage="SHIFT"                    
-            counter+=1
+
+        if (stage == "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_right > 150 || stage == "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_left > 150) {
+            stage = "SHIFT"
+            counter += 1
         }
-                    
+
+    }
+
+    function chest_expansion() {
+
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
+        if (stage === "SPREAD ARMS" && angle_shoulder_left <= 25 && angle_shoulder_right <= 25) {
+
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+            stage = "SHIFT";
+            counter += 1;
+        }
+
+        if (stage !== "SPREAD ARMS" && angle_shoulder_left > 70 && angle_shoulder_right > 70) {
+            stage = "SPREAD ARMS";
+        }
+
+
     }
     return {
         colors: colors,
