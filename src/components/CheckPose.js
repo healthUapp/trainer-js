@@ -44,6 +44,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 10) side_leg_rises();
     if (exerciseValue === 11) step_side_jack();
     if (exerciseValue === 12) chest_expansion();
+    if (exerciseValue === 12) side_arm_rises();
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -444,6 +445,27 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
 
 
+    }
+
+    function side_arm_rises() {
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
+        if (stage == "SPREAD ARMS" && angle_shoulder_left <= 15 && angle_shoulder_right <= 15) {
+
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+            stage = "SHIFT";
+            counter += 1;
+        }
+
+        if (stage !="SPREAD ARMS" && angle_shoulder_left > 100 && angle_shoulder_right > 100) {
+
+            stage = "SPREAD ARMS"
+        }
     }
     return {
         colors: colors,
