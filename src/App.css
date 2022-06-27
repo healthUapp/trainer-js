@@ -26,8 +26,6 @@ video{
     display: none;
 }
 
-
-
 .exerciseView{
     position: relative;
     width: 100vw;
@@ -35,6 +33,7 @@ video{
     display: inline-flex;
     z-index: 1;
 }
+
 .foregroundView{
     position: absolute;
     top: 0;
@@ -188,6 +187,7 @@ video{
 .createRules{
     background-color: #5a5b02;
 }
+
 .checkRule{
     background-color: #025b1e;
 }
@@ -198,6 +198,7 @@ video{
     font-size: 7vw;
     margin: 20px 0;
 }
+
 .angleBox{
     font-size: 4vw;
 }
@@ -341,5 +342,107 @@ video{
     z-index: 11;
 }
 
+
+
+
+
+.cardsBox{
+    width: 50vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: rgb(229, 229, 229);
+
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.card{
+    height: 366px;
+    width: 360px;
+    font-size: 20px;
+    margin: 20px 0 0 0;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.card:hover .cardImg{
+    border-color: #90B8F8;
+}
+
+.cardImg{
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    width: 360px;
+    height: 280px;
+    object-fit: cover;
+    box-shadow: 3px 5px 13px 0px rgba(118, 118, 118, 0.25);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+
+
+
+.cardImgBox{
+    display: flex;
+    width: 366px;
+    height: 286px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+
+.cardText{
+    padding: 10px 10px 0 10px;
+}
+
+.cardLowerTextBox{
+    display: flex;
+    align-items: center;
+}
+
+.cardLowerText{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding-right: 50px;
+}
+
+
+.cardLowerIconsBox{
+    display: flex;
+    align-items: center;
+}
+
+.cardLowerIconsText{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding-right: 10px;
+}
+
+
+.cardHighText{
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.03em;
+}
+
+
+.cardLowerIconsCheckedIcon{
+    padding-right: 4px;
+}
 
 
