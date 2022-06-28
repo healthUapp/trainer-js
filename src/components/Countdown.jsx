@@ -20,12 +20,39 @@ export default function Countdown({startTime, newTime, width}) {
         let x2 = dotRadius * Math.cos(lastPrecent - 3.14 / 2)
         let y2 = dotRadius * Math.sin(lastPrecent - 3.14 / 2)  
 
+       
+
 
 
         const svg = d3.select(svgRef.current)
             .html(null)
             .append("g")
             .attr("transform", `translate(${width/2},${width/2})`)
+
+
+
+
+        var defs = svg.append("defs");
+        var gradient = defs.append("linearGradient")
+        .attr("id", "svgGradient")
+        .attr("x1", "0%")
+        .attr("x2", "100%")
+        .attr("y1", "0%")
+        .attr("y2", "100%");
+        gradient.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#9C90F8")
+        .attr("stop-opacity", 1);
+        gradient.append("stop")
+        .attr("offset", "56.15%")
+        .attr("stop-color", "#90B8F8")
+        .attr("stop-opacity", 1);
+        gradient.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#90ECF8")
+        .attr("stop-opacity", 1);
+
+
         
         const arcBack_path = d3.arc()
             .innerRadius(innerRadius)
@@ -48,7 +75,7 @@ export default function Countdown({startTime, newTime, width}) {
         svg.append("path")
             .attr("class", "arc-2")
             .attr("d", arcFront_path)
-            .attr("fill", "rgba(144, 184, 248, 1)")
+            .attr("fill", "url(#svgGradient)")
             .style("stroke-linecap","round")
 
         svg.append("circle")
