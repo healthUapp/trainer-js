@@ -1,5 +1,5 @@
-import { IonButton, IonCheckbox, IonItem, IonLabel, IonList } from "@ionic/react";
-import React, { useRef, useEffect, useState } from "react";
+import { IonButton } from "@ionic/react";
+import { useEffect, useState } from "react";
 import CheckPose from "../components/CheckPose";
 import findAngle from "./findAngle";
 import Countdown from "./Countdown"
@@ -61,7 +61,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
             setColors(poseInfo.colors)
             setCounter(counter + poseInfo.counter)
-            if(poseInfo.accuracy) setAccuracy([...accuracy, poseInfo.accuracy])
+            if(poseInfo.accuracy) {setAccuracy([...accuracy, poseInfo.accuracy]); console.log(accuracy)}
             if(poseInfo.stage) setStage(poseInfo.stage)
         }
     },[dots])

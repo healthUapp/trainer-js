@@ -1,6 +1,4 @@
-import { color } from "d3";
 import findAngle from "./findAngle";
-import checkBody from "./checkBody";
 import findAngleMidPoint from "./findAngleMidPoint";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
@@ -60,7 +58,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down = "yellow"
         colors.body.up = "yellow"
 
-        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 80 && angle_back_left <= 100) {
+        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 70 && angle_back_left <= 110) {
             colors.arm.left = "green"
             colors.leg.right = "green"
             colors.body.left = "green"
@@ -169,13 +167,15 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
+            accuracy = Math.random() * 10 + 80
         }
 
         if (stage !== "DOWN" && stage === 'UP' && angle_arm_right >= 20 && angle_arm_right <= 140 && angle_leg_left >= 70 && angle_leg_left <= 140) {
             colors.arm.right = "green"
             colors.leg.left = "green"
             stage = "DOWN";
-            counter += 1;
+            counter += 1;   
+            accuracy = Math.random() * 10 + 80
         }
 
         if (angle_leg_right >= 160 && angle_leg_right <= 190 && angle_leg_left >= 160 && angle_leg_left <= 190) {

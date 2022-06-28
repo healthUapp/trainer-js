@@ -1,5 +1,4 @@
-import React, {useState,useEffect, useRef} from "react"
-import findAngle from "./findAngle";
+import { useRef} from "react"
 import * as d3 from "d3";
 
 export default function Interface({dots, colors}) {

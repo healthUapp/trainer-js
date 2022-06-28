@@ -1,6 +1,5 @@
-import { IonContent, IonSlide, IonImg, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { IonContent} from '@ionic/react';
+
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
 import Trainer from '../components/Trainer';
@@ -37,7 +36,7 @@ export default function Exercise() {
     const allSets = {
         names:  ["Today", "Tomorrow"],
         images: [set1, set2, set3],
-        exercises: [[2, 0, 5, 1, 9, 3], [5, 8, 4, 8]]
+        exercises: [[0],[2, 0, 5, 1, 9, 3], [5, 8, 4, 8]]
     }
 
     const allExercises = [
