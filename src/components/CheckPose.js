@@ -119,6 +119,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "red"
         }
 
+        if (angle_leg_right > 90) {
+            accuracy = Math.floor(((180 - angle_leg_right) / 90 * 100) * 10) / 10
+        } else {
+            accuracy = Math.floor((angle_leg_right / 90 * 100) * 10) / 10
+        }
+
 
     }
 
@@ -153,6 +159,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "red"
         }
 
+        if (angle_leg_left > 90) {
+            accuracy = Math.floor(((180 - angle_leg_left) / 90 * 100) * 10) / 10
+        } else {
+            accuracy = Math.floor((angle_leg_left / 90 * 100) * 10) / 10
+        }
 
     }
 
@@ -167,20 +178,34 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
-            accuracy = Math.random() * 10 + 80
+            //accuracy = Math.random() * 10 + 80
+            if (angle_leg_right > 90) {
+                accuracy = Math.floor(((180 - angle_leg_right) / 90 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_right / 90 * 100) * 10) / 10
+            }
+
         }
 
         if (stage !== "DOWN" && stage === 'UP' && angle_arm_right >= 20 && angle_arm_right <= 140 && angle_leg_left >= 70 && angle_leg_left <= 140) {
             colors.arm.right = "green"
             colors.leg.left = "green"
             stage = "DOWN";
-            counter += 1;   
-            accuracy = Math.random() * 10 + 80
+            counter += 1;
+            //accuracy = Math.random() * 10 + 80
+            if (angle_leg_left > 90) {
+                accuracy = Math.floor(((180 - angle_leg_left) / 90 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_left / 90 * 100) * 10) / 10
+            }
+
         }
 
         if (angle_leg_right >= 160 && angle_leg_right <= 190 && angle_leg_left >= 160 && angle_leg_left <= 190) {
             stage = "UP";
         }
+
+
 
 
     }
@@ -210,13 +235,24 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "UP";
             side = "RIGHT";
             counter += 1;
+            if (angle_leg_l > 110) {
+                accuracy = Math.floor(((180 - angle_leg_l) / 110 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_l / 90 * 100) * 10) / 10
+            }
         }
 
         if (stage === "PUSH" && angle_leg_r >= 110 && angle_leg_r <= 140) {
             stage = "UP";
             side = "LEFT";
             counter += 1;
+            if (angle_leg_r > 110) {
+                accuracy = Math.floor(((180 - angle_leg_r) / 110 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_r / 110 * 100) * 10) / 10
+            }
         }
+
 
     }
 
@@ -271,6 +307,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle_left >= 80 && angle_left <= 110) {
             colors.leg.left = "green"
             status_left = "OK";
+            if (angle_left > 80) {
+                accuracy = Math.floor(((180 - angle_left) / 80 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_left / 80 * 100) * 10) / 10
+            }
         } else {
             status_left = "not ok";
         }
@@ -279,6 +320,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle_right >= 80 && angle_right <= 110) {
             colors.leg.right = "green"
             status_right = "OK";
+
         } else {
             status_right = "not ok";
         }
@@ -294,6 +336,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
+
         }
 
     }
@@ -462,7 +505,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             counter += 1;
         }
 
-        if (stage !="SPREAD ARMS" && angle_shoulder_left > 100 && angle_shoulder_right > 100) {
+        if (stage != "SPREAD ARMS" && angle_shoulder_left > 100 && angle_shoulder_right > 100) {
 
             stage = "SPREAD ARMS"
         }
