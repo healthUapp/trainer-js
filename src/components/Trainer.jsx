@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import CheckPose from "../components/CheckPose";
 import findAngle from "./findAngle";
 import Countdown from "./Countdown"
+import Results from "./Results"
+import MiniGraphAccuracy from "./MiniGraphAccuracy"
 //SVG
 import next from '../assets/svg/next.svg'
 
@@ -57,7 +59,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     },[visibleBody, time, showResults, pause])
     
     useEffect(()=>{
-        if(dots && !pause){
+        if(dots && !pause && !showResults){
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
             setColors(poseInfo.colors)
             setCounter(counter + poseInfo.counter)
@@ -152,15 +154,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         // console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
     }
 
-    function drawResults(){
-
-        return <div className="results">
-            <h1 className="resultHead">RESULTS: </h1>
-            {
-                results.map((result,index)=> <p className="resultElement" key={index}>{result.name}: <span style={{"color":'rgb(177, 63, 29)'}}>{result.value}({Math.floor(accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / accuracy.length)}%)</span></p> )
-            }
-        </div>
-    }
 
     
     useEffect(()=>{
@@ -197,9 +190,8 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                             <h1 className="hight">Accuracy: <span style={{'color':"red"}}>{accuracy[counter === 0? 0 : counter -1]}</span>%</h1>
                         </>}
                     </div>
-                    {showResults && drawResults()}
 
-                    {stage && !showResults &&
+                    {!!stage && !showResults &&
                         <>
                             <div className="infoBox">
                                 <h1 className="infoStage"><span className="tm">TREINER MESSAGE:</span> <br/>{stage}</h1>
@@ -209,6 +201,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                 </div>
 
             </div>
+
             {(!visibleBody || !dots) &&
                 <div className="foregroundView">
                     <div className="foregroundTextBox">
@@ -216,7 +209,8 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                     </div>
                 </div>
             }
-            {pause &&
+
+            {!!pause &&
                 <>  
                     <Countdown startTime={5} newTime={pause} width={226}/>
 
@@ -235,12 +229,18 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                 </>
                 
             }
-
             {!pause &&
-                <div className="exerciseTimeBox">
-                    <Countdown startTime={allExercises[cource[exerciseNumber]].time} newTime={time} width={226}/>
-                </div>
+                <>
+                    <div className="exerciseAccuracyGraphBox">
+                        <MiniGraphAccuracy results={results} accuracy={accuracy}/>
+                    </div>
+                    <div className="exerciseTimeBox">
+                        <Countdown startTime={allExercises[cource[exerciseNumber]].time} newTime={time} width={226}/>
+                     </div>
+                </>
             }
+
+            {showResults &&  <Results results={results} accuracy={accuracy}/>}
         </>
     );
 }
