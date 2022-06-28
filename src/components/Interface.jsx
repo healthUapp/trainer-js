@@ -49,6 +49,7 @@ export default function Interface({dots, colors}) {
       index === 23 || index === 24 ||
       index === 25 || index === 26 ||
       index === 27 || index === 28) { 
+        
         let circle = svg.append('circle')
         .style("stroke", "white")
         .style("stroke-width", 3)
@@ -56,7 +57,7 @@ export default function Interface({dots, colors}) {
         .attr("r", 8)
         .attr("cx", upperSize.width - (dot.x) * upperSize.width)
         .attr("cy", (dot.y) * upperSize.height)
-    
+        
 
         svg.append("text")
           .attr("x", upperSize.width - (dot.x) * upperSize.width + (index % 2 === 0? 14 : -30))

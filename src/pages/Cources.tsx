@@ -1,5 +1,5 @@
-import { IonContent, IonImg, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
-
+import { IonContent, IonSlide, IonImg, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
@@ -17,13 +17,17 @@ import cabaretGif from '../assets/gif/Cabaret.gif'
 import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
-//Webp
-import set1 from '../assets/webp/set1-min.webp'
-import set2 from '../assets/webp/set2-min.webp'
-import set3 from '../assets/webp/set3-min.webp'
+//PNG
+import set1 from '../assets/png/set1.png'
+import set2 from '../assets/png/set2.png'
+import set3 from '../assets/png/set2.png'
+
+import start from '../assets/png/start.png'
 
 //SVG
 import cheked from '../assets/svg/cheked.svg'
+import logo from '../assets/svg/logo.svg'
+import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
@@ -31,10 +35,9 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 export default function Exercise() {
 
     const allSets = {
-        names:  ["Monday", "Tuesday", "Wednesday"],
+        names:  ["Today", "Tomorrow"],
         images: [set1, set2, set3],
-        exercises: [[2, 0, 5, 1, 9, 3],
-        [0, 2, 0, 1, 4, 3], [6,7,8,6]]
+        exercises: [[2, 0, 5, 1, 9, 3], [5, 8, 4, 8]]
     }
 
     const allExercises = [
@@ -99,6 +102,7 @@ export default function Exercise() {
 
     ]
 
+
     const [chosenСourse, setChosenСourse] = useState<number[] | null>(null)
     const [cameraReadiness, setCameraReadiness] = useState(false)
     
@@ -125,6 +129,15 @@ export default function Exercise() {
     })
 
     let camera = null;
+
+    const slideOpts = {
+        initialSlide: 1,
+        speed: 400,
+        scrollbar: false,
+        pager: false,
+        pagination:false,
+        options: {}
+      };
 
     function unselectCource() {
         setChosenСourse(null)
@@ -158,11 +171,6 @@ export default function Exercise() {
             setDots(results.poseLandmarks)
         }
     }
-
-
-    useEffect(() => {
-        console.log(cameraReadiness)
-    }, [cameraReadiness])
 
     useEffect(() => {
         const pose = new Pose({
@@ -208,45 +216,61 @@ export default function Exercise() {
 
     return (
         <IonContent className="startPage" fullscreen>
-            <div className="exerciseView">
+            {!cameraReadiness && <div className='loadingViewBox'>
+                <div className="loadingView">
+                    <h1 className='loadingText'>LOADING...</h1>
+                    <img className='loadingHelpIcon' src={loadingHelp} alt="" />       
+                </div>
+            </div>}
+            
+            <div className={`exerciseView`}>
+                
                 {(chosenСourse === null) &&
-                    <div className="cardsBox">
-                    {    
-                        allSets.exercises.map((cource, index) => {
-                            return  (
-                            <div  
-                                className={`card bg${(index)}`} 
-                                key={index}
-                                onClick={() => { setChosenСourse(cource) }}
-                            >
-                                   <div className='cardImgBox'>
-                                    {/* <img className='cardImg' src={''} /> */}
-                                    <img className='cardImg' src={allSets.images[index]} />
-                                   </div>
-                                    
-                                    <div className="cardText">
-                                        <h5 className='cardHighText'>{allSets.names[index]}</h5>
-                                        <div className='cardLowerTextBox'>
-                                            <p className='cardLowerText'>5 min</p>
-                                            <p className='cardLowerText'>9 ex.</p>
-                                            <div className='cardLowerIconsBox'>
-                                                <p className='cardLowerIconsText'>workouts</p>
-                                                <div className='cardLowerIconsCheckedBox'>
-                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                    <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                   <>
+                        <div className="cardsBox">
+                                    <div className="cardsSlider">
+                                    {    
+                                        allSets.exercises.map((cource, index) => {
+                                            return  (
+                                            <div 
+                                                className={`card ${index>0? "blocked" : ""}`} 
+                                                key={index}
+                                                onClick={() => {index <= 0 ? setChosenСourse(cource) : alert('This set of exercises will unlock tomorrow.') }}
+                                            >
+                                                <div className='cardImgBox'>
+                                                    {/* <img className='cardImg' src={''} /> */}
+                                                    <img className='cardImg' src={allSets.images[index]} />
+                                                    {index > 0 && <img className="faLockSvg" src={fa_lock} />}
+                                                </div>
+                                               
+                                                <div className={`cardText ${index>0? "blocked" : ""}`} >
+                                                    <h5 className='cardHighText'>{allSets.names[index]}</h5>
+                                                    <div className='cardLowerTextBox'>
+                                                        <p className='cardLowerText'>5 min</p>
+                                                        <p className='cardLowerText'>{cource.length} ex.</p>
+                                                        <div className='cardLowerIconsBox'>
+                                                            <p className='cardLowerIconsText'>workouts</p>
+                                                            <div className='cardLowerIconsCheckedBox'>
+                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            )
+                                        })
+                                    }
                                     </div>
-                            </div>
-                            )
-                        })
-                    }
-                    </div>
+                        </div>
+                        <div className="startImgBox">
+                            <img className="startImg" src={start} alt="" />
+                            <img className="logoSvg" src={logo} alt="" />
+                        </div>
+                   </>
                 }
-                
-                    <div className='drawBox' style={chosenСourse ? { "display": "inline-flex" } : { "display": "none" }}>
+                <div className='drawBox' style={chosenСourse ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
                         width={"1280"}
                         height={"720"}
@@ -271,18 +295,15 @@ export default function Exercise() {
                             unselectCource={unselectCource}   
                         />
                     </>}
-
-                    </div>
-                
+                </div>
 
             </div>
 
-            {!cameraReadiness && <div className='loadingViewBox'>
-                <div className="loadingView">
-                    <h1 className='loadingText'>LOADING...</h1>
-                    <img className='loadingHelpIcon' src={loadingHelp} alt="" />
+            {cameraReadiness && 
+                <div className='blurer'>
+                    
                 </div>
-            </div>}
+            }
 
         </IonContent>
     )

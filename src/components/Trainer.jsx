@@ -2,7 +2,9 @@ import { IonButton, IonCheckbox, IonItem, IonLabel, IonList } from "@ionic/react
 import React, { useRef, useEffect, useState } from "react";
 import CheckPose from "../components/CheckPose";
 import findAngle from "./findAngle";
-
+import Countdown from "./Countdown"
+//SVG
+import next from '../assets/svg/next.svg'
 
 
 
@@ -22,12 +24,10 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
     const [time, setTime] = useState(allExercises[cource[exerciseNumber]].time)
-    const [pause,setPause] = useState(5)
+    const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[cource[exerciseNumber]].gif)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
-
-
 
 
 
@@ -53,12 +53,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                 }
             }
             
-        }else {
-         if(!showResults){
-          setTimeout(()=>{
-            setPause(pause - 1)
-          },1000)
-         }
         }
     },[visibleBody, time, showResults, pause])
     
@@ -73,8 +67,14 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     },[dots])
 
     useEffect(()=>{
-      console.log(allExercises)
-    },[])
+        if(pause > 0){
+            let timer = setTimeout(()=>{
+                setPause(pause - 1)
+                return clearTimeout(timer)
+            },1000)
+        }
+    },[pause])
+
 
     useEffect(()=>{
         if(dotsForAngle.length === 3) {
@@ -162,6 +162,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         </div>
     }
 
+    
     useEffect(()=>{
         if(checking){
             let timer = setTimeout(()=>{
@@ -175,9 +176,13 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
 
     return (
         <>
-            <IonButton className="backBtn" onClick={unselectCource}>GO BACK</IonButton>
+            <IonButton className="backBtn" onClick={unselectCource}>
+                <img className="backBtn_svg" src={next}/>
+                <p className="backBtn_text">Back</p>
+            </IonButton>
+
             <div className="exerciseStateView">
-                {!showResults &&
+                {!showResults && visibleBody &&
                   <div className="gifBox">
                     <img className="gif" src={selectedGif} />
                   </div>
@@ -185,7 +190,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
 
                 <div className="textBox">
                     <div className="hText">
-                        <h1>Excersice name:  <span style={{'color':"gray"}}>{exerciseNames[cource[exerciseNumber]]}</span></h1>
                         {!showResults && <>
                             <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
                             <h1 className="hight">Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
@@ -208,16 +212,34 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             {(!visibleBody || !dots) &&
                 <div className="foregroundView">
                     <div className="foregroundTextBox">
-                        <h1 className="foregroundText">Stand up to your full height</h1>
+                        <h1 className="foregroundText">Please move into the center of the screen</h1>
                     </div>
                 </div>
             }
             {pause &&
-                      <div className="pause">
-                          <div className="pauseTextBox">
-                              <h1 className="foregroundText">PAUSE {pause}s</h1>
-                          </div>
-                      </div>
+                <>  
+                    <Countdown startTime={5} newTime={pause} width={226}/>
+
+                    <div className="pause">
+                        <div className="pauseTextBox">
+                            <div className="pauseText">
+                                <p className="up">coming next</p>
+                                <p className="middle">{allExercises[cource[exerciseNumber]].name}</p>
+                                <div className="duo">
+                                    <p className="down">{cource.length} reps</p>
+                                    <p className="down">{allExercises[cource[exerciseNumber]].time} sec</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+                
+            }
+
+            {!pause &&
+                <div className="exerciseTimeBox">
+                    <Countdown startTime={allExercises[cource[exerciseNumber]].time} newTime={time} width={226}/>
+                </div>
             }
         </>
     );
