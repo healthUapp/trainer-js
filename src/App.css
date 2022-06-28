@@ -245,8 +245,7 @@ video{
 }
 
 .results{
-    background-color: white;
-    border: 2px solid #000;
+    background-color: rgba(208, 208, 208, 0.5);
     padding: 5px;
     margin-top: 20px;
     position: absolute;
@@ -260,10 +259,22 @@ video{
     font-size: 50px;
     font-weight: 700;
 }
+
+.resultRoundGraphText{
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 38px;
+}
+
+.resultCircleGraph{
+    width: 240px;
+    height: 240px;
+}
+
 .resultElement{
     padding-top: 20px;
     font-weight: 700;
-    font-size: 30.2659px;
+    font-size: 30px;
     line-height: 38px;
 }
 

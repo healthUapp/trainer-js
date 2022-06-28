@@ -202,7 +202,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
 
             </div>
 
-            {(!visibleBody || !dots) &&
+            {(!visibleBody || !dots) && !showResults &&
                 <div className="foregroundView">
                     <div className="foregroundTextBox">
                         <h1 className="foregroundText">Please move into the center of the screen</h1>
