@@ -11,7 +11,8 @@ import next from '../assets/svg/next.svg'
 
 
 
-export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
+    console.log(set)
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK","CHEST EXPANSION","SIDE ARM RISES"]
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
     const [crazyRule,setCrazyRule] = useState([])
@@ -24,12 +25,12 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [stage,setStage] = useState(null)
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
-    const [time, setTime] = useState(allExercises[cource[exerciseNumber]].time)
+    const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
-    const [selectedGif,setSelectedGif] = useState(allExercises[cource[exerciseNumber]].gif)
+    const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
-
+    
 
     useEffect(()=>{
         if(!showResults && !pause){
@@ -40,15 +41,15 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             }
 
             if(visibleBody && (time <= 0)){
-                setResults([{name: allExercises[cource[exerciseNumber]].name, value: counter, accuracy: accuracy},...results])
+                setResults([{name: allExercises[set[exerciseNumber].exerciseIndex].name, value: counter, accuracy: accuracy},...results])
                 setCounter(0)
-                if(exerciseNumber + 1 >= cource.length){
-                    console.log('cource is ended')
+                if(exerciseNumber + 1 >= set.length){
+                    console.log('set is ended')
                     setShowResults(true)
                 }else {
                     setExerciseNumber(exerciseNumber + 1)
-                    setSelectedGif(allExercises[cource[exerciseNumber + 1]].gif)
-                    setTime(allExercises[cource[exerciseNumber + 1]].time)
+                    setSelectedGif(allExercises[set[exerciseNumber + 1].number].gif)
+                    setTime(set[exerciseNumber + 1].time)
                     setPause(5)
                 }
             }
@@ -58,7 +59,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     
     useEffect(()=>{
         if(dots && !pause && !showResults){
-            const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
+            const poseInfo = CheckPose(dots, set[exerciseNumber].exerciseIndex, stage)
             setColors(poseInfo.colors)
             if(poseInfo.counter){
                 setCounter(counter + poseInfo.counter)
@@ -185,7 +186,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                 <div className="textBox">
                     <div className="hText">
                         {!showResults && <>
-                            <h1>Exersice number: {exerciseNumber + 1}/{cource.length}</h1>
+                            <h1>Exersice number: {exerciseNumber + 1}/{set.length}</h1>
                             <h1 className="hight">Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
                             <h1 className="hight">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
                             <h1 className="hight">Accuracy: <span style={{'color':"red"}}>{accuracy[counter === 0? 0 : counter -1]}</span>%</h1>
@@ -219,10 +220,10 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                         <div className="pauseTextBox">
                             <div className="pauseText">
                                 <p className="up">coming next</p>
-                                <p className="middle">{allExercises[cource[exerciseNumber]].name}</p>
+                                <p className="middle">{allExercises[set[exerciseNumber].exerciseIndex].name}</p>
                                 <div className="duo">
-                                    <p className="down">{cource.length} reps</p>
-                                    <p className="down">{allExercises[cource[exerciseNumber]].time} sec</p>
+                                    <p className="down">{set.length} reps</p>
+                                    <p className="down">{set[exerciseNumber].time} sec</p>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +237,7 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
                         <MiniGraphAccuracy results={results} accuracy={accuracy}/>
                     </div>
                     <div className="exerciseTimeBox">
-                        <Countdown startTime={allExercises[cource[exerciseNumber]].time} newTime={time} width={226}/>
+                        <Countdown startTime={set[exerciseNumber].time} newTime={time} width={226}/>
                      </div>
                 </>
             }
