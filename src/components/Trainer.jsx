@@ -1,5 +1,5 @@
 import { IonButton } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import CheckPose from "../components/CheckPose";
 import findAngle from "./findAngle";
 import Countdown from "./Countdown"
@@ -14,7 +14,6 @@ import next from '../assets/svg/next.svg'
 export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, allExercises}) {
     const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK","CHEST EXPANSION","SIDE ARM RISES"]
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
-
     const [crazyRule,setCrazyRule] = useState([])
     const [accuracy,setAccuracy] = useState([])
     const [precent, setPrecent] = useState(null)
@@ -30,7 +29,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
     const [selectedGif,setSelectedGif] = useState(allExercises[cource[exerciseNumber]].gif)
     const [showResults, setShowResults] = useState(false)
     const [results,setResults] = useState([])
-
 
 
     useEffect(()=>{
@@ -81,7 +79,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
             },1000)
         }
     },[pause])
-
 
     useEffect(()=>{
         if(dotsForAngle.length === 3) {

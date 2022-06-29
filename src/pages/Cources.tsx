@@ -1,4 +1,4 @@
-import { IonContent} from '@ionic/react';
+import { IonContent, IonSlides, IonSlide, } from '@ionic/react';
 
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
@@ -25,6 +25,7 @@ import start from '../assets/png/start.png'
 
 //SVG
 import cheked from '../assets/svg/cheked.svg'
+import next from '../assets/svg/nextSlide.svg'
 import logo from '../assets/svg/logo.svg'
 import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
@@ -36,7 +37,7 @@ export default function Exercise() {
     const allSets = {
         names:  ["Today", "Tomorrow"],
         images: [set1, set2, set3],
-        exercises: [[1],[2, 0, 5, 1, 9, 3],[0] 
+        exercises: [[1],[2, 0, 5, 1, 9, 3] 
         // [5, 8, 4, 8]
         ]
     }
@@ -131,12 +132,13 @@ export default function Exercise() {
 
     let camera = null;
 
+    const [initialSlide, setTinitialSlide] = useState(0)
     const slideOpts = {
-        initialSlide: 1,
-        speed: 400,
-        scrollbar: false,
-        pager: false,
-        pagination:false,
+        initialSlide: initialSlide,
+        speed: 200,
+        scrollbar: true,
+        pager: true,
+        pagination: true,
         options: {}
       };
 
@@ -230,39 +232,50 @@ export default function Exercise() {
                    <>
                         <div className="cardsBox">
                                     <div className="cardsSlider">
-                                    {    
-                                        allSets.exercises.map((cource, index) => {
-                                            return  (
-                                            <div 
-                                                className={`card ${index>0? "blocked" : ""}`} 
-                                                key={index}
-                                                onClick={() => {index <= 0 ? setChosenСourse(cource) : alert('This set of exercises will unlock tomorrow.') }}
-                                            >
-                                                <div className='cardImgBox'>
-                                                    {/* <img className='cardImg' src={''} /> */}
-                                                    <img className='cardImg' src={allSets.images[index]} />
-                                                    {index > 0 && <img className="faLockSvg" src={fa_lock} />}
-                                                </div>
-                                               
-                                                <div className={`cardText ${index>0? "blocked" : ""}`} >
-                                                    <h5 className='cardHighText'>{allSets.names[index]}</h5>
-                                                    <div className='cardLowerTextBox'>
-                                                        <p className='cardLowerText'>5 min</p>
-                                                        <p className='cardLowerText'>{cource.length} ex.</p>
-                                                        <div className='cardLowerIconsBox'>
-                                                            <p className='cardLowerIconsText'>workouts</p>
-                                                            <div className='cardLowerIconsCheckedBox'>
-                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                        {    
+                                            allSets.exercises.map((cource, index) => {
+                                                return  (
+                                                <>
+                                                    <div
+                                                        className={`card ${index>0? "blocked" : ""}`} 
+                                                        key={index}
+                                                        onClick={() => {index <= 0 ? setChosenСourse(cource) : alert('This set of exercises will unlock tomorrow.') }}
+                                                    >
+                                                        <div className='cardImgBox'>
+                                                            {/* <img className='cardImg' src={''} /> */}
+                                                            <img className='cardImg' src={allSets.images[index]} />
+                                                            {index > 0 && <img className="faLockSvg" src={fa_lock} />}
+                                                        </div>
+                                                    
+                                                        <div className={`cardText ${index>0? "blocked" : ""}`} >
+                                                            <h5 className='cardHighText'>{allSets.names[index]}</h5>
+                                                            <div className='cardLowerTextBox'>
+                                                                <p className='cardLowerText'>5 min</p>
+                                                                <p className='cardLowerText'>{cource.length} ex.</p>
+                                                                <div className='cardLowerIconsBox'>
+                                                                    <p className='cardLowerIconsText'>workouts</p>
+                                                                    <div className='cardLowerIconsCheckedBox'>
+                                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                        <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                        <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            )
-                                        })
-                                    }
+                                                   {allSets.exercises[index + 1] &&
+                                                     <div 
+                                                     className='nextSlideBox'
+                                                     onClick={()=>setTinitialSlide(index + 1)}
+                                                     >
+                                                         <img src={next} alt="" />
+                                                     </div>
+                                                   }
+                                                    
+                                                </>
+                                                )
+                                            })
+                                        }
                                     </div>
                         </div>
                         <div className="startImgBox">
