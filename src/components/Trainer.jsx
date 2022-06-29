@@ -62,9 +62,14 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         if(dots && !pause && !showResults){
             const poseInfo = CheckPose(dots, cource[exerciseNumber], stage)
             setColors(poseInfo.colors)
-            setCounter(counter + poseInfo.counter)
-            if(poseInfo.accuracy) {setAccuracy([...accuracy, poseInfo.accuracy]); console.log(accuracy)}
-            if(poseInfo.stage) setStage(poseInfo.stage)
+            if(poseInfo.counter){
+                setCounter(counter + poseInfo.counter)
+            }
+            console.log(counter)
+            if(poseInfo.accuracy) {setAccuracy([...accuracy, poseInfo.accuracy])}
+            if(poseInfo.stage){
+                setStage(poseInfo.stage)
+            }
         }
     },[dots])
 
@@ -113,7 +118,6 @@ export default function Trainer({visibleBody, dots, cource, unselectCource, setC
         });
 
         setCrazyRule(angles)
-        console.log(angles)
     }
 
     function checkRules(){

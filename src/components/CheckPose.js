@@ -21,7 +21,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     let stage;
     let accuracy;
-    let counter = 0;
+    let counter;
 
     if (peviousStage) { stage = peviousStage }
 
@@ -107,6 +107,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "KNEE"
             counter += 1
             colors.leg.right = "green"
+            if (angle_leg_right > 90) {
+                accuracy = Math.floor(((180 - angle_leg_right) / 90 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_right / 90 * 100) * 10) / 10
+            }
         }
 
 
@@ -119,18 +124,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "red"
         }
 
-        if (angle_leg_right > 90) {
-            accuracy = Math.floor(((180 - angle_leg_right) / 90 * 100) * 10) / 10
-        } else {
-            accuracy = Math.floor((angle_leg_right / 90 * 100) * 10) / 10
-        }
+
 
 
     }
 
 
     function cabaret_left() {
-
         const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
         const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
 
@@ -139,6 +139,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         colors.arm.right = "yellow"
         colors.leg.left = "yellow"
+
+
+
         if (angle_knee_left >= 80 && angle_knee_left <= 100) {
             stage = "LEG";
             colors.leg.left = "green"
@@ -147,6 +150,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "KNEE";
             counter += 1;
             colors.leg.left = "green"
+
+            if (angle_leg_left > 90) {
+                accuracy = Math.floor(((180 - angle_leg_left) / 90 * 100) * 10) / 10
+            } else {
+                accuracy = Math.floor((angle_leg_left / 90 * 100) * 10) / 10
+            }
         }
 
 
@@ -158,13 +167,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.left = "red"
             colors.arm.right = "red"
         }
-
-        if (angle_leg_left > 90) {
-            accuracy = Math.floor(((180 - angle_leg_left) / 90 * 100) * 10) / 10
-        } else {
-            accuracy = Math.floor((angle_leg_left / 90 * 100) * 10) / 10
-        }
-
     }
 
     function march_in_place() {
@@ -510,6 +512,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SPREAD ARMS"
         }
     }
+
     return {
         colors: colors,
         stage: stage,

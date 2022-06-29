@@ -36,7 +36,7 @@ export default function Exercise() {
     const allSets = {
         names:  ["Today", "Tomorrow"],
         images: [set1, set2, set3],
-        exercises: [[2, 0, 5, 1, 9, 3],[0] 
+        exercises: [[1],[2, 0, 5, 1, 9, 3],[0] 
         // [5, 8, 4, 8]
         ]
     }
@@ -49,7 +49,7 @@ export default function Exercise() {
             },
             {
                 name:"CABARET LEFT",
-                time : 30,
+                time : 360,
                 gif : cabaretGif
             },
             {   

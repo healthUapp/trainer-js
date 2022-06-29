@@ -56,8 +56,6 @@ export default function MiniGraphAccuracy({accuracy}){
 
     },[accuracy])
 
-    
-
     return (
         <>
             <p className="graphExercisesValue">{accuracy.length}<span>/10</span></p>
