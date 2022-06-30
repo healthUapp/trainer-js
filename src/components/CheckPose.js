@@ -1,5 +1,7 @@
 import findAngle from "./findAngle";
 import findAngleMidPoint from "./findAngleMidPoint";
+import findRadius from "./findRadius";
+import findDistance from "./findDistance";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
@@ -43,6 +45,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 11) step_side_jack();
     if (exerciseValue === 12) chest_expansion();
     if (exerciseValue === 13) side_arm_rises();
+    if (exerciseValue === 14) up_shoulders();
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -479,6 +482,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SPREAD ARMS"
         }
     }
+
+    function up_shoulders(){
+
+        const radius=findRadius(8,7,poseLandmarks)
+        const distance=Math.pow(radius*1.8,2)
+        const left_side=findDistance(0,11,poseLandmarks)
+        const right_side=findDistance(0,12,poseLandmarks)
+
+        if (left_side<distance && right_side>distance){
+            counter+=1
+        }
+
+        if (right_side<distance && left_side>distance){
+            counter+=1
+        }
+    }
+
 
     return {
         colors: colors,
