@@ -46,6 +46,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 12) chest_expansion();
     if (exerciseValue === 13) side_arm_rises();
     if (exerciseValue === 14) up_shoulders();
+    if (exerciseValue === 15) ear_to_shoulder();
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -483,20 +484,37 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
     }
 
-    function up_shoulders(){
+    function up_shoulders() {
 
-        const radius=findRadius(8,7,poseLandmarks)
-        const distance=Math.pow(radius*1.8,2)
-        const left_side=findDistance(0,11,poseLandmarks)
-        const right_side=findDistance(0,12,poseLandmarks)
+        const radius = findRadius(8, 7, poseLandmarks)
+        const distance = Math.pow(radius * 1.8, 2)
+        const left_side = findDistance(0, 11, poseLandmarks)
+        const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side<distance && right_side>distance){
-            counter+=1
+        if (left_side < distance && right_side > distance) {
+            counter += 1
         }
 
-        if (right_side<distance && left_side>distance){
-            counter+=1
+        if (right_side < distance && left_side > distance) {
+            counter += 1
         }
+    }
+
+    function ear_to_shoulder() {
+
+        const radius = findRadius(8, 7, poseLandmarks)
+        const distance = Math.pow(radius * 1.6, 2)
+        const left_side = findDistance(7, 11, poseLandmarks)
+        const right_side = findDistance(8, 12, poseLandmarks)
+
+        if (left_side < distance && right_side > distance) {
+            counter += 1
+        }
+
+        if (right_side < distance && left_side > distance) {
+            counter += 1
+        }
+
     }
 
 

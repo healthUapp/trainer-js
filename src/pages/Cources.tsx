@@ -99,6 +99,29 @@ export default function Exercise() {
                 name:"STEP SIDE JACK",
                 time : 30,
                 gif : goodMorningGif
+            },
+
+            {
+                name:"CHEST EXPANSION",
+                time : 30,
+                gif : goodMorningGif
+            },
+
+            {
+                name:"SIDE ARM RISES",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"UP SHOULDERS",
+                time : 30,
+                gif : goodMorningGif
+            },
+
+            {
+                name: "EAR TO SHOULDERS",
+                time : 30,
+                gif : goodMorningGif
             }
 
     ]
