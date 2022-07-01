@@ -1,8 +1,8 @@
 import { IonButton } from "@ionic/react";
 import { useEffect, useState} from "react";
-import CheckPose from "../components/CheckPose";
-import findAngle from "./findAngle";
-import Countdown from "./Countdown"
+import CheckPose from "./functions/CheckPose";
+import findAngle from "./functions/findAngle";
+import Countdown from "./Countdown/Countdown"
 import Results from "./Results"
 import MiniGraphAccuracy from "./MiniGraphAccuracy"
 //SVG
@@ -113,14 +113,14 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
     return (
         <>
             <IonButton className="backBtn" onClick={unselectCource}>
-                <img className="backBtn_svg" src={next}/>
+                <img className="backBtn_svg" src={next} alt="next"/>
                 <p className="backBtn_text">Back</p>
             </IonButton>
 
             <div className="exerciseStateView">
                 {!showResults && visibleBody &&
                   <div className="gifBox">
-                    <img className="gif" src={selectedGif} />
+                    <img className="gif" src={selectedGif} alt="exercise gif"/>
                   </div>
                 }
 

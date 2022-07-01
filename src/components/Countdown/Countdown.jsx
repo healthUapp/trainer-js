@@ -8,7 +8,8 @@ export default function Countdown({startTime, newTime, width}) {
     const svgRef = useRef(null)
 
     useEffect(()=>{
-        let startPrecent = 6.28
+        if(newTime && width){
+            let startPrecent = 6.28
         let lastPrecent = (6.28 * (1 - newTime / startTime))
         let innerRadius = width/2 - 8
         let outerRadius = width/2 - 14
@@ -89,6 +90,7 @@ export default function Countdown({startTime, newTime, width}) {
             .attr('cy', y2)
             .attr('r', 9)
             .attr('fill', 'white');
+        }        
     },[newTime])
 
 

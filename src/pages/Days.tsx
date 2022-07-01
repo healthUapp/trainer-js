@@ -7,7 +7,7 @@ import Webcam from "react-webcam";
 import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
-import checkBody from "../components/checkBody";
+import checkBody from "../components/functions/checkBody";
 
 //GIF
 import marchGif from '../assets/gif/March.gif'
