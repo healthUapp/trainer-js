@@ -12,16 +12,10 @@ import next from '../assets/svg/next.svg'
 
 
 export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
-    console.log(set)
-    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK","CHEST EXPANSION","SIDE ARM RISES","UP SHOULDERS","EAR TO SHOULDERS"]
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
-    const [crazyRule,setCrazyRule] = useState([])
     const [accuracy,setAccuracy] = useState([])
-    const [precent, setPrecent] = useState(null)
     const [rules,setRules] = useState([])
     const [dotsForAngle,setDotsForAngle] = useState([])
-    const [angle,setAngle] = useState(null)
-    const [checking,setChecking]=useState(false)
     const [stage,setStage] = useState(null)
     const [counter,setCounter] = useState(0)
     const [exerciseNumber,setExerciseNumber] = useState(0)
@@ -83,7 +77,6 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
 
     useEffect(()=>{
         if(dotsForAngle.length === 3) {
-            setAngle(findAngle(dotsForAngle[0],dotsForAngle[1],dotsForAngle[2], dots))
             let allRules = rules.slice()
             allRules.push({dots:dotsForAngle, angle: findAngle(dotsForAngle[0],dotsForAngle[1],dotsForAngle[2], dots)})
             setRules(allRules)
@@ -115,59 +108,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             angles.push(findAngle(element[0],element[1],element[2],dots))
         });
 
-        setCrazyRule(angles)
     }
-
-    function checkRules(){
-        var dotsSet = (function(arr, limit){
-            var results = [], result, mask, total = Math.pow(2, arr.length);
-            for(mask = 0; mask < total; mask++){
-                result = [];
-                let i = arr.length - 1;
-                do{
-                    if( (mask & (1 << i)) !== 0){
-                        result.push(arr[i]);
-                    }
-                }while(i--);
-                if( result.length == limit){
-                    results.push(result);
-                }
-            }
-            return results;
-        })(rightDots, 3);
-
-        let trueAngles = 0
-        let falseAngles = 0
-
-        let angles = []
-
-        dotsSet.forEach(element => {
-            angles.push(findAngle(element[0],element[1],element[2],dots))
-        });
-
-        angles.forEach((el,ind)=>{
-            if(((el < crazyRule[ind] + 5) && (el > crazyRule[ind] - 5))){
-                trueAngles = trueAngles + 1
-            }else {
-                falseAngles = falseAngles + 1
-            }
-        })
-        setPrecent(Math.floor((trueAngles/220)*100))
-        // console.log(trueAngles,falseAngles, `${Math.floor((trueAngles/220)*100)}%`)
-    }
-
-
-    
-    useEffect(()=>{
-        if(checking){
-            let timer = setTimeout(()=>{
-                checkRules()
-                return () =>{
-                    clearTimeout(timer)
-                }
-            },10)
-        }
-    },[dots, checking])
 
     return (
         <>

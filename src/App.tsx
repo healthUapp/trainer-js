@@ -1,6 +1,7 @@
 import {Redirect, Route} from 'react-router-dom';
 import {IonApp, IonRouterOutlet, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
+import Days from './pages/Days'
 import Cources from './pages/Cources'
 
 setupIonicReact();
@@ -10,9 +11,11 @@ const App: React.FC = () => {
 return (
     <IonApp>
         <IonReactRouter>
-            <Redirect exact path="/" to="/cources"/> 
-
+            <Redirect exact path="/" to="/days"/> 
             <IonRouterOutlet>
+                <Route path="/days">
+                    <Days/>
+                </Route>
                 <Route path="/cources">
                     <Cources/>
                 </Route>
