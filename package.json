@@ -84,6 +84,7 @@
   },
   "description": "An Ionic project",
   "devDependencies": {
-    "@capacitor/cli": "3.5.1"
+    "@capacitor/cli": "3.5.1",
+    "eslint": "^8.18.0"
   }
 }

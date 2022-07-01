@@ -3,12 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
   name: 'appState',
   initialState: {
-    completed: 0,
-    all: 5
-  },
+    date: new Date(),
+    results: [],
+    stats: []
+  },  
   reducers: {
-    addCompleted: (state) => {
-      state.completed += 1
+    addResult: (state, action) => {
+      state.results.push(action)
     },
   },
 })

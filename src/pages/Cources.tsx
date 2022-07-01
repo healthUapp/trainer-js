@@ -99,6 +99,7 @@ export default function Exercise() {
             {exerciseIndex: 3, time: 30},
         ],
 
+
     }
 
     const allDays = {
@@ -109,6 +110,10 @@ export default function Exercise() {
                 allSets.lowerBody,
                 allSets.lowerBody,
                 allSets.lowerBody,
+                allSets.lowerBody,
+                allSets.lowerBody,
+                allSets.lowerBody,
+
             ],
             [
                 allSets.lowerBody,
