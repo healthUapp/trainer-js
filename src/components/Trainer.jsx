@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import { useEffect, useState} from "react";
 import CheckPose from "./functions/CheckPose";
 import findAngle from "./functions/findAngle";
-import Countdown from "./Countdown/Countdown"
+import Countdown from "./сountdown/Countdown"
 import Results from "./Results"
 import MiniGraphAccuracy from "./MiniGraphAccuracy"
 //SVG
