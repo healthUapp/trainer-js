@@ -11,9 +11,8 @@ import next from '../assets/svg/next.svg'
 
 
 
-export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
-    console.log(set)
-    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK","CHEST EXPANSION","SIDE ARM RISES"]
+export default function Trainer({visibleBody, dots, cource, unselectCource, setColors, allExercises}) {
+    const exerciseNames = ["GOOD MORNING","CABARET LEFT","MARCH IN PLACE","LEG PUSH","SQUAT","REVERSE LUNGE","CALF RISES","JUMPING JACK","HALF JACK", "CABARET RIGHT", "SIDE LEG RISES", "STEP SIDE JACK","CHEST EXPANSION","SIDE ARM RISES","UP SHOULDERS","EAR TO SHOULDERS"]
     const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
     const [crazyRule,setCrazyRule] = useState([])
     const [accuracy,setAccuracy] = useState([])

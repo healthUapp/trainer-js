@@ -38,6 +38,7 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 
 export default function Exercise() {
+<<<<<<< HEAD
     const allExercises = [
         {
             name :"GOOD MORNING",
@@ -85,6 +86,99 @@ export default function Exercise() {
             name:"STEP SIDE JACK",
             gif : goodMorningGif
         }
+=======
+
+    const allSets = {
+        names:  ["Today", "Tomorrow"],
+        images: [set1, set2, set3],
+        exercises: [[2, 0, 5, 1, 9, 3],[0] 
+        // [5, 8, 4, 8]
+        ]
+    }
+
+    const allExercises = [
+            {
+                name :"GOOD MORNING",
+                time : 30,
+                gif : goodMorningGif   
+            },
+            {
+                name:"CABARET LEFT",
+                time : 360,
+                gif : cabaretGif
+            },
+            {   
+                name:"MARCH IN PLACE",
+                time : 30,
+                gif : marchGif
+            },
+            {
+                name:"LEG PUSH",
+                time : 30,
+                gif : legPushGif
+            },
+            {
+                name:"SQUAT",
+                time :30,
+                gif :goodMorningGif,
+            },
+            {
+                name:"REVERSE LUNGE",
+                time : 30,
+                gif : lungeGif
+            },{
+                name:"CALF RISES",
+                time : 30,
+                gif : goodMorningGif
+            },{
+                name:"JUMPING JACK",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"HALF JACK",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"CABARET RIGHT",
+                time : 30,
+                gif : cabaretGif
+            },
+            {
+                name:"SIDE LEG RISES",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"STEP SIDE JACK",
+                time : 30,
+                gif : goodMorningGif
+            },
+
+            {
+                name:"CHEST EXPANSION",
+                time : 30,
+                gif : goodMorningGif
+            },
+
+            {
+                name:"SIDE ARM RISES",
+                time : 30,
+                gif : goodMorningGif
+            },
+            {
+                name:"UP SHOULDERS",
+                time : 30,
+                gif : goodMorningGif
+            },
+
+            {
+                name: "EAR TO SHOULDERS",
+                time : 30,
+                gif : goodMorningGif
+            }
+>>>>>>> 0f9a114c1990c9e16f5de628f99ee1471649c4e9
 
     ]
 
