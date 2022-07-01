@@ -2,6 +2,7 @@ import findAngle from "./findAngle";
 import findAngleMidPoint from "./findAngleMidPoint";
 import findRadius from "./findRadius";
 import findDistance from "./findDistance";
+import findRotation from "./findRotation";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
@@ -502,17 +503,21 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function ear_to_shoulder() {
 
-        const radius = findRadius(8, 7, poseLandmarks)
-        const distance = Math.pow(radius * 1.6, 2)
-        const left_side = findDistance(7, 11, poseLandmarks)
-        const right_side = findDistance(8, 12, poseLandmarks)
+        const angle = findRotation(8, 7, poseLandmarks)
 
-        if (left_side < distance && right_side > distance) {
+        if (angle > 10 && stage === "TURN RIGHT" || angle > 10 && stage === "TURN HEAD") {
+            stage = "TURN LEFT"
             counter += 1
         }
 
-        if (right_side < distance && left_side > distance) {
+        if (angle < -10 && stage === "TURN LEFT" || angle < -10 && stage === "TURN HEAD") {
+            stage = "TURN RIGHT"
             counter += 1
+        }
+
+        if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN RIGHT") {
+
+            stage = "TURN HEAD"
         }
 
     }
