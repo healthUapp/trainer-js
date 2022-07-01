@@ -6,6 +6,14 @@
     font-family: 'Mulish';
 }
 
+img{
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
 .startPage{
     --background: radial-gradient(238.54% 951.39% at 2.5% -7.92%, #FFFFFF 0%, #F4F5F6 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
     --overflow: hidden;
