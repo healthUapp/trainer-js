@@ -8,7 +8,7 @@ export default function comparePoint(a:number, b:number, poseLandmarks: any) {
     
     function compare(p1: any[], p2: any[]) {
         let point_1=p1[1]
-        let point_2=p2[2]
+        let point_2=p2[1]
         let comparation=""
         if (point_1>point_2){
             comparation="True"

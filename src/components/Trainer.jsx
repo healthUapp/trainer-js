@@ -11,6 +11,7 @@ import next from 'assets/svg/next.svg'
 
 import { useDispatch } from "react-redux";
 import { addResult } from "store/slices/userSlice";
+import chackBody from "./functions/checkBody";
 
 
 export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
@@ -59,7 +60,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
     },[showResults, results])
     
     useEffect(()=>{
-        if(dots && !pause && !showResults){
+        if(dots && !pause && !showResults && chackBody()){
             const poseInfo = CheckPose(dots, set[exerciseNumber].exerciseIndex, stage)
             setColors(poseInfo.colors)
             if(poseInfo.counter){
