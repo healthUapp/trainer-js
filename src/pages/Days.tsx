@@ -91,7 +91,6 @@ export default function Days() {
             name:"CHEST EXPANSION",
             gif : goodMorningGif
         },
-        
         {
             name: "SIDE ARM RISES",
             gif : goodMorningGif
@@ -112,12 +111,12 @@ export default function Days() {
     ]
 
     const allSets = {
-        lowerBody: [
+        test: [
             {exerciseIndex: 2, time: 5},
             {exerciseIndex: 5, time: 5},
 
         ],
-        lowerBody_1: [
+        lowerBody: [
             //По этому индексу вытаскивается упражнение из allExercises
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
@@ -135,12 +134,7 @@ export default function Days() {
         cources: [
             [
                 allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-
+              
             ],
             [
                 allSets.lowerBody,
