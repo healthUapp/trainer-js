@@ -1,19 +1,23 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-export default function Results({results, accuracy}){
-
+export default function Results({results}){
     const svgRef_1 = useRef(null)
     const svgRef_2 = useRef(null)
     const svgRef_3 = useRef(null)
 
-    const precentAccuracy = Math.floor(accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / accuracy.length)
+    
     const width = 240
-    const lineWidth = 10
     const allExResults = []
-    const exPrecent = Math.floor((allExResults.reduce((sum, elem)=>{return sum + elem}, 0) / allExResults.length) / 10)
 
     useEffect(()=>{
+        //ВРЕМЕННО!!!
+        let precentAccuracy = 0
+        results.forEach(result => {
+            let precent = result.accuracy.length > 0 ? Math.floor(results[0].accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
+            precentAccuracy = Math.floor(precentAccuracy + precent)
+        });
+        precentAccuracy = Math.floor(precentAccuracy / results.length)
         drawCircleGraph(0.74, "Exercises",  svgRef_1.current)
         drawCircleGraph( 0.33, "Time", svgRef_2.current)
         drawCircleGraph( precentAccuracy/100,  "Accuracy" ,svgRef_3.current)
@@ -113,6 +117,7 @@ export default function Results({results, accuracy}){
         {   
             results.map((result,index)=> {
                 allExResults.push(result.value / 10)
+                const precentAccuracy = result.accuracy.length > 0 ? Math.floor(results[0].accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
                 return  (
                     <p className="resultElement" key={index}>{result.name}: <span 
                         style={{"color":'rgb(177, 63, 29)'}}>{result.value}({precentAccuracy}%)</span>

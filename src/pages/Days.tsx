@@ -112,6 +112,11 @@ export default function Days() {
 
     const allSets = {
         lowerBody: [
+            {exerciseIndex: 2, time: 5},
+            {exerciseIndex: 5, time: 5},
+
+        ],
+        lowerBody_1: [
             //По этому индексу вытаскивается упражнение из allExercises
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
@@ -120,7 +125,6 @@ export default function Days() {
             {exerciseIndex: 9, time: 30},
             {exerciseIndex: 3, time: 30},
         ],
-
 
     }
 

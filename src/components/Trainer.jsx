@@ -15,7 +15,6 @@ import { addResult } from "store/slices/userSlice";
 
 export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
     const dispatch = useDispatch()
-    const rightDots = [11,12,13,14,15,16,23,24,25,26,27,28]
     const [accuracy,setAccuracy] = useState([])
     const [rules,setRules] = useState([])
     const [dotsForAngle,setDotsForAngle] = useState([])
@@ -38,12 +37,12 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             }
 
             if(visibleBody && (time <= 0)){
-                setResults([{name: allExercises[set[exerciseNumber].exerciseIndex].name, value: counter, accuracy: accuracy},...results])
+                setResults([{name: allExercises[set[exerciseNumber].exerciseIndex].name, value: accuracy.length, accuracy: accuracy},...results])
                 setCounter(0)
+                setAccuracy([])
                 if(exerciseNumber + 1 >= set.length){
                     console.log('set is ended')
                     setShowResults(true)
-                    dispatch(addResult(results))
                 }else {
                     setExerciseNumber(exerciseNumber + 1)
                     setSelectedGif(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.gif)
@@ -54,6 +53,10 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             
         }
     },[visibleBody, time, showResults, pause])
+
+    useEffect(()=>{
+        if(showResults && results.length > 0) dispatch(addResult(results))
+    },[showResults, results])
     
     useEffect(()=>{
         if(dots && !pause && !showResults){
@@ -62,7 +65,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             if(poseInfo.counter){
                 setCounter(counter + poseInfo.counter)
             }
-            if(poseInfo.accuracy) {setAccuracy([...accuracy, poseInfo.accuracy])}
+            if(poseInfo.accuracy){setAccuracy([...accuracy, poseInfo.accuracy])}
             if(poseInfo.stage){
                 setStage(poseInfo.stage)
             }
@@ -162,7 +165,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
                 </>
             }
 
-            {showResults &&  <Results results={results} accuracy={accuracy}/>}
+            {showResults &&  <Results results={results}/>}
         </>
     );
 }

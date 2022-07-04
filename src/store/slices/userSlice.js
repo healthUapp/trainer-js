@@ -13,8 +13,8 @@ const userSlice = createSlice({
     results: [],
     reducers: {
         addResult(state, action){
-            state.results = [...state.results, action.payload.results]
-            console.log(state)
+            state.results = action.payload
+            console.log(state.results)
         },
     }
 })
