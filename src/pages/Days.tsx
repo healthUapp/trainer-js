@@ -91,10 +91,7 @@ export default function Days() {
             name:"CHEST EXPANSION",
             gif : goodMorningGif
         },
-        {
-            name:"CHEST EXPANSION",
-            gif : goodMorningGif
-        },
+        
         {
             name: "SIDE ARM RISES",
             gif : goodMorningGif
