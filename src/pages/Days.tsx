@@ -37,6 +37,8 @@ import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 
+
+
 export default function Exercise() {
     const allExercises = [
         {

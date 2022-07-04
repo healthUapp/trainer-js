@@ -2,3 +2,7 @@
 /android
 /build
 /ios
+
+.env*
+.history
+.gitignore
