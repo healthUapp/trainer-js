@@ -49,6 +49,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 13) side_arm_rises();
     if (exerciseValue === 14) up_shoulders();
     if (exerciseValue === 15) ear_to_shoulder();
+    if (exerciseValue === 16) up_arms();
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)

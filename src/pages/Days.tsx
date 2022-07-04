@@ -108,6 +108,10 @@ export default function Days() {
             gif : goodMorningGif
         },
 
+        {
+            name: "UP ARMS",
+            gif : goodMorningGif
+        },
     ]
 
     const allSets = {
