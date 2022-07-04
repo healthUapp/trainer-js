@@ -39,7 +39,7 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 
 
-export default function Exercise() {
+export default function Days() {
     const allExercises = [
         {
             name :"GOOD MORNING",
