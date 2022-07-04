@@ -6,7 +6,7 @@ import Trainer from '../components/Trainer';
 import Webcam from "react-webcam";
 import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
-import { Pose } from "@mediapipe/pose";
+import { Holistic } from "@mediapipe/holistic";
 import checkBody from "../components/functions/checkBody";
 
 //GIF
@@ -233,9 +233,9 @@ export default function Days() {
     }
 
     useEffect(() => {
-        const pose = new Pose({
+        const pose = new Holistic({
             locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
             }
         });
 

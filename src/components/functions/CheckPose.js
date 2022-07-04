@@ -178,6 +178,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
+            console.log(counter)
             //accuracy = Math.random() * 10 + 80
             if (angle_leg_right > 90) {
                 accuracy = Math.floor(((180 - angle_leg_right) / 90 * 100) * 10) / 10
@@ -192,13 +193,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.left = "green"
             stage = "DOWN";
             counter += 1;
-            //accuracy = Math.random() * 10 + 80
             if (angle_leg_left > 90) {
                 accuracy = Math.floor(((180 - angle_leg_left) / 90 * 100) * 10) / 10
             } else {
                 accuracy = Math.floor((angle_leg_left / 90 * 100) * 10) / 10
             }
-
+            
         }
 
         if (angle_leg_right >= 160 && angle_leg_right <= 190 && angle_leg_left >= 160 && angle_leg_left <= 190) {
