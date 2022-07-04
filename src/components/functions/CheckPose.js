@@ -3,6 +3,7 @@ import findAngleMidPoint from "./findAngleMidPoint";
 import findRadius from "./findRadius";
 import findDistance from "./findDistance";
 import findRotation from "./findRotation";
+import comparePoint from "./comparePoint";
 
 function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     const colors = {
@@ -520,6 +521,26 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "TURN HEAD"
         }
 
+    }
+    
+    function up_arms() {
+
+        const angle= findAngle(11,12,16,poseLandmarks)
+        const left_wrist=comparePoint(15,7,poseLandmarks)
+        const right_wrist=comparePoint(16,8,poseLandmarks)
+                   
+        if (stage == "UP" && left_wrist==="False" && right_wrist==="False" && angle < 100){
+
+            stage = "DOWN"
+            counter += 1
+
+        }
+                   
+
+        if (angle > 100 && left_wrist==="True" && right_wrist==="True"){
+                    stage = "UP"  
+        }
+                    
     }
 
 
