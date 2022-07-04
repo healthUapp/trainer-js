@@ -42,7 +42,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
                     setShowResults(true)
                 }else {
                     setExerciseNumber(exerciseNumber + 1)
-                    setSelectedGif(allExercises[set[exerciseNumber + 1].number].gif)
+                    setSelectedGif(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.gif)
                     setTime(set[exerciseNumber + 1].time)
                     setPause(5)
                 }
@@ -50,6 +50,8 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             
         }
     },[visibleBody, time, showResults, pause])
+
+
     
     useEffect(()=>{
         if(dots && !pause && !showResults){
@@ -58,7 +60,6 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             if(poseInfo.counter){
                 setCounter(counter + poseInfo.counter)
             }
-            console.log(counter)
             if(poseInfo.accuracy) {setAccuracy([...accuracy, poseInfo.accuracy])}
             if(poseInfo.stage){
                 setStage(poseInfo.stage)
@@ -85,30 +86,6 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
     },[dotsForAngle])
 
 
-    function createRules(){
-        var dotsSet = (function(arr, limit){
-            var results = [], result, mask, total = Math.pow(2, arr.length);
-            for(mask = 0; mask < total; mask++){
-                result = [];
-                let i = arr.length - 1;
-                do{
-                    if( (mask & (1 << i)) !== 0){
-                        result.push(arr[i]);
-                    }
-                }while(i--);
-                if( result.length == limit){
-                    results.push(result);
-                }
-            }
-            return results;
-        })(rightDots, 3);
-
-        let angles = []
-        dotsSet.forEach(element => {
-            angles.push(findAngle(element[0],element[1],element[2],dots))
-        });
-
-    }
 
     return (
         <>
