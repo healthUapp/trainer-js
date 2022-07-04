@@ -121,7 +121,7 @@ export default function Days() {
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
             {exerciseIndex: 5, time: 30}, // время в секундаx
-            {exerciseIndex: 1, time:30},
+            {exerciseIndex: 2, time:30},
             {exerciseIndex: 9, time: 30},
             {exerciseIndex: 3, time: 30},
         ],

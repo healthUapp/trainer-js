@@ -60,7 +60,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
     },[showResults, results])
     
     useEffect(()=>{
-        if(dots && !pause && !showResults && chackBody()){
+        if(dots && !pause && !showResults && visibleBody){
             const poseInfo = CheckPose(dots, set[exerciseNumber].exerciseIndex, stage)
             setColors(poseInfo.colors)
             if(poseInfo.counter){

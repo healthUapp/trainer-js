@@ -18,7 +18,7 @@ const userSlice = createSlice({
         addResult(state, action){
 
             const results =  action.payload
-            console.log(results)
+
             state.results = results
 
             writeUserData(state.id, results)
@@ -28,9 +28,13 @@ const userSlice = createSlice({
 
 
             function writeUserData(id, exercisesResults) {
-                set(ref("https://healtuapp-fit-default-rtdb.europe-west1.firebasedatabase.app/exercises"), {
-                  id: id,
-                  results: exercisesResults
+                const db = getDatabase();
+                console.log(exercisesResults)
+                set(ref(db, 'exercises/' + id), {
+                  results: {
+                    name: exercisesResults[0].name,
+                    value: exercisesResults[0].value,
+                  }
                 });
 
             }
