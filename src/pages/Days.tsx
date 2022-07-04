@@ -57,7 +57,7 @@ export default function Exercise() {
         },
         {
             name:"SQUAT",
-            gif :goodMorningGif,
+            gif : goodMorningGif,
         },
         {
             name:"REVERSE LUNGE",
