@@ -96,16 +96,16 @@ export default function Days() {
             gif : goodMorningGif
         },
         {
-            name: "UP SHOULDERS",
+            name: "SHRUGS",
             gif : goodMorningGif
         },
         {
-            name: "EAR TO SHOULDERS",
+            name: "HEAD TILTS LR",
             gif : goodMorningGif
         },
 
         {
-            name: "UP ARMS",
+            name: "OVERHEAD SHOULDER STRETCH",
             gif : goodMorningGif
         },
     ]
