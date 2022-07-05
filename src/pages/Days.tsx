@@ -96,16 +96,16 @@ export default function Days() {
             gif : goodMorningGif
         },
         {
-            name: "UP SHOULDERS",
+            name: "SHRUGS",
             gif : goodMorningGif
         },
         {
-            name: "EAR TO SHOULDERS",
+            name: "HEAD TILTS LR",
             gif : goodMorningGif
         },
 
         {
-            name: "UP ARMS",
+            name: "OVERHEAD SHOULDER STRETCH",
             gif : goodMorningGif
         },
     ]
@@ -121,9 +121,43 @@ export default function Days() {
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
             {exerciseIndex: 5, time: 30}, // время в секундаx
-            {exerciseIndex: 2, time:30},
+            {exerciseIndex: 1, time:30},
             {exerciseIndex: 9, time: 30},
             {exerciseIndex: 3, time: 30},
+        ],
+        
+        cardioPrime1:[
+            {exerciseIndex: 7, time: 10},
+            {exerciseIndex: 4, time: 10},
+            {exerciseIndex: 7, time: 10}, // время в секундаx
+            {exerciseIndex: 4, time:10},
+            {exerciseIndex: 7, time: 10},
+            {exerciseIndex: 4, time: 10},
+
+        ],
+
+        cardioPrime2:[
+            {exerciseIndex: 8, time: 10},
+            {exerciseIndex: 7, time: 10},
+            {exerciseIndex: 8, time: 10}, // время в секундаx
+            {exerciseIndex: 7, time: 10},
+            {exerciseIndex: 8, time: 10},
+            {exerciseIndex: 7, time: 10},
+
+        ],
+
+        powerTrim:[
+            {exerciseIndex: 5, time: 15},
+            {exerciseIndex: 8, time: 15},
+            {exerciseIndex: 4, time: 15}, // время в секундаx
+            {exerciseIndex: 8, time: 15},
+        ],
+
+        quickBurn:[
+            {exerciseIndex: 11, time: 10},
+            {exerciseIndex: 7, time: 10},
+            {exerciseIndex: 11, time: 10}, // время в секундаx
+            {exerciseIndex: 7, time: 10},
         ],
 
     }
