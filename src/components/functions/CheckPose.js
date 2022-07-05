@@ -545,6 +545,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     }
 
 
+    
+
     return {
         colors: colors,
         stage: stage,
