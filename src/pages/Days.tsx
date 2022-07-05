@@ -134,7 +134,8 @@ export default function Days() {
         cources: [
             [
                 allSets.test,
-              
+                allSets.test,
+                allSets.test,
             ],
             [
                 allSets.lowerBody,
@@ -169,12 +170,14 @@ export default function Days() {
         ]
     }
 
+    const [chosenDay, setChosenDay] = useState<any | null>(null)
     const [chosenСourse, setChosenСourse] = useState<any | null>(null)
     const [cameraReadiness, setCameraReadiness] = useState(false)
-    
+
+    const date = new Date()
+
     const cameraRef: any = useRef(null)
     const canvasRef: any = useRef(null)
-
     const [dots, setDots] = useState(undefined)
     const [visibleBody, setVisibleBody] = useState(false)
     const [colors, setColors] = useState({
@@ -289,18 +292,18 @@ export default function Days() {
                    <>
                         <div className="cardsBox">
                                         {    
-                                            allDays.cources.map((set, index) => {
+                                            allDays.cources.map((sets, index) => {
                                                 if(index === initialSlide){
                                                     return  (
                                                         <div key={index}>
                                                             <div
                                                                 className={`card ${index>0? "blocked" : ""}`} 
                                                                 
-                                                                onClick={() => {index <= 0 ? setChosenСourse(set) : alert('This set of exercises will unlock tomorrow.') }}
+                                                                onClick={() => {index <= 0 ? setChosenDay(sets) : alert('This set of exercises will unlock tomorrow.') }}
                                                             >
                                                                 <div className='cardImgBox'>
                                                                     {/* <img className='cardImg' src={''} /> */}
-                                                                    <img className='cardImg' src={allDays.images[index]} />
+                                                                    <img className='cardImg' src={day1} />
                                                                     {index > 0 && <img className="faLockSvg" src={fa_lock} />}
                                                                 </div>
                                                             
@@ -308,7 +311,7 @@ export default function Days() {
                                                                     <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                                     <div className='cardLowerTextBox'>
                                                                         <p className='cardLowerText'>5 min</p>
-                                                                        <p className='cardLowerText'>{set.length} ex.</p>
+                                                                        <p className='cardLowerText'>{sets.length} ex.</p>
                                                                         <div className='cardLowerIconsBox'>
                                                                             <p className='cardLowerIconsText'>workouts</p>
                                                                             <div className='cardLowerIconsCheckedBox'>
@@ -383,7 +386,7 @@ export default function Days() {
                             setColors={setColors}
                             visibleBody={visibleBody}
                             dots={dots}
-                            set={chosenСourse[0]}
+                            set={chosenСourse}
                             allExercises={allExercises}
                             unselectCource={unselectCource}   
                         />
@@ -392,10 +395,57 @@ export default function Days() {
 
             </div>
 
-            {cameraReadiness && 
-                <div className='blurer'>
-                    
+            {(chosenDay) && 
+                <div className='setsBox' onClick={()=>setChosenDay(null)}>
+                    <div className="blueScreen"></div>
+                    <div className="prewiewBox">
+                        <div className="setPreview">
+                            <div className="prewiewInfo">
+                                <h1>{date.toLocaleString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).replace(/,/g, " ")}</h1>
+                                <h5>See which sets can be performed today</h5>
+                            </div>
+                            <div className="setCardBox">
+                                <div className="cardBoxList">
+                                {
+                                    chosenDay.map((set: any, index: number)=>{
+                                        console.log(set)
+                                        return(
+                                            <div key={index}>
+
+                                                            <div
+                                                                className="setCard"
+                                                                
+                                                                onClick={() => setChosenСourse(set)}
+                                                            >
+                                                                <div className='setCardImgBox'>
+                                                                    <img className='setCardImg' src={day2}/>
+                                                                </div>
+                                                            
+                                                                <div className={`cardText`} >
+                                                                    <h5 className='setCardHighText'>{`Set №${index}`}</h5>
+                                                                    <div className='cardLowerTextBox'>
+                                                                        <p className='cardLowerText'>5 min</p>
+                                                                        <p className='cardLowerText'>{set.length} ex.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="exercisePreview">
+
+                        </div>
+                    </div>
                 </div>
+            }
+
+
+            {cameraReadiness && 
+                <div className='blurer' />
             }
 
         </IonContent>
