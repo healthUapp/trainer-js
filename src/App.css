@@ -587,11 +587,15 @@ video{
     align-items: center;
 }
 
-.cardLowerText{
+.cardLowerText-1,.cardLowerText-2{
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     padding-right: 50px;
+}
+
+.cardLowerText-1{
+    padding-right: 30px;
 }
 
 

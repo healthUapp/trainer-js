@@ -110,13 +110,8 @@ export default function Days() {
         },
     ]
 
-    const allSets = {
-        test: [
-            {exerciseIndex: 2, time: 5},
-            {exerciseIndex: 5, time: 5},
-
-        ],
-        lowerBody: [
+    const allSets = [
+        [
             //По этому индексу вытаскивается упражнение из allExercises
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
@@ -125,8 +120,7 @@ export default function Days() {
             {exerciseIndex: 9, time: 30},
             {exerciseIndex: 3, time: 30},
         ],
-        
-        cardioPrime1:[
+        [
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 4, time: 10},
             {exerciseIndex: 7, time: 10}, // время в секундаx
@@ -135,8 +129,7 @@ export default function Days() {
             {exerciseIndex: 4, time: 10},
 
         ],
-
-        cardioPrime2:[
+        [
             {exerciseIndex: 8, time: 10},
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 8, time: 10}, // время в секундаx
@@ -146,62 +139,51 @@ export default function Days() {
 
         ],
 
-        powerTrim:[
+        [
             {exerciseIndex: 5, time: 15},
             {exerciseIndex: 8, time: 15},
             {exerciseIndex: 4, time: 15}, // время в секундаx
             {exerciseIndex: 8, time: 15},
         ],
-
-        quickBurn:[
+        [
             {exerciseIndex: 11, time: 10},
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 11, time: 10}, // время в секундаx
             {exerciseIndex: 7, time: 10},
         ],
 
-    }
+    ]
+
+    const allCources = [
+        [3,1,2],
+        [1,2,4],
+        [5,4,3],
+        [2,1,4],
+        [1,5,3],
+        [],[]
+    ]
+
+    const exercisesTimes = allSets.map((exercises)=>{
+        let time = 0
+        exercises.forEach((exercise)=>{
+            time += exercise.time
+        })
+        return time
+    })
+
+    const courcesTimes = allCources.map((setsIndexes)=>{
+        let time = 0
+        setsIndexes.forEach((setIndex)=>{
+            time += exercisesTimes[setIndex]
+        })
+        return time
+    })
+
+    
 
     const allDays = {
         names:  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"],
         images: [day1, day2, day3, day4, day5, day6, day7],
-        cources: [
-            [
-                allSets.test,
-                allSets.test,
-                allSets.test,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-            [
-                allSets.lowerBody,
-                allSets.lowerBody,
-                allSets.lowerBody,
-            ],
-        ]
     }
 
     const [chosenDay, setChosenDay] = useState<any | null>(null)
@@ -326,26 +308,25 @@ export default function Days() {
                    <>
                         <div className="cardsBox">
                                         {    
-                                            allDays.cources.map((sets, index) => {
+                                            allCources.map((cource, index) => {
                                                 if(index === initialSlide){
                                                     return  (
                                                         <div key={index}>
                                                             <div
-                                                                className={`card ${index>0? "blocked" : ""}`} 
+                                                                className={`card ${index > 4? "blocked" : ""}`} 
                                                                 
-                                                                onClick={() => {index <= 0 ? setChosenDay(sets) : alert('This set of exercises will unlock tomorrow.') }}
+                                                                onClick={() => {index <= 4 ? setChosenDay(cource) : alert('Weekends!') }}
                                                             >
                                                                 <div className='cardImgBox'>
-                                                                    {/* <img className='cardImg' src={''} /> */}
                                                                     <img className='cardImg' src={day1} />
-                                                                    {index > 0 && <img className="faLockSvg" src={fa_lock} />}
+                                                                    {index > 4 && <img className="faLockSvg" src={fa_lock} />}
                                                                 </div>
                                                             
                                                                 <div className={`cardText ${index>0? "blocked" : ""}`} >
                                                                     <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                                     <div className='cardLowerTextBox'>
-                                                                        <p className='cardLowerText'>5 min</p>
-                                                                        <p className='cardLowerText'>{sets.length} ex.</p>
+                                                                        <p className='cardLowerText-1'>{ courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
+                                                                        <p className='cardLowerText-2'>{allSets[index] ? allSets[index].length : 0} ex.</p>
                                                                         <div className='cardLowerIconsBox'>
                                                                             <p className='cardLowerIconsText'>workouts</p>
                                                                             <div className='cardLowerIconsCheckedBox'>
@@ -358,7 +339,7 @@ export default function Days() {
                                                                 </div>
                                                             </div>
 
-                                                           {allDays.cources[index + 1] ?
+                                                           {allCources[index + 1] ?
                                                                 <div 
                                                                     className='nextSlideBox'
                                                                     onClick={()=>setTinitialSlide(index + 1)}
@@ -373,7 +354,7 @@ export default function Days() {
                                                                     <img src={next} alt="" />
                                                                 </div>
                                                            }
-                                                           {allDays.cources[index - 1]?
+                                                           {allCources[index - 1]?
                                                                 <div 
                                                                     className='beforeSlideBox'
                                                                     onClick={()=>setTinitialSlide(index - 1)}
@@ -441,15 +422,15 @@ export default function Days() {
                             <div className="setCardBox">
                                 <div className="cardBoxList">
                                 {
-                                    chosenDay.map((set: any, index: number)=>{
-                                        console.log(set)
+                                    chosenDay.map((setIndex: number, index: number)=>{
+                                        console.log(allSets[setIndex])
                                         return(
                                             <div key={index}>
 
                                                             <div
                                                                 className="setCard"
                                                                 
-                                                                onClick={() => setChosenСourse(set)}
+                                                                onClick={() => setChosenСourse(allSets[setIndex])}
                                                             >
                                                                 <div className='setCardImgBox'>
                                                                     <img className='setCardImg' src={day2}/>
@@ -458,8 +439,8 @@ export default function Days() {
                                                                 <div className={`cardText`} >
                                                                     <h5 className='setCardHighText'>{`Set №${index}`}</h5>
                                                                     <div className='cardLowerTextBox'>
-                                                                        <p className='cardLowerText'>5 min</p>
-                                                                        <p className='cardLowerText'>{set.length} ex.</p>
+                                                                        <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
+                                                                        <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
