@@ -825,3 +825,14 @@ video{
 .exercisePreview{
     
 }
+
+.exercisesList{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(232, 234, 197);
+}
+
+.exercisesList p{
+    font-weight: 900;
+    font-size: 80px;
+}

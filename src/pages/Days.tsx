@@ -16,7 +16,7 @@ import cabaretGif from '../assets/gif/Cabaret.gif'
 import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
-//ecImg
+//exImg
 import halfjack from '../assets/exImg/halfjack.png'
 import squat from '../assets/exImg/squat.png'
 import stepsidejack from '../assets/exImg/step_side_jack.png'
@@ -130,7 +130,7 @@ export default function Days() {
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 4, time: 10},
             {exerciseIndex: 7, time: 10}, 
-            {exerciseIndex: 4, time:10},
+            {exerciseIndex: 4, time: 10},
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 4, time: 10},
 
@@ -203,8 +203,9 @@ export default function Days() {
         images: [day1, day2, day3, day4, day5, day6, day7],
     }
 
-    const [hosenCource, setChosenCource] = useState<any | null>(null)
+    const [chosenCource, setChosenCource] = useState<any | null>(null)
     const [chosenSet, setChosenSet] = useState<any | null>(null)
+    const [startingSet, setStartingSet] =useState<boolean>(false)
     const [cameraReadiness, setCameraReadiness] = useState(false)
 
     const date = new Date()
@@ -236,7 +237,9 @@ export default function Days() {
 
 
     function unselectCource() {
+        console.log('1')
         setChosenSet(null)
+        setChosenCource(null)
     }
 
     function onResults(results: any) {
@@ -321,7 +324,7 @@ export default function Days() {
             
             <div className={`exerciseView`}>
                 
-                {(chosenSet === null) &&
+                {(!startingSet) &&
                    <>
                         <div className="cardsBox">
                                         {    
@@ -398,7 +401,7 @@ export default function Days() {
                         </div>
                    </>
                 }
-                <div className='drawBox' style={chosenSet ? { "display": "inline-flex" } : { "display": "none" }}>
+                <div className='drawBox' style={startingSet ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
                         width={"1280"}
                         height={"720"}
@@ -413,7 +416,7 @@ export default function Days() {
                             <canvas ref={canvasRef} className="draw" />
                         </div>
                     </div>
-                    {(chosenSet !== null) && <>
+                    {startingSet && <>
                         <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
@@ -427,9 +430,9 @@ export default function Days() {
 
             </div>
 
-            {(hosenCource) && 
-                <div className='setsBox' onClick={()=>setChosenCource(null)}>
-                    <div className="blueScreen"></div>
+            {(chosenCource) && 
+                <div className='setsBox' >
+                    <div className="blueScreen" onClick={()=>unselectCource()}></div>
                     <div className="prewiewBox">
                         <div className="setPreview">
                             <div className="prewiewInfo">
@@ -439,8 +442,7 @@ export default function Days() {
                             <div className="setCardBox">
                                 <div className="cardBoxList">
                                 {
-                                    hosenCource.map((setIndex: number, index: number)=>{
-                                        console.log(allSets[setIndex])
+                                    chosenCource.map((setIndex: number, index: number)=>{
                                         return(
                                             <div key={index}>
 
@@ -469,7 +471,13 @@ export default function Days() {
                             </div>
                         </div>
                         <div className="exercisePreview">
-
+                                {(chosenSet !== null) &&
+                                    <div className="exercisesList">
+                                        {chosenSet.map((set:any, index: number)=>(
+                                            <p key={index}>{set.exerciseIndex}  {set.time}s.</p>
+                                        ))}
+                                    </div>
+                                }
                         </div>
                     </div>
                 </div>
