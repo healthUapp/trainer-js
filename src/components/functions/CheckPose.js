@@ -605,10 +605,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function punches(){
 
-        const angle_shoulder_left=findAngle(left_elbow,left_shoulder,hip_left) 
-        const angle_shoulder_right=findAngle(right_elbow,right_shoulder, hip_right)
-        const angle_elbow_left=findAngle(left_shoulder,left_elbow,left_wrist)
-        const angle_elbow_right=findAngle(right_shoulder, right_elbow,right_wrist)
+        const angle_shoulder_left=findAngle(13,11,23) 
+        const angle_shoulder_right=findAngle(14,12, 24)
+        const angle_elbow_left=findAngle(11,13,15)
+        const angle_elbow_right=findAngle(12, 14,16)
 
         if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
             stage = "PUNCH";
@@ -616,12 +616,28 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
           
           if (stage === "PUNCH" && angle_elbow_left > 130 && angle_shoulder_left > 50 || stage === "PUNCH" && angle_shoulder_right > 50 && angle_elbow_right > 130) {
             stage = "BACK";
-            accuracy=100;
+            accuracy=Math.floor(Math.random() * (100 - 70) + 70);
           }
     }
 
-    
+    function overheadPunches(){
 
+        const angle_shoulder_left=findAngle(13,11,23) 
+        const angle_shoulder_right=findAngle(14,12, 24)
+        const angle_elbow_left=findAngle(11,13,15)
+        const angle_elbow_right=findAngle(12, 14,16)
+
+        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+            stage = "UP";
+          }
+          
+          if (stage === "UP" && angle_elbow_left > 170 && angle_shoulder_left > 170 || stage === "UP" && angle_shoulder_right > 170 && angle_elbow_right > 170) {
+            stage = "DOWN";
+            accuracy=Math.floor(Math.random() * (100 - 70) + 70);
+          }
+
+    }
+    
     return {
         colors: colors,
         stage: stage,
