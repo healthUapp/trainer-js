@@ -782,7 +782,8 @@ video{
     height: calc(100% - 156px);
     background: #F0F0F0;
     overflow-y: scroll;
-    padding: 0px 0 100px 0;
+    padding: 0;
+    margin: 0px 0 100px 0;
 }
 
 .cardBoxList{
@@ -822,17 +823,95 @@ video{
     line-height: 33px;
 }
 
-.exercisePreview{
-    
+.exercisesPreview{
+    position: relative;
+    overflow: hidden;
+    min-width: 345px;
+    height: 970px;
+    background: #FFFFFF;
+    border-radius: 10px;
 }
 
-.exercisesList{
+.exercisesPreviewList{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100% - 86px);
     width: 100%;
-    height: 100%;
-    background-color: rgb(232, 234, 197);
+    background-color: none;
 }
 
-.exercisesList p{
-    font-weight: 900;
-    font-size: 80px;
+.exercisesPreviewList h2{
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 33px;
+    padding: 40px 0 30px 40px;
+}
+.exercisesPreviewList h4{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #27262B;
+    padding: 15px 0 10px 0;
+}
+.exercisesPreviewList h5{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #A6A8AB;
+}
+
+.exercisePrewiew__item{
+    margin: 0 40px;
+    width: 267px;
+    height: 242px;
+    background: none;
+    margin-bottom: 30px;
+}
+
+.exercisePrewiew__item img{
+    width: 267px;
+    height: 174px;
+    border-radius: 6px;
+}
+
+.startSetBtn{
+    width: 100%;
+    height: 86px;
+    background:  #CED4DA;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    border-radius: 10px;
+}
+
+.startSetBtn div{
+    width: 290px;
+    height: 58px;
+    background: #5C5E60;
+    box-shadow: 1px 3px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    transition: all 0.2s ease;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.startSetBtn p{
+    font-weight: 1000;
+    font-size: 22px;
+    line-height: 28px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.startSetBtn div:hover{
+    filter: opacity(0.9);
 }

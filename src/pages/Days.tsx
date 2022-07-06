@@ -110,7 +110,6 @@ export default function Days() {
         {
             name: "HEAD TILTS LR",
         },
-
         {
             name: "OVERHEAD SHOULDER STRETCH",
         },
@@ -182,21 +181,27 @@ export default function Days() {
         [],[]
     ]
 
-    const exercisesTimes = allSets.map((exercises)=>{
+    const setsTimes = allSets.map((exercises)=>{
         let time = 0
-        // exercises.forEach((exercise)=>{
-        //   time += exercise.time
-        // })
-        return time
-    })
-
-    const courcesTimes = allCources.map((setsIndexes)=>{
-        let time = 0
-        setsIndexes.forEach((setIndex)=>{
-            time += exercisesTimes[setIndex]
+        exercises.forEach((exercise: any)=>{
+            if(!exercise.time) return
+            time += exercise.time
         })
         return time
     })
+
+
+    const courcesTimes = allCources.map((set)=>{
+        let time = 0
+        set.forEach((setIndex, index)=>{
+            time += setsTimes[setIndex]
+        })
+        return time
+    })
+
+    console.log(setsTimes)
+    console.log(courcesTimes)
+    
 
     const allDays = {
         names:  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"],
@@ -237,9 +242,10 @@ export default function Days() {
 
 
     function unselectCource() {
-        console.log('1')
+        console.log('back')
         setChosenSet(null)
         setChosenCource(null)
+        setStartingSet(false)
     }
 
     function onResults(results: any) {
@@ -458,7 +464,7 @@ export default function Days() {
                                                                 <div className={`cardText`} >
                                                                     <h5 className='setCardHighText'>{`Set №${index}`}</h5>
                                                                     <div className='cardLowerTextBox'>
-                                                                        <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
+                                                                        {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
                                                                         <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
                                                                     </div>
                                                                 </div>
@@ -470,14 +476,28 @@ export default function Days() {
                                 </div>
                             </div>
                         </div>
-                        <div className="exercisePreview">
+                        <div className="exercisesPreview">
                                 {(chosenSet !== null) &&
-                                    <div className="exercisesList">
-                                        {chosenSet.map((set:any, index: number)=>(
-                                            <p key={index}>{set.exerciseIndex}  {set.time}s.</p>
-                                        ))}
-                                    </div>
+                                    <>
+                                        <div className="exercisesPreviewList">
+                                            <h2>Strength</h2>
+                                            {chosenSet.map((ex:any, index: number)=>(
+                                                <div key={index} className='exercisePrewiew__item'>
+                                                    <img  src={allExercises[ex.exerciseIndex].gif} alt="" />
+                                                    <h4>{allExercises[ex.exerciseIndex].name}</h4>
+                                                    <h5>{ex.time} sec</h5>
+                                                </div>
+                                            ))}
+                                        
+                                        </div>
+                                        <div className="startSetBtn">
+                                            <div onClick={()=>setStartingSet(true)}>
+                                                <div><p>Begin</p></div>
+                                            </div>
+                                        </div>
+                                    </>
                                 }
+                                
                         </div>
                     </div>
                 </div>
