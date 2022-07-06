@@ -16,6 +16,16 @@ import cabaretGif from '../assets/gif/Cabaret.gif'
 import lungeGif from '../assets/gif/BL.gif'
 import legPushGif from '../assets/gif/SLDL.gif'
 
+//ecImg
+import halfjack from '../assets/exImg/halfjack.png'
+import squat from '../assets/exImg/squat.png'
+import stepsidejack from '../assets/exImg/step_side_jack.png'
+import side_leg_raises from '../assets/exImg/side_leg_raises.png'
+import side_arm_raises from '../assets/exImg/side_arm_raises.png'
+import chest_expansion from '../assets/exImg/chest_expansion.png'
+import jumping_jack from '../assets/exImg/jumping_jack.png'
+
+
 //PNG
 import day1 from '../assets/png/day1.png'
 import day2 from '../assets/png/day2.png'
@@ -59,6 +69,7 @@ export default function Days() {
         },
         {
             name:"SQUAT",
+            gif : squat
         },
         {
             name:"REVERSE LUNGE",
@@ -67,9 +78,11 @@ export default function Days() {
             name:"CALF RISES",
         },{
             name:"JUMPING JACK",
+            gif : jumping_jack
         },
         {
             name:"HALF JACK",
+            gif:halfjack
         },
         {
             name:"CABARET RIGHT",
@@ -77,15 +90,19 @@ export default function Days() {
         },
         {
             name:"SIDE LEG RISES",
+            gif : side_leg_raises
         },
         {
             name:"STEP SIDE JACK",
+            gif : stepsidejack
         },
         {
             name:"CHEST EXPANSION",
+            gif: chest_expansion
         },
         {
             name: "SIDE ARM RISES",
+            gif:side_arm_raises
         },
         {
             name: "SHRUGS",
