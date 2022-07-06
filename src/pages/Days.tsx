@@ -104,7 +104,7 @@ export default function Days() {
             //По этому индексу вытаскивается упражнение из allExercises
             {exerciseIndex: 2, time: 30},
             {exerciseIndex: 0, time: 30},
-            {exerciseIndex: 5, time: 30}, // время в секундаx
+            {exerciseIndex: 5, time: 30},
             {exerciseIndex: 1, time:30},
             {exerciseIndex: 9, time: 30},
             {exerciseIndex: 3, time: 30},
@@ -112,7 +112,7 @@ export default function Days() {
         [
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 4, time: 10},
-            {exerciseIndex: 7, time: 10}, // время в секундаx
+            {exerciseIndex: 7, time: 10}, 
             {exerciseIndex: 4, time:10},
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 4, time: 10},
@@ -121,7 +121,7 @@ export default function Days() {
         [
             {exerciseIndex: 8, time: 10},
             {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 8, time: 10}, // время в секундаx
+            {exerciseIndex: 8, time: 10},
             {exerciseIndex: 7, time: 10},
             {exerciseIndex: 8, time: 10},
             {exerciseIndex: 7, time: 10},
@@ -131,14 +131,27 @@ export default function Days() {
         [
             {exerciseIndex: 5, time: 15},
             {exerciseIndex: 8, time: 15},
-            {exerciseIndex: 4, time: 15}, // время в секундаx
+            {exerciseIndex: 4, time: 15}, 
             {exerciseIndex: 8, time: 15},
         ],
         [
             {exerciseIndex: 11, time: 10},
             {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 11, time: 10}, // время в секундаx
+            {exerciseIndex: 11, time: 10}, 
             {exerciseIndex: 7, time: 10},
+        ],
+
+        [
+            {exerciseIndex: 7, exValue: 20},
+            {exerciseIndex: 11, exValue: 4},
+            {exerciseIndex: 12, exValue: 4}, 
+            {exerciseIndex: 7, exValue: 20},
+            {exerciseIndex: 11, exValue: 4},
+            {exerciseIndex: 12, exValue: 4}, 
+            {exerciseIndex: 7, exValue: 20},
+            {exerciseIndex: 11, exValue: 4},
+            {exerciseIndex: 12, exValue: 4}, 
+            //2 минуты отдыха и так 3 раза
         ],
 
     ]
@@ -154,9 +167,9 @@ export default function Days() {
 
     const exercisesTimes = allSets.map((exercises)=>{
         let time = 0
-        exercises.forEach((exercise)=>{
-            time += exercise.time
-        })
+        // exercises.forEach((exercise)=>{
+        //   time += exercise.time
+        // })
         return time
     })
 
