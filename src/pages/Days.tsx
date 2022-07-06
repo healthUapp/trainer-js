@@ -59,21 +59,17 @@ export default function Days() {
         },
         {
             name:"SQUAT",
-            gif : goodMorningGif,
         },
         {
             name:"REVERSE LUNGE",
             gif : lungeGif
         },{
             name:"CALF RISES",
-            gif : goodMorningGif
         },{
             name:"JUMPING JACK",
-            gif : goodMorningGif
         },
         {
             name:"HALF JACK",
-            gif : goodMorningGif
         },
         {
             name:"CABARET RIGHT",
@@ -81,32 +77,25 @@ export default function Days() {
         },
         {
             name:"SIDE LEG RISES",
-            gif : goodMorningGif
         },
         {
             name:"STEP SIDE JACK",
-            gif : goodMorningGif
         },
         {
             name:"CHEST EXPANSION",
-            gif : goodMorningGif
         },
         {
             name: "SIDE ARM RISES",
-            gif : goodMorningGif
         },
         {
             name: "SHRUGS",
-            gif : goodMorningGif
         },
         {
             name: "HEAD TILTS LR",
-            gif : goodMorningGif
         },
 
         {
             name: "OVERHEAD SHOULDER STRETCH",
-            gif : goodMorningGif
         },
     ]
 
@@ -179,15 +168,13 @@ export default function Days() {
         return time
     })
 
-    
-
     const allDays = {
         names:  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"],
         images: [day1, day2, day3, day4, day5, day6, day7],
     }
 
-    const [chosenDay, setChosenDay] = useState<any | null>(null)
-    const [chosenСourse, setChosenСourse] = useState<any | null>(null)
+    const [hosenCource, setChosenCource] = useState<any | null>(null)
+    const [chosenSet, setChosenSet] = useState<any | null>(null)
     const [cameraReadiness, setCameraReadiness] = useState(false)
 
     const date = new Date()
@@ -219,7 +206,7 @@ export default function Days() {
 
 
     function unselectCource() {
-        setChosenСourse(null)
+        setChosenSet(null)
     }
 
     function onResults(results: any) {
@@ -304,7 +291,7 @@ export default function Days() {
             
             <div className={`exerciseView`}>
                 
-                {(chosenСourse === null) &&
+                {(chosenSet === null) &&
                    <>
                         <div className="cardsBox">
                                         {    
@@ -315,7 +302,7 @@ export default function Days() {
                                                             <div
                                                                 className={`card ${index > 4? "blocked" : ""}`} 
                                                                 
-                                                                onClick={() => {index <= 4 ? setChosenDay(cource) : alert('Weekends!') }}
+                                                                onClick={() => {index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
                                                             >
                                                                 <div className='cardImgBox'>
                                                                     <img className='cardImg' src={day1} />
@@ -381,7 +368,7 @@ export default function Days() {
                         </div>
                    </>
                 }
-                <div className='drawBox' style={chosenСourse ? { "display": "inline-flex" } : { "display": "none" }}>
+                <div className='drawBox' style={chosenSet ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
                         width={"1280"}
                         height={"720"}
@@ -396,12 +383,12 @@ export default function Days() {
                             <canvas ref={canvasRef} className="draw" />
                         </div>
                     </div>
-                    {(chosenСourse !== null) && <>
+                    {(chosenSet !== null) && <>
                         <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
                             dots={dots}
-                            set={chosenСourse}
+                            set={chosenSet}
                             allExercises={allExercises}
                             unselectCource={unselectCource}   
                         />
@@ -410,8 +397,8 @@ export default function Days() {
 
             </div>
 
-            {(chosenDay) && 
-                <div className='setsBox' onClick={()=>setChosenDay(null)}>
+            {(hosenCource) && 
+                <div className='setsBox' onClick={()=>setChosenCource(null)}>
                     <div className="blueScreen"></div>
                     <div className="prewiewBox">
                         <div className="setPreview">
@@ -422,7 +409,7 @@ export default function Days() {
                             <div className="setCardBox">
                                 <div className="cardBoxList">
                                 {
-                                    chosenDay.map((setIndex: number, index: number)=>{
+                                    hosenCource.map((setIndex: number, index: number)=>{
                                         console.log(allSets[setIndex])
                                         return(
                                             <div key={index}>
@@ -430,7 +417,7 @@ export default function Days() {
                                                             <div
                                                                 className="setCard"
                                                                 
-                                                                onClick={() => setChosenСourse(allSets[setIndex])}
+                                                                onClick={() => setChosenSet(allSets[setIndex])}
                                                             >
                                                                 <div className='setCardImgBox'>
                                                                     <img className='setCardImg' src={day2}/>

@@ -103,7 +103,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             <div className="exerciseStateView">
                 {!showResults && visibleBody &&
                     <div className="gifBox">
-                        <img className="gif" src={selectedGif} alt="exercise gif"/>
+                        <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
                     </div>
                 }
 
