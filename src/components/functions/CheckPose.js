@@ -603,6 +603,22 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
                     
     }
 
+    function punches(){
+
+        const angle_shoulder_left=findAngle(left_elbow,left_shoulder,hip_left) 
+        const angle_shoulder_right=findAngle(right_elbow,right_shoulder, hip_right)
+        const angle_elbow_left=findAngle(left_shoulder,left_elbow,left_wrist)
+        const angle_elbow_right=findAngle(right_shoulder, right_elbow,right_wrist)
+
+        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+            stage = "PUNCH";
+          }
+          
+          if (stage === "PUNCH" && angle_elbow_left > 130 && angle_shoulder_left > 50 || stage === "PUNCH" && angle_shoulder_right > 50 && angle_elbow_right > 130) {
+            stage = "BACK";
+            accuracy=100;
+          }
+    }
 
     
 
