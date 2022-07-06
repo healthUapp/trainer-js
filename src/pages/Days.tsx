@@ -243,8 +243,8 @@ export default function Days() {
 
     function unselectCource() {
         console.log('back')
-        setChosenSet(null)
-        setChosenCource(null)
+        // setChosenSet(null)
+        // setChosenCource(null)
         setStartingSet(false)
     }
 
@@ -436,7 +436,7 @@ export default function Days() {
 
             </div>
 
-            {(chosenCource) && 
+            {(chosenCource && !startingSet) && 
                 <div className='setsBox' >
                     <div className="blueScreen" onClick={()=>unselectCource()}></div>
                     <div className="prewiewBox">
