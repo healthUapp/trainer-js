@@ -103,29 +103,17 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
             <div className="exerciseStateView">
                 {!showResults && visibleBody &&
                     <div className="gifBox">
-                        <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
+                        {!!selectedGif &&
+                            <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
+                        }
+
+                        {!selectedGif &&
+                            <div className="noGif">
+                                <p>GIF IS NOT FOUND</p>
+                            </div>
+                        }
                     </div>
                 }
-
-                <div className="textBox">
-                    <div className="hText">
-                        {!showResults && <>
-                            <h1>Exersice number: {exerciseNumber + 1}/{set.length}</h1>
-                            <h1 className="hight">Performed: <span style={{'color':"#28a64e"}}>{counter}</span></h1>
-                            <h1 className="hight">Time: <span style={{'color':"orange"}}>{time}</span>s</h1>
-                            <h1 className="hight">Accuracy: <span style={{'color':"red"}}>{accuracy[counter === 0? 0 : counter -1]}</span>%</h1>
-                        </>}
-                    </div>
-
-                    {!!stage && !showResults &&
-                        <>
-                            <div className="infoBox">
-                                <h1 className="infoStage"><span className="tm">TREINER MESSAGE:</span> <br/>{stage}</h1>
-                            </div>
-                        </>
-                    }
-                </div>
-
             </div>
 
             {(!visibleBody || !dots) && !showResults &&
