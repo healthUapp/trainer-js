@@ -129,7 +129,14 @@ export default function Days() {
         {
             name: "ARM SCISSORS(seat)",
         },
+
+        {
+            name: "ARM CHOPS",
+        },
         
+        {
+            name: "ARM SCISSORS",
+        }
     ]
 
     const allSets = [
