@@ -645,12 +645,30 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right > 100 || radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_left > 100) {
             counter += 1;
+            accuracy=Math.floor(Math.random() * (100 - 70) + 70);
             stage = "SPREAD";
           }
           
           if (radius > radius_shoulders * 3 && stage !== "SHIFT") {
             stage = "SHIFT";
           }
+    }
+
+    function arm_scissors_seat(){
+        const radius = findRadius(16, 15, poseLandmarks)
+        const radius_shoulders = findRadius(12, 11, poseLandmarks)
+        const angle_shoulder_right=findAngle(14,12, 24,poseLandmarks)
+
+        if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right < 100 ) {
+            counter += 1;
+            accuracy=Math.floor(Math.random() * (100 - 70) + 70);
+            stage = "SPREAD";
+          }
+          
+          if (radius > radius_shoulders * 3.5 && stage !== "SHIFT") {
+            stage = "SHIFT";
+          }
+
     }
     return {
         colors: colors,
