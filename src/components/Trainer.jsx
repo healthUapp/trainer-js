@@ -14,7 +14,7 @@ import { addResult } from "store/slices/userSlice";
 import chackBody from "./functions/checkBody";
 
 
-export default function Trainer({visibleBody, dots, set, unselectCource, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, set, stoppingSet, setColors, allExercises}) {
     const dispatch = useDispatch()
     const [accuracy,setAccuracy] = useState([])
     const [rules,setRules] = useState([])
@@ -95,7 +95,7 @@ export default function Trainer({visibleBody, dots, set, unselectCource, setColo
 
     return (
         <>
-            <IonButton className="backBtn" onClick={unselectCource}>
+            <IonButton className="backBtn" onClick={stoppingSet}>
                 <img className="backBtn_svg" src={next} alt="next"/>
                 <p className="backBtn_text">Back</p>
             </IonButton>
