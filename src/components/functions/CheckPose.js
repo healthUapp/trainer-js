@@ -549,12 +549,12 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (left_side < distance && right_side > distance) {
             counter += 1
-            accuracy = 90
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
         if (right_side < distance && left_side > distance) {
             counter += 1
-            accuracy = 90
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
     }
 
