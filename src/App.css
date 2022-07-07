@@ -880,7 +880,7 @@ video{
     background:  #CED4DA;
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 60px;
     display: flex;
     text-align: center;
     justify-content: center;
