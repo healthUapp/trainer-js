@@ -75,9 +75,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "UP";
             counter += 1;
             if (angle_back_left > 70) {
-                accuracy = Math.floor(((180 - angle_back_left) / 70 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle_back_left) / 110 * 100))
             } else {
-                accuracy = Math.floor((angle_back_left / 70 * 100) * 10) / 10
+                accuracy = Math.floor((angle_back_left / 70 * 100) )
             }
         }
 
@@ -110,9 +110,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             counter += 1
             colors.leg.right = "green"
             if (angle_leg_right > 60) {
-                accuracy = Math.floor(((180 - angle_leg_right) / 60 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle_leg_right) / 120 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_right / 60 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_right / 60 * 100) )
             }
         }
 
@@ -150,9 +150,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.left = "green"
 
             if (angle_leg_left > 60) {
-                accuracy = Math.floor(((180 - angle_leg_left) / 60 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle_leg_left) / 120 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_left / 60 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_left / 60 * 100))
             }
         }
 
@@ -178,12 +178,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             stage = "DOWN";
             counter += 1;
-            console.log(counter)
-            //accuracy = Math.random() * 10 + 80
-            if (angle_leg_right > 70) {
-                accuracy = Math.floor(((180 - angle_leg_right) / 70 * 100) * 10) / 10
+            if (angle_leg_right >= 70 && angle_leg_right <=100) {
+                accuracy = Math.floor(((angle_leg_right) / 100 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_right / 70 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_right / 140 * 100))
             }
 
         }
@@ -193,10 +191,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.left = "green"
             stage = "DOWN";
             counter += 1;
-            if (angle_leg_left > 70) {
-                accuracy = Math.floor(((180 - angle_leg_left) / 70 * 100) * 10) / 10
+            if (angle_leg_left >= 70 && angle_leg_left <=100) {
+                accuracy = Math.floor(((angle_leg_left) / 100 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_left / 70 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_left / 140 * 100))
             }
             
         }
@@ -232,10 +230,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "UP";
             side = "RIGHT";
             counter += 1;
-            if (angle_leg_l > 110) {
-                accuracy = Math.floor(((180 - angle_leg_l) / 110 * 100) * 10) / 10
+            if (angle_leg_l >= 110 && angle_leg_l <=140) {
+                accuracy = Math.floor((angle_leg_l / 140 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_l / 90 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_l / 140 * 100))
             }
         }
 
@@ -243,10 +241,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "UP";
             side = "LEFT";
             counter += 1;
-            if (angle_leg_r > 110) {
-                accuracy = Math.floor(((180 - angle_leg_r) / 110 * 100) * 10) / 10
+            if (angle_leg_r >= 110 && angle_leg_r <=140) {
+                accuracy = Math.floor((angle_leg_r / 140 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_r / 110 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_r / 140 * 100))
             }
         }
     }
@@ -266,10 +264,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             colors.leg.left = "green"
             counter += 1;
-            if (angle_leg_left > 80) {
-                accuracy = Math.floor(((180 - angle_leg_left) / 80 * 100) * 10) / 10
+            if (angle_leg_left >= 80 && angle_leg_left<=100) {
+                accuracy = Math.floor(((180 - angle_leg_left) / 100 * 100))
             } else {
-                accuracy = Math.floor((angle_leg_left / 80 * 100) * 10) / 10
+                accuracy = Math.floor((angle_leg_left / 130 * 100))
             }
 
         }
@@ -301,7 +299,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.body.right = "red"
         }
 
-        if (angle_left >= 80 && angle_left <= 110) {
+        if (angle_left >= 80 && angle_left <= 130) {
             colors.leg.left = "green"
             status_left = "OK";
 
@@ -309,7 +307,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             status_left = "not ok";
         }
 
-        if (angle_right >= 80 && angle_right <= 110) {
+        if (angle_right >= 80 && angle_right <= 130) {
             colors.leg.right = "green"
             status_right = "OK";
 
@@ -319,18 +317,19 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (stage !== "UP" && status_right === "OK" && status_left === "OK") {
             stage = "UP";
+            counter += 1;
+            if (angle_right >= 80 && angle_right <=100) {
+                accuracy = Math.floor((angle_right / 100 * 100))
+            } else {
+                accuracy = Math.floor((angle_right / 130 * 100))
+            }
         }
 
-        if (angle_left > 110 && angle_right > 110 && stage === "UP") {
+        if (angle_left > 120 && angle_right > 120 && stage === "UP") {
             colors.leg.left = "green"
             colors.leg.right = "green"
             stage = "DOWN";
-            counter += 1;
-            if (angle_left > 110) {
-                accuracy = Math.floor(((180 - angle_left) / 110 * 100) * 10) / 10
-            } else {
-                accuracy = Math.floor((angle_left / 110 * 100) * 10) / 10
-            }
+            
         }
     }
 
@@ -354,6 +353,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const arm_left = findAngle(23, 11, 13, poseLandmarks)
         const arm_right = findAngle(24, 12, 14, poseLandmarks)
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
+        const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
         let arm_status = ""
 
@@ -367,17 +367,17 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             arm_status = "not ok";
         }
 
-        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok") {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok" && angle_leg_left>150) {
             stage = "SHIFT";
             colors.arm.left = "green"
             colors.arm.right = "green"
             colors.leg.left = "green"
             colors.leg.right = "green"
             counter += 1;
-            if (center_angle > 25) {
-                accuracy = Math.floor(((180 - center_angle) / 25 * 100) * 10) / 10
+            if (center_angle >= 25) {
+                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
             } else {
-                accuracy = Math.floor((center_angle / 25 * 100) * 10) / 10
+                accuracy = Math.floor((center_angle / 25 * 100))
             }
         }
     }
@@ -385,17 +385,22 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function half_jack() {
 
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
+        const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
 
         if (center_angle < 15) {
             stage = "SPREAD LEG";
         }
 
-        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25) {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25 && angle_leg_left>150) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
             counter += 1;
-            accuracy=Math.floor(Math.random() * (100 - 70) + 70);
+            if (center_angle >= 25) {
+                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
+            } else {
+                accuracy = Math.floor((center_angle / 25 * 100))
+            }
         }
     }
 
@@ -422,9 +427,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
                 stage = "SHIFT";
                 counter += 1;
                 if (center_angle > 100) {
-                    accuracy = Math.floor(((180 - center_angle) / 100 * 100) * 10) / 10
+                    accuracy = Math.floor(((180 - center_angle) / 100 * 100))
                 } else {
-                    accuracy = Math.floor((center_angle / 100 * 100) * 10) / 10
+                    accuracy = Math.floor((center_angle / 100 * 100))
                 }
                 side = "LEFT"
                 colors.leg.right = "green"
@@ -436,9 +441,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
                 stage = "SHIFT";
                 counter += 1;
                 if (center_angle > 100) {
-                    accuracy = Math.floor(((180 - center_angle) / 100 * 100) * 10) / 10
+                    accuracy = Math.floor(((180 - center_angle) / 100 * 100))
                 } else {
-                    accuracy = Math.floor((center_angle / 100 * 100) * 10) / 10
+                    accuracy = Math.floor((center_angle / 100 * 100))
                 }
                 side = "LEFT"
                 colors.leg.right = "green"
@@ -465,9 +470,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SHIFT"
             counter += 1
             if (center_angle > 25) {
-                accuracy = Math.floor(((180 - center_angle) / 25 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - center_angle) / 25 * 100))
             } else {
-                accuracy = Math.floor((center_angle / 25 * 100) * 10) / 10
+                accuracy = Math.floor((center_angle / 25 * 100))
             }
         }
     }
@@ -487,9 +492,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SHIFT";
             counter += 1;
             if (angle_shoulder_left < 25) {
-                accuracy = Math.floor(((180 - angle_shoulder_left) / 25 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle_shoulder_left) / 25 * 100))
             } else {
-                accuracy = Math.floor((angle_shoulder_left / 25 * 100) * 10) / 10
+                accuracy = Math.floor((angle_shoulder_left / 25 * 100))
             }
         }
 
@@ -512,9 +517,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SHIFT";
             counter += 1;
             if (angle_shoulder_left < 15) {
-                accuracy = Math.floor(((180 - angle_shoulder_left) / 15 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle_shoulder_left) / 15 * 100))
             } else {
-                accuracy = Math.floor((angle_shoulder_left / 15 * 100) * 10) / 10
+                accuracy = Math.floor((angle_shoulder_left / 15 * 100))
             }
         }
 
@@ -550,9 +555,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "TURN LEFT"
             counter += 1
             if (angle > 10) {
-                accuracy = Math.floor(((180 - angle) / 10 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle) / 10 * 100))
             } else {
-                accuracy = Math.floor((angle / 10 * 100) * 10) / 10
+                accuracy = Math.floor((angle / 10 * 100))
             }
         }
 
@@ -560,9 +565,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "TURN RIGHT"
             counter += 1
             if (angle < -10) {
-                accuracy = Math.floor(((180 + angle) / 10 * 100) * 10) / 10
+                accuracy = Math.floor(((180 + angle) / 10 * 100))
             } else {
-                accuracy = Math.floor((angle / 10 * 100) * 10) / 10
+                accuracy = Math.floor((angle / 10 * 100))
             }
         }
 
@@ -584,10 +589,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "DOWN"
             counter += 1
             if (angle < 100) {
-                accuracy = Math.floor(((180 - angle) / 100 * 100) * 10) / 10
+                accuracy = Math.floor(((180 - angle) / 100 * 100))
             } else {
-                accuracy = Math.floor((angle / 100 * 100) * 10) / 10
-            }
+                accuracy = Math.floor((angle / 100 * 100))}
 
         }
                    
