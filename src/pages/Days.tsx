@@ -243,8 +243,12 @@ export default function Days() {
 
     function unselectCource() {
         console.log('back')
-        // setChosenSet(null)
-        // setChosenCource(null)
+        setChosenSet(null)
+        setChosenCource(null)
+        setStartingSet(false)
+    }
+    function stoppingSet() {
+        console.log('set is stopping')
         setStartingSet(false)
     }
 
@@ -429,7 +433,7 @@ export default function Days() {
                             dots={dots}
                             set={chosenSet}
                             allExercises={allExercises}
-                            unselectCource={unselectCource}   
+                            stoppingSet={stoppingSet}   
                         />
                     </>}
                 </div>
@@ -475,6 +479,7 @@ export default function Days() {
                                 }
                                 </div>
                             </div>
+                            <div className='prewiewBox_bottom'></div>
                         </div>
                         <div className="exercisesPreview">
                                 {(chosenSet !== null) &&
