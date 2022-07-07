@@ -259,14 +259,15 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function squat() {
 
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
         colors.leg.right = "yellow"
         colors.leg.left = "yellow"
-        if (angle_leg_left > 150) {
+        if (angle_leg_left > 150 && angle_leg_right >150 ) {
             stage = "DOWN";
         }
 
-        if (stage === "DOWN" && angle_leg_left <= 130 && angle_leg_left >= 80) {
+        if (stage === "DOWN" && angle_leg_left <= 130 && angle_leg_left >= 80 && angle_leg_right <= 130 && angle_leg_right >= 80) {
             stage = "UP";
             colors.leg.right = "green"
             colors.leg.left = "green"
@@ -361,6 +362,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const arm_right = findAngle(24, 12, 14, poseLandmarks)
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
 
         let arm_status = ""
 
@@ -374,7 +376,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             arm_status = "not ok";
         }
 
-        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok" && angle_leg_left > 150) {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok" && angle_leg_left > 150 && angle_leg_right>150) {
             stage = "SHIFT";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -393,18 +395,20 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
         const angle_leg_left = findAngle(23, 25, 27, poseLandmarks)
-
+        const angle_leg_right = findAngle(24, 26, 28, poseLandmarks)
+        const side_left = findAngle(11, 23, 25, poseLandmarks)
+        const side_right = findAngle(12, 24, 26, poseLandmarks)
         if (center_angle < 15) {
             stage = "SPREAD LEG";
         }
-
-        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25 && angle_leg_left > 150) {
+       
+        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 20 && angle_leg_left > 140 && angle_leg_right>140 && side_left > 160 && side_right>160) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
             counter += 1;
-            if (center_angle >= 25) {
-                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
+            if (center_angle >= 20) {
+                accuracy = Math.floor(((180 - center_angle) / 160 * 100))
             } else {
                 accuracy = Math.floor((center_angle / 25 * 100))
             }
