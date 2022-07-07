@@ -113,6 +113,23 @@ export default function Days() {
         {
             name: "OVERHEAD SHOULDER STRETCH",
         },
+
+        {
+            name: "PUNCHES",
+        },
+
+        {
+            name: "OVERHEAD PUNCHES",
+        },
+
+        {
+            name: "ARM CHOPS(seat)",
+        },
+
+        {
+            name: "ARM SCISSORS(seat)",
+        },
+        
     ]
 
     const allSets = [
