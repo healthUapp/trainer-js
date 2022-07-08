@@ -56,7 +56,7 @@ export default function Days() {
             gif : goodMorningGif   
         },
         {
-            name:"CABARET LEFT",
+            name:"CANCAN LEFT",
             gif : cabaretGif
         },
         {   
@@ -85,7 +85,7 @@ export default function Days() {
             gif:halfjack
         },
         {
-            name:"CABARET RIGHT",
+            name:"CANCAN RIGHT",
             gif : cabaretGif
         },
         {
