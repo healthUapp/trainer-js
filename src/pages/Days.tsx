@@ -151,8 +151,6 @@ export default function Days() {
     ]
 
     const allSets = [
-        [{exerciseIndex: 19, time: 5}],
-
         [
             { exerciseIndex: 19, time: 30 },
             { exerciseIndex: 20, time: 30 },
