@@ -22,14 +22,10 @@ const userSlice = createSlice({
 
             state.results = results
 
-            writeUserDataForFirebase(state.id, results)
+            // writeUserDataForFirebase(state.id, results)
 
             
             localStorage.setItem(`${setIndex}`, JSON.stringify(results));
-
-
-
-
 
             function clearResults(){
                 state.id += 1
