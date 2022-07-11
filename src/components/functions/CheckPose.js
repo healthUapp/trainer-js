@@ -408,7 +408,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             counter += 1;
             if (center_angle >= 25) {
-                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
+                accuracy = Math.floor(((180 - center_angle) / 180 * 100))
             } else {
                 accuracy = Math.floor((center_angle / 25 * 100))
             }
