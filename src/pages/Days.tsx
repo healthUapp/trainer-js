@@ -73,9 +73,11 @@ export default function Days() {
         {
             name:"REVERSE LUNGE",
             gif : lungeGif
-        },{
+        },
+        {
             name:"CALF RISES",
-        },{
+        },
+        {
             name:"JUMPING JACK",
             gif : jumping_jack
         },
@@ -104,29 +106,29 @@ export default function Days() {
             gif:side_arm_raises
         },
         {
-            name: "SHRUGS",
+            name: "SHRUGS SEATED",
         },
         {
-            name: "HEAD TILTS LR",
+            name: "HEAD TILTS LR SEATED",
         },
         {
-            name: "OVERHEAD SHOULDER STRETCH",
-        },
-
-        {
-            name: "PUNCHES",
+            name: "OVERHEAD SHOULDER STRETCH SEATED",
         },
 
         {
-            name: "OVERHEAD PUNCHES",
+            name: "PUNCHES SEATED",
         },
 
         {
-            name: "ARM CHOPS(seat)",
+            name: "OVERHEAD PUNCHES SEATED",
         },
 
         {
-            name: "ARM SCISSORS(seat)",
+            name: "ARM CHOPS SEATED",
+        },
+
+        {
+            name: "ARM SCISSORS SEATED",
         },
 
         {
