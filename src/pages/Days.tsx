@@ -51,59 +51,59 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 export default function Days() {
     const allExercises = [
         {
-            name :"GOOD MORNING",
-            gif : goodMorningGif   
+            name: "GOOD MORNING",
+            gif: goodMorningGif
         },
         {
-            name:"CANCAN LEFT",
-            gif : cabaretGif
-        },
-        {   
-            name:"MARCH IN PLACE",
-            gif : marchGif
+            name: "CANCAN LEFT",
+            gif: cabaretGif
         },
         {
-            name:"LEG PUSH",
-            gif : legPushGif
+            name: "MARCH IN PLACE",
+            gif: marchGif
         },
         {
-            name:"SQUAT",
-            gif : squat
+            name: "LEG PUSH",
+            gif: legPushGif
         },
         {
-            name:"REVERSE LUNGE",
-            gif : lungeGif
+            name: "SQUAT",
+            gif: squat
         },
         {
-            name:"CALF RISES",
+            name: "REVERSE LUNGE",
+            gif: lungeGif
         },
         {
-            name:"JUMPING JACK",
-            gif : jumping_jack
+            name: "CALF RISES",
         },
         {
-            name:"HALF JACK",
-            gif:halfjack
+            name: "JUMPING JACK",
+            gif: jumping_jack
         },
         {
-            name:"CANCAN RIGHT",
-            gif : cabaretGif
+            name: "HALF JACK",
+            gif: halfjack
         },
         {
-            name:"SIDE LEG RISES",
-            gif : side_leg_raises
+            name: "CANCAN RIGHT",
+            gif: cabaretGif
         },
         {
-            name:"STEP SIDE JACK",
-            gif : stepsidejack
+            name: "SIDE LEG RISES",
+            gif: side_leg_raises
         },
         {
-            name:"CHEST EXPANSION",
+            name: "STEP SIDE JACK",
+            gif: stepsidejack
+        },
+        {
+            name: "CHEST EXPANSION",
             gif: chest_expansion
         },
         {
             name: "SIDE ARM RISES",
-            gif:side_arm_raises
+            gif: side_arm_raises
         },
         {
             name: "SHRUGS SEATED",
@@ -134,104 +134,123 @@ export default function Days() {
         {
             name: "ARM CHOPS",
         },
-        
+
         {
             name: "ARM SCISSORS",
+        },
+        {
+            name: "ELBOW CLICKS SEATED",
         }
     ]
 
     const allSets = [
+
+        [
+            { exerciseIndex: 19, time: 30 },
+            { exerciseIndex: 20, time: 30 },
+            { exerciseIndex: 17, time: 30 },
+            { exerciseIndex: 18, time: 30 },
+        ],
+
+        [
+            { exerciseIndex: 14, time: 30 },
+            { exerciseIndex: 15, time: 30 },
+            { exerciseIndex: 16, time: 30 },
+        ],
+
         [
             //По этому индексу вытаскивается упражнение из allExercises
-            {exerciseIndex: 2, time: 30},
-            {exerciseIndex: 0, time: 30},
-            {exerciseIndex: 5, time: 30},
-            {exerciseIndex: 1, time:30},
-            {exerciseIndex: 9, time: 30},
-            {exerciseIndex: 3, time: 30},
+            { exerciseIndex: 0, time: 30 },
+            { exerciseIndex: 2, time: 30 },
+            { exerciseIndex: 1, time: 30 },
+            { exerciseIndex: 9, time: 30 },
+            { exerciseIndex: 5, time: 30 },
+            { exerciseIndex: 3, time: 30 },
         ],
-        [
-            {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 4, time: 10},
-            {exerciseIndex: 7, time: 10}, 
-            {exerciseIndex: 4, time: 10},
-            {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 4, time: 10},
 
-        ],
         [
-            {exerciseIndex: 8, time: 10},
-            {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 8, time: 10},
-            {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 8, time: 10},
-            {exerciseIndex: 7, time: 10},
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 4, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 4, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 4, time: 10 },
 
         ],
 
         [
-            {exerciseIndex: 5, time: 15},
-            {exerciseIndex: 8, time: 15},
-            {exerciseIndex: 4, time: 15}, 
-            {exerciseIndex: 8, time: 15},
-        ],
-        [
-            {exerciseIndex: 11, time: 10},
-            {exerciseIndex: 7, time: 10},
-            {exerciseIndex: 11, time: 10}, 
-            {exerciseIndex: 7, time: 10},
+            { exerciseIndex: 8, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 8, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 8, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+
         ],
 
         [
-            {exerciseIndex: 7, exValue: 20},
-            {exerciseIndex: 11, exValue: 4},
-            {exerciseIndex: 12, exValue: 4}, 
-            {exerciseIndex: 7, exValue: 20},
-            {exerciseIndex: 11, exValue: 4},
-            {exerciseIndex: 12, exValue: 4}, 
-            {exerciseIndex: 7, exValue: 20},
-            {exerciseIndex: 11, exValue: 4},
-            {exerciseIndex: 12, exValue: 4}, 
+            { exerciseIndex: 5, time: 15 },
+            { exerciseIndex: 8, time: 15 },
+            { exerciseIndex: 4, time: 15 },
+            { exerciseIndex: 8, time: 15 },
+        ],
+
+        [
+            { exerciseIndex: 11, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+            { exerciseIndex: 11, time: 10 },
+            { exerciseIndex: 7, time: 10 },
+        ],
+
+        [
+            { exerciseIndex: 7, exValue: 20 },
+            { exerciseIndex: 11, exValue: 4 },
+            { exerciseIndex: 12, exValue: 4 },
+            { exerciseIndex: 7, exValue: 20 },
+            { exerciseIndex: 11, exValue: 4 },
+            { exerciseIndex: 12, exValue: 4 },
+            { exerciseIndex: 7, exValue: 20 },
+            { exerciseIndex: 11, exValue: 4 },
+            { exerciseIndex: 12, exValue: 4 },
             //2 минуты отдыха и так 3 раза
         ],
 
     ]
 
     const allCources = [
-        [3,1,2],
-        [1,2,4],
-        [5,4,3],
-        [2,1,4],
-        [1,5,3],
-        [],[]
+      [0,1,2],
+      [0,1,2],
+      [0,1,2],
+      [0,1,2],
+      [0,1,2]
     ]
 
 
-    const setsTimes = allSets.map((exercises)=>{
+    const setsTimes = allSets.map((exercises) => {
         let time = 0
-        exercises.forEach((exercise: any)=>{
-            if(!exercise.time) return
+        exercises.forEach((exercise: any) => {
+            if (!exercise.time) return
             time += exercise.time
         })
         return time
     })
 
-    const courcesTimes = allCources.map((set)=>{
+    const courcesTimes = allCources.map((set) => {
         let time = 0
-        set.forEach((setIndex, index)=>{
+        set.forEach((setIndex, index) => {
             time += setsTimes[setIndex]
         })
         return time
     })
 
     const allDays = {
-        names:  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"],
+        names: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         images: [day1, day2, day3, day4, day5, day6, day7],
     }
 
     const [chosenCource, setChosenCource] = useState<any | null>(null)
     const [chosenSet, setChosenSet] = useState<any | null>(null)
-    const [startingSet, setStartingSet] =useState<boolean>(false)
+    const [startingSet, setStartingSet] = useState<boolean>(false)
     const [cameraReadiness, setCameraReadiness] = useState(false)
     const [chosenSetIndex, setChosenSetIndex] = useState<number | null>(null)
 
@@ -303,7 +322,7 @@ export default function Days() {
         }
     }
 
-    function sendDataToFirebase(){
+    function sendDataToFirebase() {
         console.log(1)
     }
 
@@ -357,92 +376,92 @@ export default function Days() {
             {!cameraReadiness && <div className='loadingViewBox'>
                 <div className="loadingView">
                     <h1 className='loadingText'>LOADING...</h1>
-                    <img className='loadingHelpIcon' src={loadingHelp} alt="" />       
+                    <img className='loadingHelpIcon' src={loadingHelp} alt="" />
                 </div>
             </div>}
-            
+
 
         
 
 
             <div className={`exerciseView`}>
-                
+
                 {(!startingSet) &&
-                   <>
+                    <>
                         <div className="cardsBox">
-                                        {    
-                                            allCources.map((cource, index) => {
-                                                if(index === initialSlide){
-                                                    return  (
-                                                        <div key={index}>
-                                                            <div
-                                                                className={`card ${index > 4? "blocked" : ""}`} 
-                                                                
-                                                                onClick={() => {index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
-                                                            >
-                                                                <div className='cardImgBox'>
-                                                                    <img className='cardImg' src={day1} />
-                                                                    {index > 4 && <img className="faLockSvg" src={fa_lock} />}
-                                                                </div>
-                                                            
-                                                                <div className={`cardText ${index>0? "blocked" : ""}`} >
-                                                                    <h5 className='cardHighText'>{allDays.names[index]}</h5>
-                                                                    <div className='cardLowerTextBox'>
-                                                                        <p className='cardLowerText-1'>{ courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
-                                                                        <p className='cardLowerText-2'>{allSets[index] ? allSets[index].length : 0} ex.</p>
-                                                                        <div className='cardLowerIconsBox'>
-                                                                            <p className='cardLowerIconsText'>workouts</p>
-                                                                            <div className='cardLowerIconsCheckedBox'>
-                                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                                <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                                <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                            {
+                                allCources.map((cource, index) => {
+                                    if (index === initialSlide) {
+                                        return (
+                                            <div key={index}>
+                                                <div
+                                                    className={`card ${index > 4 ? "blocked" : ""}`}
+
+                                                    onClick={() => { index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
+                                                >
+                                                    <div className='cardImgBox'>
+                                                        <img className='cardImg' src={day1} />
+                                                        {index > 4 && <img className="faLockSvg" src={fa_lock} />}
+                                                    </div>
+
+                                                    <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
+                                                        <h5 className='cardHighText'>{allDays.names[index]}</h5>
+                                                        <div className='cardLowerTextBox'>
+                                                            <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
+                                                            <p className='cardLowerText-2'>{allSets[index] ? allSets[index].length : 0} ex.</p>
+                                                            <div className='cardLowerIconsBox'>
+                                                                <p className='cardLowerIconsText'>workouts</p>
+                                                                <div className='cardLowerIconsCheckedBox'>
+                                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
+                                                                    <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
                                                                 </div>
                                                             </div>
-
-                                                           {allCources[index + 1] ?
-                                                                <div 
-                                                                    className='nextSlideBox'
-                                                                    onClick={()=>setTinitialSlide(index + 1)}
-                                                                >
-                                                                    <img src={next} alt="" />
-                                                                </div>
-                                                                :
-                                                                <div 
-                                                                    className='nextSlideBox'
-                                                                    onClick={()=>setTinitialSlide(0)}
-                                                                >
-                                                                    <img src={next} alt="" />
-                                                                </div>
-                                                           }
-                                                           {allCources[index - 1]?
-                                                                <div 
-                                                                    className='beforeSlideBox'
-                                                                    onClick={()=>setTinitialSlide(index - 1)}
-                                                                    >
-                                                                        <img src={next} alt="" />
-                                                                </div>
-                                                                :
-                                                                <div 
-                                                                    className='beforeSlideBox'
-                                                                    onClick={()=>setTinitialSlide(6)}
-                                                                    >
-                                                                        <img src={next} alt="" />
-                                                                </div>                                                        
-                                                            }
                                                         </div>
-                                                        )
+                                                    </div>
+                                                </div>
+
+                                                {allCources[index + 1] ?
+                                                    <div
+                                                        className='nextSlideBox'
+                                                        onClick={() => setTinitialSlide(index + 1)}
+                                                    >
+                                                        <img src={next} alt="" />
+                                                    </div>
+                                                    :
+                                                    <div
+                                                        className='nextSlideBox'
+                                                        onClick={() => setTinitialSlide(0)}
+                                                    >
+                                                        <img src={next} alt="" />
+                                                    </div>
                                                 }
-                                            })
-                                        }
+                                                {allCources[index - 1] ?
+                                                    <div
+                                                        className='beforeSlideBox'
+                                                        onClick={() => setTinitialSlide(index - 1)}
+                                                    >
+                                                        <img src={next} alt="" />
+                                                    </div>
+                                                    :
+                                                    <div
+                                                        className='beforeSlideBox'
+                                                        onClick={() => setTinitialSlide(6)}
+                                                    >
+                                                        <img src={next} alt="" />
+                                                    </div>
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                })
+                            }
                         </div>
                         <div className="startImgBox">
                             <img className="startImg" src={start} alt="" />
                             <img className="logoSvg" src={logo} alt="" />
                         </div>
-                   </>
+                    </>
                 }
                 <div className='drawBox' style={startingSet ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
@@ -467,16 +486,16 @@ export default function Days() {
                             set={chosenSet}
                             chosenSetIndex={chosenSetIndex}
                             allExercises={allExercises}
-                            stoppingSet={stoppingSet}   
+                            stoppingSet={stoppingSet}
                         />
                     </>}
                 </div>
 
             </div>
 
-            {(chosenCource && !startingSet) && 
+            {(chosenCource && !startingSet) &&
                 <div className='setsBox' >
-                    <div className="blueScreen" onClick={()=>unselectCource()}></div>
+                    <div className="blueScreen" onClick={() => unselectCource()}></div>
                     <div className="prewiewBox">
                         <div className="setPreview">
                             <div className="prewiewInfo">
@@ -485,66 +504,66 @@ export default function Days() {
                             </div>
                             <div className="setCardBox">
                                 <div className="cardBoxList">
-                                {
-                                    chosenCource.map((setIndex: number, index: number)=>{
-                                        return(
-                                            <div key={index}>
+                                    {
+                                        chosenCource.map((setIndex: number, index: number) => {
+                                            return (
+                                                <div key={index}>
 
-                                                            <div
-                                                                className="setCard"
-                                                                
-                                                                onClick={() => {setChosenSet(allSets[setIndex]); setChosenSetIndex(setIndex)}}
-                                                                >
-                                                                <div className='setCardImgBox'>
-                                                                    <img className='setCardImg' src={day2}/>
-                                                                </div>
-                                                            
-                                                                <div className={`cardText`} >
-                                                                    <h5 className='setCardHighText'>{`Set №${index}`}</h5>
-                                                                    <div className='cardLowerTextBox'>
-                                                                        {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
-                                                                        <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
-                                                                    </div>
-                                                                </div>
+                                                    <div
+                                                        className="setCard"
+
+                                                        onClick={() => { setChosenSet(allSets[setIndex]); setChosenSetIndex(setIndex) }}
+                                                    >
+                                                        <div className='setCardImgBox'>
+                                                            <img className='setCardImg' src={day2} />
+                                                        </div>
+
+                                                        <div className={`cardText`} >
+                                                            <h5 className='setCardHighText'>{`Set №${index}`}</h5>
+                                                            <div className='cardLowerTextBox'>
+                                                                {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
+                                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
                                                             </div>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>
                             <div className='prewiewBox_bottom'></div>
                         </div>
                         <div className="exercisesPreview">
-                                {(chosenSet !== null) &&
-                                    <>
-                                        <div className="exercisesPreviewList">
-                                            <h2>Strength</h2>
-                                            {chosenSet.map((ex:any, index: number)=>(
-                                                <div key={index} className='exercisePrewiew__item'>
-                                                    {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
-                                                    <img src={allExercises[ex.exerciseIndex].gif}/>
-                                                    <h4>{allExercises[ex.exerciseIndex].name}</h4>
-                                                    <h5>{ex.time} sec</h5>
-                                                </div>
-                                            ))}
-                                        
-                                        </div>
-                                        <div className="startSetBtn">
-                                            <div onClick={()=>setStartingSet(true)}>
-                                                <div><p>Begin</p></div>
+                            {(chosenSet !== null) &&
+                                <>
+                                    <div className="exercisesPreviewList">
+                                        <h2>Strength</h2>
+                                        {chosenSet.map((ex: any, index: number) => (
+                                            <div key={index} className='exercisePrewiew__item'>
+                                                {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
+                                                <img src={allExercises[ex.exerciseIndex].gif} />
+                                                <h4>{allExercises[ex.exerciseIndex].name}</h4>
+                                                <h5>{ex.time} sec</h5>
                                             </div>
+                                        ))}
+
+                                    </div>
+                                    <div className="startSetBtn">
+                                        <div onClick={() => setStartingSet(true)}>
+                                            <div><p>Begin</p></div>
                                         </div>
-                                    </>
-                                }
-                                
+                                    </div>
+                                </>
+                            }
+
                         </div>
                     </div>
                 </div>
             }
             
 
-            {cameraReadiness && 
+            {cameraReadiness &&
                 <div className='blurer' />
             }
 

@@ -56,6 +56,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 20) arm_scissors_seat();
     if (exerciseValue === 21) arm_chops();
     if (exerciseValue === 22) arm_scissors();
+    if (exerciseValue === 23) elbow_clicks_seated();
     
 
     function goodMorning() {
@@ -547,15 +548,16 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side < distance && right_side > distance) {
-            counter += 1
+        if (left_side < distance && right_side > distance && stage==="TURN HEAD" || right_side < distance && left_side > distance && stage==="TURN HEAD") {
+            stage="DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
-        if (right_side < distance && left_side > distance) {
-            counter += 1
-            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+
+        if (distance>right_side && distance>left_side){
+            stage="TURN HEAD"
         }
+
     }
 
     function ear_to_shoulder() {
@@ -565,21 +567,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle > 10 && stage === "TURN RIGHT" || angle > 10 && stage === "TURN HEAD") {
             stage = "TURN LEFT"
             counter += 1
-            if (angle > 10) {
-                accuracy = Math.floor(((180 - angle) / 10 * 100))
-            } else {
-                accuracy = Math.floor((angle / 10 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
         if (angle < -10 && stage === "TURN LEFT" || angle < -10 && stage === "TURN HEAD") {
             stage = "TURN RIGHT"
             counter += 1
-            if (angle < -10) {
-                accuracy = Math.floor(((180 + angle) / 10 * 100))
-            } else {
-                accuracy = Math.floor((angle / 10 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
         if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN RIGHT") {
@@ -628,11 +622,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+        if (angle_elbow_left < 20 && angle_elbow_right < 20 && angle_shoulder_left < 20 && angle_shoulder_right < 20) {
             stage = "PUNCH";
         }
 
-        if (stage === "PUNCH" && angle_elbow_left > 130 && angle_shoulder_left > 50 || stage === "PUNCH" && angle_shoulder_right > 50 && angle_elbow_right > 130) {
+        if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" &&  angle_elbow_right > 20) {
             stage = "BACK";
             accuracy = Math.floor(Math.random() * (100 - 70) + 70);
             colors.arm.left = "green"
@@ -650,7 +644,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 30) {
             stage = "UP";
         }
 
@@ -752,6 +746,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     }
 
+    function elbow_clicks_seated(){
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_elbow_right = findAngle(12, 14, 16, poseLandmarks)
+        const radius = findRadius(16, 15, poseLandmarks)
+        const radius_shoulders = findRadius(12, 11, poseLandmarks)
+
+        if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && angle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
+            stage = "SHIFT";
+          }
+          
+          if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
+            counter += 1;
+            stage = "SPEAD";
+          }
+    }
     return {
         colors: colors,
         stage: stage,
