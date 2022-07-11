@@ -218,13 +218,14 @@ export default function Days() {
     ]
 
     const allCources = [
-      [0,1,2],
-      [0,1,2],
-      [0,1,2],
-      [0,1,2],
-      [0,1,2]
+        [0,1,2],
+        [0,1,2],
+        [0,1,2],
+        [0,1,2],
+        [0,1,2],
+        [],
+        []
     ]
-
 
     const setsTimes = allSets.map((exercises) => {
         let time = 0
@@ -279,7 +280,7 @@ export default function Days() {
 
     let camera = null;
 
-    const [initialSlide, setTinitialSlide] = useState(0)
+    const [initialSlide, setTinitialSlide] = useState(6)
 
 
     function unselectCource() {
@@ -436,7 +437,7 @@ export default function Days() {
                                                         <img src={next} alt="" />
                                                     </div>
                                                 }
-                                                {allCources[index - 1] ?
+                                                {allCources[index - 1]?
                                                     <div
                                                         className='beforeSlideBox'
                                                         onClick={() => setTinitialSlide(index - 1)}
@@ -562,6 +563,10 @@ export default function Days() {
                 </div>
             }
             
+            <IonButton className='firebase' onClick={() => {
+                localStorage.setItem("results",JSON.stringify({1:"ssd"}))
+                console.log(localStorage.getItem("results"))
+            }}>FIREBASE</IonButton>
 
             {cameraReadiness &&
                 <div className='blurer' />
