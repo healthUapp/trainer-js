@@ -622,11 +622,11 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+        if (angle_elbow_left < 20 && angle_elbow_right < 20 && angle_shoulder_left < 20 && angle_shoulder_right < 20) {
             stage = "PUNCH";
         }
 
-        if (stage === "PUNCH" && angle_elbow_left > 130 && angle_shoulder_left > 50 || stage === "PUNCH" && angle_shoulder_right > 50 && angle_elbow_right > 130) {
+        if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" &&  angle_elbow_right > 20) {
             stage = "BACK";
             accuracy = Math.floor(Math.random() * (100 - 70) + 70);
             colors.arm.left = "green"
@@ -644,7 +644,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 10) {
+        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 30) {
             stage = "UP";
         }
 
