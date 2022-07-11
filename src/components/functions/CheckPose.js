@@ -548,15 +548,16 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side < distance && right_side > distance) {
-            counter += 1
+        if (left_side < distance && right_side > distance && stage==="TURN HEAD" || right_side < distance && left_side > distance && stage==="TURN HEAD") {
+            stage="DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
-        if (right_side < distance && left_side > distance) {
-            counter += 1
-            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+
+        if (distance>right_side && distance>left_side){
+            stage="TURN HEAD"
         }
+
     }
 
     function ear_to_shoulder() {
@@ -566,21 +567,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle > 10 && stage === "TURN RIGHT" || angle > 10 && stage === "TURN HEAD") {
             stage = "TURN LEFT"
             counter += 1
-            if (angle > 10) {
-                accuracy = Math.floor(((180 - angle) / 10 * 100))
-            } else {
-                accuracy = Math.floor((angle / 10 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
         if (angle < -10 && stage === "TURN LEFT" || angle < -10 && stage === "TURN HEAD") {
             stage = "TURN RIGHT"
             counter += 1
-            if (angle < -10) {
-                accuracy = Math.floor(((180 + angle) / 10 * 100))
-            } else {
-                accuracy = Math.floor((angle / 10 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
         if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN RIGHT") {
@@ -761,7 +754,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const radius = findRadius(16, 15, poseLandmarks)
         const radius_shoulders = findRadius(12, 11, poseLandmarks)
 
-        if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && anle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
+        if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && angle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
             stage = "SHIFT";
           }
           
