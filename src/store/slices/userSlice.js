@@ -18,15 +18,17 @@ const userSlice = createSlice({
         addResult(state, action){
 
             const results =  action.payload.results
-            const setIndex = action.payload.setIndex
+            const indexOfSet = action.payload.indexOfSet
 
             state.results = results
 
-            writeUserDataForFirebase(state.id, results)
+            // writeUserDataForFirebase(state.id, results)
 
             
-            localStorage.setItem(`${setIndex}`, JSON.stringify(results));
+            localStorage.setItem(`${indexOfSet}`, JSON.stringify(results));
 
+
+            
 
 
 

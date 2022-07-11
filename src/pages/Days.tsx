@@ -472,10 +472,6 @@ export default function Days() {
 
             </div>
 
-            <IonButton className='firebase' onClick={()=>{
-                console.log(localStorage)
-            }}>FIREBASE</IonButton>
-
             {(chosenCource && !startingSet) && 
                 <div className='setsBox' >
                     <div className="blueScreen" onClick={()=>unselectCource()}></div>
