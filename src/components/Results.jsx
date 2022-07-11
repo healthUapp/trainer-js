@@ -14,7 +14,7 @@ export default function Results({results}){
         //ВРЕМЕННО!!!
         let precentAccuracy = 0
         results.forEach(result => {
-            let precent = result.accuracy.length > 0 ? Math.floor(results[0].accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
+            let precent = result.accuracy.length > 0 ? Math.floor(results.accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
             precentAccuracy = Math.floor(precentAccuracy + precent)
         });
         precentAccuracy = Math.floor(precentAccuracy / results.length)
@@ -117,7 +117,8 @@ export default function Results({results}){
         {   
             results.map((result,index)=> {
                 allExResults.push(result.value / 10)
-                const precentAccuracy = result.accuracy.length > 0 ? Math.floor(results[0].accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
+                const precentAccuracy = result.accuracy.length > 0 ? Math.floor(result.accuracy.reduce((sum, elem)=>{return sum + elem}, 0) / result.accuracy.length) : 0
+                console.log(results)
                 return  (
                     <p className="resultElement" key={index}>{result.name}: <span 
                         style={{"color":'rgb(177, 63, 29)'}}>{result.value}({precentAccuracy}%)</span>
