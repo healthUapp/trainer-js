@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-
 import { getDatabase, ref, set } from "firebase/database";
+import {database} from "../../firebase";
 
 const initialState = {
     email: null,
@@ -46,6 +46,20 @@ const userSlice = createSlice({
                 state.id += 1
                 state.results = []
             }
+<<<<<<< HEAD
+=======
+
+            // function writeUserDataForFirebase(id, exercisesResults) {
+            //     console.log(exercisesResults, id)
+            //     database.ref('exercises/' + id).push({
+            //         results: {
+            //             name: exercisesResults[0].name,
+            //             value: exercisesResults[0].value,
+            //         }
+            //     })
+            // }
+              
+>>>>>>> 6e154d4ee18d317bb8b85503cccea67386219ba0
             clearResults()
         },
     }

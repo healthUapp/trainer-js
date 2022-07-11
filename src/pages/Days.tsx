@@ -1,4 +1,6 @@
 import { IonContent, IonSlides, IonSlide, IonButton, } from '@ionic/react';
+import { database } from '../firebase'
+import { ref, set } from "firebase/database";
 
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
@@ -342,6 +344,17 @@ export default function Days() {
         console.log(1)
     }
 
+    const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
+
+    function writeUserDataForFirebase() {
+        console.log(dimaHyi)
+        set(ref(database, 'exercises/'), {dimaHyi});
+        // database.ref('exercises/').push({
+        //     dima: objectblyat
+        // })
+        // ref('exercises/').push({objectblyat})
+    }
+
     useEffect(() => {
 
 
@@ -578,7 +591,11 @@ export default function Days() {
                 </div>
             }
             
+<<<<<<< HEAD
             <IonButton className='firebase' onClick={() => {dispatch(addResult(result))}}>FIREBASE</IonButton>
+=======
+            <IonButton className='firebase' onClick={() => {writeUserDataForFirebase()}} >FIREBASE</IonButton>
+>>>>>>> 6e154d4ee18d317bb8b85503cccea67386219ba0
 
             {cameraReadiness &&
                 <div className='blurer' />
