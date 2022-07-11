@@ -153,7 +153,7 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
                 </>
             }
 
-            <IonButton className='firebase' onClick={() => console.log(new Date().toLocaleString('us'))}>FIREBASE</IonButton>
+           
             {showResults &&  <Results results={results}/>}
         </>
     );
