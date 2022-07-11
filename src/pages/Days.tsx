@@ -564,8 +564,7 @@ export default function Days() {
             }
             
             <IonButton className='firebase' onClick={() => {
-                localStorage.setItem("results",JSON.stringify({1:"ssd"}))
-                console.log(localStorage.getItem("results"))
+
             }}>FIREBASE</IonButton>
 
             {cameraReadiness &&

@@ -16,23 +16,24 @@ const userSlice = createSlice({
     results: [],
     reducers: {
         addResult(state, action){
-
+            let localState = JSON.parse(localStorage.getItem('result'))
             const results =  action.payload.results
             const indexOfSet = action.payload.indexOfSet
+            const date = action.payload.date
 
             state.results = results
 
-            // writeUserDataForFirebase(state.id, results)
-            localStorage.getItem('result')
-            
-            const date = new Date().toLocaleString("by-BY", {year: 'numeric', month: '2-digit', day: 'numeric' })
-            const id = `date-${date}-set-${indexOfSet}`
-            localStorage.setItem(`${id}`, JSON.stringify(results));
+                
+            let newState = []
 
+            newState.push(localState)
+            newState.push({
+                results:results,
+                indexOfSet: indexOfSet,
+                date: date
+            })
 
-            
-
-
+            localStorage.setItem('results', JSON.stringify(newState));
 
 
             function clearResults(){
