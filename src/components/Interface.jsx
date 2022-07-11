@@ -4,6 +4,7 @@ import * as d3 from "d3";
 export default function Interface({dots, colors}) {
   const svgRef = useRef(null)
   const svg = d3.select(svgRef.current)
+  
   const upperSize = {
     width: svgRef.current?.parentNode.clientWidth,
     height: svgRef.current?.parentNode.clientHeight,

@@ -14,7 +14,7 @@ import { addResult } from "store/slices/userSlice";
 import chackBody from "./functions/checkBody";
 
 
-export default function Trainer({visibleBody, dots, set, stoppingSet, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, set,chosenSetIndex, stoppingSet, setColors, allExercises}) {
     const dispatch = useDispatch()
     const [accuracy,setAccuracy] = useState([])
     const [rules,setRules] = useState([])
@@ -56,7 +56,7 @@ export default function Trainer({visibleBody, dots, set, stoppingSet, setColors,
     },[visibleBody, time, showResults, pause])
 
     useEffect(()=>{
-        if(showResults && results.length > 0) dispatch(addResult(results))
+        if(showResults && results.length > 0) dispatch(addResult({results:results, setIndex: chosenSetIndex}))
     },[showResults, results])
     
     useEffect(()=>{
@@ -90,7 +90,6 @@ export default function Trainer({visibleBody, dots, set, stoppingSet, setColors,
             setDotsForAngle([])
         }
     },[dotsForAngle])
-
 
 
     return (

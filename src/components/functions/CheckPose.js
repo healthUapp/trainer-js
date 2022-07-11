@@ -402,13 +402,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SPREAD LEG";
         }
        
-        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 20 && angle_leg_left > 140 && angle_leg_right>140 && side_left > 160 && side_right>160) {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25 && angle_leg_left > 140 && angle_leg_right>140 && side_left > 160 && side_right>160) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
             counter += 1;
-            if (center_angle >= 20) {
-                accuracy = Math.floor(((180 - center_angle) / 160 * 100))
+            if (center_angle >= 25) {
+                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
             } else {
                 accuracy = Math.floor((center_angle / 25 * 100))
             }
