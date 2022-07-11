@@ -591,11 +591,7 @@ export default function Days() {
                 </div>
             }
             
-<<<<<<< HEAD
-            <IonButton className='firebase' onClick={() => {dispatch(addResult(result))}}>FIREBASE</IonButton>
-=======
             <IonButton className='firebase' onClick={() => {writeUserDataForFirebase()}} >FIREBASE</IonButton>
->>>>>>> 6e154d4ee18d317bb8b85503cccea67386219ba0
 
             {cameraReadiness &&
                 <div className='blurer' />

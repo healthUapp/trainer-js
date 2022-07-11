@@ -46,8 +46,6 @@ const userSlice = createSlice({
                 state.id += 1
                 state.results = []
             }
-<<<<<<< HEAD
-=======
 
             // function writeUserDataForFirebase(id, exercisesResults) {
             //     console.log(exercisesResults, id)
@@ -59,7 +57,6 @@ const userSlice = createSlice({
             //     })
             // }
               
->>>>>>> 6e154d4ee18d317bb8b85503cccea67386219ba0
             clearResults()
         },
     }
