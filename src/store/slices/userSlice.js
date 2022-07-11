@@ -2,7 +2,6 @@ import {createSlice} from '@reduxjs/toolkit'
 
 import { getDatabase, ref, set } from "firebase/database";
 
-
 const initialState = {
     email: null,
     token: null,
@@ -16,46 +15,38 @@ const userSlice = createSlice({
     results: [],
     reducers: {
         addResult(state, action){
+
+            console.log('s')
+
             let localState = JSON.parse(localStorage.getItem('result'))
+            console.log(localState)
             const results =  action.payload.results
             const indexOfSet = action.payload.indexOfSet
-            const date = action.payload.date
 
             state.results = results
 
+            
                 
             let newState = []
 
-            newState.push(localState)
+            console.log(newState)
+
+            if(localState) newState.push(localState)
+
             newState.push({
                 results:results,
                 indexOfSet: indexOfSet,
-                date: date
+                date: new Date().toString()
             })
 
-            localStorage.setItem('results', JSON.stringify(newState));
 
+            localStorage.setItem('results', JSON.stringify(newState));
 
             function clearResults(){
                 state.id += 1
                 state.results = []
             }
-
-
-            function writeUserDataForFirebase(id, exercisesResults) {
-                const db = getDatabase();
-                console.log(exercisesResults)
-                set(ref(db, 'exercises/' + id), {
-                  results: {
-                    name: exercisesResults[0].name,
-                    value: exercisesResults[0].value,
-                  }
-                });
-
-            }
-              
             clearResults()
-        
         },
     }
 })

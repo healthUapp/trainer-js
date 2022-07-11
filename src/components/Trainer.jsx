@@ -56,7 +56,7 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
     },[visibleBody, time, showResults, pause])
 
     useEffect(()=>{
-        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex, date: new Date()}))
+        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex}))
     },[showResults, results])
     
     useEffect(()=>{
@@ -153,7 +153,8 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
                 </>
             }
 
-           
+            <IonButton className='firebase' onClick={() => {addResult(results)}}>FIREBASE</IonButton>
+
             {showResults &&  <Results results={results}/>}
         </>
     );

@@ -48,7 +48,12 @@ import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
+import { useDispatch } from "react-redux";
+import { addResult } from "store/slices/userSlice";
+
 export default function Days() {
+    const dispatch = useDispatch()
+
     const allExercises = [
         {
             name: "GOOD MORNING",
@@ -226,6 +231,16 @@ export default function Days() {
         [],
         []
     ]
+
+    const result = {
+        results:{
+            name: "name",
+            value: 15,
+            accuracy: [99,98,45]
+        },
+        indexOfSet: 4,
+        date: "21.03.2412"
+        }
 
     const setsTimes = allSets.map((exercises) => {
         let time = 0
@@ -563,9 +578,7 @@ export default function Days() {
                 </div>
             }
             
-            <IonButton className='firebase' onClick={() => {
-
-            }}>FIREBASE</IonButton>
+            <IonButton className='firebase' onClick={() => {dispatch(addResult(result))}}>FIREBASE</IonButton>
 
             {cameraReadiness &&
                 <div className='blurer' />
