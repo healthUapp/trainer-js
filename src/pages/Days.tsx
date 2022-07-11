@@ -55,7 +55,7 @@ export default function Days() {
             gif : goodMorningGif   
         },
         {
-            name:"CABARET LEFT",
+            name:"CANCAN LEFT",
             gif : cabaretGif
         },
         {   
@@ -84,7 +84,7 @@ export default function Days() {
             gif:halfjack
         },
         {
-            name:"CABARET RIGHT",
+            name:"CANCAN RIGHT",
             gif : cabaretGif
         },
         {
@@ -112,6 +112,30 @@ export default function Days() {
         {
             name: "OVERHEAD SHOULDER STRETCH",
         },
+
+        {
+            name: "PUNCHES",
+        },
+
+        {
+            name: "OVERHEAD PUNCHES",
+        },
+
+        {
+            name: "ARM CHOPS(seat)",
+        },
+
+        {
+            name: "ARM SCISSORS(seat)",
+        },
+
+        {
+            name: "ARM CHOPS",
+        },
+        
+        {
+            name: "ARM SCISSORS",
+        }
     ]
 
     const allSets = [
