@@ -24,8 +24,9 @@ const userSlice = createSlice({
 
             // writeUserDataForFirebase(state.id, results)
 
-            
-            localStorage.setItem(`${indexOfSet}`, JSON.stringify(results));
+            const date = new Date().toLocaleString("by-BY", {year: 'numeric', month: '2-digit', day: 'numeric' })
+            const id = `date-${date}-set-${indexOfSet}`
+            localStorage.setItem(`${id}`, JSON.stringify(results));
 
 
             

@@ -362,6 +362,8 @@ export default function Days() {
             </div>}
             
 
+        
+
 
             <div className={`exerciseView`}>
                 
@@ -540,7 +542,7 @@ export default function Days() {
                     </div>
                 </div>
             }
-
+            
 
             {cameraReadiness && 
                 <div className='blurer' />
