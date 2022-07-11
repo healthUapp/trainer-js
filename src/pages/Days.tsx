@@ -151,6 +151,7 @@ export default function Days() {
     ]
 
     const allSets = [
+        [{exerciseIndex: 19, time: 5}],
 
         [
             { exerciseIndex: 19, time: 30 },
@@ -297,7 +298,7 @@ export default function Days() {
 
     let camera = null;
 
-    const [initialSlide, setTinitialSlide] = useState(6)
+    const [initialSlide, setTinitialSlide] = useState(0)
 
 
     function unselectCource() {
@@ -591,7 +592,7 @@ export default function Days() {
                 </div>
             }
             
-            <IonButton className='firebase' onClick={() => {writeUserDataForFirebase()}} >FIREBASE</IonButton>
+            <IonButton className='firebase' onClick={() => {localStorage.clear()}}>CLEAR LOCAL</IonButton>
 
             {cameraReadiness &&
                 <div className='blurer' />

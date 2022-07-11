@@ -16,7 +16,7 @@ import chackBody from "./functions/checkBody";
 
 export default function Trainer({visibleBody, dots, set,chosenSetIndex, stoppingSet, setColors, allExercises}) {
     const dispatch = useDispatch()
-    const [accuracy,setAccuracy] = useState([])
+    const [accuracy, setAccuracy] = useState([])
     const [rules,setRules] = useState([])
     const [dotsForAngle,setDotsForAngle] = useState([])
     const [stage,setStage] = useState(null)
@@ -153,7 +153,6 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
                 </>
             }
 
-            <IonButton className='firebase' onClick={() => {addResult(results)}}>FIREBASE</IonButton>
 
             {showResults &&  <Results results={results}/>}
         </>
