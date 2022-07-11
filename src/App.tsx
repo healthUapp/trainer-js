@@ -3,10 +3,18 @@ import {IonApp, IonRouterOutlet, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
 import Days from './pages/Days'
 
+
+
+
 setupIonicReact();
+
+
 
 const App: React.FC = () => { 
     
+
+
+
 
 return (
     <IonApp>

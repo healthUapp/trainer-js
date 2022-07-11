@@ -1,4 +1,4 @@
-import { IonContent, IonSlides, IonSlide, } from '@ionic/react';
+import { IonContent, IonSlides, IonSlide, IonButton, } from '@ionic/react';
 
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
@@ -8,6 +8,8 @@ import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
 import { Holistic } from "@mediapipe/holistic";
 import checkBody from "../components/functions/checkBody";
+//@ts-ignore
+import ReactFreezeframe from 'react-freezeframe';
 
 //GIF
 import marchGif from '../assets/gif/March.gif'
@@ -45,9 +47,6 @@ import logo from '../assets/svg/logo.svg'
 import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
-
-
-
 
 export default function Days() {
     const allExercises = [
@@ -181,6 +180,7 @@ export default function Days() {
         [],[]
     ]
 
+
     const setsTimes = allSets.map((exercises)=>{
         let time = 0
         exercises.forEach((exercise: any)=>{
@@ -190,7 +190,6 @@ export default function Days() {
         return time
     })
 
-
     const courcesTimes = allCources.map((set)=>{
         let time = 0
         set.forEach((setIndex, index)=>{
@@ -198,10 +197,6 @@ export default function Days() {
         })
         return time
     })
-
-    console.log(setsTimes)
-    console.log(courcesTimes)
-    
 
     const allDays = {
         names:  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"],
@@ -212,6 +207,7 @@ export default function Days() {
     const [chosenSet, setChosenSet] = useState<any | null>(null)
     const [startingSet, setStartingSet] =useState<boolean>(false)
     const [cameraReadiness, setCameraReadiness] = useState(false)
+    const [chosenSetIndex, setChosenSetIndex] = useState<number | null>(null)
 
     const date = new Date()
 
@@ -281,7 +277,13 @@ export default function Days() {
         }
     }
 
+    function sendDataToFirebase(){
+        console.log(1)
+    }
+
     useEffect(() => {
+
+
         const pose = new Holistic({
             locateFile: (file) => {
                 return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
@@ -300,6 +302,7 @@ export default function Days() {
 
         //@ts-ignore
         pose.onResults(onResults);
+
 
         if (
             typeof cameraRef.current !== "undefined" &&
@@ -332,6 +335,8 @@ export default function Days() {
                 </div>
             </div>}
             
+
+
             <div className={`exerciseView`}>
                 
                 {(!startingSet) &&
@@ -432,6 +437,7 @@ export default function Days() {
                             visibleBody={visibleBody}
                             dots={dots}
                             set={chosenSet}
+                            chosenSetIndex={chosenSetIndex}
                             allExercises={allExercises}
                             stoppingSet={stoppingSet}   
                         />
@@ -439,6 +445,10 @@ export default function Days() {
                 </div>
 
             </div>
+
+            <IonButton className='firebase' onClick={()=>{
+                console.log(localStorage)
+            }}>FIREBASE</IonButton>
 
             {(chosenCource && !startingSet) && 
                 <div className='setsBox' >
@@ -459,8 +469,8 @@ export default function Days() {
                                                             <div
                                                                 className="setCard"
                                                                 
-                                                                onClick={() => setChosenSet(allSets[setIndex])}
-                                                            >
+                                                                onClick={() => {setChosenSet(allSets[setIndex]); setChosenSetIndex(setIndex)}}
+                                                                >
                                                                 <div className='setCardImgBox'>
                                                                     <img className='setCardImg' src={day2}/>
                                                                 </div>
@@ -488,7 +498,8 @@ export default function Days() {
                                             <h2>Strength</h2>
                                             {chosenSet.map((ex:any, index: number)=>(
                                                 <div key={index} className='exercisePrewiew__item'>
-                                                    <img  src={allExercises[ex.exerciseIndex].gif} alt="" />
+                                                    {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
+                                                    <img src={allExercises[ex.exerciseIndex].gif}/>
                                                     <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                     <h5>{ex.time} sec</h5>
                                                 </div>

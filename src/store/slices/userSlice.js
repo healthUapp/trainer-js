@@ -17,17 +17,27 @@ const userSlice = createSlice({
     reducers: {
         addResult(state, action){
 
-            const results =  action.payload
+            const results =  action.payload.results
+            const setIndex = action.payload.setIndex
 
             state.results = results
 
-            writeUserData(state.id, results)
+            writeUserDataForFirebase(state.id, results)
 
-            state.id += 1
-            state.results = []
+            
+            localStorage.setItem(`${setIndex}`, JSON.stringify(results));
 
 
-            function writeUserData(id, exercisesResults) {
+
+
+
+            function clearResults(){
+                state.id += 1
+                state.results = []
+            }
+
+
+            function writeUserDataForFirebase(id, exercisesResults) {
                 const db = getDatabase();
                 console.log(exercisesResults)
                 set(ref(db, 'exercises/' + id), {
@@ -39,7 +49,7 @@ const userSlice = createSlice({
 
             }
               
-
+            clearResults()
         
         },
     }
