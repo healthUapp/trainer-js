@@ -56,7 +56,7 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
     },[visibleBody, time, showResults, pause])
 
     useEffect(()=>{
-        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex}))
+        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex, date: new Date()}))
     },[showResults, results])
     
     useEffect(()=>{
