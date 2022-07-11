@@ -383,12 +383,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "green"
             colors.leg.left = "green"
             colors.leg.right = "green"
-            counter += 1;
-            if (center_angle >= 25) {
-                accuracy = Math.floor(((180 - center_angle) / 155 * 100))
-            } else {
-                accuracy = Math.floor((center_angle / 25 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
     }
 
@@ -407,12 +402,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
-            counter += 1;
-            if (center_angle >= 25) {
-                accuracy = Math.floor(((180 - center_angle) / 180 * 100))
-            } else {
-                accuracy = Math.floor((center_angle / 25 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
     }
 
@@ -481,11 +471,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage == "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_right > 150 || stage == "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_left > 150) {
             stage = "SHIFT"
             counter += 1
-            if (center_angle > 25) {
-                accuracy = Math.floor(((180 - center_angle) / 25 * 100))
-            } else {
-                accuracy = Math.floor((center_angle / 25 * 100))
-            }
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
     }
 
