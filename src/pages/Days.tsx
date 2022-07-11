@@ -137,6 +137,9 @@ export default function Days() {
         
         {
             name: "ARM SCISSORS",
+        },
+        {
+            name: "ELBOW CLICKS SEATED",
         }
     ]
 

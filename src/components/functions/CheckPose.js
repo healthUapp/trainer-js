@@ -56,6 +56,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 20) arm_scissors_seat();
     if (exerciseValue === 21) arm_chops();
     if (exerciseValue === 22) arm_scissors();
+    if (exerciseValue === 23) elbow_clicks_seated();
     
 
     function goodMorning() {
@@ -752,6 +753,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     }
 
+    function elbow_clicks_seated(){
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_elbow_right = findAngle(12, 14, 16, poseLandmarks)
+        const radius = findRadius(16, 15, poseLandmarks)
+        const radius_shoulders = findRadius(12, 11, poseLandmarks)
+
+        if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && anle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
+            stage = "SHIFT";
+          }
+          
+          if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
+            counter += 1;
+            stage = "SPEAD";
+          }
+    }
     return {
         colors: colors,
         stage: stage,
