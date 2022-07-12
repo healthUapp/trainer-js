@@ -57,6 +57,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 21) arm_chops();
     if (exerciseValue === 22) arm_scissors();
     if (exerciseValue === 23) elbow_clicks_seated();
+    if (exerciseValue === 24) shoulder_taps_seated();
     
 
     function goodMorning() {
@@ -614,7 +615,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" &&  angle_elbow_right > 20) {
             stage = "BACK";
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             colors.arm.left = "green"
             colors.arm.right = "green"
         }
@@ -636,7 +637,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (stage === "UP" && angle_elbow_left > 170 && angle_shoulder_left > 170 || stage === "UP" && angle_shoulder_right > 170 && angle_elbow_right > 170) {
             stage = "DOWN";
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             colors.arm.left = "green"
             colors.arm.right = "green"
         }
@@ -654,7 +655,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right > 100 || radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_left > 100) {
             counter += 1;
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPREAD";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -675,7 +676,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right < 100) {
             counter += 1;
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPREAD";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -698,7 +699,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (radius_shoulders * 2 > radius && stage === "SHIFT" && angle_shoulder_right > 90 || radius_shoulders * 2 > radius && stage === "SHIFT" && angle_shoulder_left > 90) {
             counter += 1;
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPREAD";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -720,7 +721,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right < 100) {
             counter += 1;
-            accuracy = Math.floor(Math.random() * (100 - 70) + 70);
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPREAD";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -746,8 +747,27 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
           
           if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
             counter += 1;
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPEAD";
           }
+    }
+
+    function shoulder_taps_seated(){
+        const radius = findRadius(7, 0, poseLandmarks)
+        const radius_left = findRadius(19, 11, poseLandmarks)
+        const radius_right  = findRadius(20, 12, poseLandmarks)
+
+        if (radius*2>radius_left*0.8 && radius*2>radius_right*0.8){
+            stage="UP"
+        }
+                    
+
+        if (stage==="UP" && angle_shoulder_left>150 && angle_shoulder_right>150){
+            stage="DOWN"
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+        }
+                    
+                    
     }
     return {
         colors: colors,

@@ -14,11 +14,18 @@ import checkBody from "../components/functions/checkBody";
 import ReactFreezeframe from 'react-freezeframe';
 
 //GIF
-import marchGif from '../assets/gif/March.gif'
-import goodMorningGif from '../assets/gif/GM.gif'
-import cabaretGif from '../assets/gif/Cabaret.gif'
-import lungeGif from '../assets/gif/BL.gif'
-import legPushGif from '../assets/gif/SLDL.gif'
+import marchGif from '../assets/gif/March in place.gif'
+import goodMorningGif from '../assets/gif/Good morning.gif'
+import cancanGif from '../assets/gif/Cancan.gif'
+import lungeGif from '../assets/gif/Back lunge.gif'
+import legPushGif from '../assets/gif/SLDL with chair.gif'
+import armChopsSeatGif from '../assets/gif/Arm Chops on chair.gif'
+import armScissorsSeatGif from '../assets/gif/Arm scissors on chair.gif'
+import headTiltisGif from '../assets/gif/Head tilts.gif'
+import overheadPunchesSeatedGif from '../assets/gif/Overhead punches seated.gif'
+import overheadShouldersStretchGif from '../assets/gif/Overhead shoulders strech.gif'
+import punchesSeatedGif from '../assets/gif/Punches.gif'
+import shrugsGif from '../assets/gif/Shrugs.gif'
 
 //exImg
 import halfjack from '../assets/exImg/halfjack.png'
@@ -63,7 +70,7 @@ export default function Days() {
         },
         {
             name: "CANCAN LEFT",
-            gif: cabaretGif
+            gif: cancanGif
         },
         {
             name: "MARCH IN PLACE",
@@ -94,7 +101,7 @@ export default function Days() {
         },
         {
             name: "CANCAN RIGHT",
-            gif: cabaretGif
+            gif: cancanGif
         },
         {
             name: "SIDE LEG RISES",
@@ -114,28 +121,35 @@ export default function Days() {
         },
         {
             name: "SHRUGS SEATED",
+            gif:shrugsGif
         },
         {
             name: "HEAD TILTS LR SEATED",
+            gif:headTiltisGif
         },
         {
             name: "OVERHEAD SHOULDER STRETCH SEATED",
+            gif:overheadShouldersStretchGif
         },
 
         {
             name: "PUNCHES SEATED",
+            gif:punchesSeatedGif
         },
 
         {
             name: "OVERHEAD PUNCHES SEATED",
+            gif:overheadPunchesSeatedGif
         },
 
         {
             name: "ARM CHOPS SEATED",
+            gif:armChopsSeatGif
         },
 
         {
             name: "ARM SCISSORS SEATED",
+            gif:armScissorsSeatGif
         },
 
         {
