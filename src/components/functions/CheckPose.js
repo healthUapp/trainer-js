@@ -58,7 +58,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 22) arm_scissors();
     if (exerciseValue === 23) elbow_clicks_seated();
     if (exerciseValue === 24) shoulder_taps_seated();
-    
+    if (exerciseValue === 25) elbow_clicks();
+
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -93,6 +94,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle_back_left >= 140) {
             stage = "DOWN";
         }
+
     }
 
     function cabaret_right() {
@@ -173,6 +175,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.left = "red"
             colors.arm.right = "red"
         }
+
     }
 
     function march_in_place() {
@@ -211,6 +214,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (angle_leg_right >= 160 && angle_leg_right <= 190 && angle_leg_left >= 160 && angle_leg_left <= 190) {
             stage = "UP";
         }
+
     }
 
     function leg_push() {
@@ -256,6 +260,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
                 accuracy = Math.floor((angle_leg_r / 140 * 100))
             }
         }
+
     }
 
     function squat() {
@@ -265,7 +270,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         colors.leg.right = "yellow"
         colors.leg.left = "yellow"
-        if (angle_leg_left > 150 && angle_leg_right >150 ) {
+        if (angle_leg_left > 150 && angle_leg_right > 150) {
             stage = "DOWN";
         }
 
@@ -274,13 +279,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             colors.leg.left = "green"
             counter += 1;
-            if (angle_leg_left >= 80 && angle_leg_left <= 100 && angle_leg_right >= 80 && angle_leg_right <= 100 ) {
+            if (angle_leg_left >= 80 && angle_leg_left <= 100 && angle_leg_right >= 80 && angle_leg_right <= 100) {
                 accuracy = Math.floor(((180 - angle_leg_left) / 100 * 100))
             } else {
                 accuracy = Math.floor((angle_leg_left / 130 * 100))
             }
-
         }
+
     }
 
     function lunges() {
@@ -341,6 +346,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "DOWN";
 
         }
+
     }
 
     function calf_rises() {
@@ -356,6 +362,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "UP";
             counter += 1;
         }
+
     }
 
     function junmping_jack() {
@@ -378,7 +385,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             arm_status = "not ok";
         }
 
-        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok" && angle_leg_left > 150 && angle_leg_right>150) {
+        if (stage !== "SHIFT" && stage === "SPREAD LEG AND ARMS" && center_angle >= 25 && arm_status === "ok" && angle_leg_left > 150 && angle_leg_right > 150) {
             stage = "SHIFT";
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -386,6 +393,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.leg.right = "green"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
+
     }
 
     function half_jack() {
@@ -398,13 +406,14 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (center_angle < 15) {
             stage = "SPREAD LEG";
         }
-       
-        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25 && angle_leg_left > 140 && angle_leg_right>140 && side_left > 160 && side_right>160) {
+
+        if (stage !== "SHIFT" && stage === "SPREAD LEG" && center_angle >= 25 && angle_leg_left > 140 && angle_leg_right > 140 && side_left > 160 && side_right > 160) {
             stage = "SHIFT";
             colors.leg.left = "green"
             colors.leg.right = "green"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
+
     }
 
     function side_leg_rises() {
@@ -452,6 +461,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
                 colors.leg.right = "green"
             }
         }
+
     }
 
     function step_side_jack() {
@@ -474,6 +484,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             counter += 1
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
+
     }
 
     function chest_expansion() {
@@ -500,6 +511,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage !== "SPREAD ARMS" && angle_shoulder_left > 70 && angle_shoulder_right > 70) {
             stage = "SPREAD ARMS";
         }
+
     }
 
     function side_arm_rises() {
@@ -526,6 +538,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
             stage = "SPREAD ARMS"
         }
+
     }
 
     function up_shoulders() {
@@ -535,14 +548,14 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side < distance && right_side > distance && stage==="TURN HEAD" || right_side < distance && left_side > distance && stage==="TURN HEAD") {
-            stage="DOWN"
+        if (left_side < distance && right_side > distance && stage === "TURN HEAD" || right_side < distance && left_side > distance && stage === "TURN HEAD") {
+            stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
 
-        if (distance>right_side && distance>left_side){
-            stage="TURN HEAD"
+        if (distance > right_side && distance > left_side) {
+            stage = "TURN HEAD"
         }
 
     }
@@ -613,12 +626,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             stage = "PUNCH";
         }
 
-        if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" &&  angle_elbow_right > 20) {
+        if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" && angle_elbow_right > 20) {
             stage = "BACK";
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             colors.arm.left = "green"
             colors.arm.right = "green"
         }
+
     }
 
     function overheadPunches() {
@@ -664,6 +678,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (radius > radius_shoulders * 3 && stage !== "SHIFT") {
             stage = "SHIFT";
         }
+
     }
 
     function arm_scissors_seat() {
@@ -733,7 +748,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     }
 
-    function elbow_clicks_seated(){
+    function elbow_clicks_seated() {
         const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
         const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
         const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
@@ -743,32 +758,53 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
         if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && angle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
             stage = "SHIFT";
-          }
-          
-          if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
-            counter += 1;
+        }
+
+        if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPEAD";
-          }
+        }
+
     }
 
-    function shoulder_taps_seated(){
+    function shoulder_taps_seated() {
         const radius = findRadius(7, 0, poseLandmarks)
         const radius_left = findRadius(19, 11, poseLandmarks)
-        const radius_right  = findRadius(20, 12, poseLandmarks)
+        const radius_right = findRadius(20, 12, poseLandmarks)
 
-        if (radius*2>radius_left*0.8 && radius*2>radius_right*0.8){
-            stage="UP"
+        if (radius * 2 > radius_left * 0.8 && radius * 2 > radius_right * 0.8) {
+            stage = "UP"
         }
-                    
 
-        if (stage==="UP" && angle_shoulder_left>150 && angle_shoulder_right>150){
-            stage="DOWN"
+
+        if (stage === "UP" && angle_shoulder_left > 150 && angle_shoulder_right > 150) {
+            stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
-                    
-                    
+
+
     }
+
+    function elbow_clicks() {
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_elbow_right = findAngle(12, 14, 16, poseLandmarks)
+        const radius = findRadius(16, 15, poseLandmarks)
+        const radius_shoulders = findRadius(12, 11, poseLandmarks)
+
+        if (angle_shoulder_left > 60 && angle_shoulder_left < 100 && angle_shoulder_right > 60 && angle_shoulder_right < 100 && angle_elbow_left > 60 && angle_elbow_left < 100 && angle_elbow_right > 60 && angle_elbow_right < 100) {
+            stage = "SHIFT";
+        }
+
+        if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+            stage = "SPEAD";
+        }
+    }
+
+
+
     return {
         colors: colors,
         stage: stage,

@@ -161,7 +161,14 @@ export default function Days() {
         },
         {
             name: "ELBOW CLICKS SEATED",
+        },
+        {
+            name: "SHOULDER TAPS SEATED",
+        },
+        {
+            name: "ELBOW CLICKS ",
         }
+        
     ]
 
     const allSets = [
