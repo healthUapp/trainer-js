@@ -275,19 +275,31 @@ video{
 }
 
 .results{
-    background-color: rgba(208, 208, 208, 0.5);
-    padding: 5px;
-    margin-top: 20px;
+    background-color: rgb(255, 255, 255);
     position: absolute;
-
-    width: 800px;
-    height: 800px;
-
-     text-align: center;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
 }
 .resultHead{
-    font-size: 50px;
-    font-weight: 700;
+    padding-top: 50px;
+    font-size: 36px;
+    line-height: 45px;
+    font-weight: 800;
+    color: rgba(31, 24, 81, 1);
+
+    font-style: upperhead;
+}
+
+.resultHead-bottom{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #A6A8AB;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .resultRoundGraphText{
@@ -300,6 +312,14 @@ video{
     width: 240px;
     height: 240px;
 }
+
+.circleText{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #27262B;
+}
+
 
 .resultElement{
     padding-top: 20px;

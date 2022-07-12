@@ -25,7 +25,7 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
-    const [showResults, setShowResults] = useState(false)
+    const [showResults, setShowResults] = useState(true)
     const [results, setResults] = useState([])
     
 
@@ -54,6 +54,11 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
             
         }
     },[visibleBody, time, showResults, pause])
+
+
+    useEffect(()=>{
+        
+    })
 
     useEffect(()=>{
         if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex}))
@@ -147,14 +152,16 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
                     <div className="exerciseAccuracyGraphBox">
                         <MiniGraphAccuracy results={results} accuracy={accuracy}/>
                     </div>
-                    <div className="exerciseTimeBox">
-                        <Countdown startTime={set[exerciseNumber].time} newTime={time} width={226}/>
-                     </div>
+                    {!showResults &&
+                        <div className="exerciseTimeBox">
+                            <Countdown startTime={set[exerciseNumber].time} newTime={time} width={226}/>
+                        </div>
+                    }
                 </>
             }
 
 
-            {showResults &&  <Results results={results}/>}
+            {showResults &&  <Results/>}
         </>
     );
 }
