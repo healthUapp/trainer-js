@@ -1,0 +1,15 @@
+[
+    {
+        "results":
+        [
+            {"name":"LEG PUSH","value":5,"accuracy":[98,79,84,79,96]},
+            {"name":"REVERSE LUNGE","value":10,"accuracy":[89,87,82,90,86,91,88,93,77,84]},
+            {"name":"CANCAN RIGHT","value":9,"accuracy":[53,50,52,61,54,50,67,61,50]},
+            {"name":"CANCAN LEFT","value":12,"accuracy":[58,66,63,65,62,66,55,52,55,68,62,68]},
+            {"name":"MARCH IN PLACE","value":8,"accuracy":[78,92,88,91,83,97,91,94]},
+            {"name":"GOOD MORNING","value":0,"accuracy":[]}
+        ],
+        "indexOfSet":2,
+        "date":"Mon Jul 11 2022 22:21:35 GMT+0300 (Moscow Standard Time)"
+    }
+]
