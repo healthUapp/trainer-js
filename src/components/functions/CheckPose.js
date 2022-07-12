@@ -769,6 +769,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function shoulder_taps_seated() {
         const radius = findRadius(7, 0, poseLandmarks)
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
         const radius_left = findRadius(19, 11, poseLandmarks)
         const radius_right = findRadius(20, 12, poseLandmarks)
 
