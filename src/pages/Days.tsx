@@ -50,8 +50,8 @@ import day1 from '../assets/png/day1.png'
 import day2 from '../assets/png/day2.png'
 import day3 from '../assets/png/day3.png'
 import day4 from '../assets/png/day4.png'
-import day5 from '../assets/png/day5.png'
-import day6 from '../assets/png/day5.png'
+import day5 from '../assets/png/day7.png'
+import day6 from '../assets/png/day6.png'
 
 
 

@@ -623,8 +623,9 @@ img{
     font-size: 20px;
     cursor: pointer;
     user-select: none;
-    margin-left: 40px;
-    margin-top: 50px;
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 30px;
 
     /*position: absolute;*/
     left: calc(50% - 360px / 2);
@@ -667,9 +668,11 @@ img{
 .cardImg{
     width: 100%;
     height: 100%;
+    max-width: 230px;
+    max-height: 180px;
     object-fit: cover;
     box-shadow: 3px 5px 13px 0px rgba(118, 118, 118, 0.25);
-    border-width: 3px;
+    border-width: 0px;
     border-style: solid;
     border-radius: 6px;
     border-color: rgba(0, 0, 0, 0);
@@ -680,6 +683,7 @@ img{
 
 
 .card:hover .cardImg{
+    border-width: 2px;
     border-color: #90B8F8;
 }
 
