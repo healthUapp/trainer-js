@@ -11,13 +11,13 @@
     scrollbar-width: thin;
     scrollbar-color: blue orange;
 }
-  
+
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
     width: 15px;
 }
 
-*::-webkit-scrollbar-track {        
+*::-webkit-scrollbar-track {
     background: #F0F0F0;
 }
 
@@ -82,10 +82,10 @@ video{
 
 @keyframes blure{
     from {
-      background: rgba(255, 255, 255, 1);
-      z-index: 9999;
+        background: rgba(255, 255, 255, 1);
+        z-index: 9999;
     }
-    
+
     80%{
         z-index: 9999;
     }
@@ -364,7 +364,7 @@ video{
     font-size: 20px;
     z-index: 999;
 
-    
+
     justify-content: center;
 }
 
@@ -383,7 +383,7 @@ video{
     background-color: #28a64e;
     color: #fff;
     width: 100%;
-    
+
 }
 
 .infoStage{
@@ -460,7 +460,7 @@ video{
     z-index: 0;
     display: flex;
     justify-content: center;
-    
+
 }
 
 .gif{
@@ -494,7 +494,7 @@ video{
     width: 50%;
     height: 100%;
     background-color: rgba(24, 37, 53, 0.6);
-    ;
+;
     z-index: 100;
 }
 .pauseTextBox{
@@ -558,19 +558,57 @@ video{
 }
 
 .startImgBox{
-    width: 50vw;
+    width: 30vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
 }
 
+.videoWrapper {
+    width: 490px;
+    height: 900px;
+    background: none;
+}
+
+#myVideo {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    z-index: 950;
+    overflow: hidden;
+}
+
 
 .cardsBox{
-    width: 50vw;
+    width: 70vw;
+    max-width: 1100px;
     min-height: 100vh;
-    position: relative;
+    /*position: relative;*/
     background-color: radial-gradient(238.54% 951.39% at 2.5% -7.92%, #FFFFFF 0%, #F4F5F6 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.titleCardBox {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: 0.03em;
+    color: #1F1851;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.cardsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 
@@ -583,15 +621,25 @@ video{
 
 
 .card{
-    height: 366px;
-    width: 360px;
+    height: 240px;
+    width: 250px;
     font-size: 20px;
     cursor: pointer;
     user-select: none;
+    margin-left: 40px;
+    margin-top: 50px;
 
-    position: absolute;
+    /*position: absolute;*/
     left: calc(50% - 360px / 2);
     top: calc(50% - 366px / 2);
+}
+
+.healtLink {
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    text-align: center;
+    bottom: 40px;
 }
 
 .nextSlideBox, .beforeSlideBox{
@@ -625,8 +673,8 @@ video{
     object-fit: cover;
     transform: matrix(-1, 0, 0, 1, 0, 0);
     box-shadow: 3px 5px 13px 0px rgba(118, 118, 118, 0.25);
-    width: 360px;
-    height: 280px;
+    width: 240px;
+    height: 180px;
     border-width: 3px;
     border-style: solid;
     border-radius: 6px;
@@ -761,7 +809,7 @@ video{
 .setsBox{
     width: 100%;
     height: 100%;
-    border-radius: 10px;    
+    border-radius: 10px;
     position: absolute;
 
     right: 0;
@@ -793,7 +841,7 @@ video{
     background: #F0F0F0;
     width: 345px;
     height: 100%;
-    border-radius: 10px;   
+    border-radius: 10px;
 }
 
 
@@ -801,7 +849,7 @@ video{
 .prewiewBox .setPreview{
     position: relative;
     overflow: hidden;
-    border-radius: 10px;   
+    border-radius: 10px;
     width: 819px;
     height: 100%;
     background: #F0F0F0;

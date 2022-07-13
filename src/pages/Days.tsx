@@ -37,17 +37,18 @@ import chest_expansion from '../assets/exImg/chest_expansion.png'
 import jumping_jack from '../assets/exImg/jumping_jack.png'
 
 
+
+
 //PNG
 import day1 from '../assets/png/day1.png'
 import day2 from '../assets/png/day2.png'
 import day3 from '../assets/png/day3.png'
-import day4 from '../assets/png/day1.png'
-import day5 from '../assets/png/day2.png'
-import day6 from '../assets/png/day3.png'
-import day7 from '../assets/png/day2.png'
+import day4 from '../assets/png/day4.png'
+import day5 from '../assets/png/day5.png'
+import day6 from '../assets/png/day5.png'
 
 
-import start from '../assets/png/start.png'
+
 
 //SVG
 import cheked from '../assets/svg/cheked.svg'
@@ -259,7 +260,6 @@ export default function Days() {
         [0,1,2],
         [0,1,2],
         [0,1,2],
-        [],
         []
     ]
 
@@ -282,8 +282,8 @@ export default function Days() {
     })
 
     const allDays = {
-        names: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        images: [day1, day2, day3, day4, day5, day6, day7],
+        names: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"],
+        images: [day1, day2, day3, day4, day5, day6],
     }
 
     const [chosenCource, setChosenCource] = useState<any | null>(null)
@@ -359,21 +359,21 @@ export default function Days() {
             setDots(results.poseLandmarks)
         }
     }
+    //
+    // function sendDataToFirebase() {
+    //     console.log(1)
+    // }
 
-    function sendDataToFirebase() {
-        console.log(1)
-    }
-
-    const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
-
-    function writeUserDataForFirebase() {
-        console.log(dimaHyi)
-        set(ref(database, 'exercises/'), {dimaHyi});
-        // database.ref('exercises/').push({
-        //     dima: objectblyat
-        // })
-        // ref('exercises/').push({objectblyat})
-    }
+    // const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
+    //
+    // function writeUserDataForFirebase() {
+    //     console.log(dimaHyi)
+    //     set(ref(database, 'exercises/'), {dimaHyi});
+    //     // database.ref('exercises/').push({
+    //     //     dima: objectblyat
+    //     // })
+    //     // ref('exercises/').push({objectblyat})
+    // }
 
     useEffect(() => {
 
@@ -437,10 +437,19 @@ export default function Days() {
 
                 {(!startingSet) &&
                     <>
+                        <div className="startImgBox">
+                            {/*<img className="startImg" src={start} alt="" />*/}
+                            <div className={'videoWrapper'}>
+                                {/*<video autoPlay muted loop id="myVideo">*/}
+                                {/*    <source src={Video} type="video.mp4"/>*/}
+                                {/*</video>*/}
+                            </div>
+                        </div>
                         <div className="cardsBox">
-                            {
-                                allCources.map((cource, index) => {
-                                    if (index === initialSlide) {
+                            <div className={'titleCardBox'}>Weekly activity program</div>
+                            <div className={'cardsWrapper'}>
+                                {
+                                    allCources.map((cource, index) => {
                                         return (
                                             <div key={index}>
                                                 <div
@@ -449,17 +458,17 @@ export default function Days() {
                                                     onClick={() => { index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
                                                 >
                                                     <div className='cardImgBox'>
-                                                        <img className='cardImg' src={day2} />
+                                                        <img className='cardImg' src={allDays.images[index]} />
                                                         {index > 4 && <img className="faLockSvg" src={fa_lock} />}
                                                     </div>
 
                                                     <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
                                                         <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                         <div className='cardLowerTextBox'>
-                                                            <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
-                                                            <p className='cardLowerText-2'>{cource.length} cr.</p>
+                                                            {/*<p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>*/}
+                                                            <p className='cardLowerText-2'>{cource.length} ex.</p>
                                                             <div className='cardLowerIconsBox'>
-                                                                <p className='cardLowerIconsText'>workouts</p>
+                                                                <p className='cardLowerIconsText'>activities</p>
                                                                 <div className='cardLowerIconsCheckedBox'>
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
@@ -469,46 +478,12 @@ export default function Days() {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                {allCources[index + 1] ?
-                                                    <div
-                                                        className='nextSlideBox'
-                                                        onClick={() => setTinitialSlide(index + 1)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                    :
-                                                    <div
-                                                        className='nextSlideBox'
-                                                        onClick={() => setTinitialSlide(0)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                }
-                                                {allCources[index - 1]?
-                                                    <div
-                                                        className='beforeSlideBox'
-                                                        onClick={() => setTinitialSlide(index - 1)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                    :
-                                                    <div
-                                                        className='beforeSlideBox'
-                                                        onClick={() => setTinitialSlide(6)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                }
                                             </div>
                                         )
-                                    }
-                                })
-                            }
-                        </div>
-                        <div className="startImgBox">
-                            <img className="startImg" src={start} alt="" />
-                            <img className="logoSvg" src={logo} alt="" />
+                                    })
+                                }
+                                <a className={'healtLink'} href="https://healthuapp.com">healthuapp.com</a>
+                            </div>
                         </div>
                     </>
                 }
