@@ -36,7 +36,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 0) goodMorning();
     if (exerciseValue === 1) cabaret_left();
     if (exerciseValue === 2) march_in_place();
-    if (exerciseValue === 3) leg_push();
+    if (exerciseValue === 3) SLDL();
     if (exerciseValue === 4) squat();
     if (exerciseValue === 5) lunges();
     if (exerciseValue === 6) calf_rises();
@@ -59,6 +59,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 23) elbow_clicks_seated();
     if (exerciseValue === 24) shoulder_taps_seated();
     if (exerciseValue === 25) elbow_clicks();
+    if (exerciseValue === 26) shoulder_taps();
 
 
     function goodMorning() {
@@ -217,7 +218,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     }
 
-    function leg_push() {
+    function SLDL() {
 
         let side = ""
 
@@ -553,7 +554,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
         }
 
-
         if (distance > right_side && distance > left_side) {
             stage = "TURN HEAD"
         }
@@ -604,7 +604,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             }
 
         }
-
 
         if (angle > 100 && left_wrist === "True" && right_wrist === "True") {
             stage = "UP"
@@ -756,6 +755,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const radius = findRadius(16, 15, poseLandmarks)
         const radius_shoulders = findRadius(12, 11, poseLandmarks)
 
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
         if (angle_shoulder_left > 70 && angle_shoulder_left < 100 && angle_shoulder_right > 70 && angle_shoulder_right < 100 && angle_elbow_left > 70 && angle_elbow_left < 100 && angle_elbow_right > 70 && angle_elbow_right < 100) {
             stage = "SHIFT";
         }
@@ -763,6 +765,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPEAD";
+            colors.arm.left = "green"
+            colors.arm.right = "green"
         }
 
     }
@@ -774,16 +778,19 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const radius_left = findRadius(19, 11, poseLandmarks)
         const radius_right = findRadius(20, 12, poseLandmarks)
 
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
         if (radius * 2 > radius_left * 0.8 && radius * 2 > radius_right * 0.8) {
             stage = "UP"
         }
 
-
         if (stage === "UP" && angle_shoulder_left > 150 && angle_shoulder_right > 150) {
             stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+            colors.arm.left = "green"
+            colors.arm.right = "green"
         }
-
 
     }
 
@@ -795,6 +802,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const radius = findRadius(16, 15, poseLandmarks)
         const radius_shoulders = findRadius(12, 11, poseLandmarks)
 
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
         if (angle_shoulder_left > 60 && angle_shoulder_left < 100 && angle_shoulder_right > 60 && angle_shoulder_right < 100 && angle_elbow_left > 60 && angle_elbow_left < 100 && angle_elbow_right > 60 && angle_elbow_right < 100) {
             stage = "SHIFT";
         }
@@ -802,9 +812,34 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         if (stage === "SHIFT" && radius < radius_shoulders * 1.2) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage = "SPEAD";
+            colors.arm.left = "green"
+            colors.arm.right = "green"
         }
+
     }
 
+    function shoulder_taps() {
+        const radius = findRadius(7, 0, poseLandmarks)
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const radius_left = findRadius(19, 11, poseLandmarks)
+        const radius_right = findRadius(20, 12, poseLandmarks)
+
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
+        if (radius * 1.5 > radius_left * 0.8 && radius * 1.5 > radius_right * 0.8) {
+            stage = "UP"
+        }
+
+        if (stage === "UP" && angle_shoulder_left > 150 && angle_shoulder_right > 150) {
+            stage = "DOWN"
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+        }
+
+    }
 
 
     return {

@@ -18,7 +18,7 @@ import marchGif from '../assets/gif/March in place.gif'
 import goodMorningGif from '../assets/gif/Good morning.gif'
 import cancanGif from '../assets/gif/Cancan.gif'
 import lungeGif from '../assets/gif/Back lunge.gif'
-import legPushGif from '../assets/gif/SLDL with chair.gif'
+import SLDLGif from '../assets/gif/SLDL with chair.gif'
 import armChopsSeatGif from '../assets/gif/Arm Chops on chair.gif'
 import armScissorsSeatGif from '../assets/gif/Arm scissors on chair.gif'
 import headTiltisGif from '../assets/gif/Head tilts.gif'
@@ -78,7 +78,7 @@ export default function Days() {
         },
         {
             name: "LEG PUSH",
-            gif: legPushGif
+            gif: SLDLGif
         },
         {
             name: "SQUAT",
@@ -167,6 +167,9 @@ export default function Days() {
         },
         {
             name: "ELBOW CLICKS ",
+        },
+        {
+            name: "SHOULDER TAPS",
         }
         
     ]
