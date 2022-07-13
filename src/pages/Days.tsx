@@ -13,6 +13,9 @@ import checkBody from "../components/functions/checkBody";
 //@ts-ignore
 import ReactFreezeframe from 'react-freezeframe';
 
+
+import Video from "../components/Video";
+
 //GIF
 import marchGif from '../assets/gif/March in place.gif'
 import goodMorningGif from '../assets/gif/Good morning.gif'
@@ -26,6 +29,9 @@ import overheadPunchesSeatedGif from '../assets/gif/Overhead punches seated.gif'
 import overheadShouldersStretchGif from '../assets/gif/Overhead shoulders strech.gif'
 import punchesSeatedGif from '../assets/gif/Punches.gif'
 import shrugsGif from '../assets/gif/Shrugs.gif'
+
+//video
+
 
 //exImg
 import halfjack from '../assets/exImg/halfjack.png'
@@ -52,14 +58,13 @@ import day6 from '../assets/png/day5.png'
 
 //SVG
 import cheked from '../assets/svg/cheked.svg'
-import next from '../assets/svg/nextSlide.svg'
-import logo from '../assets/svg/logo.svg'
 import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 import { useDispatch } from "react-redux";
 import { addResult } from "store/slices/userSlice";
+import {start} from "repl";
 
 export default function Days() {
     const dispatch = useDispatch()
@@ -441,12 +446,7 @@ export default function Days() {
                 {(!startingSet) &&
                     <>
                         <div className="startImgBox">
-                            {/*<img className="startImg" src={start} alt="" />*/}
-                            <div className={'videoWrapper'}>
-                                {/*<video autoPlay muted loop id="myVideo">*/}
-                                {/*    <source src={Video} type="video.mp4"/>*/}
-                                {/*</video>*/}
-                            </div>
+                            <Video />
                         </div>
                         <div className="cardsBox">
                             <div className={'titleCardBox'}>Weekly activity program</div>
