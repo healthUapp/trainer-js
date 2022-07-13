@@ -299,18 +299,36 @@ video{
     line-height: 20px;
     color: #A6A8AB;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .resultRoundGraphText{
     font-weight: 700;
-    font-size: 50px;
+    font-size: 45px;
     line-height: 38px;
 }
-
+.resultCircleGraphBox{
+    display: flex;
+    margin: 0 auto;
+    max-width: 860px;
+    justify-content: space-around;
+    align-items:flex-end;
+}
 .resultCircleGraph{
-    width: 240px;
-    height: 240px;
+    width: 250px;
+    height: 250px;
+}
+.resultCircleGraph.gr-2 {
+    width: 280px;
+    height: 350px;
+    padding-top: 20px;
+}
+
+.resultGraph{
+    width: 360px;
+    height: 300px;
+    box-shadow: 3px 5px 20px rgba(172,177, 192, 0.25);
+    border-radius: 10px;
 }
 
 .circleText{
@@ -435,7 +453,7 @@ video{
 
 .gifBox{
     background-color: white;
-    position: absolute;
+    position: relative;
     height: 100vh;
     min-width: 50vw;
     overflow: hidden;
@@ -445,6 +463,11 @@ video{
     
 }
 
+.gif{
+    position: absolute;
+    height: 100%;
+    top: 0;
+}
 
 .noGif{
     width: 100%;

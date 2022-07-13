@@ -14,7 +14,7 @@ import { addResult } from "store/slices/userSlice";
 import chackBody from "./functions/checkBody";
 
 
-export default function Trainer({visibleBody, dots, set,chosenSetIndex, stoppingSet, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, selectedCource, set, allSets, chosenSetIndex, stoppingSet, setColors, allExercises}) {
     const dispatch = useDispatch()
     const [accuracy, setAccuracy] = useState([])
     const [rules,setRules] = useState([])
@@ -25,7 +25,7 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
-    const [showResults, setShowResults] = useState(true)
+    const [showResults, setShowResults] = useState(false)
     const [results, setResults] = useState([])
     
 
@@ -61,7 +61,14 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
     })
 
     useEffect(()=>{
-        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex}))
+        if(showResults && results.length > 0) {
+            dispatch(addResult({results:results, indexOfSet: chosenSetIndex}) )
+            let timer = setTimeout(()=>{
+                setResults([])
+                clearTimeout(timer)
+            }, 10000)
+        }
+        
     },[showResults, results])
     
     useEffect(()=>{
@@ -161,7 +168,13 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
             }
 
 
-            {showResults &&  <Results/>}
+            {showResults &&  <Results allSets={allSets} selectedCource = {selectedCource} showResults={showResults} results = {
+                {
+                    results: results,
+                    indexOfSet: chosenSetIndex,
+                    date: new Date().toString()
+                }
+            } />}
         </>
     );
 }

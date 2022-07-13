@@ -260,15 +260,6 @@ export default function Days() {
         []
     ]
 
-    const result = {
-        results:{
-            name: "name",
-            value: 15,
-            accuracy: [99,98,45]
-        },
-        indexOfSet: 4,
-        date: "21.03.2412"
-        }
 
     const setsTimes = allSets.map((exercises) => {
         let time = 0
@@ -537,8 +528,10 @@ export default function Days() {
                         <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
+                            selectedCource={chosenCource}
                             dots={dots}
                             set={chosenSet}
+                            allSets={allSets}
                             chosenSetIndex={chosenSetIndex}
                             allExercises={allExercises}
                             stoppingSet={stoppingSet}
@@ -617,7 +610,7 @@ export default function Days() {
                 </div>
             }
             
-            <IonButton className='firebase' onClick={() => {localStorage.clear()}}>CLEAR LOCAL</IonButton>
+            {/* <IonButton className='firebase' onClick={() => {}}>SHOW LOCAL</IonButton> */}
 
             {cameraReadiness &&
                 <div className='blurer' />
