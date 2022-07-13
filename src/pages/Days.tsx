@@ -179,7 +179,12 @@ export default function Days() {
         },
         {
             name: "BICEPS EXTENSION SEATED",
+        },
+        {
+            name: "W EXTENSION SEATED",
         }
+
+
         
     ]
 
