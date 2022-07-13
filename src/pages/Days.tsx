@@ -176,6 +176,9 @@ export default function Days() {
         },
         {
             name: "SHOULDER TAPS",
+        },
+        {
+            name: "BICEPS EXTENSION SEATED",
         }
         
     ]

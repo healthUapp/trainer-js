@@ -60,7 +60,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 24) shoulder_taps_seated();
     if (exerciseValue === 25) elbow_clicks();
     if (exerciseValue === 26) shoulder_taps();
-
+    if (exerciseValue === 27) biceps_extension_seated();
+    
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
@@ -838,6 +839,25 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.left = "green"
             colors.arm.right = "green"
         }
+
+    }
+
+    function biceps_extension_seated(){
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_elbow_right = findAngle(12, 14, 16, poseLandmarks)
+
+        if (angle_elbow_left>110 && angle_elbow_right>110 && angle_shoulder_left<40 && angle_shoulder_right<40){
+            stage="LIFT" 
+        }
+                    
+                
+        if (stage==="LIFT" && anlge_elbow_left<20 && angle_elbow_right<20  && angle_shoulder_left<40 && angle_shoulder_right<40){
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+            stage="DOWN"
+        }
+                   
 
     }
 
