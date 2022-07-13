@@ -275,31 +275,69 @@ video{
 }
 
 .results{
-    background-color: rgba(208, 208, 208, 0.5);
-    padding: 5px;
-    margin-top: 20px;
+    background-color: rgb(255, 255, 255);
     position: absolute;
-
-    width: 800px;
-    height: 800px;
-
-     text-align: center;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
 }
 .resultHead{
-    font-size: 50px;
-    font-weight: 700;
+    padding-top: 50px;
+    font-size: 36px;
+    line-height: 45px;
+    font-weight: 800;
+    color: rgba(31, 24, 81, 1);
+
+    font-style: upperhead;
+}
+
+.resultHead-bottom{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #A6A8AB;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .resultRoundGraphText{
     font-weight: 700;
-    font-size: 50px;
+    font-size: 45px;
     line-height: 38px;
 }
-
-.resultCircleGraph{
-    width: 240px;
-    height: 240px;
+.resultCircleGraphBox{
+    display: flex;
+    margin: 0 auto;
+    max-width: 860px;
+    justify-content: space-around;
+    align-items:flex-end;
 }
+.resultCircleGraph{
+    width: 250px;
+    height: 250px;
+}
+.resultCircleGraph.gr-2 {
+    width: 280px;
+    height: 350px;
+    padding-top: 20px;
+}
+
+.resultGraph{
+    width: 360px;
+    height: 300px;
+    box-shadow: 3px 5px 20px rgba(172,177, 192, 0.25);
+    border-radius: 10px;
+}
+
+.circleText{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #27262B;
+}
+
 
 .resultElement{
     padding-top: 20px;
@@ -415,7 +453,7 @@ video{
 
 .gifBox{
     background-color: white;
-    position: absolute;
+    position: relative;
     height: 100vh;
     min-width: 50vw;
     overflow: hidden;
@@ -425,6 +463,11 @@ video{
     
 }
 
+.gif{
+    position: absolute;
+    height: 100%;
+    top: 0;
+}
 
 .noGif{
     width: 100%;

@@ -14,7 +14,7 @@ import { addResult } from "store/slices/userSlice";
 import chackBody from "./functions/checkBody";
 
 
-export default function Trainer({visibleBody, dots, set,chosenSetIndex, stoppingSet, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, selectedCource, set, allSets, chosenSetIndex, stoppingSet, setColors, allExercises}) {
     const dispatch = useDispatch()
     const [accuracy, setAccuracy] = useState([])
     const [rules,setRules] = useState([])
@@ -55,8 +55,20 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
         }
     },[visibleBody, time, showResults, pause])
 
+
     useEffect(()=>{
-        if(showResults && results.length > 0) dispatch(addResult({results:results, indexOfSet: chosenSetIndex}))
+        
+    })
+
+    useEffect(()=>{
+        if(showResults && results.length > 0) {
+            dispatch(addResult({results:results, indexOfSet: chosenSetIndex}) )
+            let timer = setTimeout(()=>{
+                setResults([])
+                clearTimeout(timer)
+            }, 10000)
+        }
+        
     },[showResults, results])
     
     useEffect(()=>{
@@ -147,14 +159,22 @@ export default function Trainer({visibleBody, dots, set,chosenSetIndex, stopping
                     <div className="exerciseAccuracyGraphBox">
                         <MiniGraphAccuracy results={results} accuracy={accuracy}/>
                     </div>
-                    <div className="exerciseTimeBox">
-                        <Countdown startTime={set[exerciseNumber].time} newTime={time} width={226}/>
-                     </div>
+                    {!showResults &&
+                        <div className="exerciseTimeBox">
+                            <Countdown startTime={set[exerciseNumber].time} newTime={time} width={226}/>
+                        </div>
+                    }
                 </>
             }
 
 
-            {showResults &&  <Results results={results}/>}
+            {showResults &&  <Results allSets={allSets} selectedCource = {selectedCource} showResults={showResults} results = {
+                {
+                    results: results,
+                    indexOfSet: chosenSetIndex,
+                    date: new Date().toString()
+                }
+            } />}
         </>
     );
 }

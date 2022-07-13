@@ -174,6 +174,12 @@ export default function Days() {
         
     ]
 
+    const allSetsNames = [
+        "Chop Scissors Punches seated",
+        "Seated stretch",
+        "Legs & Core"
+    ]
+
     const allSets = [
         [
             { exerciseIndex: 19, time: 30 },
@@ -257,15 +263,6 @@ export default function Days() {
         []
     ]
 
-    const result = {
-        results:{
-            name: "name",
-            value: 15,
-            accuracy: [99,98,45]
-        },
-        indexOfSet: 4,
-        date: "21.03.2412"
-        }
 
     const setsTimes = allSets.map((exercises) => {
         let time = 0
@@ -452,7 +449,7 @@ export default function Days() {
                                                     onClick={() => { index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
                                                 >
                                                     <div className='cardImgBox'>
-                                                        <img className='cardImg' src={day1} />
+                                                        <img className='cardImg' src={day2} />
                                                         {index > 4 && <img className="faLockSvg" src={fa_lock} />}
                                                     </div>
 
@@ -460,7 +457,7 @@ export default function Days() {
                                                         <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                         <div className='cardLowerTextBox'>
                                                             <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
-                                                            <p className='cardLowerText-2'>{allSets[index] ? allSets[index].length : 0} ex.</p>
+                                                            <p className='cardLowerText-2'>{cource.length} cr.</p>
                                                             <div className='cardLowerIconsBox'>
                                                                 <p className='cardLowerIconsText'>workouts</p>
                                                                 <div className='cardLowerIconsCheckedBox'>
@@ -534,8 +531,10 @@ export default function Days() {
                         <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
+                            selectedCource={chosenCource}
                             dots={dots}
                             set={chosenSet}
+                            allSets={allSets}
                             chosenSetIndex={chosenSetIndex}
                             allExercises={allExercises}
                             stoppingSet={stoppingSet}
@@ -567,11 +566,11 @@ export default function Days() {
                                                         onClick={() => { setChosenSet(allSets[setIndex]); setChosenSetIndex(setIndex) }}
                                                     >
                                                         <div className='setCardImgBox'>
-                                                            <img className='setCardImg' src={day2} />
+                                                            <img className='setCardImg' src={allDays.images[index]} />
                                                         </div>
 
                                                         <div className={`cardText`} >
-                                                            <h5 className='setCardHighText'>{`Set №${index}`}</h5>
+                                                            <h5 className='setCardHighText'>{`${allSetsNames[index]}`}</h5>
                                                             <div className='cardLowerTextBox'>
                                                                 {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
                                                                 <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
@@ -614,7 +613,7 @@ export default function Days() {
                 </div>
             }
             
-            <IonButton className='firebase' onClick={() => {localStorage.clear()}}>CLEAR LOCAL</IonButton>
+            {/* <IonButton className='firebase' onClick={() => {}}>SHOW LOCAL</IonButton> */}
 
             {cameraReadiness &&
                 <div className='blurer' />
