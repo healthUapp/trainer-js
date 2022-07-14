@@ -8,6 +8,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
+    const [rerenderCounter, setRerenderCounter] = useState(0)
     const formatOfDate = {day: "numeric", month: "numeric", year: "numeric"}
     const dateNow = new Date().toLocaleString('ru', formatOfDate)
 
@@ -26,7 +27,11 @@ export default function Results({allSets, selectedCource, results, showResults})
         console.log(allResults)
         setResultsOfDays(allResults)
         }
-    },[])
+        let delay = setTimeout(()=>{
+            setRerenderCounter(rerenderCounter + 1)
+            clearTimeout(delay)
+        },1000)
+    },[rerenderCounter])
 
     useEffect(()=>{
         if(resultsOfDays){
@@ -97,8 +102,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         let accuracy = [];
 
-        let charts = [
-        ]
+        let charts = []
 
         if(resultsData.length > 0){
             accuracy = resultsData[0].results.map((result)=>{
