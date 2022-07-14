@@ -13,12 +13,15 @@ import checkBody from "../components/functions/checkBody";
 //@ts-ignore
 import ReactFreezeframe from 'react-freezeframe';
 
+
+import Video from "../components/Video";
+
 //GIF
 import marchGif from '../assets/gif/March in place.gif'
 import goodMorningGif from '../assets/gif/Good morning.gif'
 import cancanGif from '../assets/gif/Cancan.gif'
 import lungeGif from '../assets/gif/Back lunge.gif'
-import legPushGif from '../assets/gif/SLDL with chair.gif'
+import SLDLGif from '../assets/gif/SLDL with chair.gif'
 import armChopsSeatGif from '../assets/gif/Arm Chops on chair.gif'
 import armScissorsSeatGif from '../assets/gif/Arm scissors on chair.gif'
 import headTiltisGif from '../assets/gif/Head tilts.gif'
@@ -26,6 +29,9 @@ import overheadPunchesSeatedGif from '../assets/gif/Overhead punches seated.gif'
 import overheadShouldersStretchGif from '../assets/gif/Overhead shoulders strech.gif'
 import punchesSeatedGif from '../assets/gif/Punches.gif'
 import shrugsGif from '../assets/gif/Shrugs.gif'
+
+//video
+
 
 //exImg
 import halfjack from '../assets/exImg/halfjack.png'
@@ -37,28 +43,28 @@ import chest_expansion from '../assets/exImg/chest_expansion.png'
 import jumping_jack from '../assets/exImg/jumping_jack.png'
 
 
+
+
 //PNG
 import day1 from '../assets/png/day1.png'
 import day2 from '../assets/png/day2.png'
 import day3 from '../assets/png/day3.png'
-import day4 from '../assets/png/day1.png'
-import day5 from '../assets/png/day2.png'
-import day6 from '../assets/png/day3.png'
-import day7 from '../assets/png/day2.png'
+import day4 from '../assets/png/day4.png'
+import day5 from '../assets/png/day7.png'
+import day6 from '../assets/png/blocked.png'
 
 
-import start from '../assets/png/start.png'
+
 
 //SVG
 import cheked from '../assets/svg/cheked.svg'
-import next from '../assets/svg/nextSlide.svg'
-import logo from '../assets/svg/logo.svg'
 import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 import { useDispatch } from "react-redux";
 import { addResult } from "store/slices/userSlice";
+import {start} from "repl";
 
 export default function Days() {
     const dispatch = useDispatch()
@@ -78,7 +84,7 @@ export default function Days() {
         },
         {
             name: "LEG PUSH",
-            gif: legPushGif
+            gif: SLDLGif
         },
         {
             name: "SQUAT",
@@ -167,7 +173,18 @@ export default function Days() {
         },
         {
             name: "ELBOW CLICKS ",
+        },
+        {
+            name: "SHOULDER TAPS",
+        },
+        {
+            name: "BICEPS EXTENSION SEATED",
+        },
+        {
+            name: "W EXTENSION SEATED",
         }
+
+
         
     ]
 
@@ -256,7 +273,6 @@ export default function Days() {
         [0,1,2],
         [0,1,2],
         [0,1,2],
-        [],
         []
     ]
 
@@ -279,8 +295,8 @@ export default function Days() {
     })
 
     const allDays = {
-        names: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        images: [day1, day2, day3, day4, day5, day6, day7],
+        names: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"],
+        images: [day1, day2, day3, day4, day5, day6],
     }
 
     const [chosenCource, setChosenCource] = useState<any | null>(null)
@@ -356,21 +372,21 @@ export default function Days() {
             setDots(results.poseLandmarks)
         }
     }
+    //
+    // function sendDataToFirebase() {
+    //     console.log(1)
+    // }
 
-    function sendDataToFirebase() {
-        console.log(1)
-    }
-
-    const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
-
-    function writeUserDataForFirebase() {
-        console.log(dimaHyi)
-        set(ref(database, 'exercises/'), {dimaHyi});
-        // database.ref('exercises/').push({
-        //     dima: objectblyat
-        // })
-        // ref('exercises/').push({objectblyat})
-    }
+    // const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
+    //
+    // function writeUserDataForFirebase() {
+    //     console.log(dimaHyi)
+    //     set(ref(database, 'exercises/'), {dimaHyi});
+    //     // database.ref('exercises/').push({
+    //     //     dima: objectblyat
+    //     // })
+    //     // ref('exercises/').push({objectblyat})
+    // }
 
     useEffect(() => {
 
@@ -434,10 +450,14 @@ export default function Days() {
 
                 {(!startingSet) &&
                     <>
+                        <div className="startImgBox">
+                            {/*<Video />*/}
+                        </div>
                         <div className="cardsBox">
-                            {
-                                allCources.map((cource, index) => {
-                                    if (index === initialSlide) {
+                            <div className={'titleCardBox'}>Weekly activity program</div>
+                            <div className={'cardsWrapper'}>
+                                {
+                                    allCources.map((cource, index) => {
                                         return (
                                             <div key={index}>
                                                 <div
@@ -446,17 +466,17 @@ export default function Days() {
                                                     onClick={() => { index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
                                                 >
                                                     <div className='cardImgBox'>
-                                                        <img className='cardImg' src={day2} />
+                                                        <img className='cardImg' src={allDays.images[index]} />
                                                         {index > 4 && <img className="faLockSvg" src={fa_lock} />}
                                                     </div>
 
                                                     <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
                                                         <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                         <div className='cardLowerTextBox'>
-                                                            <p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>
-                                                            <p className='cardLowerText-2'>{cource.length} cr.</p>
+                                                            {/*<p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>*/}
+                                                            <p className='cardLowerText-2'>{cource.length} ex.</p>
                                                             <div className='cardLowerIconsBox'>
-                                                                <p className='cardLowerIconsText'>workouts</p>
+                                                                <p className='cardLowerIconsText'>activities</p>
                                                                 <div className='cardLowerIconsCheckedBox'>
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
@@ -466,46 +486,12 @@ export default function Days() {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                {allCources[index + 1] ?
-                                                    <div
-                                                        className='nextSlideBox'
-                                                        onClick={() => setTinitialSlide(index + 1)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                    :
-                                                    <div
-                                                        className='nextSlideBox'
-                                                        onClick={() => setTinitialSlide(0)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                }
-                                                {allCources[index - 1]?
-                                                    <div
-                                                        className='beforeSlideBox'
-                                                        onClick={() => setTinitialSlide(index - 1)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                    :
-                                                    <div
-                                                        className='beforeSlideBox'
-                                                        onClick={() => setTinitialSlide(6)}
-                                                    >
-                                                        <img src={next} alt="" />
-                                                    </div>
-                                                }
                                             </div>
                                         )
-                                    }
-                                })
-                            }
-                        </div>
-                        <div className="startImgBox">
-                            <img className="startImg" src={start} alt="" />
-                            <img className="logoSvg" src={logo} alt="" />
+                                    })
+                                }
+                                <a className={'healtLink'} href="https://healthuapp.com">healthuapp.com</a>
+                            </div>
                         </div>
                     </>
                 }
