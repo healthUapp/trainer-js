@@ -97,8 +97,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         let accuracy = [];
 
-        let charts = [
-        ]
+        let charts = [];
 
         if(resultsData.length > 0){
             accuracy = resultsData[0].results.map((result)=>{

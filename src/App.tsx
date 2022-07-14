@@ -15,9 +15,9 @@ const App: React.FC = () => {
 return (
     <IonApp>
         <IonReactRouter>
-            <Redirect exact path="/" to="/days"/> 
+            <Redirect exact path="/" to="/trainer"/> 
             <IonRouterOutlet>
-                <Route path="/days">
+                <Route path="/trainer">
                     <Days/>
                 </Route>
             </IonRouterOutlet>
