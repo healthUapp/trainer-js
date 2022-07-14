@@ -25,7 +25,7 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
-    const [showResults, setShowResults] = useState(false)
+    const [showResults, setShowResults] = useState(true)
     const [results, setResults] = useState([])
     
 
@@ -68,7 +68,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                 clearTimeout(timer)
             }, 10000)
         }
-        
     },[showResults, results])
     
     useEffect(()=>{
@@ -166,7 +165,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                     }
                 </>
             }
-
 
             {showResults &&  <Results allSets={allSets} selectedCource = {selectedCource} showResults={showResults} results = {
                 {
