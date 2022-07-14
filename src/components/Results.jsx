@@ -21,9 +21,11 @@ export default function Results({allSets, selectedCource, results, showResults})
 
     useEffect(()=>{
         let allResults = JSON.parse(localStorage.getItem('results'))
-        allResults.push(results)
+        if(allResults){
+            allResults.push(results)
+            setResultsOfDays(allResults)
+        }
         console.log(allResults)
-        setResultsOfDays(allResults)
     },[])
 
     useEffect(()=>{
@@ -32,7 +34,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         
             resultsOfDays.map(result => {
                 const resultDate = new Date(result.date).toLocaleString('ru', formatOfDate)
-                if(resultDate === dateNow){
+                if((resultDate === dateNow) && (result.results.length > 0)){
                     console.log(result)
                     todaysResultsArray.push(result)
                 }
@@ -93,7 +95,10 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         console.log(resultsData)
 
-        let accuracy;
+        let accuracy = []
+
+        let charts = [
+        ]
 
         if(resultsData.length > 0){
             accuracy = resultsData[0].results.map((result)=>{
@@ -109,15 +114,16 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
 
-        // accuracy.forEach((a,i)=>{
-        //     charts.push({
-        //         data: a,
-        //         color: colors[i]
-        //     })
-        // })
+        if(accuracy.length > 0){
+            accuracy.forEach((a,i)=>{
+                charts.push({
+                    data: a,
+                    color: colors[i]
+                })
+            })
+        }
 
-        let charts = [
-        ]
+        
 
         const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = svgRef.clientWidth - margin.left - margin.right,
