@@ -43,7 +43,7 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                 setAccuracy([])
                 if(exerciseNumber + 1 >= set.length){
                     console.log('set is ended')
-                    setShowResults(true)
+                    setShowResults(false)
                 }else {
                     setExerciseNumber(exerciseNumber + 1)
                     setSelectedGif(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.gif)
@@ -176,5 +176,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
         </>
     );
 }
+
 
 

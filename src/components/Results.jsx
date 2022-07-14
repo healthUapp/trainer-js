@@ -1,4 +1,6 @@
 import { useRef,useState, useEffect } from "react";
+import { database } from '../firebase'
+import { ref, child, get } from "firebase/database";
 import * as d3 from "d3";
 import { svg } from "d3";
 
@@ -23,6 +25,16 @@ export default function Results({allSets, selectedCource, results, showResults})
     
 
     useEffect(()=>{
+        const dbRef = ref(database)
+        get(child(dbRef, `exercises/`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val())
+            } else {
+                console.log("no have data")
+            }
+        }).catch((error) => {
+            console.error(error)
+        })
         let allResults = JSON.parse(localStorage.getItem('results'))
         if (allResults) {
         allResults.push(results)
@@ -41,9 +53,7 @@ export default function Results({allSets, selectedCource, results, showResults})
                     console.log(result)
                     todaysResultsArray.push(result)
                 }
-                
             });
-
             setTodayResults(todaysResultsArray)
         }
     },[resultsOfDays])
