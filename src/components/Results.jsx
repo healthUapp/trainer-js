@@ -31,7 +31,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },10000000)
+        },1000)
     },[rerenderCounter])
 
     useEffect(()=>{
@@ -40,7 +40,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         
             resultsOfDays.map(result => {
                 const resultDate = new Date(result.date).toLocaleString('ru', formatOfDate)
-                if(resultDate === dateNow){
+                if(resultDate === dateNow && result.results.length > 0){
                     console.log(result)
                     todaysResultsArray.push(result)
                 }
@@ -101,7 +101,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         console.log(resultsData)
 
-        let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
+        let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(238, 221, 204 ,1)','rgba(238, 204, 214 ,1)','#000','#500']
 
         let charts = []
 
@@ -141,11 +141,11 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
         const yScale = d3.scaleLinear()
-            .domain([0, 100])
+            .domain([70, 100])
             .range([height - 60, 70])
 
         const yAxis = d3.axisLeft(yScale)
-            .ticks(5)
+            .ticks(3)
             .tickPadding([20])
             .tickSize(width - 90)
 
@@ -195,17 +195,6 @@ export default function Results({allSets, selectedCource, results, showResults})
             //     .attr('height',100)
             //     .attr('fill', 'red')
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
