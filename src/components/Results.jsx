@@ -41,7 +41,8 @@ export default function Results({allSets, selectedCource, results, showResults})
         console.log(allResults)
         setResultsOfDays(allResults)
         }
-    },[])
+        let delay = setTimeout(()=>{setRenderInterval(renderInterval + 1); clearTimeout(delay)}, 500)
+    },[renderInterval])
 
     useEffect(()=>{
         if(resultsOfDays){
@@ -103,8 +104,8 @@ export default function Results({allSets, selectedCource, results, showResults})
                 drawCircleGraph( (todayAccuracy? todayAccuracy : 0)/100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
                 drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
-        let delay = setTimeout(()=>{setRenderInterval(renderInterval + 1); clearTimeout(delay)}, 500)
-    },[todayResults, results, renderInterval])
+
+    },[todayResults, results])
 
     const drawGraph = (resultsData, text, svgRef) => {
 
