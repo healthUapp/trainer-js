@@ -558,12 +558,6 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        colors.body.up="green"
-        console.log("distance")
-        console.log(distance)
-        console.log("left_side")
-        console.log(left_side)
-
         if (left_side < distance && right_side < distance && stage === "UP") {
             stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
