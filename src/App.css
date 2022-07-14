@@ -971,3 +971,21 @@ video{
     left: 0;
     top: 0;
 }
+
+.graphText{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.tick text{
+    color: black;
+    filter: opacity(1);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.tick line{
+    filter: opacity(0.1);
+}

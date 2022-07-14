@@ -1,5 +1,6 @@
 import { useRef,useState, useEffect } from "react";
 import * as d3 from "d3";
+import { svg } from "d3";
 
 
 
@@ -32,6 +33,7 @@ export default function Results({allSets, selectedCource, results, showResults})
             resultsOfDays.map(result => {
                 const resultDate = new Date(result.date).toLocaleString('ru', formatOfDate)
                 if(resultDate === dateNow){
+                    console.log(result)
                     todaysResultsArray.push(result)
                 }
                 
@@ -67,6 +69,8 @@ export default function Results({allSets, selectedCource, results, showResults})
                 }).reduce((a,b) => a+b, 0)
             }).reduce((a,b) => a+b, 0);
             
+            console.log(todayResults)
+
             let todayUnompletedSets = selectedCource.filter(n => todayResults.map(todayResult => {
                 return todayResult.indexOfSet
             }).indexOf(n) === -1);
@@ -80,18 +84,128 @@ export default function Results({allSets, selectedCource, results, showResults})
 
             drawCircleGraph( Math.round(( (selectedCource.length - todayUnompletedSets.length) / selectedCource.length) * 100) / 100, "Sets", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current)
             drawCircleGraph( (todayCompletedExercises) / 1000, "Repeats", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current)
-            drawCircleGraph( (todayAccuracy? todayAccuracy : 87)/100,  "Accuracy" , "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
+            drawCircleGraph( (todayAccuracy? todayAccuracy : 0)/100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
             drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
     },[todayResults])
 
-    const drawGraph = (results, text, svgRef) => {
+    const drawGraph = (resultsData, text, svgRef) => {
 
+        console.log(resultsData)
 
-        const svg = d3.select(svgRef)
-            .html(null)
+        let accuracy;
+
+        if(resultsData.length > 0){
+            accuracy = resultsData[0].results.map((result)=>{
+                return result.accuracy.map((val) => val)
+            })
+
+            console.log(accuracy)
+        }
+
+        let data1 = [100,90,80,72,32]
+        let data2 = [0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,6,30,60,80,100]
+        let data3 = [29,45,82,75,23,23,11,5,23,88,77]
+
+        let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
+
+        // accuracy.forEach((a,i)=>{
+        //     charts.push({
+        //         data: a,
+        //         color: colors[i]
+        //     })
+        // })
+
+        let charts = [
+        ]
+
+        const margin = {top: 0, right: 0, bottom: 0, left: 0},
+        width = svgRef.clientWidth - margin.left - margin.right,
+        height = svgRef.clientHeight - margin.top - margin.bottom;
+
+        // Очистка предыдущего кадра
+        const svg = d3.select(svgRef).html(null) 
+            .attr("width", width)
+            .attr("height", height)
             .append("g")
-            .attr("transform", `translate(${width/2},${width/2})`)
+            .attr("transform", `translate(${0},${0})`)
+            .style('overflow', 'visivle')
+        
+        svg.append('text')
+            .attr('x', 25)
+            .attr('y', 40)
+            .text("Accuracy preformance, %")
+            .attr('text-anchor', 'left')
+            .attr('class', 'graphText')
+
+
+        const yScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([height - 60, 70])
+
+        const yAxis = d3.axisLeft(yScale)
+            .ticks(5)
+            .tickPadding([20])
+            .tickSize(width - 90)
+
+
+
+        svg.append('g')
+            .call(yAxis)
+            .attr('transform', `translate(${width - 30},${0})`)
+            .attr('opacity', 1)
+
+        d3.selectAll('g.tick')
+            .attr('opacity', '1')
+            .attr('stroke-width', 1)
+
+        d3.selectAll('path.domain')
+            .attr('display', 'none')
+
+
+        if (charts.length > 0) {
+            charts.forEach(chart => drawLine(chart))
+        }
+
+        function drawLine( chart ) {
+            const data = chart.data
+            const color = chart.color
+
+            const xScale = d3.scaleLinear()
+            .domain([0, data.length])
+            .range([60, width - 30])
+
+            const generateScaledLine = d3.line()
+                .x((d,i) => xScale(i))
+                .y(yScale)
+                .curve(d3.curveBasis)
+
+            svg.selectAll('.line')
+                .data([data])
+                .join('path')
+                    .attr('d', d => generateScaledLine(d))
+                    .attr('fill', 'none')
+                    .attr('stroke', color)
+                    .attr('stroke-width', 3)
+            // svg.append('rect')
+            //     .attr('x', 0)
+            //     .attr('y', 0)
+            //     .attr('width',100)
+            //     .attr('height',100)
+            //     .attr('fill', 'red')
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     const drawCircleGraph = (val, text, grColorStart, grColorEnd, svgRef) => {
@@ -108,7 +222,6 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         let x2 = middleRadius * Math.cos(lastPrecent  - 3.14 / 2)
         let y2 = middleRadius * Math.sin(lastPrecent  - 3.14 / 2)  
-
 
         const svg = d3.select(svgRef)
             .html(null)
@@ -132,8 +245,6 @@ export default function Results({allSets, selectedCource, results, showResults})
         .attr("stop-color", grColorEnd)
         .attr("stop-opacity", 1);
 
-
-        
         const arcBack_path = d3.arc()
             .innerRadius(innerRadius)
             .outerRadius(outerRadius)
@@ -203,6 +314,7 @@ export default function Results({allSets, selectedCource, results, showResults})
             default:
                 break;
         }
+
         svg.append("text")
             .attr('x', 0)
             .attr('y', 30)
