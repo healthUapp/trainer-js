@@ -141,7 +141,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
         const yScale = d3.scaleLinear()
-            .domain([70, 100])
+            .domain([0, 100])
             .range([height - 60, 70])
 
         const yAxis = d3.axisLeft(yScale)
