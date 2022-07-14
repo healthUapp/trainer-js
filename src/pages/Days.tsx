@@ -51,7 +51,7 @@ import day2 from '../assets/png/day2.png'
 import day3 from '../assets/png/day3.png'
 import day4 from '../assets/png/day4.png'
 import day5 from '../assets/png/day7.png'
-import day6 from '../assets/png/day6.png'
+import day6 from '../assets/png/blocked.png'
 
 
 
@@ -451,7 +451,7 @@ export default function Days() {
                 {(!startingSet) &&
                     <>
                         <div className="startImgBox">
-                            <Video />
+                            {/*<Video />*/}
                         </div>
                         <div className="cardsBox">
                             <div className={'titleCardBox'}>Weekly activity program</div>
