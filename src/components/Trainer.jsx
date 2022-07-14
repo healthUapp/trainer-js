@@ -68,7 +68,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                 clearTimeout(timer)
             }, 10000)
         }
-        
     },[showResults, results])
     
     useEffect(()=>{
@@ -167,7 +166,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                 </>
             }
 
-
             {showResults &&  <Results allSets={allSets} selectedCource = {selectedCource} showResults={showResults} results = {
                 {
                     results: results,
@@ -178,5 +176,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
         </>
     );
 }
+
 
 

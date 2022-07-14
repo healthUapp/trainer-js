@@ -66,7 +66,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
 
     function goodMorning() {
         const angle_back_left = findAngle(11, 23, 25, poseLandmarks)
-
+        const angle_back_right = findAngle(12, 24, 26, poseLandmarks)
 
         const angle_elbow_left = findAngle(15, 13, 11, poseLandmarks)
         const angle_elbow_right = findAngle(16, 14, 12, poseLandmarks)
@@ -78,8 +78,10 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.body.down = "yellow"
         colors.body.up = "yellow"
 
-        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 70 && angle_back_left <= 110) {
+        if (stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_left >= 70 && angle_back_left <= 110 || stage !== "UP" && stage === 'DOWN' && angle_elbow_left >= 40 && angle_elbow_right >= 40 && angle_elbow_left <= 80 && angle_elbow_right <= 80 && angle_back_right >= 70 && angle_back_right <= 110 ) {
             colors.arm.left = "green"
+            colors.leg.left = "green"
+            colors.arm.right = "green"
             colors.leg.right = "green"
             colors.body.left = "green"
             colors.body.right = "green"
@@ -87,14 +89,19 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.body.up = "green"
             stage = "UP";
             counter += 1;
-            if (angle_back_left > 70) {
+            if (angle_back_left > 70 ) {
                 accuracy = Math.floor(((180 - angle_back_left) / 110 * 100))
             } else {
                 accuracy = Math.floor((angle_back_left / 70 * 100))
+            }   
+            if (angle_back_right > 70 ) {
+                accuracy = Math.floor(((180 - angle_back_right) / 110 * 100))
+            } else {
+                accuracy = Math.floor((angle_back_right / 70 * 100))
             }
         }
 
-        if (angle_back_left >= 140) {
+        if (angle_back_left >= 140 || angle_back_right>=140) {
             stage = "DOWN";
         }
 
@@ -547,17 +554,17 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function up_shoulders() {
 
         const radius = findRadius(8, 7, poseLandmarks)
-        const distance = Math.pow(radius * 1.8, 2)
+        const distance = Math.pow(radius , 2)*4
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side < distance && right_side > distance && stage === "TURN HEAD" || right_side < distance && left_side > distance && stage === "TURN HEAD") {
+        if (left_side < distance && right_side < distance && stage === "UP") {
             stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
         }
 
-        if (distance > right_side && distance > left_side) {
-            stage = "TURN HEAD"
+        if (distance < right_side && distance < left_side) {
+            stage = "UP"
         }
 
     }
@@ -578,7 +585,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
         }
 
-        if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN RIGHT") {
+        if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN LEFT") {
 
             stage = "TURN HEAD"
         }
@@ -590,10 +597,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle = findAngle(11, 12, 16, poseLandmarks)
         const left_wrist = comparePoint(15, 7, poseLandmarks)
         const right_wrist = comparePoint(16, 8, poseLandmarks)
-
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
-
         if (stage == "UP" && left_wrist === "False" && right_wrist === "False" && angle < 100) {
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -604,9 +609,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             } else {
                 accuracy = Math.floor((angle / 100 * 100))
             }
-
         }
-
         if (angle > 100 && left_wrist === "True" && right_wrist === "True") {
             stage = "UP"
         }
@@ -623,11 +626,18 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (angle_elbow_left < 30 && angle_elbow_right < 30 && angle_shoulder_left < 30 && angle_shoulder_right < 30) {
+        if (angle_elbow_left < 25 && angle_elbow_right < 25 && angle_shoulder_left < 30 && angle_shoulder_right < 30) {
             stage = "PUNCH";
         }
 
-        if (stage === "PUNCH" && angle_elbow_left > 20 || stage === "PUNCH" && angle_elbow_right > 20) {
+        if (stage === "PUNCH" && angle_elbow_left > 25 ) {
+            stage = "BACK";
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90)
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+        }
+
+        if (stage === "PUNCH" && angle_elbow_right > 25 ) {
             stage = "BACK";
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
             colors.arm.left = "green"

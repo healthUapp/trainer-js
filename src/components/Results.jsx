@@ -1,4 +1,6 @@
 import { useRef,useState, useEffect } from "react";
+import { database } from '../firebase'
+import { ref, child, get } from "firebase/database";
 import * as d3 from "d3";
 import { svg } from "d3";
 
@@ -6,6 +8,7 @@ import { svg } from "d3";
 
 export default function Results({allSets, selectedCource, results, showResults}){
 
+    const [renderInterval, setRenderInterval] = useState(0)
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
     const [rerenderCounter, setRerenderCounter] = useState(0)
@@ -20,7 +23,19 @@ export default function Results({allSets, selectedCource, results, showResults})
     
     const width = 250
 
+    
+
     useEffect(()=>{
+        const dbRef = ref(database)
+        get(child(dbRef, `exercises/`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val())
+            } else {
+                console.log("no have data")
+            }
+        }).catch((error) => {
+            console.error(error)
+        })
         let allResults = JSON.parse(localStorage.getItem('results'))
         if (allResults) {
         allResults.push(results)
@@ -43,9 +58,7 @@ export default function Results({allSets, selectedCource, results, showResults})
                     console.log(result)
                     todaysResultsArray.push(result)
                 }
-                
             });
-
             setTodayResults(todaysResultsArray)
         }
     },[resultsOfDays])
@@ -89,16 +102,21 @@ export default function Results({allSets, selectedCource, results, showResults})
             console.log(selectedCource)
             
 
-            drawCircleGraph( Math.round(( (selectedCource.length - todayUnompletedSets.length) / selectedCource.length) * 100) / 100, "Sets", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current)
-            drawCircleGraph( (todayCompletedExercises) / 1000, "Repeats", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current)
-            drawCircleGraph( (todayAccuracy? todayAccuracy : 0)/100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
-            drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
+            
+                drawCircleGraph( Math.round(( (selectedCource.length - todayUnompletedSets.length) / selectedCource.length) * 100) / 100, "Sets", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current)
+                drawCircleGraph( (todayCompletedExercises) / 1000, "Repeats", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current)
+                drawCircleGraph( (todayAccuracy? todayAccuracy : 0)/100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
+                drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
-    },[todayResults])
+
+    },[todayResults, results])
 
     const drawGraph = (resultsData, text, svgRef) => {
 
         console.log(resultsData)
+        resultsData = []
+
+        let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
 
         let accuracy = [];
 
@@ -107,24 +125,23 @@ export default function Results({allSets, selectedCource, results, showResults})
         if(resultsData.length > 0){
             accuracy = resultsData[0].results.map((result)=>{
                 return result.accuracy.map((val) => val)
-            })
+            }).flat()
+
+            
 
             console.log(accuracy)
+
+            accuracy.forEach((a,i)=>{
+                charts.push({
+                    data: a,
+                    color: colors[i]
+                })
+            })
         }
 
         let data1 = [100,90,80,72,32]
         let data2 = [0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,6,30,60,80,100]
         let data3 = [29,45,82,75,23,23,11,5,23,88,77]
-
-        let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
-
-        accuracy.forEach((a,i)=>{
-            charts.push({
-                data: a,
-                color: colors[i]
-            })
-        })
-
 
 
         const margin = {top: 0, right: 0, bottom: 0, left: 0},
@@ -331,6 +348,7 @@ export default function Results({allSets, selectedCource, results, showResults})
             .text(svgText);
 
     }
+
 
 
 
