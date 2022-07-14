@@ -55,9 +55,9 @@ img{
 }
 
 
-/*video{*/
-/*    display: none;*/
-/*}*/
+video{
+    display: none;
+}
 
 .exerciseView{
     position: relative;
