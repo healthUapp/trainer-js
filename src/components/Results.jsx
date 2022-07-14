@@ -20,10 +20,7 @@ export default function Results({allSets, selectedCource, results, showResults})
     const svgRef_3 = useRef(null)
     const svgRef_4 = useRef(null)
 
-    
     const width = 250
-
-    
 
     useEffect(()=>{
         const dbRef = ref(database)
@@ -42,10 +39,11 @@ export default function Results({allSets, selectedCource, results, showResults})
         console.log(allResults)
         setResultsOfDays(allResults)
         }
+
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },1000)
+        },10000000)
     },[rerenderCounter])
 
     useEffect(()=>{
@@ -109,31 +107,21 @@ export default function Results({allSets, selectedCource, results, showResults})
                 drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
 
-    },[todayResults, results])
+    },[todayResults])
 
     const drawGraph = (resultsData, text, svgRef) => {
 
         console.log(resultsData)
-        resultsData = []
 
         let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)']
-
-        let accuracy = [];
 
         let charts = []
 
         if(resultsData.length > 0){
-            accuracy = resultsData[0].results.map((result)=>{
-                return result.accuracy.map((val) => val)
-            }).flat()
-
-            
-
-            console.log(accuracy)
-
-            accuracy.forEach((a,i)=>{
+            resultsData.forEach((v,i)=>{
+                console.log( v.results.map((result)=>result.accuracy))
                 charts.push({
-                    data: a,
+                    data: v.results.map((result)=>result.accuracy).flat(),
                     color: colors[i]
                 })
             })
