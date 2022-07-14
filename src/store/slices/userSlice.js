@@ -1,6 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { getDatabase, ref, set } from "firebase/database";
-import {database} from "../../firebase";
+import {sendData} from "../../components/functions/firebaseFunctions";
 
 const initialState = {
     email: null,
@@ -36,6 +35,7 @@ const userSlice = createSlice({
                 })
     
                 localStorage.setItem('results', JSON.stringify(newState));
+                sendData(JSON.stringify(newState))
             }
 
             function clearResults(){

@@ -1,6 +1,4 @@
 import { IonContent, IonSlides, IonSlide, IonButton, } from '@ionic/react';
-import { database } from '../firebase'
-import { ref, set } from "firebase/database";
 
 import { useEffect, useState, useRef } from 'react';
 import '../App.css';
@@ -13,8 +11,6 @@ import checkBody from "../components/functions/checkBody";
 //@ts-ignore
 import ReactFreezeframe from 'react-freezeframe';
 
-
-import Video from "../components/Video";
 
 //GIF
 import marchGif from '../assets/gif/March in place.gif'
@@ -67,7 +63,6 @@ import { addResult } from "store/slices/userSlice";
 import {start} from "repl";
 
 export default function Days() {
-    const dispatch = useDispatch()
 
     const allExercises = [
         {
@@ -372,21 +367,7 @@ export default function Days() {
             setDots(results.poseLandmarks)
         }
     }
-    //
-    // function sendDataToFirebase() {
-    //     console.log(1)
-    // }
 
-    // const dimaHyi = {hui: 'DIMA PIDOR', vtoroy: 'Dima vseravno pidor'}
-    //
-    // function writeUserDataForFirebase() {
-    //     console.log(dimaHyi)
-    //     set(ref(database, 'exercises/'), {dimaHyi});
-    //     // database.ref('exercises/').push({
-    //     //     dima: objectblyat
-    //     // })
-    //     // ref('exercises/').push({objectblyat})
-    // }
 
     useEffect(() => {
 
@@ -596,7 +577,7 @@ export default function Days() {
                 </div>
             }
             
-            {/* <IonButton className='firebase' onClick={() => {}}>SHOW LOCAL</IonButton> */}
+             {/*<IonButton className='firebase' onClick={() => {sendData('dce')}}>SHOW LOCAL</IonButton>*/}
 
             {cameraReadiness &&
                 <div className='blurer' />
