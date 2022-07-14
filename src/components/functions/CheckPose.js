@@ -854,7 +854,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         }
                     
                 
-        if (stage==="LIFT" && anlge_elbow_left<20 && angle_elbow_right<20  && angle_shoulder_left<40 && angle_shoulder_right<40){
+        if (stage==="LIFT" && angle_elbow_left<20 && angle_elbow_right<20  && angle_shoulder_left<40 && angle_shoulder_right<40){
             accuracy = Math.floor(Math.random() * (100 - 90) + 90);
             stage="DOWN"
         }
