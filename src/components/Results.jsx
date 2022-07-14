@@ -101,7 +101,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         ]
 
         if(resultsData.length > 0){
-            accuracy = resultsData[0].results.map((result)=>{
+            accuracy = resultsData[resultsData.length - 1].results.map((result)=>{
                 return result.accuracy.map((val) => val)
             })
 
