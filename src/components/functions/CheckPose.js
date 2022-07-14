@@ -554,17 +554,23 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function up_shoulders() {
 
         const radius = findRadius(8, 7, poseLandmarks)
-        const distance = Math.pow(radius , 2)*2
+        const distance = Math.pow(radius , 2)*4
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
-        if (left_side > distance && right_side > distance && stage === "TURN HEAD") {
+        colors.body.up="green"
+        console.log("distance")
+        console.log(distance)
+        console.log("left_side")
+        console.log(left_side)
+
+        if (left_side < distance && right_side < distance && stage === "UP") {
             stage = "DOWN"
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
         }
 
-        if (distance > right_side && distance > left_side) {
-            stage = "TURN HEAD"
+        if (distance < right_side && distance < left_side) {
+            stage = "UP"
         }
 
     }
