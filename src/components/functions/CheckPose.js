@@ -585,7 +585,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
         }
 
-        if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN RIGHT") {
+        if (angle > -10 && angle < 10 && stage !== "TURN RIGHT" && stage !== "TURN LEFT") {
 
             stage = "TURN HEAD"
         }
@@ -597,10 +597,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
         const angle = findAngle(11, 12, 16, poseLandmarks)
         const left_wrist = comparePoint(15, 7, poseLandmarks)
         const right_wrist = comparePoint(16, 8, poseLandmarks)
-
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
-
         if (stage == "UP" && left_wrist === "False" && right_wrist === "False" && angle < 100) {
             colors.arm.left = "green"
             colors.arm.right = "green"
@@ -611,9 +609,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             } else {
                 accuracy = Math.floor((angle / 100 * 100))
             }
-
         }
-
         if (angle > 100 && left_wrist === "True" && right_wrist === "True") {
             stage = "UP"
         }
