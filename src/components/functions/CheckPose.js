@@ -554,7 +554,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function up_shoulders() {
 
         const radius = findRadius(8, 7, poseLandmarks)
-        const distance = Math.pow(radius * 1.8, 2)
+        const distance = Math.pow(radius * 1.5, 2)
         const left_side = findDistance(0, 11, poseLandmarks)
         const right_side = findDistance(0, 12, poseLandmarks)
 
