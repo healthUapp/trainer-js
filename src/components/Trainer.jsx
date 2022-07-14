@@ -55,11 +55,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
         }
     },[visibleBody, time, showResults, pause])
 
-
-    useEffect(()=>{
-        
-    })
-
     useEffect(()=>{
         if(showResults && results.length > 0) {
             dispatch(addResult({results:results, indexOfSet: chosenSetIndex}) )
@@ -101,7 +96,6 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
             setDotsForAngle([])
         }
     },[dotsForAngle])
-
 
     return (
         <>

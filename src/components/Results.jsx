@@ -135,7 +135,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         svg.append('text')
             .attr('x', 25)
             .attr('y', 40)
-            .text("Accuracy preformance, %")
+            .text(text)
             .attr('text-anchor', 'left')
             .attr('class', 'graphText')
 
@@ -324,8 +324,6 @@ export default function Results({allSets, selectedCource, results, showResults})
             .text(svgText);
 
     }
-
-
 
 
     return <div className="results">
