@@ -41,6 +41,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         console.log(allResults)
         setResultsOfDays(allResults)
         }
+        
         let delay = setTimeout(()=>{setRenderInterval(renderInterval + 1); clearTimeout(delay)}, 500)
     },[renderInterval])
 
