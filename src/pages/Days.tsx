@@ -456,14 +456,14 @@ export default function Days() {
                                                         <div className='cardLowerTextBox'>
                                                             {/*<p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>*/}
                                                             <p className='cardLowerText-2'>{cource.length} ex.</p>
-                                                            <div className='cardLowerIconsBox'>
+                                                            {/* <div className='cardLowerIconsBox'>
                                                                 <p className='cardLowerIconsText'>activities</p>
                                                                 <div className='cardLowerIconsCheckedBox'>
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
                                                                     <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
                                                                     <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </div>
                                                 </div>
