@@ -110,7 +110,7 @@ export default function Results({allSets, selectedCource, results, showResults})
                 console.log( v.results.map((result)=>result.accuracy))
                 charts.push({
                     data: v.results.map((result)=>result.accuracy).flat(),
-                    color: colors[i]
+                    color: colors[v.indexOfSet]
                 })
             })
         }
@@ -148,7 +148,6 @@ export default function Results({allSets, selectedCource, results, showResults})
             .ticks(3)
             .tickPadding([20])
             .tickSize(width - 90)
-
 
 
         svg.append('g')
