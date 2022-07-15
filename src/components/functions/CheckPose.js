@@ -674,13 +674,13 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     function arm_chops_seat() {
         const radius = findRadius(16, 15, poseLandmarks)
         const radius_shoulders = findRadius(12, 11, poseLandmarks)
-        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
-        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_shoulder_left = findAngle(13, 11, 12, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 13, poseLandmarks)
 
         colors.arm.left = "yellow"
         colors.arm.right = "yellow"
 
-        if (radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_right > 100 || radius_shoulders > radius && stage === "SHIFT" && angle_shoulder_left > 100) {
+        if (radius>radius_shoulders*3  && stage === "SHIFT" && angle_shoulder_right > 100 || radius>radius_shoulders*3  && stage === "SHIFT" && angle_shoulder_left > 100) {
             counter += 1;
             accuracy = Math.floor(Math.random() * (100 - 90) + 90)
             stage = "SPREAD";
@@ -688,7 +688,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "green"
         }
 
-        if (radius > radius_shoulders * 3 && stage !== "SHIFT") {
+        if (radius<radius_shoulders*1.5   && stage !== "SHIFT") {
             stage = "SHIFT";
         }
 
