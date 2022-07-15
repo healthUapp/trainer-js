@@ -316,7 +316,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
     return <div className="results">
-        <h1 className="resultHead">{"your score for the day".toUpperCase()}</h1>
+        <h1 className="resultHead">{"today's score".toUpperCase()}</h1>
         <h6 className="resultHead-bottom">{new Date().toLocaleString('ru',{month:"numeric",day:"numeric", year: "numeric", minute: "2-digit", hour: "2-digit"})}</h6>
 
         

@@ -299,7 +299,7 @@ video{
     line-height: 20px;
     color: #A6A8AB;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 }
 
 .resultRoundGraphText{
@@ -321,17 +321,17 @@ video{
 .resultCircleGraph.gr-2 {
     width: 280px;
     height: 350px;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .resultGraph{
-    width: 360px;
-    height: 300px;
+    width: 340px;
+    height: 260px;
     box-shadow: 3px 5px 20px rgba(172,177, 192, 0.25);
     border-radius: 10px;
     position: absolute;
     left: calc(50% - 180px);
-    bottom: 10vh;
+    bottom: 1%;
 }
 
 .circleText{
