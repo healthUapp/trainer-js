@@ -6,7 +6,7 @@ import Trainer from '../components/Trainer';
 import Webcam from "react-webcam";
 import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
-import { Holistic } from "@mediapipe/holistic";
+import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/functions/checkBody";
 //@ts-ignore
 import ReactFreezeframe from 'react-freezeframe';
@@ -177,30 +177,36 @@ export default function Days() {
         },
         {
             name: "W EXTENSION SEATED",
+        },
+        {
+            name: "BICEPS EXTENSION",
+        },
+
+        {
+            name: "W EXTENSION",
         }
-
-
         
     ]
 
     const allSetsNames = [
-        "Chop Scissors Punches seated",
         "Seated stretch",
+        "Chop Scissors Punches seated",
         "Legs & Core"
     ]
 
     const allSets = [
-        [
-            { exerciseIndex: 19, time: 30 },
-            { exerciseIndex: 20, time: 30 },
-            { exerciseIndex: 17, time: 30 },
-            { exerciseIndex: 18, time: 30 },
-        ],
 
         [
             { exerciseIndex: 14, time: 30 },
             { exerciseIndex: 15, time: 30 },
             { exerciseIndex: 16, time: 30 },
+        ],
+
+        [
+            { exerciseIndex: 19, time: 30 },
+            { exerciseIndex: 20, time: 30 },
+            { exerciseIndex: 17, time: 30 },
+            { exerciseIndex: 18, time: 30 },
         ],
 
         [
@@ -372,9 +378,9 @@ export default function Days() {
     useEffect(() => {
 
 
-        const pose = new Holistic({
+        const pose = new Pose({
             locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
             }
         });
 
@@ -382,7 +388,7 @@ export default function Days() {
         pose.setOptions({
             modelComplexity: 1,
             smoothLandmarks: true,
-            enableSegmentation: true,
+            enableSegmentation: false,
             smoothSegmentation: false,
             minDetectionConfidence: 0.6,
             minTrackingConfidence: 0.6
