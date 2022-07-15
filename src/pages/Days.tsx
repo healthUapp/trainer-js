@@ -382,7 +382,7 @@ export default function Days() {
         pose.setOptions({
             modelComplexity: 1,
             smoothLandmarks: true,
-            enableSegmentation: true,
+            enableSegmentation: false,
             smoothSegmentation: false,
             minDetectionConfidence: 0.6,
             minTrackingConfidence: 0.6
