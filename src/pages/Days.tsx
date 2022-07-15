@@ -189,23 +189,24 @@ export default function Days() {
     ]
 
     const allSetsNames = [
-        "Chop Scissors Punches seated",
         "Seated stretch",
+        "Chop Scissors Punches seated",
         "Legs & Core"
     ]
 
     const allSets = [
-        [
-            { exerciseIndex: 19, time: 30 },
-            { exerciseIndex: 20, time: 30 },
-            { exerciseIndex: 17, time: 30 },
-            { exerciseIndex: 18, time: 30 },
-        ],
 
         [
             { exerciseIndex: 14, time: 30 },
             { exerciseIndex: 15, time: 30 },
             { exerciseIndex: 16, time: 30 },
+        ],
+
+        [
+            { exerciseIndex: 19, time: 30 },
+            { exerciseIndex: 20, time: 30 },
+            { exerciseIndex: 17, time: 30 },
+            { exerciseIndex: 18, time: 30 },
         ],
 
         [
