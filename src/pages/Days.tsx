@@ -182,7 +182,9 @@ export default function Days() {
             name: "BICEPS EXTENSION",
         },
 
-
+        {
+            name: "W EXTENSION",
+        }
         
     ]
 

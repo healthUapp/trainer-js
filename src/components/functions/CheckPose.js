@@ -61,8 +61,9 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 25) elbow_clicks();
     if (exerciseValue === 26) shoulder_taps();
     if (exerciseValue === 27) biceps_extension_seated();
-    if (exerciseValue === 27) w_extension_seated();
-    if (exerciseValue === 28) biceps_extension_seated();
+    if (exerciseValue === 28) w_extension_seated();
+    if (exerciseValue === 29) biceps_extension_seated();
+    if (exerciseValue === 30) w_extension_seated();
     
 
     function goodMorning() {
