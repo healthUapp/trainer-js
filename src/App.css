@@ -330,8 +330,8 @@ video{
     box-shadow: 3px 5px 20px rgba(172,177, 192, 0.25);
     border-radius: 10px;
     position: absolute;
-    left: calc(50% - 180px);
-    bottom: 1%;
+    left: calc(50% - 170px);
+    bottom: 5%;
 }
 
 .circleText{
