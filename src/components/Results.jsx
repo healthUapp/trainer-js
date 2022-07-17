@@ -1,12 +1,15 @@
 import { useRef,useState, useEffect } from "react";
 import * as d3 from "d3";
 import { svg } from "d3";
+import { useSelector } from "react-redux";
 
 
 
 export default function Results({allSets, selectedCource, results, showResults}){
 
-    const [renderInterval, setRenderInterval] = useState(0)
+
+    const trainerData = useSelector(state => state.user.data)
+
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
     const [rerenderCounter, setRerenderCounter] = useState(0)
@@ -24,24 +27,23 @@ export default function Results({allSets, selectedCource, results, showResults})
         let allResults = JSON.parse(localStorage.getItem('results'))
         if (allResults) {
         allResults.push(results)
-        console.log(allResults)
         setResultsOfDays(allResults)
         }
 
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },1000)
+        },100000)
     },[rerenderCounter])
 
     useEffect(()=>{
+        
         if(resultsOfDays){
             let todaysResultsArray = []
         
             resultsOfDays.map(result => {
                 const resultDate = new Date(result.date).toLocaleString('ru', formatOfDate)
                 if(resultDate === dateNow && result.results.length > 0){
-                    console.log(result)
                     todaysResultsArray.push(result)
                 }
             });
@@ -51,55 +53,69 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
     useEffect(()=>{
-        if(todayResults) {
-            console.log(todayResults)
+        if(todayResults && todayResults.length > 0) {
 
             let todayAccuracy = Math.round(
                 (todayResults.map(todayResult => {
                     let accuracy = todayResult.results.map((results)=> {
-                        if(results.accuracy.length > 0) {
+                        if(results.value > 0) {
                             return (results.accuracy.reduce((a,b) => a+b, 0) / results.accuracy.length)
                         } else return 0
                     })
-                    console.log(accuracy)
                     
-                    if(accuracy.length > 0) {
+                    if(accuracy.length > 1) {
                         return (accuracy.reduce((a,b) => a+b, 0) / accuracy.length)
                     } else return 0
                 }).reduce((a,b) => a+b, 0) / todayResults.length)
             );
 
-            let todayCompletedExercises = todayResults.map(todayResult => {
-                return todayResult.results.map((results)=>{
-                    return results.value
-                }).reduce((a,b) => a+b, 0)
+            let todayTime = todayResults.map(todayResult => {
+                    console.log(todayResult)
+                    let time = todayResult.results.map(result => {
+                        if(result.value > 0) {
+                            return result.time
+                        } else return 0
+                    })
+                    return time.reduce((a,b) => a+b, 0)
             }).reduce((a,b) => a+b, 0);
             
-            console.log(todayResults)
+            let allTime = selectedCource.map(index => {
+                if(trainerData) {
+                    let time = trainerData.allSets[index].map(v => {
+                        return v.time
+                    })
+                    return time.reduce((a,b) => a+b, 0)
+                }
+            }).reduce((a,b) => a+b, 0);
 
-            let todayUnompletedSets = selectedCource.filter(n => todayResults.map(todayResult => {
-                return todayResult.indexOfSet
-            }).indexOf(n) === -1);
-            
+            console.log(allTime)
 
-            console.log(todayCompletedExercises)
-            console.log(todayUnompletedSets)
-            console.log(todayAccuracy)
-            console.log(selectedCource)
-            
+            let completedExercises =  todayResults.map(todayResult => {
+                let exercises = todayResult.results.map(result => {
+                    if(result.value > 0) {
+                        return 1
+                    } else return 0
+                })
+                return exercises.reduce((a,b) => a+b, 0)
+            }).reduce((a,b) => a+b, 0);
 
-            
-                drawCircleGraph( Math.round(( (selectedCource.length - todayUnompletedSets.length) / selectedCource.length) * 100) / 100, "Sets", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current)
-                drawCircleGraph( (todayCompletedExercises) / 1000, "Repeats", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current)
-                drawCircleGraph( (todayAccuracy? todayAccuracy : 0)/100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current)
-                drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
+
+            let allExercises = selectedCource.map(index => {
+                if(trainerData) {
+                    return trainerData.allSets[index].length
+                }
+            }).reduce((a,b) => a+b, 0);
+
+
+            drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 1)
+            drawCircleGraph( todayTime, allTime, "Activity time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 2)
+            drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 3)
+            drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
 
     },[todayResults])
 
     const drawGraph = (resultsData, text, svgRef) => {
-
-        console.log(resultsData)
 
         let colors = ['rgba(155,157,234,1)','rgba(247,160,181,1)','rgba(204,238,212,1)','rgba(238, 221, 204 ,1)','rgba(238, 204, 214 ,1)','#000','#500']
 
@@ -107,18 +123,12 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         if(resultsData.length > 0){
             resultsData.forEach((v,i)=>{
-                console.log( v.results.map((result)=>result.accuracy))
                 charts.push({
                     data: v.results.map((result)=>result.accuracy).flat(),
                     color: colors[v.indexOfSet]
                 })
             })
         }
-
-        let data1 = [100,90,80,72,32]
-        let data2 = [0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,6,30,60,80,100]
-        let data3 = [29,45,82,75,23,23,11,5,23,88,77]
-
 
         const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = svgRef.clientWidth - margin.left - margin.right,
@@ -141,8 +151,8 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
         const yScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([height - 60, 70])
+            .domain([60, 100])
+            .range([height - 70, 80])
 
         const yAxis = d3.axisLeft(yScale)
             .ticks(3)
@@ -197,12 +207,13 @@ export default function Results({allSets, selectedCource, results, showResults})
 
     }
 
-    const drawCircleGraph = (val, text, grColorStart, grColorEnd, svgRef) => {
+    const drawCircleGraph = (val1, val2, text, grColorStart, grColorEnd, svgRef, id) => {
+        let val = Math.round((val1 / val2) * 10) / 10
         let startPrecent = 6.28  * 0.6
         let lastPrecent = 6.28 * (0.6 + (0.8 * val))
-        let thisWidth = text === "Repeats" ? width + 30 : width
-        let innerRadius = text === "Repeats" ? thisWidth/2 - 37 : thisWidth/2 - 34
-        let outerRadius = text === "Repeats" ? thisWidth/2 - 12 : thisWidth/2 - 14
+        let thisWidth = text === "Activity time" ? width + 30 : width
+        let innerRadius = text === "Activity time" ? thisWidth/2 - 37 : thisWidth/2 - 34
+        let outerRadius = text === "Activity time" ? thisWidth/2 - 12 : thisWidth/2 - 14
         let middleRadius = (innerRadius + outerRadius) / 2
         let dotRadius = (outerRadius - innerRadius) / 2
 
@@ -220,7 +231,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         var defs = svg.append("defs");
 
         var gradient = defs.append("linearGradient")
-        .attr("id", `svgGradient-${text}`)
+        .attr("id", `svgGradient-${id}`)
         .attr("x1", "0%")
         .attr("x2", "100%")
         .attr("y1", "0%")
@@ -262,7 +273,7 @@ export default function Results({allSets, selectedCource, results, showResults})
         svg.append("path")
             .attr("class", "arc-2")
             .attr("d", arcFront_path)
-            .attr("fill", `url(#svgGradient-${text})`)
+            .attr("fill", `url(#svgGradient-${id})`)
 
         svg.append("circle")
             .attr('cx', x2)
@@ -290,11 +301,11 @@ export default function Results({allSets, selectedCource, results, showResults})
         let svgText;
         
         switch (text) {
-            case "Repeats":
-                svgText = `${val * 1000}/1k`
+            case "Activity time":
+                svgText = `${val * 100} s.`
                 break;
-            case "Sets":
-                svgText = `${Math.round(val * 100)}%`
+            case "Exercises":
+                svgText = `${val1} / ${val2}`
                 break;
             case "Accuracy":
                 svgText = `${Math.round(val * 100)}%`
@@ -315,7 +326,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
     return <div className="results">
-        <h1 className="resultHead">{"today's score".toUpperCase()}</h1>
+        <h1 className="resultHead">{"today's scores".toUpperCase()}</h1>
         <h6 className="resultHead-bottom">{new Date().toLocaleString('ru',{month:"numeric",day:"numeric", year: "numeric", minute: "2-digit", hour: "2-digit"})}</h6>
 
         
