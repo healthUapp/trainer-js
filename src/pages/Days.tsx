@@ -124,51 +124,63 @@ export default function Days() {
     }
 
 
-    useEffect(() => {
+    useEffect (() => {
+
+        const newCam = async () => {
 
 
-        const pose = new Pose({
-            locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-            }
-        });
 
-
-        pose.setOptions({
-            modelComplexity: 1,
-            smoothLandmarks: true,
-            enableSegmentation: false,
-            smoothSegmentation: false,
-            minDetectionConfidence: 0.6,
-            minTrackingConfidence: 0.6
-        });
-
-        //@ts-ignore
-        pose.onResults(onResults);
-
-
-        if (
-            typeof cameraRef.current !== "undefined" &&
-            cameraRef.current !== null
-        ) {
-            console.log('upTrue')
-            camera = new cam.Camera(cameraRef.current.video, {
-                onFrame: async () => {
-                    await pose.send({ image: cameraRef.current.video });
-                    if (!cameraReadiness) {
-                        setCameraReadiness(true)
-                    }
-                },
-                width: 640,
-                height: 480,
+            const pose = await new Pose({
+                locateFile: (file) => {
+                    return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+                }
             });
-            camera.start();
-        } else {
-            console.log('false')
+
+
+            pose.setOptions({
+                modelComplexity: 1,
+                smoothLandmarks: true,
+                enableSegmentation: false,
+                smoothSegmentation: false,
+                minDetectionConfidence: 0.6,
+                minTrackingConfidence: 0.6
+            });
+
+            //@ts-ignore
+            pose.onResults(onResults);
+
+
+            if (
+                typeof cameraRef.current !== "undefined" &&
+                cameraRef.current !== null
+            ) {
+                console.log('upTrue')
+                camera = new cam.Camera(cameraRef.current.video, {
+                    onFrame: async () => {
+                        await pose.send({ image: cameraRef.current.video });
+                        if (!cameraReadiness) {
+                            setCameraReadiness(true)
+                        }
+                    },
+                    width: 640,
+                    height: 480,
+                });
+                camera.start();
+            } else {
+                console.log('false')
+            }
+
         }
+
+        setTimeout(() =>  {
+            newCam()
+        }, 2000)
+
+
     }, []);
 
 
+    // @ts-ignore
     return (
         <IonContent className="startPage" fullscreen>
             {!cameraReadiness && <div className='loadingViewBox'>
@@ -235,6 +247,7 @@ export default function Days() {
                 }
                 <div className='drawBox' style={startingSet ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
+                        id="block"
                         width={"1280"}
                         height={"720"}
                         ref={cameraRef}
@@ -314,7 +327,8 @@ export default function Days() {
                                         {chosenSet.map((ex: any, index: number) => (
                                             <div key={index} className='exercisePrewiew__item'>
                                                 {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
-                                                <img src={allExercises[ex.exerciseIndex].gif} />
+                                                {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} />*/}
+                                                {videoTag()}
                                                 <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                 <h5>{ex.time} sec</h5>
                                             </div>

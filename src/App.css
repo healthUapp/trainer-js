@@ -55,7 +55,12 @@ img{
 }
 
 
-video{
+/*video{*/
+/*    display: none;*/
+/*}*/
+
+
+#block {
     display: none;
 }
 
@@ -443,6 +448,12 @@ video{
     margin: 10px;
 }
 
+.vidPunch {
+    margin: 0;
+    /*background: none;*/
+    margin-bottom: 30px;
+}
+
 .canvasBox{
     overflow: hidden;
     width: 50%;
@@ -616,19 +627,6 @@ video{
     background-size: cover;
 }
 
-/*.videoWrapper {*/
-/*    width: 105%;*/
-/*    height: 100vh;*/
-/*    display: flex;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.videoFirst {*/
-/*    top: 10px;*/
-/*    width: 490px;*/
-/*    height: 1400px;*/
-/*    margin-bottom: 400px;*/
-/*}*/
 
 
 
@@ -664,12 +662,6 @@ video{
 }
 
 
-
-.cardsSlider{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
 
 
 .card{

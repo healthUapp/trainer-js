@@ -55,7 +55,7 @@ export default function Results(){
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },100000)
+        },1000)
     },[rerenderCounter])
 
     useEffect(()=>{

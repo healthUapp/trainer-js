@@ -37,7 +37,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
-    const [showResults, setShowResults] = useState(true)
+    const [showResults, setShowResults] = useState(false)
     const [results, setResults] = useState([])
     
 
@@ -154,7 +154,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                                 <p className="up">coming next</p>
                                 <p className="middle">{allExercises[set[exerciseNumber].exerciseIndex].name}</p>
                                 <div className="duo">
-                                    <p className="down">{set.length} reps</p>
+                                    {/*<p className="down">{set.length} reps</p>*/}
                                     <p className="down">{set[exerciseNumber].time} sec</p>
                                 </div>
                             </div>

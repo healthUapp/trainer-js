@@ -352,7 +352,7 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             }
         }
 
-        if (angle_left > 120 && angle_right > 120 && stage === "UP") {
+        if (angle_left > 140 && angle_right > 140 && stage === "UP") {
             colors.leg.left = "green"
             colors.leg.right = "green"
             stage = "DOWN";
