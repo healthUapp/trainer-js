@@ -450,7 +450,11 @@ export default function Days() {
                                                 <div
                                                     className={`card ${index > 4 ? "blocked" : ""}`}
 
-                                                    onClick={() => { index <= 4 ? setChosenCource(cource) : alert('Weekends!') }}
+                                                    onClick={() => { if(index <= 4) {
+                                                        setChosenCource(cource);
+                                                        setChosenSet(allSets[0]);
+                                                        setChosenSetIndex(0)
+                                                    } else alert('Weekends!') }}
                                                 >
                                                     <div className='cardImgBox'>
                                                         <img className='cardImg' src={allDays.images[index]} />
