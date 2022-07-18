@@ -23,7 +23,7 @@ import armScissorsSeatGif from '../assets/gif/Arm scissors on chair.gif'
 import headTiltisGif from '../assets/gif/Head tilts.gif'
 import overheadPunchesSeatedGif from '../assets/gif/Overhead punches seated.gif'
 import overheadShouldersStretchGif from '../assets/gif/Overhead shoulders strech.gif'
-import punchesSeatedGif from '../assets/gif/Punches.gif'
+
 import shrugsGif from '../assets/gif/Shrugs.gif'
 
 //video
@@ -61,6 +61,8 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 import { useDispatch } from "react-redux";
 import { addResult } from "store/slices/userSlice";
 import {start} from "repl";
+// @ts-ignore
+import videoTag from "../assets/video/punchesVid";
 
 export default function Days() {
 
@@ -135,7 +137,7 @@ export default function Days() {
 
         {
             name: "PUNCHES SEATED",
-            gif:punchesSeatedGif
+            mp4:videoTag()
         },
 
         {
@@ -303,7 +305,7 @@ export default function Days() {
     const [chosenCource, setChosenCource] = useState<any | null>(null)
     const [chosenSet, setChosenSet] = useState<any | null>(null)
     const [startingSet, setStartingSet] = useState<boolean>(false)
-    const [cameraReadiness, setCameraReadiness] = useState(false)
+    const [cameraReadiness, setCameraReadiness] = useState(true)
     const [chosenSetIndex, setChosenSetIndex] = useState<number | null>(null)
 
     const date = new Date()
@@ -375,7 +377,7 @@ export default function Days() {
     }
 
 
-    useEffect(() => {
+    useEffect (() => {
 
 
         const pose = new Pose({
@@ -420,6 +422,7 @@ export default function Days() {
     }, []);
 
 
+    // @ts-ignore
     return (
         <IonContent className="startPage" fullscreen>
             {!cameraReadiness && <div className='loadingViewBox'>
@@ -454,7 +457,7 @@ export default function Days() {
                                                         setChosenCource(cource);
                                                         setChosenSet(allSets[0]);
                                                         setChosenSetIndex(0)
-                                                    } else alert('Weekends!') }}
+                                                    }}}
                                                 >
                                                     <div className='cardImgBox'>
                                                         <img className='cardImg' src={allDays.images[index]} />
@@ -488,6 +491,7 @@ export default function Days() {
                 }
                 <div className='drawBox' style={startingSet ? { "display": "inline-flex" } : { "display": "none" }}>
                     <Webcam
+                        id="block"
                         width={"1280"}
                         height={"720"}
                         ref={cameraRef}
@@ -567,7 +571,8 @@ export default function Days() {
                                         {chosenSet.map((ex: any, index: number) => (
                                             <div key={index} className='exercisePrewiew__item'>
                                                 {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
-                                                <img src={allExercises[ex.exerciseIndex].gif} />
+                                                {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} />*/}
+                                                {videoTag()}
                                                 <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                 <h5>{ex.time} sec</h5>
                                             </div>
