@@ -1,13 +1,14 @@
 import { useRef,useState, useEffect } from "react";
 import * as d3 from "d3";
 import { svg } from "d3";
-import { useSelector } from "react-redux";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setCourceIndex, setSetIndex, setShowResults } from "store/slices/appSlice";
 
 
 export default function Results(){
 
-
+    const dispatch = useDispatch()
 
     const reduxAppState = useSelector(state => state.app)
     const reduxUserState = useSelector(state => state.user)
@@ -366,7 +367,8 @@ export default function Results(){
                                         onClick={() => { 
                                             // setChosenSet(allSets[setIndex]);
                                             // setChosenSetIndex(setIndex);
-                                            // dispatch(setSetIndex({index:setIndex}));
+                                            dispatch(setSetIndex({index:setIndex}));
+                                            dispatch(setShowResults({status: false}))
                                         }}
                                     >
                                         <div className='resultCardImgBox'>

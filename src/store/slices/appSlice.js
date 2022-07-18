@@ -256,6 +256,7 @@ const initialState = {
     data: trainerData,
     chosenCourceIndex: null,
     chosenSetIndex: null,
+    showResults: true
 };
 
 
@@ -268,10 +269,14 @@ const appSlice = createSlice({
         },
         setSetIndex(state, action) {
             state.chosenSetIndex = action.payload.index
+        },
+        setShowResults(state,action){
+            state.showResults = action.payload.status
         }
+        
     }
 })
 
-export const {setCourceIndex, setSetIndex} = appSlice.actions;
+export const {setCourceIndex, setSetIndex, setShowResults} = appSlice.actions;
 
 export default appSlice.reducer;

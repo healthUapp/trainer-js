@@ -20,7 +20,6 @@ import loadingHelp from '../assets/svg/loadingHelp.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { setCourceIndex, setSetIndex } from "store/slices/appSlice";
 
-
 export default function Days() {
 
     const dispatch = useDispatch()
@@ -328,7 +327,7 @@ export default function Days() {
                                             <div key={index} className='exercisePrewiew__item'>
                                                 {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
                                                 {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} />*/}
-                                                {videoTag()}
+                                                {/* {videoTag()} */}
                                                 <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                 <h5>{ex.time} sec</h5>
                                             </div>

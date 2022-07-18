@@ -10,7 +10,8 @@ import MiniGraphAccuracy from "./MiniGraphAccuracy"
 import next from 'assets/svg/next.svg'
 
 import { useDispatch, useSelector } from "react-redux";
-import { addResult } from "store/slices/userSlice";
+import { addResult} from "store/slices/userSlice";
+import { setShowResults } from "store/slices/appSlice";
 import chackBody from "./functions/checkBody";
 
 
@@ -19,6 +20,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const trainerData = useSelector((state) => state.app.data)
     const chosenSetIndex = useSelector((state) => state.app.chosenSetIndex)
     const chosenCourceIndex = useSelector((state) => state.app.chosenCourceIndex)
+    const showResults = useSelector((state) => state.app.showResults)
 
     const allSets = trainerData.allSets
     const allCources = trainerData.allCources
@@ -26,6 +28,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const allSetsNames = trainerData.allSetsNames
     
     const set = allSets[chosenSetIndex]
+   
     
     const dispatch = useDispatch()
     const [accuracy, setAccuracy] = useState([])
@@ -37,7 +40,6 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
     const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].gif)
-    const [showResults, setShowResults] = useState(false)
     const [results, setResults] = useState([])
     
 
@@ -55,7 +57,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                 setAccuracy([])
                 if(exerciseNumber + 1 >= set.length){
                     console.log('set is ended')
-                    setShowResults(true)
+                    dispatch(setShowResults({status: true}))
                 }else {
                     setExerciseNumber(exerciseNumber + 1)
                     setSelectedGif(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.gif)
@@ -65,7 +67,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
             }
             
         }
-    },[visibleBody, time, showResults, pause])
+    },[visibleBody, time, pause])
 
     useEffect(()=>{
         if(showResults && results.length > 0) {
