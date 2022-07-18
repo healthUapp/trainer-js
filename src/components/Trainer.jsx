@@ -138,7 +138,7 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                                 <p className="up">coming next</p>
                                 <p className="middle">{allExercises[set[exerciseNumber].exerciseIndex].name}</p>
                                 <div className="duo">
-                                    <p className="down">{set.length} reps</p>
+                                    {/*<p className="down">{set.length} reps</p>*/}
                                     <p className="down">{set[exerciseNumber].time} sec</p>
                                 </div>
                             </div>

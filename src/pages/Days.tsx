@@ -379,46 +379,57 @@ export default function Days() {
 
     useEffect (() => {
 
-
-        const pose = new Pose({
-            locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-            }
-        });
+        const newCam = async () => {
 
 
-        pose.setOptions({
-            modelComplexity: 1,
-            smoothLandmarks: true,
-            enableSegmentation: false,
-            smoothSegmentation: false,
-            minDetectionConfidence: 0.6,
-            minTrackingConfidence: 0.6
-        });
 
-        //@ts-ignore
-        pose.onResults(onResults);
-
-
-        if (
-            typeof cameraRef.current !== "undefined" &&
-            cameraRef.current !== null
-        ) {
-            console.log('upTrue')
-            camera = new cam.Camera(cameraRef.current.video, {
-                onFrame: async () => {
-                    await pose.send({ image: cameraRef.current.video });
-                    if (!cameraReadiness) {
-                        setCameraReadiness(true)
-                    }
-                },
-                width: 640,
-                height: 480,
+            const pose = await new Pose({
+                locateFile: (file) => {
+                    return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+                }
             });
-            camera.start();
-        } else {
-            console.log('false')
+
+
+            pose.setOptions({
+                modelComplexity: 1,
+                smoothLandmarks: true,
+                enableSegmentation: false,
+                smoothSegmentation: false,
+                minDetectionConfidence: 0.6,
+                minTrackingConfidence: 0.6
+            });
+
+            //@ts-ignore
+            pose.onResults(onResults);
+
+
+            if (
+                typeof cameraRef.current !== "undefined" &&
+                cameraRef.current !== null
+            ) {
+                console.log('upTrue')
+                camera = new cam.Camera(cameraRef.current.video, {
+                    onFrame: async () => {
+                        await pose.send({ image: cameraRef.current.video });
+                        if (!cameraReadiness) {
+                            setCameraReadiness(true)
+                        }
+                    },
+                    width: 640,
+                    height: 480,
+                });
+                camera.start();
+            } else {
+                console.log('false')
+            }
+
         }
+
+        setTimeout(() =>  {
+            newCam()
+        }, 2000)
+
+
     }, []);
 
 
