@@ -8,47 +8,6 @@ import Interface from "../components/Interface";
 import * as cam from "@mediapipe/camera_utils";
 import { Pose } from "@mediapipe/pose";
 import checkBody from "../components/functions/checkBody";
-//@ts-ignore
-import ReactFreezeframe from 'react-freezeframe';
-
-
-//GIF
-import marchGif from '../assets/gif/March in place.gif'
-import goodMorningGif from '../assets/gif/Good morning.gif'
-import cancanGif from '../assets/gif/Cancan.gif'
-import lungeGif from '../assets/gif/Back lunge.gif'
-import SLDLGif from '../assets/gif/SLDL with chair.gif'
-import armChopsSeatGif from '../assets/gif/Arm Chops on chair.gif'
-import armScissorsSeatGif from '../assets/gif/Arm scissors on chair.gif'
-import headTiltisGif from '../assets/gif/Head tilts.gif'
-import overheadPunchesSeatedGif from '../assets/gif/Overhead punches seated.gif'
-import overheadShouldersStretchGif from '../assets/gif/Overhead shoulders strech.gif'
-import punchesSeatedGif from '../assets/gif/Punches.gif'
-import shrugsGif from '../assets/gif/Shrugs.gif'
-
-//video
-
-
-//exImg
-import halfjack from '../assets/exImg/halfjack.png'
-import squat from '../assets/exImg/squat.png'
-import stepsidejack from '../assets/exImg/step_side_jack.png'
-import side_leg_raises from '../assets/exImg/side_leg_raises.png'
-import side_arm_raises from '../assets/exImg/side_arm_raises.png'
-import chest_expansion from '../assets/exImg/chest_expansion.png'
-import jumping_jack from '../assets/exImg/jumping_jack.png'
-
-
-
-
-//PNG
-import day1 from '../assets/png/day1.png'
-import day2 from '../assets/png/day2.png'
-import day3 from '../assets/png/day3.png'
-import day4 from '../assets/png/day4.png'
-import day5 from '../assets/png/day7.png'
-import day6 from '../assets/png/blocked.png'
-
 
 
 
@@ -58,227 +17,25 @@ import fa_lock from '../assets/svg/fa_lock.svg'
 import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
-import { useDispatch } from "react-redux";
-import { addResult } from "store/slices/userSlice";
-import {start} from "repl";
+import { useDispatch, useSelector } from "react-redux";
+import { setCourceIndex, setSetIndex } from "store/slices/appSlice";
+
 
 export default function Days() {
 
-    const allExercises = [
-        {
-            name: "GOOD MORNING",
-            gif: goodMorningGif
-        },
-        {
-            name: "CANCAN LEFT",
-            gif: cancanGif
-        },
-        {
-            name: "MARCH IN PLACE",
-            gif: marchGif
-        },
-        {
-            name: "LEG PUSH",
-            gif: SLDLGif
-        },
-        {
-            name: "SQUAT",
-            gif: squat
-        },
-        {
-            name: "REVERSE LUNGE",
-            gif: lungeGif
-        },
-        {
-            name: "CALF RISES",
-        },
-        {
-            name: "JUMPING JACK",
-            gif: jumping_jack
-        },
-        {
-            name: "HALF JACK",
-            gif: halfjack
-        },
-        {
-            name: "CANCAN RIGHT",
-            gif: cancanGif
-        },
-        {
-            name: "SIDE LEG RISES",
-            gif: side_leg_raises
-        },
-        {
-            name: "STEP SIDE JACK",
-            gif: stepsidejack
-        },
-        {
-            name: "CHEST EXPANSION",
-            gif: chest_expansion
-        },
-        {
-            name: "SIDE ARM RISES",
-            gif: side_arm_raises
-        },
-        {
-            name: "SHRUGS SEATED",
-            gif:shrugsGif
-        },
-        {
-            name: "HEAD TILTS LR SEATED",
-            gif:headTiltisGif
-        },
-        {
-            name: "OVERHEAD SHOULDER STRETCH SEATED",
-            gif:overheadShouldersStretchGif
-        },
+    const dispatch = useDispatch()
 
-        {
-            name: "PUNCHES SEATED",
-            gif:punchesSeatedGif
-        },
+    const trainerData = useSelector((state: any) => state.app.data)
 
-        {
-            name: "OVERHEAD PUNCHES SEATED",
-            gif:overheadPunchesSeatedGif
-        },
-
-        {
-            name: "ARM CHOPS SEATED",
-            gif:armChopsSeatGif
-        },
-
-        {
-            name: "ARM SCISSORS SEATED",
-            gif:armScissorsSeatGif
-        },
-
-        {
-            name: "ARM CHOPS",
-        },
-
-        {
-            name: "ARM SCISSORS",
-        },
-        {
-            name: "ELBOW CLICKS SEATED",
-        },
-        {
-            name: "SHOULDER TAPS SEATED",
-        },
-        {
-            name: "ELBOW CLICKS ",
-        },
-        {
-            name: "SHOULDER TAPS",
-        },
-        {
-            name: "BICEPS EXTENSION SEATED",
-        },
-        {
-            name: "W EXTENSION SEATED",
-        },
-        {
-            name: "BICEPS EXTENSION",
-        },
-
-        {
-            name: "W EXTENSION",
-        }
-        
-    ]
-
-    const allSetsNames = [
-        "Seated stretch",
-        "Chop Scissors Punches seated",
-        "Legs & Core"
-    ]
-
-    const allSets = [
-
-        [
-            { exerciseIndex: 14, time: 30 },
-            { exerciseIndex: 15, time: 30 },
-            { exerciseIndex: 16, time: 30 },
-        ],
-
-        [
-            { exerciseIndex: 19, time: 30 },
-            { exerciseIndex: 20, time: 30 },
-            { exerciseIndex: 17, time: 30 },
-            { exerciseIndex: 18, time: 30 },
-        ],
-
-        [
-            //По этому индексу вытаскивается упражнение из allExercises
-            { exerciseIndex: 0, time: 30 },
-            { exerciseIndex: 2, time: 30 },
-            { exerciseIndex: 1, time: 30 },
-            { exerciseIndex: 9, time: 30 },
-            { exerciseIndex: 5, time: 30 },
-            { exerciseIndex: 3, time: 30 },
-        ],
-
-        [
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 4, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 4, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 4, time: 10 },
-
-        ],
-
-        [
-            { exerciseIndex: 8, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 8, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 8, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-
-        ],
-
-        [
-            { exerciseIndex: 5, time: 15 },
-            { exerciseIndex: 8, time: 15 },
-            { exerciseIndex: 4, time: 15 },
-            { exerciseIndex: 8, time: 15 },
-        ],
-
-        [
-            { exerciseIndex: 11, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-            { exerciseIndex: 11, time: 10 },
-            { exerciseIndex: 7, time: 10 },
-        ],
-
-        [
-            { exerciseIndex: 7, exValue: 20 },
-            { exerciseIndex: 11, exValue: 4 },
-            { exerciseIndex: 12, exValue: 4 },
-            { exerciseIndex: 7, exValue: 20 },
-            { exerciseIndex: 11, exValue: 4 },
-            { exerciseIndex: 12, exValue: 4 },
-            { exerciseIndex: 7, exValue: 20 },
-            { exerciseIndex: 11, exValue: 4 },
-            { exerciseIndex: 12, exValue: 4 },
-            //2 минуты отдыха и так 3 раза
-        ],
-
-    ]
-
-    const allCources = [
-        [0,1,2],
-        [0,1,2],
-        [0,1,2],
-        [0,1,2],
-        [0,1,2],
-        []
-    ]
+    const allSets = trainerData.allSets
+    const allCources = trainerData.allCources
+    const allExercises = trainerData.allExercises
+    const allSetsNames = trainerData.allSetsNames
+    const allDays = trainerData.allDays
+    
 
 
-    const setsTimes = allSets.map((exercises) => {
+    const setsTimes = allSets.map((exercises: any) => {
         let time = 0
         exercises.forEach((exercise: any) => {
             if (!exercise.time) return
@@ -287,23 +44,12 @@ export default function Days() {
         return time
     })
 
-    const courcesTimes = allCources.map((set) => {
-        let time = 0
-        set.forEach((setIndex, index) => {
-            time += setsTimes[setIndex]
-        })
-        return time
-    })
 
-    const allDays = {
-        names: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"],
-        images: [day1, day2, day3, day4, day5, day6],
-    }
 
     const [chosenCource, setChosenCource] = useState<any | null>(null)
     const [chosenSet, setChosenSet] = useState<any | null>(null)
     const [startingSet, setStartingSet] = useState<boolean>(false)
-    const [cameraReadiness, setCameraReadiness] = useState(false)
+    const [cameraReadiness, setCameraReadiness] = useState(true)
     const [chosenSetIndex, setChosenSetIndex] = useState<number | null>(null)
 
     const date = new Date()
@@ -331,15 +77,18 @@ export default function Days() {
 
     let camera = null;
 
-    const [initialSlide, setTinitialSlide] = useState(0)
-
 
     function unselectCource() {
         console.log('back')
         setChosenSet(null)
+        dispatch(setSetIndex({index: null}))
+
         setChosenCource(null)
+        dispatch(setCourceIndex({index: null}))
+
         setStartingSet(false)
     }
+
     function stoppingSet() {
         console.log('set is stopping')
         setStartingSet(false)
@@ -429,10 +178,6 @@ export default function Days() {
                 </div>
             </div>}
 
-
-        
-
-
             <div className={`exerciseView`}>
 
                 {(!startingSet) &&
@@ -444,7 +189,7 @@ export default function Days() {
                             <div className={'titleCardBox'}>Weekly activity program</div>
                             <div className={'cardsWrapper'}>
                                 {
-                                    allCources.map((cource, index) => {
+                                    allCources.map((cource: any, index: number) => {
                                         return (
                                             <div key={index}>
                                                 <div
@@ -452,9 +197,11 @@ export default function Days() {
 
                                                     onClick={() => { if(index <= 4) {
                                                         setChosenCource(cource);
+                                                        dispatch(setCourceIndex({index: index}))
+                                                        dispatch(setSetIndex({index: 0}))
                                                         setChosenSet(allSets[0]);
                                                         setChosenSetIndex(0)
-                                                    } else alert('Weekends!') }}
+                                                    } else console.log('blocked') }}
                                                 >
                                                     <div className='cardImgBox'>
                                                         <img className='cardImg' src={allDays.images[index]} />
@@ -505,12 +252,7 @@ export default function Days() {
                         <Trainer
                             setColors={setColors}
                             visibleBody={visibleBody}
-                            selectedCource={chosenCource}
                             dots={dots}
-                            set={chosenSet}
-                            allSets={allSets}
-                            chosenSetIndex={chosenSetIndex}
-                            allExercises={allExercises}
                             stoppingSet={stoppingSet}
                         />
                     </>}
@@ -537,7 +279,12 @@ export default function Days() {
                                                     <div
                                                         className="setCard"
 
-                                                        onClick={() => { setChosenSet(allSets[setIndex]); setChosenSetIndex(setIndex) }}
+                                                        onClick={() => { 
+                                                            setChosenSet(allSets[setIndex]);
+                                                            setChosenSetIndex(setIndex) 
+
+                                                            dispatch(setSetIndex({index:setIndex}))
+                                                        }}
                                                     >
                                                         <div className='setCardImgBox'>
                                                             <img className='setCardImg' src={allDays.images[index]} />
@@ -587,11 +334,7 @@ export default function Days() {
                 </div>
             }
             
-             {/*<IonButton className='firebase' onClick={() => {sendData('dce')}}>SHOW LOCAL</IonButton>*/}
-
-            {cameraReadiness &&
-                <div className='blurer' />
-            }
+            {cameraReadiness && <div className='blurer' />}
 
         </IonContent>
     )

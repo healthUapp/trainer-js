@@ -274,17 +274,63 @@ video{
     font-size: 4vw;
 }
 
-.results{
-    background-color: rgb(255, 255, 255);
+.results_page{
+    display: flex;
+    background: #e1e1e1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    justify-content: center;
+}
+
+.results_header{
+    width: 100vw;
+    height: 60px;
+    background:#FFFFFF;
     position: absolute;
     left: 0;
     top: 0;
-    width: 100vw;
-    height: 100vh;
-    text-align: center;
 }
+
+.results_box{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 70px;
+    height: calc(100vh - 150px);
+}
+
+.results{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    width: 860px;
+    height: 100%;
+    background: #FFFFFF;
+    text-align: center;
+    z-index: 10;
+    border-radius: 10px;
+}
+
+.results_menu{
+    width: 100px;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.results_days{
+    width: 530px;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+
 .resultHead{
     padding-top: 50px;
+    padding-bottom: 40px;
     font-size: 36px;
     line-height: 45px;
     font-weight: 800;
@@ -304,24 +350,25 @@ video{
 
 .resultRoundGraphText{
     font-weight: 700;
-    font-size: 45px;
+    font-size: 30px;
     line-height: 38px;
 }
 .resultCircleGraphBox{
     display: flex;
     margin: 0 auto;
     max-width: 860px;
-    justify-content: space-around;
+    justify-content: center;
     align-items:flex-end;
 }
 .resultCircleGraph{
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 }
 .resultCircleGraph.gr-2 {
-    width: 280px;
-    height: 350px;
+    width: 230px;
+    height: 270px;
     padding-top: 10px;
+    margin:  0 20px;
 }
 
 .resultGraph{
@@ -885,6 +932,7 @@ video{
     height: calc(100% - 156px);
     background: #F0F0F0;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding: 0;
     margin: 0px 0 100px 0;
 }
@@ -918,6 +966,9 @@ video{
     width: 325px;
     height: 212px;
     object-fit: cover;
+}.result{
+    width: 207px;
+    height: 150px;
 }
 
 .setCardHighText{
@@ -1043,3 +1094,73 @@ video{
 .tick line{
     filter: opacity(0.1);
 }
+
+.resultCardImgBox{
+    width: 207px;
+    height: 150px;
+}
+
+.resultCardImg{
+    width: 207px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.resultCardText{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.resultCardHighText{
+    width: 200px;
+    padding: 20px 0 15px 15px;
+}
+
+.resultCard{
+    width: 450px;
+    box-shadow: 3px 5px 20px rgba(172,177,192,0.25);
+    border-radius: 10px;
+    display: flex;
+    flex-direction:row;
+    margin-left: 29px;
+    margin-bottom: 50px;
+    border: 2px solid rgba(174,237,228,0);
+    transition: 0.2 all ease;
+}
+
+.resultCardTextBox{
+    padding-left: 20px;
+}
+
+.resultCard:hover{
+    border: 2px solid rgba(174,237,228,1);
+}
+
+.results_activitesText{
+    display: flex;
+    margin-left: 29px;
+    margin-bottom: 70px;
+    margin-top: 50px;
+}
+
+
+.resultsActivites-1{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+}
+
+.resultsActivites{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    margin-left: 235px;
+}
+
+.resultsActivites-2{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 38px;
+}
+

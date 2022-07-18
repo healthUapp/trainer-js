@@ -5,10 +5,29 @@ import { useSelector } from "react-redux";
 
 
 
-export default function Results({allSets, selectedCource, results, showResults}){
+export default function Results(){
 
 
-    const trainerData = useSelector(state => state.user.data)
+
+    const reduxAppState = useSelector(state => state.app)
+    const reduxUserState = useSelector(state => state.user)
+
+    const trainerData = reduxAppState.data
+
+    const results = reduxUserState.results
+    const chosenSetIndex = reduxAppState.chosenSetIndex
+    const chosenCourceIndex = reduxAppState.chosenCourceIndex
+    const selectedCource = trainerData.allCources[chosenCourceIndex]
+
+    const allSets = trainerData.allSets
+    const allCources = trainerData.allCources
+    const allDays = trainerData.allDays
+    const allExercises = trainerData.allExercises
+    const allSetsNames = trainerData.allSetsNames
+
+    const chosenCource = allCources[chosenCourceIndex]
+    const chosenSet = allSets[chosenSetIndex]
+
 
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
@@ -21,9 +40,12 @@ export default function Results({allSets, selectedCource, results, showResults})
     const svgRef_3 = useRef(null)
     const svgRef_4 = useRef(null)
 
-    const width = 250
+    const width = 200
 
     useEffect(()=>{
+        console.log("Cource index: ",chosenCourceIndex,"Set index: ", chosenSetIndex)
+
+
         let allResults = JSON.parse(localStorage.getItem('results'))
         if (allResults) {
         allResults.push(results)
@@ -50,7 +72,6 @@ export default function Results({allSets, selectedCource, results, showResults})
             setTodayResults(todaysResultsArray)
         }
     },[resultsOfDays])
-
 
     useEffect(()=>{
         if(todayResults && todayResults.length > 0) {
@@ -212,8 +233,8 @@ export default function Results({allSets, selectedCource, results, showResults})
         let startPrecent = 6.28  * 0.6
         let lastPrecent = 6.28 * (0.6 + (0.8 * val))
         let thisWidth = text === "Activity time" ? width + 30 : width
-        let innerRadius = text === "Activity time" ? thisWidth/2 - 37 : thisWidth/2 - 34
-        let outerRadius = text === "Activity time" ? thisWidth/2 - 12 : thisWidth/2 - 14
+        let innerRadius = text === "Activity time" ? thisWidth/2 - 40 : thisWidth/2 - 35
+        let outerRadius = text === "Activity time" ? thisWidth/2 - 20 : thisWidth/2 - 16
         let middleRadius = (innerRadius + outerRadius) / 2
         let dotRadius = (outerRadius - innerRadius) / 2
 
@@ -292,7 +313,7 @@ export default function Results({allSets, selectedCource, results, showResults})
 
         svg.append("text")
             .attr('x', 0)
-            .attr('y', -30)
+            .attr('y', -10)
             .text(text)
             .attr('text-anchor', 'middle')
             .attr('class', 'circleText');
@@ -324,19 +345,61 @@ export default function Results({allSets, selectedCource, results, showResults})
 
     }
 
+    return <div className="results_page">
+        <div className="results_background"></div>
+        <div className="results_header"></div>
+        <div className="results_box">
+            <div className="results_menu"></div>
+            <div className="results_days">
+                <div className="results_activitesText">
+                    <h1>{allDays.names[chosenCourceIndex]}</h1>
+                    <p className="resultsActivites"><span className="resultsActivites-1">{0}</span><span className="resultsActivites-2">/{3}</span> activites</p>
+                </div>
+                <div className="cardBoxList">
+                    {
+                        chosenCource.map((setIndex, index) => {
+                            return (
+                                <div key={index}>
+                                    <div
+                                        className="resultCard"
 
-    return <div className="results">
-        <h1 className="resultHead">{"today's scores".toUpperCase()}</h1>
-        <h6 className="resultHead-bottom">{new Date().toLocaleString('ru',{month:"numeric",day:"numeric", year: "numeric", minute: "2-digit", hour: "2-digit"})}</h6>
+                                        onClick={() => { 
+                                            // setChosenSet(allSets[setIndex]);
+                                            // setChosenSetIndex(setIndex);
+                                            // dispatch(setSetIndex({index:setIndex}));
+                                        }}
+                                    >
+                                        <div className='resultCardImgBox'>
+                                            <img className='resultCardImg' src={allDays.images[index]} />
+                                        </div>
 
-        
-        <div className="resultCircleGraphBox">
-            <svg className="resultCircleGraph gr-1" ref={svgRef_1}></svg>
-            <svg className="resultCircleGraph gr-2" ref={svgRef_2}></svg>
-            <svg className="resultCircleGraph gr-3" ref={svgRef_3}></svg>
+                                        <div className={`resultCardText`} >
+                                            <h5 className='resultCardHighText'>{`${allSetsNames[index]}`}</h5>
+                                            <div className='resultCardTextBox'>
+                                                {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
+                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className="results">
+                
+                <h1 className="resultHead">THAT'S A GOOD START! <br/> KEEP IT UP! </h1>                
+                <div className="resultCircleGraphBox">
+                    <svg className="resultCircleGraph gr-1" ref={svgRef_1}></svg>
+                    <svg className="resultCircleGraph gr-2" ref={svgRef_2}></svg>
+                    <svg className="resultCircleGraph gr-3" ref={svgRef_3}></svg>
+                </div>
+                <svg className="resultGraph" ref={svgRef_4}></svg>
+
+            </div>  
         </div>
-        <svg className="resultGraph" ref={svgRef_4}></svg>
-
     </div>
     
 }

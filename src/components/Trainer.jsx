@@ -9,12 +9,24 @@ import MiniGraphAccuracy from "./MiniGraphAccuracy"
 //SVG
 import next from 'assets/svg/next.svg'
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addResult } from "store/slices/userSlice";
 import chackBody from "./functions/checkBody";
 
 
-export default function Trainer({visibleBody, dots, selectedCource, set, allSets, chosenSetIndex, stoppingSet, setColors, allExercises}) {
+export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
+
+    const trainerData = useSelector((state) => state.app.data)
+    const chosenSetIndex = useSelector((state) => state.app.chosenSetIndex)
+    const chosenCourceIndex = useSelector((state) => state.app.chosenCourceIndex)
+
+    const allSets = trainerData.allSets
+    const allCources = trainerData.allCources
+    const allExercises = trainerData.allExercises
+    const allSetsNames = trainerData.allSetsNames
+    
+    const set = allSets[chosenSetIndex]
+    
     const dispatch = useDispatch()
     const [accuracy, setAccuracy] = useState([])
     const [rules,setRules] = useState([])
@@ -57,7 +69,11 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
 
     useEffect(()=>{
         if(showResults && results.length > 0) {
-            dispatch(addResult({results:results, indexOfSet: chosenSetIndex}) )
+            dispatch(addResult({
+                results: results,
+                indexOfSet: chosenSetIndex,
+                date: new Date().toString()
+            }) )
             let timer = setTimeout(()=>{
                 setResults([])
                 clearTimeout(timer)
@@ -160,13 +176,7 @@ export default function Trainer({visibleBody, dots, selectedCource, set, allSets
                 </>
             }
 
-            {showResults &&  <Results allSets={allSets} selectedCource = {selectedCource} showResults={showResults} results = {
-                {
-                    results: results,
-                    indexOfSet: chosenSetIndex,
-                    date: new Date().toString()
-                }
-            } />}
+            {showResults &&  <Results />}
         </>
     );
 }
