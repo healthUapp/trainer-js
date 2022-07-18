@@ -151,11 +151,11 @@ export default function Results({allSets, selectedCource, results, showResults})
 
 
         const yScale = d3.scaleLinear()
-            .domain([60, 100])
+            .domain([50, 100])
             .range([height - 70, 80])
 
         const yAxis = d3.axisLeft(yScale)
-            .ticks(3)
+            .ticks(4)
             .tickPadding([20])
             .tickSize(width - 90)
 
