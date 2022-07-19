@@ -48,54 +48,42 @@ const trainerData = {
         },
         {
             name: "CANCAN LEFT",
-            gif: cancanGif
         },
         {
             name: "MARCH IN PLACE",
-            gif: marchGif
         },
         {
             name: "LEG PUSH",
-            gif: SLDLGif
         },
         {
             name: "SQUAT",
-            gif: squat
         },
         {
             name: "REVERSE LUNGE",
-            gif: lungeGif
         },
         {
             name: "CALF RISES",
         },
         {
             name: "JUMPING JACK",
-            gif: jumping_jack
         },
         {
             name: "HALF JACK",
-            gif: halfjack
         },
         {
             name: "CANCAN RIGHT",
-            gif: cancanGif
         },
         {
             name: "SIDE LEG RISES",
-            gif: side_leg_raises
         },
         {
             name: "STEP SIDE JACK",
-            gif: stepsidejack
         },
         {
             name: "CHEST EXPANSION",
-            gif: chest_expansion
         },
         {
             name: "SIDE ARM RISES",
-            gif: side_arm_raises
         },
         {
             name: "SHRUGS SEATED",
@@ -107,7 +95,6 @@ const trainerData = {
         },
         {
             name: "OVERHEAD SHOULDER STRETCH SEATED",
-            gif:overheadShouldersStretchGif
         },
 
         {
@@ -117,7 +104,6 @@ const trainerData = {
 
         {
             name: "OVERHEAD PUNCHES SEATED",
-            gif:overheadPunchesSeatedGif
         },
 
         {
@@ -158,7 +144,6 @@ const trainerData = {
         {
             name: "BICEPS EXTENSION",
         },
-
         {
             name: "W EXTENSION",
         }
