@@ -1119,6 +1119,13 @@ img{
     margin-bottom: 50px;
     border: 2px solid rgba(174,237,228,0);
     transition: 0.2 all ease;
+    position: relative;
+}
+
+.checkSvgBox{
+    position: absolute;
+    top: 23px;
+    right: 20px; 
 }
 
 .resultCardTextBox{
@@ -1155,4 +1162,5 @@ img{
     font-size: 18px;
     line-height: 38px;
 }
+
 

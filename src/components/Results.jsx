@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCourceIndex, setSetIndex, setShowResults } from "store/slices/appSlice";
 
 
+//SVG
+import checked from 'assets/svg/check.svg'
+import unchecked from 'assets/svg/check-gray.svg'
+
 export default function Results(){
 
     const dispatch = useDispatch()
@@ -32,6 +36,7 @@ export default function Results(){
 
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
+    const [todayUncompletedSetsIndexes ,setTodayUncompletedSetsIndexes] = useState([])
     const [rerenderCounter, setRerenderCounter] = useState(0)
     const formatOfDate = {day: "numeric", month: "numeric", year: "numeric"}
     const dateNow = new Date().toLocaleString('ru', formatOfDate)
@@ -110,7 +115,9 @@ export default function Results(){
                 }
             }).reduce((a,b) => a+b, 0);
 
-            console.log(allTime)
+            setTodayUncompletedSetsIndexes(selectedCource.filter(n => todayResults.map(todayResult => {
+                return todayResult.indexOfSet
+            }).indexOf(n) === -1))
 
             let completedExercises =  todayResults.map(todayResult => {
                 let exercises = todayResult.results.map(result => {
@@ -121,18 +128,16 @@ export default function Results(){
                 return exercises.reduce((a,b) => a+b, 0)
             }).reduce((a,b) => a+b, 0);
 
-
             let allExercises = selectedCource.map(index => {
                 if(trainerData) {
                     return trainerData.allSets[index].length
                 }
             }).reduce((a,b) => a+b, 0);
 
-
             drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 1)
             drawCircleGraph( todayTime, allTime, "Activity time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 2)
             drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 3)
-            drawGraph( todayResults,  "Accuracy performance, %" , svgRef_4.current)
+            drawGraph(todayResults,  "Accuracy performance, %" , svgRef_4.current)
         }
 
     },[todayResults])
@@ -354,7 +359,7 @@ export default function Results(){
             <div className="results_days">
                 <div className="results_activitesText">
                     <h1>{allDays.names[chosenCourceIndex]}</h1>
-                    <p className="resultsActivites"><span className="resultsActivites-1">{0}</span><span className="resultsActivites-2">/{3}</span> activites</p>
+                    <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
                 </div>
                 <div className="cardBoxList">
                     {
@@ -367,10 +372,17 @@ export default function Results(){
                                         onClick={() => { 
                                             // setChosenSet(allSets[setIndex]);
                                             // setChosenSetIndex(setIndex);
-                                            dispatch(setSetIndex({index:setIndex}));
-                                            dispatch(setShowResults({status: false}))
+
+                                            // dispatch(setSetIndex({index:setIndex}));
+                                            // dispatch(setShowResults({status: false}));
                                         }}
                                     >
+                                        <div className ='checkSvgBox'>
+                                            {todayUncompletedSetsIndexes.indexOf(index) !== -1 
+                                                ?   <img src={unchecked} />
+                                                :   <img src={checked} />
+                                            }
+                                        </div>
                                         <div className='resultCardImgBox'>
                                             <img className='resultCardImg' src={allDays.images[index]} />
                                         </div>

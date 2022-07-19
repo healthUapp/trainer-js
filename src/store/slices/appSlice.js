@@ -1,20 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {sendData} from "components/functions/firebaseFunctions";
 
-//GIF
-import marchGif from 'assets/gif/March in place.gif'
-import goodMorningGif from 'assets/gif/Good morning.gif'
-import cancanGif from 'assets/gif/Cancan.gif'
-import lungeGif from 'assets/gif/Back lunge.gif'
-import SLDLGif from 'assets/gif/SLDL with chair.gif'
-import armChopsSeatGif from 'assets/gif/Arm Chops on chair.gif'
-import armScissorsSeatGif from 'assets/gif/Arm scissors on chair.gif'
-import headTiltisGif from 'assets/gif/Head tilts.gif'
-import overheadPunchesSeatedGif from 'assets/gif/Overhead punches seated.gif'
-import overheadShouldersStretchGif from 'assets/gif/Overhead shoulders strech.gif'
-import punchesSeatedGif from 'assets/gif/Punches.gif'
-import shrugsGif from 'assets/gif/Shrugs.gif'
-
 //exImg
 import halfjack from 'assets/exImg/halfjack.png'
 import squat from 'assets/exImg/squat.png'
@@ -249,7 +235,7 @@ const initialState = {
     data: trainerData,
     chosenCourceIndex: null,
     chosenSetIndex: null,
-    showResults: true
+    showResults: false
 };
 
 
