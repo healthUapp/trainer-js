@@ -126,7 +126,10 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                 {!showResults && visibleBody &&
                     <div className="gifBox">
                         {!!selectedGif &&
-                            <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
+                            // <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
+                            <video className="gif" width="267px" autoPlay={true} loop={true} muted>
+                            <source src={selectedGif? selectedGif : ""} type="video/mp4" alt="exercise gif"/>
+                            </video>
                         }
 
                         {!selectedGif &&
@@ -156,7 +159,6 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                                 <p className="up">coming next</p>
                                 <p className="middle">{allExercises[set[exerciseNumber].exerciseIndex].name}</p>
                                 <div className="duo">
-                                    {/*<p className="down">{set.length} reps</p>*/}
                                     <p className="down">{set[exerciseNumber].time} sec</p>
                                 </div>
                             </div>

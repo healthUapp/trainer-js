@@ -24,6 +24,14 @@ import side_arm_raises from 'assets/exImg/side_arm_raises.png'
 import chest_expansion from 'assets/exImg/chest_expansion.png'
 import jumping_jack from 'assets/exImg/jumping_jack.png'
 
+//video
+import goodMorningMp from '../../assets/video/5.mp4'
+import armStorony from '../../assets/video/4.mp4'
+import armVverh from '../../assets/video/3.mp4'
+import kylaki from '../../assets/video/2.mp4'
+import plechi from '../../assets/video/6.mp4'
+import golova from '../../assets/video/7.mp4'
+
 //PNG
 import day1 from 'assets/png/day1.png'
 import day2 from 'assets/png/day2.png'
@@ -36,7 +44,7 @@ const trainerData = {
     allExercises: [
         {
             name: "GOOD MORNING",
-            gif: goodMorningGif
+            mp4: goodMorningMp
         },
         {
             name: "CANCAN LEFT",
@@ -87,7 +95,7 @@ const trainerData = {
         },
         {
             name: "SIDE ARM RISES",
-            gif: side_arm_raises
+            mp4: armStorony
         },
         {
             name: "SHRUGS SEATED",
@@ -95,7 +103,7 @@ const trainerData = {
         },
         {
             name: "HEAD TILTS LR SEATED",
-            gif:headTiltisGif
+            mp4:golova
         },
         {
             name: "OVERHEAD SHOULDER STRETCH SEATED",
@@ -109,17 +117,17 @@ const trainerData = {
 
         {
             name: "OVERHEAD PUNCHES SEATED",
-            gif:overheadPunchesSeatedGif
+            mp4:kylaki
         },
 
         {
             name: "ARM CHOPS SEATED",
-            gif:armChopsSeatGif
+            mp4:armVverh
         },
 
         {
             name: "ARM SCISSORS SEATED",
-            gif:armScissorsSeatGif
+            mp4:plechi
         },
 
         {

@@ -327,7 +327,9 @@ export default function Days() {
                                             <div key={index} className='exercisePrewiew__item'>
                                                 {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
                                                 {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} />*/}
-                                                {/* {videoTag()} */}
+                                                <video width="267px" className="vidPunch" autoPlay={true} loop={true} muted>
+                                                    <source src={allExercises[ex.exerciseIndex].mp4} type="video/mp4"/>
+                                                </video>
                                                 <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                 <h5>{ex.time} sec</h5>
                                             </div>
