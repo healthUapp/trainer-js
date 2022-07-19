@@ -95,15 +95,15 @@ const trainerData = {
         },
         {
             name: "SIDE ARM RISES",
-            mp4: armStorony
+            gif: side_arm_raises
         },
         {
             name: "SHRUGS SEATED",
-            gif:shrugsGif
+            mp4: plechi
         },
         {
             name: "HEAD TILTS LR SEATED",
-            mp4:golova
+            mp4: golova
         },
         {
             name: "OVERHEAD SHOULDER STRETCH SEATED",
@@ -112,22 +112,22 @@ const trainerData = {
 
         {
             name: "PUNCHES SEATED",
-            gif:punchesSeatedGif
+            mp4: kylaki
         },
 
         {
             name: "OVERHEAD PUNCHES SEATED",
-            mp4:kylaki
+            gif:overheadPunchesSeatedGif
         },
 
         {
             name: "ARM CHOPS SEATED",
-            mp4:armVverh
+            mp4: armVverh
         },
 
         {
             name: "ARM SCISSORS SEATED",
-            mp4:plechi
+            mp4: armStorony
         },
 
         {
