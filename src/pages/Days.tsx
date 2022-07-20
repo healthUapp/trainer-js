@@ -172,9 +172,8 @@ export default function Days() {
 
         }
 
-        setTimeout(() =>  {
-            newCam()
-        }, 2000)
+
+        newCam()
 
 
     }, []);
@@ -224,7 +223,7 @@ export default function Days() {
                                                         <h5 className='cardHighText'>{allDays.names[index]}</h5>
                                                         <div className='cardLowerTextBox'>
                                                             {/*<p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>*/}
-                                                            <p className='cardLowerText-2'>{cource.length} ex.</p>
+                                                            <p className='cardLowerText-2'>{cource.length} activities</p>
                                                             {/* <div className='cardLowerIconsBox'>
                                                                 <p className='cardLowerIconsText'>activities</p>
                                                                 <div className='cardLowerIconsCheckedBox'>
@@ -307,7 +306,7 @@ export default function Days() {
                                                             <h5 className='setCardHighText'>{`${allSetsNames[index]}`}</h5>
                                                             <div className='cardLowerTextBox'>
                                                                 {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
-                                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
+                                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} activities</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -323,14 +322,12 @@ export default function Days() {
                             {(chosenSet !== null) &&
                                 <>
                                     <div className="exercisesPreviewList">
-                                        <h2>Strength</h2>
+                                        <h2></h2>
                                         {chosenSet.map((ex: any, index: number) => (
                                             <div key={index} className='exercisePrewiew__item'>
                                                 {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
-                                                {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} />*/}
-                                                <video width="267px" className="vidPunch" autoPlay={true} loop={true} muted>
-                                                    <source src={allExercises[ex.exerciseIndex].mp4} type="video/mp4"/>
-                                                </video>
+                                                {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} type="video/mp4" />*/}
+                                                <video src={allExercises[ex.exerciseIndex].mp4}  width="267px" className="vidPunch" autoPlay={true} loop={true} muted />
                                                 <h4>{allExercises[ex.exerciseIndex].name}</h4>
                                                 <h5>{ex.time} sec</h5>
                                             </div>

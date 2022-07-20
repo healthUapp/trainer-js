@@ -359,7 +359,7 @@ export default function Results(){
             <div className="results_days">
                 <div className="results_activitesText">
                     <h1>{allDays.names[chosenCourceIndex]}</h1>
-                    <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
+                    <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activities</p>
                 </div>
                 <div className="cardBoxList">
                     {
