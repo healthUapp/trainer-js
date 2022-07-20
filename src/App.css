@@ -342,8 +342,8 @@ img{
 }
 
 .resultHead{
-    padding-top: 50px;
-    padding-bottom: 40px;
+    padding-top: 30px;
+    padding-bottom: 1vh;
     font-size: 36px;
     line-height: 45px;
     font-weight: 800;
