@@ -126,6 +126,7 @@ const trainerData = {
 
         {
             name: "ARM CHOPS",
+            mp4: armVverh
         },
 
         {
