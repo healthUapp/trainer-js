@@ -33,7 +33,7 @@ export default function Results(){
     const chosenCource = allCources[chosenCourceIndex]
     const chosenSet = allSets[chosenSetIndex]
 
-
+    const [selectedPage,setSelectedPage] = useState(0)
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
     const [todayUncompletedSetsIndexes ,setTodayUncompletedSetsIndexes] = useState([])
@@ -351,57 +351,62 @@ export default function Results(){
 
     }
 
+    // const page1 = () => {
+    //     return (
+    //         <div className="results_days">
+    //             <div className="results_activitesText">
+    //                 <h1>{allDays.names[chosenCourceIndex]}</h1>
+    //                 <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
+    //             </div>
+    //             <div className="cardBoxList">
+    //                 {
+    //                     chosenCource.map((setIndex, index) => {
+    //                         return (
+    //                             <div key={index}>
+    //                                 <div
+    //                                     className="resultCard"
+
+    //                                     onClick={() => { 
+    //                                         // setChosenSet(allSets[setIndex]);
+    //                                         // setChosenSetIndex(setIndex);
+
+    //                                         // dispatch(setSetIndex({index:setIndex}));
+    //                                         // dispatch(setShowResults({status: false}));
+    //                                     }}
+    //                                 >
+    //                                     <div className ='checkSvgBox'>
+    //                                         {todayUncompletedSetsIndexes.indexOf(index) !== -1 
+    //                                             ?   <img src={unchecked} />
+    //                                             :   <img src={checked} />
+    //                                         }
+    //                                     </div>
+    //                                     <div className='resultCardImgBox'>
+    //                                         <img className='resultCardImg' src={allDays.images[index]} />
+    //                                     </div>
+
+    //                                     <div className={`resultCardText`} >
+    //                                         <h5 className='resultCardHighText'>{`${allSetsNames[index]}`}</h5>
+    //                                         <div className='resultCardTextBox'>
+    //                                             {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
+    //                                             <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
+    //                                         </div>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         )
+    //                     })
+    //                 }
+    //             </div>
+    //         </div>
+    //     )
+    // }
+
     return <div className="results_page">
         <div className="results_background"></div>
         <div className="results_header"></div>
         <div className="results_box">
             <div className="results_menu"></div>
-            <div className="results_days">
-                <div className="results_activitesText">
-                    <h1>{allDays.names[chosenCourceIndex]}</h1>
-                    <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
-                </div>
-                <div className="cardBoxList">
-                    {
-                        chosenCource.map((setIndex, index) => {
-                            return (
-                                <div key={index}>
-                                    <div
-                                        className="resultCard"
-
-                                        onClick={() => { 
-                                            // setChosenSet(allSets[setIndex]);
-                                            // setChosenSetIndex(setIndex);
-
-                                            // dispatch(setSetIndex({index:setIndex}));
-                                            // dispatch(setShowResults({status: false}));
-                                        }}
-                                    >
-                                        <div className ='checkSvgBox'>
-                                            {todayUncompletedSetsIndexes.indexOf(index) !== -1 
-                                                ?   <img src={unchecked} />
-                                                :   <img src={checked} />
-                                            }
-                                        </div>
-                                        <div className='resultCardImgBox'>
-                                            <img className='resultCardImg' src={allDays.images[index]} />
-                                        </div>
-
-                                        <div className={`resultCardText`} >
-                                            <h5 className='resultCardHighText'>{`${allSetsNames[index]}`}</h5>
-                                            <div className='resultCardTextBox'>
-                                                {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
-                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-
+            
             <div className="results">
                 
                 <h1 className="resultHead">THAT'S A GOOD START! <br/> KEEP IT UP! </h1>                
