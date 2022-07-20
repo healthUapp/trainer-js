@@ -132,6 +132,9 @@ const trainerData = {
         },
         {
             name: "W EXTENSION",
+        },
+        {
+            name: "ELBOW CLICKS STEP",
         }
         
     ],
