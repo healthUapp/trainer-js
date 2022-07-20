@@ -11,12 +11,19 @@ import chest_expansion from 'assets/exImg/chest_expansion.png'
 import jumping_jack from 'assets/exImg/jumping_jack.png'
 
 //video
-import goodMorningMp from '../../assets/video/5.mp4'
-import armStorony from '../../assets/video/4.mp4'
-import armVverh from '../../assets/video/3.mp4'
-import kylaki from '../../assets/video/2.mp4'
-import plechi from '../../assets/video/6.mp4'
-import golova from '../../assets/video/7.mp4'
+import goodMorningMp from 'assets/video/5.mp4'
+import armStorony from 'assets/video/4.mp4'
+import armVverh from 'assets/video/1.mp4'
+import kylaki from 'assets/video/2.mp4'
+import plechi from 'assets/video/6.mp4'
+import golova from 'assets/video/7.mp4'
+import nognitsy from 'assets/video/3_1.mp4'
+import backLungeMp from 'assets/video/10.mp4'
+import legPushMp from 'assets/video/8.mp4'
+import realyGoodMp from 'assets/video/12.mp4'
+import cancanlMp from 'assets/video/9.mp4'
+import marchinplMp from 'assets/video/13.mp4'
+
 
 //PNG
 import day1 from 'assets/png/day1.png'
@@ -30,46 +37,59 @@ const trainerData = {
     allExercises: [
         {
             name: "GOOD MORNING",
-            mp4: goodMorningMp
+            mp4: realyGoodMp
         },
         {
             name: "CANCAN LEFT",
+            mp4: cancanlMp
         },
         {
             name: "MARCH IN PLACE",
+            mp4: marchinplMp
         },
         {
             name: "LEG PUSH",
+            mp4: legPushMp
         },
         {
             name: "SQUAT",
+            mp4: goodMorningMp
         },
         {
             name: "REVERSE LUNGE",
+            mp4: backLungeMp
         },
         {
             name: "CALF RISES",
+            mp4: goodMorningMp
         },
         {
             name: "JUMPING JACK",
+            mp4: goodMorningMp
         },
         {
             name: "HALF JACK",
+            mp4: goodMorningMp
         },
         {
             name: "CANCAN RIGHT",
+            mp4: cancanlMp
         },
         {
             name: "SIDE LEG RISES",
+            mp4: goodMorningMp
         },
         {
             name: "STEP SIDE JACK",
+            mp4: goodMorningMp
         },
         {
             name: "CHEST EXPANSION",
+            mp4: goodMorningMp
         },
         {
             name: "SIDE ARM RISES",
+            mp4: goodMorningMp
         },
         {
             name: "SHRUGS SEATED",
@@ -81,6 +101,7 @@ const trainerData = {
         },
         {
             name: "OVERHEAD SHOULDER STRETCH SEATED",
+            mp4: goodMorningMp
         },
 
         {
@@ -90,11 +111,12 @@ const trainerData = {
 
         {
             name: "OVERHEAD PUNCHES SEATED",
+            mp4: armVverh
         },
 
         {
             name: "ARM CHOPS SEATED",
-            mp4: armVverh
+            mp4: nognitsy
         },
 
         {
