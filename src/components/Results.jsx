@@ -5,11 +5,6 @@ import { svg } from "d3";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourceIndex, setSetIndex, setShowResults } from "store/slices/appSlice";
 
-
-//SVG
-import checked from 'assets/svg/check.svg'
-import unchecked from 'assets/svg/check-gray.svg'
-
 export default function Results(){
 
     const dispatch = useDispatch()
@@ -403,7 +398,9 @@ export default function Results(){
 
     return <div className="results_page">
         <div className="results_background"></div>
-        <div className="results_header"></div>
+        <div className="results_header">
+            <div><p>DEMO</p></div>
+        </div>
         <div className="results_box">
             <div className="results_menu"></div>
             

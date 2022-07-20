@@ -35,7 +35,7 @@ export default function Interface({dots, colors}) {
     svg.append('line')
         .style("stroke", line.color)
         .style('filter',"opacity(1)")
-        .style("stroke-width", 10)
+        .style("stroke-width", "2px")
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -50,20 +50,20 @@ export default function Interface({dots, colors}) {
       index === 25 || index === 26 ||
       index === 27 || index === 28) { 
         
-        let circle = svg.append('circle')
-        .style("stroke", "white")
-        .style("stroke-width", 3)
-        .style("fill", 'rgba(0,0,0,0.4)')
-        .attr("r", 8)
-        .attr("cx", upperSize.width - (dot.x) * upperSize.width)
-        .attr("cy", (dot.y) * upperSize.height)
+        svg.append('circle')
+          .style("stroke", "rgba(255,255,255,.9)")
+          .style("stroke-width", "13px")
+          .style("fill", 'rgba(255,255,255,.1)')
+          .attr("r", "18px")
+          .attr("cx", upperSize.width - (dot.x) * upperSize.width)
+          .attr("cy", (dot.y) * upperSize.height)
         
 
-        svg.append("text")
-          .attr("x", upperSize.width - (dot.x) * upperSize.width + (index % 2 === 0? 14 : -30))
-          .attr("y", (dot.y) * upperSize.height )
-          .text(index)
-          .attr('class', 'dotName') 
+        // svg.append("text")
+        //   .attr("x", upperSize.width - (dot.x) * upperSize.width + (index % 2 === 0? 14 : -30))
+        //   .attr("y", (dot.y) * upperSize.height )
+        //   .text(index)
+        //   .attr('class', 'dotName') 
     }
   });
 

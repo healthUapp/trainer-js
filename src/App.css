@@ -297,6 +297,13 @@ img{
     position: absolute;
     left: 0;
     top: 0;
+    color: #E1E1E1;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .results_box{
