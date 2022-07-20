@@ -38,7 +38,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const [exerciseNumber,setExerciseNumber] = useState(0)
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
-    const [selectedGif,setSelectedGif] = useState(allExercises[set[exerciseNumber].exerciseIndex].mp4)
+    const [selectedMP4,setselectedMP4] = useState(allExercises[set[exerciseNumber].exerciseIndex].mp4)
     const [results, setResults] = useState([])
     
 
@@ -58,15 +58,16 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                     console.log('set is ended')
                     dispatch(setShowResults({status: true}))
                 }else {
+                    console.log(selectedMP4)
                     setExerciseNumber(exerciseNumber + 1)
-                    setSelectedGif(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.gif)
+                    setselectedMP4(allExercises[set[exerciseNumber + 1]?.exerciseIndex]?.mp4)
                     setTime(set[exerciseNumber + 1].time)
                     setPause(5)
                 }
             }
             
         }
-    },[visibleBody, time, pause])
+    },[visibleBody, time, pause,selectedMP4])
 
     useEffect(()=>{
         if(showResults && results.length > 0) {
@@ -124,14 +125,14 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
             <div className="exerciseStateView">
                 {!showResults && visibleBody &&
                     <div className="gifBox">
-                        {!!selectedGif &&
-                            // <img className="gif" src={selectedGif? selectedGif : ""} alt="exercise gif"/>
-                            <video className="gif" width="267px" autoPlay={true} loop={true} muted>
-                            <source src={selectedGif? selectedGif : ""} type="video/mp4" alt="exercise gif"/>
+                        {!!selectedMP4 &&
+                            // <img className="gif" src={selectedMP4? selectedMP4 : ""} alt="exercise gif"/>
+                            <video className="gif" height="100vh" autoPlay={true} loop={true} muted>
+                                <source src={selectedMP4? selectedMP4 : ""} type="video/mp4" alt="exercise gif"/>
                             </video>
                         }
 
-                        {!selectedGif &&
+                        {!selectedMP4 &&
                             <div className="noGif">
                                 <p>GIF IS NOT FOUND</p>
                             </div>

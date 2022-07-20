@@ -18,7 +18,7 @@ import uncheked from '../assets/svg/uncheked.svg'
 import loadingHelp from '../assets/svg/loadingHelp.svg'
 
 import { useDispatch, useSelector } from "react-redux";
-import { setCourceIndex, setSetIndex } from "store/slices/appSlice";
+import { setCourceIndex, setSetIndex, setShowResults } from "store/slices/appSlice";
 
 export default function Days() {
 
@@ -91,6 +91,7 @@ export default function Days() {
     function stoppingSet() {
         console.log('set is stopping')
         setStartingSet(false)
+        dispatch(setShowResults({status: false}))
     }
 
     function onResults(results: any) {
