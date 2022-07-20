@@ -127,9 +127,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                     <div className="gifBox">
                         {!!selectedMP4 &&
                             // <img className="gif" src={selectedMP4? selectedMP4 : ""} alt="exercise gif"/>
-                            <video className="gif" height="100vh" autoPlay={true} loop={true} muted>
-                                <source src={selectedMP4? selectedMP4 : ""} type="video/mp4" alt="exercise gif"/>
-                            </video>
+                            <video src={selectedMP4? selectedMP4 : ""} type="video/mp4" alt="exercise gif" className="gif" height="100vh" autoPlay={true} loop={true} muted />
                         }
 
                         {!selectedMP4 &&
