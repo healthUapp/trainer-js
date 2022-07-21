@@ -302,28 +302,42 @@ img{
     font-size: 16px;
     line-height: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 }
+.results_header p{
+    margin-right: 20px;
+}
+
 
 .results_box{
     display: flex;
     justify-content: center;
     position: relative;
     margin-top: 70px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 90px);
+    
 }
 
-.results{
+.results_graphs{
     position: relative;
     background-color: rgb(255, 255, 255);
-    width: 60vw;
+    width: 70vw;
     height: 100%;
     background: #FFFFFF;
     text-align: center;
     z-index: 10;
     border-radius: 10px;
     margin-left: 10px;
+    overflow: hidden;
+
+}
+
+.results_graph_scroll{
+    position: relative;
+    overflow-y: auto;
+    height: calc(100% - (22px + 10%));
+    width: 100%;
 }
 
 .results_menu{
@@ -342,11 +356,11 @@ img{
 }
 
 .resultHead{
-    padding-top: 30px;
-    padding-bottom: 1vh;
-    font-size: 36px;
-    line-height: 45px;
-    font-weight: 800;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 600;
     color: rgba(31, 24, 81, 1);
 
     font-style: upperhead;
@@ -367,32 +381,23 @@ img{
     line-height: 38px;
 }
 .resultCircleGraphBox{
+    position: relative;
     display: flex;
-    margin: 0 auto;
-    max-width: 860px;
     justify-content: center;
-    align-items:flex-end;
+    align-items: flex-end;
 }
+
 .resultCircleGraph{
-    width: 200px;
-    height: 200px;
 }
 .resultCircleGraph.gr-2 {
-    width: 230px;
-    height: 270px;
-    padding-top: 10px;
-    margin:  0 20px;
 }
 
 .resultGraph{
-    display: none;
     width: 340px;
     height: 260px;
     box-shadow: 3px 5px 20px rgba(172,177, 192, 0.25);
     border-radius: 10px;
-    position: absolute;
-    left: calc(50% - 170px);
-    bottom: 5%;
+    margin-bottom: 10%;
 }
 
 .circleText{

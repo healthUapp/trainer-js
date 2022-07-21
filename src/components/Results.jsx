@@ -31,22 +31,20 @@ export default function Results(){
     const [selectedPage,setSelectedPage] = useState(0)
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
+    const [circleBoxWidth, setcircleBoxWidth] = useState(0)
     const [todayUncompletedSetsIndexes ,setTodayUncompletedSetsIndexes] = useState([])
     const [rerenderCounter, setRerenderCounter] = useState(0)
     const formatOfDate = {day: "numeric", month: "numeric", year: "numeric"}
     const dateNow = new Date().toLocaleString('ru', formatOfDate)
 
+    const svgRef_0 = useRef(null)
     const svgRef_1 = useRef(null)
     const svgRef_2 = useRef(null)
     const svgRef_3 = useRef(null)
     const svgRef_4 = useRef(null)
 
-    const width = 200
-
     useEffect(()=>{
-        console.log("Cource index: ",chosenCourceIndex,"Set index: ", chosenSetIndex)
-
-
+        console.log("Cource index: ",chosenCourceIndex,"Set index: ", chosenSetIndex,"........................")
         let allResults = JSON.parse(localStorage.getItem('results'))
         if (allResults) {
         allResults.push(results)
@@ -56,20 +54,39 @@ export default function Results(){
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },1000)
+        },3000)
     },[rerenderCounter])
 
     useEffect(()=>{
         
         if(resultsOfDays){
             let todaysResultsArray = []
-        
-            resultsOfDays.map(result => {
+
+            resultsOfDays.map((result,rIndex) => {
                 const resultDate = new Date(result.date).toLocaleString('ru', formatOfDate)
                 if(resultDate === dateNow && result.results.length > 0){
-                    todaysResultsArray.push(result)
+                    let indexOfSet = todaysResultsArray.map(v => v.indexOfSet).indexOf(result.indexOfSet)
+                    if(indexOfSet === -1){
+                        todaysResultsArray.push(result)
+                    } else {
+                        let length1 = result.results.map(v => v.accuracy.length).reduce((a,b) => a + b , 0)
+                        let length2 = todaysResultsArray[indexOfSet].results.map(v => v.accuracy.length).reduce((a,b) => a + b , 0)
+                        
+                        if(length1 > length2){
+                            console.log('Замена сета',length1,'>',length2)
+                            todaysResultsArray.push(result)
+                            todaysResultsArray.splice(indexOfSet, 1)
+                        }else {
+                            console.log('Есть сет получше',length2,'>',length1)
+                        }
+
+                        
+                    }
+                    
                 }
             });
+            console.log(todaysResultsArray)
+
             setTodayResults(todaysResultsArray)
         }
     },[resultsOfDays])
@@ -92,7 +109,6 @@ export default function Results(){
             );
 
             let todayTime = todayResults.map(todayResult => {
-                    console.log(todayResult)
                     let time = todayResult.results.map(result => {
                         if(result.value > 0) {
                             return result.time
@@ -129,13 +145,14 @@ export default function Results(){
                 }
             }).reduce((a,b) => a+b, 0);
 
-            drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 1)
-            drawCircleGraph( todayTime, allTime, "Activity time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 2)
-            drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 3)
+            drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 0)
+            drawCircleGraph( todayTime, allTime, "Activity time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 1)
+            drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 2)
             drawGraph(todayResults,  "Accuracy performance, %" , svgRef_4.current)
+            console.log("........................")
         }
 
-    },[todayResults])
+    },[todayResults, circleBoxWidth])
 
     const drawGraph = (resultsData, text, svgRef) => {
 
@@ -219,36 +236,38 @@ export default function Results(){
                     .attr('fill', 'none')
                     .attr('stroke', color)
                     .attr('stroke-width', 3)
-            // svg.append('rect')
-            //     .attr('x', 0)
-            //     .attr('y', 0)
-            //     .attr('width',100)
-            //     .attr('height',100)
-            //     .attr('fill', 'red')
         }
 
     }
 
     const drawCircleGraph = (val1, val2, text, grColorStart, grColorEnd, svgRef, id) => {
+        let width = (svgRef_0.current.clientWidth - 20)/ 4
+
+        if(svgRef.clientWidth){
+            if  (id === 1) {
+                width = (svgRef_0.current.clientWidth / 3) + 20
+            }
+        }
+        
         let val = Math.round((val1 / val2) * 10) / 10
-        let startPrecent = 6.28  * 0.6
-        let lastPrecent = 6.28 * (0.6 + (0.8 * val))
-        let thisWidth = text === "Activity time" ? width + 30 : width
-        let innerRadius = text === "Activity time" ? thisWidth/2 - 40 : thisWidth/2 - 35
-        let outerRadius = text === "Activity time" ? thisWidth/2 - 20 : thisWidth/2 - 16
+        let startPrecent = 6.28  * 0.56
+        let lastPrecent = 6.28 * (0.561 + val)
+        let innerRadius = id === 1 ? width/2 - 40 : width/2 - 35
+        let outerRadius = id === 1 ? width/2 - 20 : width/2 - 16
         let middleRadius = (innerRadius + outerRadius) / 2
         let dotRadius = (outerRadius - innerRadius) / 2
 
         let x1 = middleRadius * Math.cos(startPrecent - 3.14 / 2)
         let y1 = middleRadius * Math.sin(startPrecent - 3.14 / 2)
 
-        let x2 = middleRadius * Math.cos(lastPrecent  - 3.14 / 2)
-        let y2 = middleRadius * Math.sin(lastPrecent  - 3.14 / 2)  
+        let x2 = middleRadius * Math.cos((lastPrecent - 0.1)  - 3.14 / 2)
+        let y2 = middleRadius * Math.sin((lastPrecent - 0.1) - 3.14 / 2)  
 
-        const svg = d3.select(svgRef)
-            .html(null)
-            .append("g")
-            .attr("transform", `translate(${thisWidth/2},${thisWidth/2})`)
+        const svg = d3.select(svgRef).html(null)
+            .attr('width', `${width}px`)
+            .attr('height', `${width + 20}px`)
+                .append("g")
+                .attr("transform", `translate(${width/2},${width/2})`)
 
         var defs = svg.append("defs");
 
@@ -270,8 +289,8 @@ export default function Results(){
         const arcBack_path = d3.arc()
             .innerRadius(innerRadius)
             .outerRadius(outerRadius)
-            .startAngle((6.28 * 1.2) / 2)
-            .endAngle((6.28 * 2.8) / 2);
+            .startAngle(Math.PI)
+            .endAngle(Math.PI * 3);
         
         const arcFront_path = d3.arc()
             .innerRadius(innerRadius)
@@ -285,24 +304,12 @@ export default function Results(){
             .attr("fill", "rgba(239, 241, 244, 1)")
             .style("stroke-linecap","round")
 
-        svg.append("circle")
-            .attr('cx', x2)
-            .attr('cy', y2)
-            .attr('r', dotRadius)
-            .attr('fill', grColorEnd)
-            .style("filter","opacity(0.7)")
+
 
         svg.append("path")
             .attr("class", "arc-2")
             .attr("d", arcFront_path)
             .attr("fill", `url(#svgGradient-${id})`)
-
-        svg.append("circle")
-            .attr('cx', x2)
-            .attr('cy', y2)
-            .attr('r', dotRadius)
-            .attr('fill', grColorEnd)
-            .style("filter","opacity(0.2)")
         
 
         svg.append("circle")
@@ -324,7 +331,7 @@ export default function Results(){
         
         switch (text) {
             case "Activity time":
-                svgText = `${val * 100} s.`
+                svgText = `${Math.floor((val1 + 20) / 60)} min ${Math.floor((val1 + 20) / 60) % 60 > 0 ? `${(val1 + 20) % 60} s` : ""}`
                 break;
             case "Exercises":
                 svgText = `${val1} / ${val2}`
@@ -402,17 +409,19 @@ export default function Results(){
             <div><p>DEMO</p></div>
         </div>
         <div className="results_box">
-            <div className="results_menu"></div>
+            {/* <div className="results_menu"></div> */}
             
-            <div className="results">
+            <div className="results_graphs">
                 
                 <h1 className="resultHead">THAT'S A GOOD START! <br/> KEEP IT UP! </h1>                
-                <div className="resultCircleGraphBox">
-                    <svg className="resultCircleGraph gr-1" ref={svgRef_1}></svg>
-                    <svg className="resultCircleGraph gr-2" ref={svgRef_2}></svg>
-                    <svg className="resultCircleGraph gr-3" ref={svgRef_3}></svg>
+                <div className="results_graph_scroll">
+                    <div className="resultCircleGraphBox"  ref={svgRef_0}>
+                        <svg className="resultCircleGraph gr-1" ref={svgRef_1}></svg>
+                        <svg className="resultCircleGraph gr-2" ref={svgRef_2}></svg>
+                        <svg className="resultCircleGraph gr-3" ref={svgRef_3}></svg>
+                    </div>
+                    <svg className="resultGraph" ref={svgRef_4}></svg>
                 </div>
-                <svg className="resultGraph" ref={svgRef_4}></svg>
 
             </div>  
         </div>

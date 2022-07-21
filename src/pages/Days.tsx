@@ -216,23 +216,20 @@ export default function Days() {
                                                 >
                                                     <div className='cardImgBox'>
                                                         <img className='cardImg' src={allDays.images[index]} />
-                                                        {index > 4 && <img className="faLockSvg" src={fa_lock} />}
                                                     </div>
 
                                                     <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
-                                                        <h5 className='cardHighText'>{allDays.names[index]}</h5>
-                                                        <div className='cardLowerTextBox'>
-                                                            {/*<p className='cardLowerText-1'>{courcesTimes[index] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p>*/}
-                                                            <p className='cardLowerText-2'>{cource.length} activities</p>
-                                                            {/* <div className='cardLowerIconsBox'>
-                                                                <p className='cardLowerIconsText'>activities</p>
-                                                                <div className='cardLowerIconsCheckedBox'>
-                                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                    <img className='cardLowerIconsCheckedIcon' src={cheked} alt="" />
-                                                                    <img className='cardLowerIconsCheckedIcon' src={uncheked} alt="" />
+                                                        {index < 5 &&
+
+                                                            <>
+                                                                <h5 className='cardHighText'>{allDays.names[index]}</h5>
+
+                                                                <div className='cardLowerTextBox'>
+                                                                    <p className='cardLowerText-2'>{cource.length} activities</p>
                                                                 </div>
-                                                            </div> */}
-                                                        </div>
+                                                            </>
+
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

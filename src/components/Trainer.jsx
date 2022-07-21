@@ -38,7 +38,8 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const [exerciseNumber,setExerciseNumber] = useState(0)
     const [time, setTime] = useState(set[exerciseNumber].time)
     const [pause, setPause] = useState(5)
-    const [selectedMP4,setselectedMP4] = useState(allExercises[set[exerciseNumber].exerciseIndex].mp4)
+    const [selectedMP4,setselectedMP4] = useState(allExercises[set[exerciseNumber].exerciseIndex].mp4
+        )
     const [results, setResults] = useState([])
     
 

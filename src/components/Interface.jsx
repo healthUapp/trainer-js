@@ -35,7 +35,7 @@ export default function Interface({dots, colors}) {
     svg.append('line')
         .style("stroke", line.color)
         .style('filter',"opacity(1)")
-        .style("stroke-width", "2px")
+        .style("stroke-width", "8px")
         .attr('x1',upperSize.width - (dots[a].x) * upperSize.width)
         .attr('y1',dots[a].y * upperSize.height)
         .attr('x2',upperSize.width - (dots[b].x) * upperSize.width)
@@ -51,9 +51,9 @@ export default function Interface({dots, colors}) {
       index === 27 || index === 28) { 
         
         svg.append('circle')
-          .style("stroke", "rgba(255,255,255,.9)")
-          .style("stroke-width", "13px")
-          .style("fill", 'rgba(255,255,255,.1)')
+          .style("stroke", "rgba(255,255,255,.6)")
+          .style("stroke-width", "36px")
+          .style("fill", 'rgba(255,255,255,1)')
           .attr("r", "18px")
           .attr("cx", upperSize.width - (dot.x) * upperSize.width)
           .attr("cy", (dot.y) * upperSize.height)
