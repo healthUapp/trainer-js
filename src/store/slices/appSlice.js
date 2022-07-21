@@ -158,6 +158,9 @@ const trainerData = {
         },
         {
             name: "ELBOW CLICKS STEP",
+        },
+        {
+            name: "SHOULDER TAPS STEP",
         }
         
     ],
