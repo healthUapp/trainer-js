@@ -11,8 +11,8 @@ export default function Countdown({startTime, newTime, width}) {
         if(newTime && width){
             let startPrecent = 6.28
         let lastPrecent = (6.28 * (1 - newTime / startTime))
-        let innerRadius = width/2 - 8
-        let outerRadius = width/2 - 14
+        let innerRadius = width/2 - 10
+        let outerRadius = width/2 - 16
         let dotRadius = (innerRadius + outerRadius) / 2
 
         let x1 = dotRadius * Math.cos(startPrecent - 3.14 / 2)
@@ -35,22 +35,18 @@ export default function Countdown({startTime, newTime, width}) {
 
         var defs = svg.append("defs");
         var gradient = defs.append("linearGradient")
-        .attr("id", "svgGradient")
+        .attr("id", "svgGradient-1")
         .attr("x1", "0%")
         .attr("x2", "100%")
         .attr("y1", "0%")
         .attr("y2", "100%");
         gradient.append("stop")
         .attr("offset", "0%")
-        .attr("stop-color", "#9C90F8")
-        .attr("stop-opacity", 1);
-        gradient.append("stop")
-        .attr("offset", "56.15%")
-        .attr("stop-color", "#90B8F8")
-        .attr("stop-opacity", 1);
+        .attr("stop-color", "#E0DCFF")
+        .attr("stop-opacity", .9);
         gradient.append("stop")
         .attr("offset", "100%")
-        .attr("stop-color", "#90ECF8")
+        .attr("stop-color", "rgba(134, 117, 255)")
         .attr("stop-opacity", 1);
 
 
@@ -64,32 +60,45 @@ export default function Countdown({startTime, newTime, width}) {
         const arcFront_path = d3.arc()
             .innerRadius(innerRadius)
             .outerRadius(outerRadius)
-            .startAngle(lastPrecent)
-            .endAngle(0);
+            .startAngle(0)
+            .endAngle(lastPrecent);
         
         svg.append("path")
             .attr("class", "arc-1")
             .attr("d", arcBack_path)
-            .attr("fill", "rgba(239, 241, 244, 1)")
+            .attr("fill", "#E0DCFF")
             .style("stroke-linecap","round")
 
         svg.append("path")
             .attr("class", "arc-2")
             .attr("d", arcFront_path)
-            .attr("fill", "url(#svgGradient)")
+            .attr("fill", "url(#svgGradient-1)")
             .style("stroke-linecap","round")
-
-        svg.append("circle")
-            .attr('cx', x1)
-            .attr('cy', y1)
-            .attr('r', 9)
-            .attr('fill', 'white');
             
         svg.append("circle")
             .attr('cx', x2)
             .attr('cy', y2)
-            .attr('r', 9)
-            .attr('fill', 'white');
+            .attr('r', 12)
+            .attr('class', 'circle');
+        svg.append("circle")
+            .attr('cx', x2)
+            .attr('cy', y2)
+            .attr('r', 8)
+            .attr('fill', 'rgba(134, 117, 255)')
+            
+
+
+        svg.append("circle")
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('r', innerRadius - 15)
+            .attr('fill', 'none')
+            .attr('stroke', '#8675FF')
+            .attr('stroke-width','0.53px')
+            .attr('stroke-dasharray', "2 10")
+            .attr('stroke-dashoffset', 5)
+            .attr('stroke-linecap', 'round')
+            .attr('stroke', 'black')
         }        
     },[newTime])
 

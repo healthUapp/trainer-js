@@ -171,26 +171,26 @@ const trainerData = {
     allSets: [
 
         [
-            { exerciseIndex: 14, time: 30 },
-            { exerciseIndex: 15, time: 30 },
-            { exerciseIndex: 16, time: 30 },
+            { exerciseIndex: 14, time: 20 },
+            { exerciseIndex: 15, time: 20 },
+            { exerciseIndex: 16, time: 20 },
         ],
 
         [
-            { exerciseIndex: 19, time: 30 },
-            { exerciseIndex: 20, time: 30 },
-            { exerciseIndex: 17, time: 30 },
-            { exerciseIndex: 18, time: 30 },
+            { exerciseIndex: 19, time: 20 },
+            { exerciseIndex: 20, time: 20 },
+            { exerciseIndex: 17, time: 20 },
+            { exerciseIndex: 18, time: 20 },
         ],
 
         [
             //По этому индексу вытаскивается упражнение из allExercises
-            { exerciseIndex: 0, time: 30 },
-            { exerciseIndex: 2, time: 30 },
-            { exerciseIndex: 1, time: 30 },
-            { exerciseIndex: 9, time: 30 },
-            { exerciseIndex: 5, time: 30 },
-            { exerciseIndex: 3, time: 30 },
+            { exerciseIndex: 0, time: 20 },
+            { exerciseIndex: 2, time: 20 },
+            { exerciseIndex: 1, time: 20 },
+            { exerciseIndex: 9, time: 20 },
+            { exerciseIndex: 5, time: 20 },
+            { exerciseIndex: 3, time: 20 },
         ],
 
         [

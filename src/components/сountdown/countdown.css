@@ -1,15 +1,16 @@
 .countdown{
     width: 100px;
     height: 100px;
-    background-color: rgba(219, 229, 245, 1);
+    background: linear-gradient(138deg, rgba(255,255,255,0.9) -5.43%, rgba(238, 241, 250, 0.9) 132.3%) ;
     position: absolute;
     z-index: 999;
     border-radius: 200px;
 
-    font-size: 98px;
+    font-size: 100px;
     font-family: 'Mulish';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
+    color: #1F1851;
 
     display: flex;
     justify-content: center;
@@ -30,3 +31,6 @@
     stroke-linecap: round;
 }
 
+.circle{
+    fill: rgba(134, 117, 255, 0.5);
+}

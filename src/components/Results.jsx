@@ -146,7 +146,7 @@ export default function Results(){
             }).reduce((a,b) => a+b, 0);
 
             drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 0)
-            drawCircleGraph( todayTime, allTime, "Activity time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 1)
+            drawCircleGraph( todayTime, allTime, "Time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 1)
             drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 2)
             drawGraph(todayResults,  "Accuracy performance, %" , svgRef_4.current)
             console.log("........................")
@@ -238,6 +238,28 @@ export default function Results(){
                     .attr('stroke-width', 3)
         }
 
+        resultsData.forEach((result, index)=>{
+            let x = [58,158,258]
+
+            svg.append('text')
+                .attr('x', x[index])
+                .attr('y', 230)
+                .text(`${index + 1}st set`)
+                .attr('text-anchor', 'left')
+                .attr('class', 'grapLegendText')
+
+            svg.append('line')
+                .attr('x1', x[index] - 22)
+                .attr('y1', 227)
+                .attr('x2', x[index] - 5)
+                .attr('y2', 227)
+                .attr('stroke', colors[index])
+                .attr('stroke-width', '2.5px')
+                .attr('stroke-linecap', 'round')
+
+
+        })
+
     }
 
     const drawCircleGraph = (val1, val2, text, grColorStart, grColorEnd, svgRef, id) => {
@@ -319,18 +341,33 @@ export default function Results(){
             .attr('fill', 'black')
             
 
+        svg.append("circle")
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('r', innerRadius - 7)
+            .attr('fill', 'none')
+            .attr('stroke', '#8675FF')
+            .attr('stroke-width','0.53px')
+            .attr('stroke-dasharray', "2 10")
+            .attr('stroke-dashoffset', 5)
+            .attr('stroke-linecap', 'round')
+            .attr('stroke', 'black')
+
+
         svg.append("text")
             .attr('x', 0)
             .attr('y', -10)
             .text(text)
             .attr('text-anchor', 'middle')
             .attr('class', 'circleText');
-            
+
+
+
 
         let svgText;
         
         switch (text) {
-            case "Activity time":
+            case "Time":
                 svgText = `${Math.floor((val1 + 20) / 60)} min ${Math.floor((val1 + 20) / 60) % 60 > 0 ? `${(val1 + 20) % 60} s` : ""}`
                 break;
             case "Exercises":

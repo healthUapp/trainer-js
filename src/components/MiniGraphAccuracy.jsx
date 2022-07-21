@@ -7,7 +7,10 @@ export default function MiniGraphAccuracy({accuracy}){
     useEffect(()=>{
         const svg = d3.select(svgRef.current)
             .html(null)
+            .attr('width', '700px')
             .append("g")
+            .attr('width', '700px')
+            .attr('height', '700px')
             .attr("transform", `translate(${0},${0})`)
 
         var defs = svg.append("defs");
@@ -19,15 +22,11 @@ export default function MiniGraphAccuracy({accuracy}){
             .attr("y2", "100%");
             gradient.append("stop")
             .attr("offset", "0%")
-            .attr("stop-color", "#9C90F8")
-            .attr("stop-opacity", 1);
-            gradient.append("stop")
-            .attr("offset", "56.15%")
-            .attr("stop-color", "#90B8F8")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "rgb(143, 131, 237)")
+            .attr("stop-opacity", .9);
             gradient.append("stop")
             .attr("offset", "100%")
-            .attr("stop-color", "#90ECF8")
+            .attr("stop-color", "rgba(134, 117, 255)")
             .attr("stop-opacity", 1);
     
 
