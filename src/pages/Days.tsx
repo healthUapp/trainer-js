@@ -179,6 +179,7 @@ export default function Days() {
     }, []);
 
 
+
     // @ts-ignore
     return (
         <IonContent className="startPage" fullscreen>
@@ -225,7 +226,7 @@ export default function Days() {
                                                                 <h5 className='cardHighText'>{allDays.names[index]}</h5>
 
                                                                 <div className='cardLowerTextBox'>
-                                                                    <p className='cardLowerText-2'>{cource.length} exercises</p>
+                                                                    <p className='cardLowerText-2'>{cource.length} activites</p>
                                                                 </div>
                                                             </>
 
@@ -291,7 +292,7 @@ export default function Days() {
                                                         onClick={() => { 
                                                             setChosenSet(allSets[setIndex]);
                                                             setChosenSetIndex(setIndex) 
-
+                                                            //videlenie
                                                             dispatch(setSetIndex({index:setIndex}))
                                                         }}
                                                     >
@@ -303,7 +304,7 @@ export default function Days() {
                                                             <h5 className='setCardHighText'>{`${allSetsNames[index]}`}</h5>
                                                             <div className='cardLowerTextBox'>
                                                                 {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
-                                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} activities</p>
+                                                                <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} exercises</p>
                                                             </div>
                                                         </div>
                                                     </div>
