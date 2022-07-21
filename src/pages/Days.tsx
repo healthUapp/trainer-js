@@ -225,7 +225,7 @@ export default function Days() {
                                                                 <h5 className='cardHighText'>{allDays.names[index]}</h5>
 
                                                                 <div className='cardLowerTextBox'>
-                                                                    <p className='cardLowerText-2'>{cource.length} activities</p>
+                                                                    <p className='cardLowerText-2'>{cource.length} exercises</p>
                                                                 </div>
                                                             </>
 
