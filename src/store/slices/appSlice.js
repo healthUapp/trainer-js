@@ -161,6 +161,9 @@ const trainerData = {
         },
         {
             name: "SHOULDER TAPS STEP",
+        },
+        {
+            name: "BICEPS EXTENSION STEP",
         }
         
     ],

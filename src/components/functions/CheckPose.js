@@ -65,7 +65,8 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
     if (exerciseValue === 29) biceps_extension_seated();
     if (exerciseValue === 30) w_extension_seated();
     if (exerciseValue === 31) elbow_clicks_step();
-    if (exerciseValue === 31) shoulder_taps_step();
+    if (exerciseValue === 32) shoulder_taps_step();
+    if (exerciseValue === 33) biceps_extension_step();
     
 
     function goodMorning() {
@@ -952,6 +953,30 @@ function CheckExercise(poseLandmarks, exerciseValue, peviousStage) {
             colors.arm.right = "green"
         }
 
+    } 
+
+    function biceps_extension_step(){
+        const angle_shoulder_left = findAngle(13, 11, 23, poseLandmarks)
+        const angle_shoulder_right = findAngle(14, 12, 24, poseLandmarks)
+        const angle_elbow_left = findAngle(11, 13, 15, poseLandmarks)
+        const angle_elbow_right = findAngle(12, 14, 16, poseLandmarks)
+        const center_angle = findAngleMidPoint(23, 24, 25, 26, poseLandmarks)//находим середину между бёдрами,затем считаем угол мжде серединой и коленями
+
+        colors.arm.left = "yellow"
+        colors.arm.right = "yellow"
+
+        if (angle_elbow_left>110 && angle_elbow_right>110 && angle_shoulder_left<40 && angle_shoulder_right<40  && center_angle < 15){
+            stage="LIFT" 
+        }
+                    
+                
+        if (stage==="LIFT" && angle_elbow_left<20 && angle_elbow_right<20  && angle_shoulder_left<40 && angle_shoulder_right<40 && center_angle >= 25){
+            accuracy = Math.floor(Math.random() * (100 - 90) + 90);
+            colors.arm.left = "green"
+            colors.arm.right = "green"
+            stage="DOWN"
+        }
+                   
     }
 
     return {
