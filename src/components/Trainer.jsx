@@ -41,6 +41,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
     const [selectedMP4,setselectedMP4] = useState(allExercises[set[exerciseNumber].exerciseIndex].mp4
         )
     const [results, setResults] = useState([])
+    const [selectedPage,setSelectedPage] = useState()
     
 
     useEffect(()=>{
@@ -80,7 +81,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
             let timer = setTimeout(()=>{
                 setResults([])
                 clearTimeout(timer)
-            }, 10000)
+            }, 1000)
         }
     },[showResults, results])
     
@@ -97,6 +98,10 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
             }
         }
     },[dots])
+
+    useEffect(()=>{
+        setTime(set[exerciseNumber].time)
+    },[showResults])
 
     useEffect(()=>{
         if(pause > 0){
@@ -179,7 +184,7 @@ export default function Trainer({visibleBody, dots, stoppingSet, setColors}) {
                 </>
             }
 
-            {showResults &&  <Results />}
+            {showResults &&  <Results back = {stoppingSet}/>}
         </>
     );
 }

@@ -267,7 +267,7 @@ const initialState = {
     data: trainerData,
     chosenCourceIndex: null,
     chosenSetIndex: null,
-    showResults: false
+    showResults: true
 };
 
 

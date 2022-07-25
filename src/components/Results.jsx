@@ -5,7 +5,18 @@ import { svg } from "d3";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourceIndex, setSetIndex, setShowResults } from "store/slices/appSlice";
 
-export default function Results(){
+//SVG
+import cheked from 'assets/svg/cheked.svg'
+import uncheked from 'assets/svg/uncheked.svg'
+import home from 'assets/svg/home.svg'
+import dumbbell from 'assets/svg/dumbbell.svg'
+import calender from 'assets/svg/calender.svg'
+import graph from 'assets/svg/graph.svg'
+import dumbbell_active from 'assets/svg/dumbbell_active.svg'
+import calender_active from 'assets/svg/calender_active.svg'
+import graph_active from 'assets/svg/graph_active.svg'
+
+export default function Results({back}){
 
     const dispatch = useDispatch()
 
@@ -28,7 +39,8 @@ export default function Results(){
     const chosenCource = allCources[chosenCourceIndex]
     const chosenSet = allSets[chosenSetIndex]
 
-    const [selectedPage,setSelectedPage] = useState(0)
+    const [selectedPage, setSelectedPage] = useState(2)
+    const [selectedSetIndex, setSelectedSetIndex] = useState(0)
     const [todayResults, setTodayResults] = useState(null)
     const [resultsOfDays ,setResultsOfDays] = useState([])
     const [circleBoxWidth, setcircleBoxWidth] = useState(0)
@@ -54,7 +66,7 @@ export default function Results(){
         let delay = setTimeout(()=>{
             setRerenderCounter(rerenderCounter + 1)
             clearTimeout(delay)
-        },3000)
+        },1000)
     },[rerenderCounter])
 
     useEffect(()=>{
@@ -145,14 +157,14 @@ export default function Results(){
                 }
             }).reduce((a,b) => a+b, 0);
 
-            drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 0)
-            drawCircleGraph( todayTime, allTime, "Time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 1)
-            drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 2)
-            drawGraph(todayResults,  "Accuracy performance, %" , svgRef_4.current)
+            svgRef_1.current && drawCircleGraph( completedExercises, allExercises, "Exercises", "rgba(174, 237, 228, 1)", "rgba(163, 220, 239, 1)", svgRef_1.current, 0)
+            svgRef_2.current && drawCircleGraph( todayTime, allTime, "Time", "rgba(249, 155, 181, 1)", "rgba(255, 248, 182, 0.9)", svgRef_2.current , 1)
+            svgRef_3.current && drawCircleGraph( (todayAccuracy? todayAccuracy : 0), 100,  "Accuracy", "rgba(149, 136, 246, 1)", "rgba(204, 238, 212, 1)", svgRef_3.current, 2)
+            svgRef_4.current && drawGraph(todayResults,  "Accuracy performance, %" , svgRef_4.current)
             console.log("........................")
         }
 
-    },[todayResults, circleBoxWidth])
+    },[todayResults,selectedCource, circleBoxWidth, rerenderCounter])
 
     const drawGraph = (resultsData, text, svgRef) => {
 
@@ -163,11 +175,12 @@ export default function Results(){
         if(resultsData.length > 0){
             resultsData.forEach((v,i)=>{
                 charts.push({
-                    data: v.results.map((result)=>result.accuracy).flat(),
+                    data: v.results.map((result)=>result.accuracy.filter(e => e > 50)).flat(),
                     color: colors[v.indexOfSet]
                 })
             })
         }
+        console.log(charts)
 
         const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = svgRef.clientWidth - margin.left - margin.right,
@@ -189,8 +202,9 @@ export default function Results(){
             .attr('class', 'graphText')
 
 
+
         const yScale = d3.scaleLinear()
-            .domain([50, 100])
+            .domain([60, 100])
             .range([height - 70, 80])
 
         const yAxis = d3.axisLeft(yScale)
@@ -272,9 +286,9 @@ export default function Results(){
         }
         
         let val = Math.round((val1 / val2) * 10) / 10
-        let startPrecent = 6.28  * 0.56
-        let lastPrecent = 6.28 * (0.561 + val)
-        let innerRadius = id === 1 ? width/2 - 40 : width/2 - 35
+        let startPrecent = 3.14
+        let lastPrecent = 6.28 * (0.52 + val)
+        let innerRadius = id === 1 ? width/2 - 42 : width/2 - 36
         let outerRadius = id === 1 ? width/2 - 20 : width/2 - 16
         let middleRadius = (innerRadius + outerRadius) / 2
         let dotRadius = (outerRadius - innerRadius) / 2
@@ -327,7 +341,6 @@ export default function Results(){
             .style("stroke-linecap","round")
 
 
-
         svg.append("path")
             .attr("class", "arc-2")
             .attr("d", arcFront_path)
@@ -337,7 +350,7 @@ export default function Results(){
         svg.append("circle")
             .attr('cx', x2)
             .attr('cy', y2)
-            .attr('r', 3.5)
+            .attr('r', width/60)
             .attr('fill', 'black')
             
 
@@ -359,7 +372,8 @@ export default function Results(){
             .attr('y', -10)
             .text(text)
             .attr('text-anchor', 'middle')
-            .attr('class', 'circleText');
+            .attr('class', `'circleText'`)
+            .style('font-size', `${width/14}px`)
 
 
 
@@ -383,71 +397,91 @@ export default function Results(){
 
         svg.append("text")
             .attr('x', 0)
-            .attr('y', 30)
+            .attr('y', width/12)
             .attr("class", "resultRoundGraphText")
             .attr('text-anchor','middle')
-            .text(svgText);
+            .text(svgText)
+            .style('font-size', `${width/12}px`)
 
     }
 
-    // const page1 = () => {
-    //     return (
-    //         <div className="results_days">
-    //             <div className="results_activitesText">
-    //                 <h1>{allDays.names[chosenCourceIndex]}</h1>
-    //                 <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
-    //             </div>
-    //             <div className="cardBoxList">
-    //                 {
-    //                     chosenCource.map((setIndex, index) => {
-    //                         return (
-    //                             <div key={index}>
-    //                                 <div
-    //                                     className="resultCard"
+    const dumbbellPage = () => {
+        return (
+            <>
+                <div className="results_days">
+                    <div className="results_activitesText">
+                        <h1>{allDays.names[chosenCourceIndex]}</h1>
+                        <p className="resultsActivites"><span className="resultsActivites-1">{3 - todayUncompletedSetsIndexes.length}</span><span className="resultsActivites-2">/{3}</span> activites</p>
+                    </div>
+                    <div className="cardBoxList">
+                        {
+                            chosenCource.map((setIndex, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div
+                                            className="resultCard"
 
-    //                                     onClick={() => { 
-    //                                         // setChosenSet(allSets[setIndex]);
-    //                                         // setChosenSetIndex(setIndex);
+                                            onClick={() => { 
+                                                // setChosenSet(allSets[setIndex]);
+                                                // setChosenSetIndex(setIndex);
+                                                setSelectedSetIndex(setIndex)
+                                                // dispatch(setSetIndex({index:setIndex}));
+                                                // dispatch(setShowResults({status: false}));
+                                            }}
+                                        >
+                                            <div className ='checkSvgBox'>
+                                                {todayUncompletedSetsIndexes.indexOf(index) !== -1 
+                                                    ?   <img src={uncheked} />
+                                                    :   <img src={cheked} />
+                                                }
+                                            </div>
+                                            <div className='resultCardImgBox'>
+                                                <img className='resultCardImg' src={allDays.images[index]} />
+                                            </div>
 
-    //                                         // dispatch(setSetIndex({index:setIndex}));
-    //                                         // dispatch(setShowResults({status: false}));
-    //                                     }}
-    //                                 >
-    //                                     <div className ='checkSvgBox'>
-    //                                         {todayUncompletedSetsIndexes.indexOf(index) !== -1 
-    //                                             ?   <img src={unchecked} />
-    //                                             :   <img src={checked} />
-    //                                         }
-    //                                     </div>
-    //                                     <div className='resultCardImgBox'>
-    //                                         <img className='resultCardImg' src={allDays.images[index]} />
-    //                                     </div>
+                                            <div className={`resultCardText`} >
+                                                <h5 className='resultCardHighText'>{`${allSetsNames[index]}`}</h5>
+                                                <div className='resultCardTextBox'>
+                                                    {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
+                                                    <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+                <div className="exercisesPreview results">
+                            {(chosenSet !== null) &&
+                                <>
+                                    <div className="prewivwResultHeader">
+                                        <h2>{allSetsNames[selectedSetIndex]}</h2>
+                                        <p>exercises</p>
+                                    </div>
+                                    <div className="exercisesPreviewList results">
+                                        {allSets[selectedSetIndex].map((ex, index) => (
+                                            <div key={index} className='exercisePrewiew__item results'>
+                                                {/* <ReactFreezeframe src={allExercises[ex.exerciseIndex].gif} /> */}
+                                                {/*<iframe width="264px" src={allExercises[ex.exerciseIndex].mp4} type="video/mp4" />*/}
+                                                <video src={allExercises[ex.exerciseIndex].mp4}  width="267px" className="vidPunch" autoPlay={true} loop={true} muted />
+                                                <h4>{allExercises[ex.exerciseIndex].name}</h4>
+                                                <h5>{ex.time} sec</h5>
+                                            </div>
+                                        ))}
 
-    //                                     <div className={`resultCardText`} >
-    //                                         <h5 className='resultCardHighText'>{`${allSetsNames[index]}`}</h5>
-    //                                         <div className='resultCardTextBox'>
-    //                                             {/* <p className='cardLowerText-1'>{setsTimes[chosenCource[index]] ? `${Math.floor(courcesTimes[index] / 60)} min. ${(courcesTimes[index] % 60) > 0 ? (`${courcesTimes[index] % 60}s.`) : ""}` : "0 s."}</p> */}
-    //                                             <p className='cardLowerText-2'>{allSets[setIndex] ? allSets[setIndex].length : 0} ex.</p>
-    //                                         </div>
-    //                                     </div>
-    //                                 </div>
-    //                             </div>
-    //                         )
-    //                     })
-    //                 }
-    //             </div>
-    //         </div>
-    //     )
-    // }
+                                    </div>
+                                </>
+                            }
 
-    return <div className="results_page">
-        <div className="results_background"></div>
-        <div className="results_header">
-            <div><p>DEMO</p></div>
-        </div>
-        <div className="results_box">
-            {/* <div className="results_menu"></div> */}
-            
+                </div>
+            </>
+        )
+    }
+
+    const graphsPage = () => {
+        return (
             <div className="results_graphs">
                 
                 <h1 className="resultHead">THAT'S A GOOD START! <br/> KEEP IT UP! </h1>                
@@ -460,7 +494,161 @@ export default function Results(){
                     <svg className="resultGraph" ref={svgRef_4}></svg>
                 </div>
 
-            </div>  
+            </div> 
+        )
+    }
+
+    const calenderPage = () => (
+        <div className="calender">
+                
+                <h1 className="resultHead">Activity plan</h1>                
+                <div className="calender_inner">
+                    <div className="week">
+                        <div className="week_name">Week 1</div>
+                        <div className="week_cards">
+                        {
+                            allCources.map((cource, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div
+                                            className={`card ${index > 4 ? "blocked results" : ""}`}
+
+                                            onClick={() => { if(index <= 4) {
+                                                // setChosenCource(cource);
+                                                // dispatch(setCourceIndex({index: index}))
+                                                // dispatch(setSetIndex({index: 0}))
+                                                // setChosenSet(allSets[0]);
+                                                // setChosenSetIndex(0)
+                                            } else console.log('blocked') }}
+                                        >
+                                            <div className='cardImgBox'>
+                                                <img className='cardImg' src={allDays.images[index]} />
+                                            </div>
+
+                                            <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
+                                                {index < 5 &&
+
+                                                    <>
+                                                        <h5 className='cardHighText'>{allDays.names[index]}</h5>
+
+                                                        <div className='cardLowerTextBox'>
+                                                            <p className='cardLowerText-2'>{cource.length} activities</p>
+                                                        </div>
+                                                    </>
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+                    </div>
+                    <div className="week">
+                        <div className="week_name">Week 2</div>
+                        <div className="week_cards">
+                        {
+                            allCources.map((cource, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div
+                                            className={`card ${index > 4 ? "blocked results" : ""}`}
+
+                                            onClick={() => { if(index <= 4) {
+                                                // setChosenCource(cource);
+                                                // dispatch(setCourceIndex({index: index}))
+                                                // dispatch(setSetIndex({index: 0}))
+                                                // setChosenSet(allSets[0]);
+                                                // setChosenSetIndex(0)
+                                            } else console.log('blocked') }}
+                                        >
+                                            <div className='cardImgBox'>
+                                                <img className='cardImg' src={allDays.images[index]} />
+                                            </div>
+
+                                            <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
+                                                {index < 5 &&
+
+                                                    <>
+                                                        <h5 className='cardHighText'>{allDays.names[index]}</h5>
+
+                                                        <div className='cardLowerTextBox'>
+                                                            <p className='cardLowerText-2'>{cource.length} activities</p>
+                                                        </div>
+                                                    </>
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+                    </div>
+                    <div className="week">
+                        <div className="week_name">Week 3</div>
+                        <div className="week_cards">
+                        {
+                            allCources.map((cource, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div
+                                            className={`card ${index > 4 ? "blocked results" : ""}`}
+
+                                            onClick={() => { if(index <= 4) {
+                                                // setChosenCource(cource);
+                                                // dispatch(setCourceIndex({index: index}))
+                                                // dispatch(setSetIndex({index: 0}))
+                                                // setChosenSet(allSets[0]);
+                                                // setChosenSetIndex(0)
+                                            } else console.log('blocked') }}
+                                        >
+                                            <div className='cardImgBox'>
+                                                <img className='cardImg' src={allDays.images[index]} />
+                                            </div>
+
+                                            <div className={`cardText ${index > 0 ? "blocked" : ""}`} >
+                                                {index < 5 &&
+
+                                                    <>
+                                                        <h5 className='cardHighText'>{allDays.names[index]}</h5>
+
+                                                        <div className='cardLowerTextBox'>
+                                                            <p className='cardLowerText-2'>{cource.length} activities</p>
+                                                        </div>
+                                                    </>
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+                    </div>
+                </div>
+        </div> 
+    )
+
+    return <div className="results_page">
+        <div className="results_background"></div>
+
+        <div className="results_header">
+            <div><p>DEMO</p></div>
+        </div>
+        <div className="results_box">
+            <div className="results_menu">
+                <img src={home} alt="" onClick={()=>back()}/>
+                <img src={selectedPage===1? dumbbell_active : dumbbell} alt="" onClick={()=>setSelectedPage(1)}/>
+                <img src={selectedPage===2? graph_active: graph} alt="" onClick={()=>setSelectedPage(2)}/>
+                <img src={selectedPage===3? calender_active : calender} alt="" onClick={()=>setSelectedPage(3)}/>
+            </div>
+            {selectedPage === 1 && dumbbellPage()}
+            {selectedPage === 2 && graphsPage()}
+            {selectedPage === 3 && calenderPage()}
         </div>
     </div>
     

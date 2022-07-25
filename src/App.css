@@ -316,19 +316,16 @@ img{
     position: relative;
     margin-top: 70px;
     height: calc(100vh - 90px);
-    
 }
 
 .results_graphs{
     position: relative;
     background-color: rgb(255, 255, 255);
-    width: 70vw;
     height: 100%;
     background: #FFFFFF;
     text-align: center;
     z-index: 10;
     border-radius: 10px;
-    margin-left: 10px;
     overflow: hidden;
 
 }
@@ -338,14 +335,24 @@ img{
     overflow-y: auto;
     height: calc(100% - (22px + 10%));
     margin: 0 auto;
-    max-width: 900px;
+    width: 60vw;
 }
 
 .results_menu{
     width: 100px;
-    height: 100%;
+    height: calc(100% - 158px);
     background: #FFFFFF;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 158px;
+    margin-right: 10px;
+}
+.results_menu img{
+    width: 28px;
+    height: 38px;
+    margin-bottom: 60px;
 }
 
 .results_days{
@@ -353,7 +360,7 @@ img{
     height: 100%;
     background: #FFFFFF;
     border-radius: 10px;
-    margin: 0 10px;
+    margin-right: 10px;
 }
 
 .resultHead{
@@ -465,8 +472,8 @@ img{
 
 .vidPunch {
     margin: 0;
-    /*background: none;*/
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .canvasBox{
@@ -725,6 +732,10 @@ img{
 .blocked{
     filter: opacity(0.9);
     filter: grayscale(0%);
+}
+
+.blocked.results{
+    display: none;
 }
 
 .cardImg{
@@ -1003,6 +1014,40 @@ img{
     background-color: none;
 }
 
+.exercisesPreview.results{
+    width: 860px;
+    overflow-y: auto;
+}
+
+.prewivwResultHeader{
+    display: flex;
+    margin-left: 40px;
+    margin-top: 52px;
+    margin-bottom: 47px;
+    justify-content: left;
+    align-items: flex-end   ;
+}
+.prewivwResultHeader h2{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+
+}
+.prewivwResultHeader p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+
+.exercisesPreviewList.results{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    overflow-y: auto;
+}
+
 .exercisesPreviewList h2{
     font-weight: 800;
     font-size: 26px;
@@ -1030,6 +1075,12 @@ img{
     background: none;
     margin-bottom: 30px;
 }
+.exercisePrewiew__item.results{
+    margin: 20px 40px;
+    height: auto;
+    width: 310px;
+}
+
 
 .exercisePrewiew__item img{
     width: 267px;
@@ -1186,3 +1237,35 @@ img{
     line-height: 38px;
 }
 
+.calender{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    background: #FFFFFF;
+    text-align: center;
+    z-index: 10;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 80vw;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.calender_inner{
+
+}
+
+.week_cards{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.week_name{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+    text-align: left;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
